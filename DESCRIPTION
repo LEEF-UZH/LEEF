@@ -1,6 +1,6 @@
 Package: LEEF.Data
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Data package containing only data and data information
 Version: 0.1.0
 Authors@R: c(
   person("Rainer", "M.", "Krug", email = "Rainer.Krug@uzh.zch", role = c("aut", "cre")),
@@ -11,4 +11,10 @@ Description: More about what it does (maybe more than one line)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
-Suggests: testthat
+Depends:
+    feather,
+    testthat
+Suggests: 
+    testthat,
+    covr
+RoxygenNote: 6.0.1

@@ -1,5 +1,11 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^rawData$
-^README.*$
 ^\.travis\.yml$
+
+^README.*$
+^dataDownload$
+^codecov\.yml$
+
+^CONFIG.NAME$
+^config\.yml$
+
