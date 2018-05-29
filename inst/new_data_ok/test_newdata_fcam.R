@@ -1,20 +1,24 @@
-context("New Data Test fcam.feather")
-library(feather)
+context("New Data Test fcam.csv")
 
 test_that(
   "Data can be loaded",
   {
     expect_error(
-      nd <<- read_feather(
-        file.path(
-          getOption("new_data_dir"),
-          "fcam.feather"
+      set_option(
+        "fcam",
+        read.csv(
+          file.path(
+            getOption("new_data_dir"),
+            "fcam.csv"
+          )
         )
       ),
       regexp = NA
     )
   }
 )
+
+nd <- get_option("fcam")
 
 test_that(
   "Names are OK",

@@ -133,7 +133,7 @@ An import of new data follows the following steps:
 
 1. Create a new branch on the local fork and check it out.
 2. Add all new data files to the directory `inst/new_data/`. The data has to follow the following rules:
-    - the data has to be in a common format, e.g. `.feather` - r+w from R,  python , Julia, ( <span style="color:red">we have to decide on the format; I would prefer `feather`, but is it stable?</span> )
+    - the data has to be in a common format, e.g. `.csv`
     - the name has to reflect the name of the table the data needs to be imported to
     - **<span style="color:red">metadata do be added in additional file?</span>**
     - **<span style="color:red">more?</span>**

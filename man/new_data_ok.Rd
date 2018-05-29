@@ -4,12 +4,9 @@
 \alias{new_data_ok}
 \title{Check new data}
 \usage{
-new_data_ok(new_data_dir = system.file("new_data", package = packageName()),
-  ...)
+new_data_ok(new_data_dir = file.path(get_option("pkg_dir", "new_data")), ...)
 }
 \arguments{
-\item{new_data_dir}{directory where the new data files are located in. Defaults to \code{system.file("new_data", package = packageName())}}
-
 \item{...}{aditional arguments for the test function \code{testthat::test_dir}}
 }
 \value{

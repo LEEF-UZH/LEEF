@@ -1,4 +1,4 @@
-context("Data Check Functions")
+context("Test new_data_ok()")
 
 test_that( "Returns data_test_results class",
            { expect_s3_class( ndo <<- new_data_ok(reporter = SilentReporter), "data_test_results") }
