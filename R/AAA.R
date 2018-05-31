@@ -5,15 +5,6 @@
 
 .DATA_CACHE <- new.env(FALSE, parent = globalenv())
 
-#' Title
-#'
-#' @param lib
-#' @param pkg
-#'
-#' @return
-#' @importFrom config get
-#'
-#' @examples
 .onLoad <- function(lib, pkg) {
   # Set fcam option ------------------------------------------------------
 
@@ -54,11 +45,28 @@
     )
   )
 
+
+  # Set new_data_dir -___-------------------------------------------------------
+
+  set_option(
+    "new_data_dir",
+    file.path( get_option("pkg_path"), "new_data"  )
+  )
+
+  # Set new_data_archiver -___-------------------------------------------------------
+
+  set_option(
+    "new_data_archive",
+    file.path( get_option("pkg_path"), "new_data_archive"  )
+  )
+
   # Set raw_data_connection -----------------------------------------------------
   set_option(
     "raw_data_connection",
     NULL
   )
+
+
 }
 
 

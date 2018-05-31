@@ -5,12 +5,9 @@ test_that(
   {
     expect_error(
       set_option(
-        "fcam",
-        read.csv(
-          file.path(
-            getOption("new_data_dir"),
+        "tmp",
+        read_new_data(
             "fcam.csv"
-          )
         )
       ),
       regexp = NA
@@ -18,7 +15,8 @@ test_that(
   }
 )
 
-nd <- get_option("fcam")
+nd <- get_option("tmp")
+set_option("tmp", NULL)
 
 test_that(
   "Names are OK",
@@ -34,3 +32,4 @@ test_that(
     expect_lt( max(nd$Area..ABD.), 100)
   }
 )
+

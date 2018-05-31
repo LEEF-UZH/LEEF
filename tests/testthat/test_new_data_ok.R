@@ -1,28 +1,54 @@
 context("Test new_data_ok()")
 
-test_that( "Returns data_test_results class",
-           { expect_s3_class( ndo <<- new_data_ok(reporter = SilentReporter), "data_test_results") }
+test_that(
+  "Runs without error",
+  expect_error(
+    set_option("tmp", new_data_ok(reporter = SilentReporter)),
+    regexp = NA
+  )
 )
 
-test_that( "Default Result is false",
-           {
-             expect_false( ndo$result )
-           }
+test_that(
+  "Returns data_test_results class",
+  expect_s3_class(
+    get_option("tmp"),
+    "data_test_results"
+  )
 )
 
-test_that( "Check Sample dataset",
-           { expect_s3_class( ndo <<- new_data_ok( system.file("test_data", "false", package = packageName()), reporter = SilentReporter ), "data_test_results") }
+test_that(
+  "Result is FALSE from false dataset",
+  expect_false(
+    get_option(("tmp"))$OK
+  )
 )
 
-test_that( "Default Result is false",
-           {
-             expect_false( ndo$result )
-           }
+set_option(
+  "new_data_dir",
+  file.path( get_option("pkg_path"), "test_data", "true"  )
 )
 
-test_that( "Default Result is true",
-           {
-             expect_true( new_data_ok( system.file("test_data", "true", package = packageName()), reporter = SilentReporter )$result )
-           }
+test_that(
+  "Runs without error",
+  expect_error(
+    set_option("tmp", new_data_ok(reporter = SilentReporter)),
+    regexp = NA
+  )
 )
 
+test_that(
+  "Returns data_test_results class",
+  expect_s3_class(
+    get_option("tmp"),
+    "data_test_results"
+  )
+)
+
+test_that(
+  "Result is TRUE from true dataset",
+  expect_true(
+    get_option(("tmp"))$OK
+  )
+)
+
+set_option("new_data_dir", old_dir)

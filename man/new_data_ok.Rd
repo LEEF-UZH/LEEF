@@ -4,7 +4,7 @@
 \alias{new_data_ok}
 \title{Check new data}
 \usage{
-new_data_ok(new_data_dir = file.path(get_option("pkg_dir", "new_data")), ...)
+new_data_ok(...)
 }
 \arguments{
 \item{...}{aditional arguments for the test function \code{testthat::test_dir}}
@@ -12,8 +12,8 @@ new_data_ok(new_data_dir = file.path(get_option("pkg_dir", "new_data")), ...)
 \value{
 invisibly returns list of two elements as class \code{data_test_results}
 \describe{
-   \item{\code{result}:}{  \code{TRUE} if data is conform with rules, \code{FALSE} if not}
-   \item{\code{details}:}{ obect of class \code{testthat_results} containing the detailed results of the tests}
+   \item{\code{result}}{  \code{TRUE} if data is conform with rules, \code{FALSE} if not}
+   \item{\code{details}}{ obect of class \code{testthat_results} containing the detailed results of the tests}
 }
 }
 \description{

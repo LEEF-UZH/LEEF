@@ -174,7 +174,32 @@ For relevance here are two actions:
 
 # Package structure
 
+The DAata package contains the code to
+
+  - `check_existing_...()` to check the existing data
+  - `check_new_...()` to check the incoming new data
+  - `merge_...()` to merge the new data into the existing data
+  - …
+
+In addition, it contains the function
+
+  - `existing_data_ok()` which is doing all checks on the existing data
+  - `newData_ok()` which is doing all checks on the new data
+  - `merge_all()` which is doing all the merging
+
+and finally
+
+  - `do_all()` which is doing everything in the order of
+    1)  `existing_data_ok()`
+    2)  `new_data_ok()`
+    3)  `merge_all()`  
+    4)  `existing_data_ok()`
+
 ![](README_files/figure-gfm/leef.processing.content-1.png)<!-- -->
+
+## Activity Diagram of `import_new_data()` function
+
+![](README_files/figure-gfm/leef.processing.activity-1.png)<!-- -->
 
 # **<span style="color:red">TODO</span>**
 

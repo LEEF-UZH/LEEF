@@ -157,6 +157,28 @@ For relevance here are two actions:
 1. `LEEF.Processing` does commit the imported data to this repository or to the external database. 
 
 # Package structure
+
+The DAata package contains the code to
+
+- `check_existing_...()` to check the existing data 
+- `check_new_...()` to check the incoming new data 
+- `merge_...()` to merge the new data into the existing data
+- ...
+
+In addition, it contains the function 
+
+- `existing_data_ok()` which is doing all checks on the existing data
+- `newData_ok()` which is doing all checks on the new data
+- `merge_all()` which is doing all the merging
+
+and finally
+
+- `do_all()` which is doing everything in the order of
+    1) `existing_data_ok()`
+    1) `new_data_ok()`
+    2) `merge_all()`    
+    1) `existing_data_ok()`
+
 ```{r leef.processing.content}
 '
 package "LEEF.Data" {
@@ -173,17 +195,6 @@ package "LEEF.Data" {
     + check_new_...(...)
   }
   
-  Group("New Data Clean") {
-    + clean_all(repo_type = "master", ...)
-    ....
-    + clean_...(...)
-  }
-  
-  Group("Data Processing") {
-    + process_all(repo_type = "master", ...)
-    ....
-    + process_...(...)
-  }
 
   Group("Data Merging") {
     + merge_all(repo_type = "master", ...)
@@ -202,6 +213,42 @@ package "LEEF.Data" {
   plot
 ```
 
+## Activity Diagram of `import_new_data()` function
+```{r leef.processing.activity, fig.width = 8, fig.height = 16}
+'
+start
+:""import_new_data(repo)"";
+if (""existing_data_ok()"") then (FALSE)
+  stop
+else (TRUE)
+endif
+if (check ""repo"") then 
+  if (""new_data_ok()"") then (FALSE)
+    stop
+  else (TRUE)
+  endif
+else (repo != "master")
+
+note right
+  Not sure if we should 
+  really check
+  ====
+  Maybe different repos 
+  do have different data checks?
+end note
+
+endif
+:""clean_all()"";
+:""merge_all(repo = "master")"";
+if (""existing_data_ok()"") then (FALSE)
+  stop
+else (TRUE)
+endif
+:""process_all(repo)"";
+' %>%
+  plantuml %>%
+  plot
+```
 
 # **<span style="color:red">TODO</span>**
 - request DOI and TTS only for sqlite database or snapshot of external database - how can I do this?
