@@ -2,13 +2,16 @@
 % Please edit documentation in R/tar_new_data.R
 \name{tar_new_data}
 \alias{tar_new_data}
-\title{Compress and checksum the \code{get_option("new_data_path)}}
+\title{Compress and checksum the \code{get_option("new_data_path")}}
 \usage{
-tar_new_data()
+tar_new_data(overwrite = FALSE)
+}
+\arguments{
+\item{overwrite}{if \code{TRUE}, overwrite existing tar file; default is \code{FALSE}}
 }
 \value{
-invisibly returns \code(TRUE)
+invisibly returns the name of the tarfile
 }
 \description{
-Compress all files in \code{get_option("new_data_path")} into the directory \code{"NEW_DATA_PATH/../new_data_archive}
+Compress all files in \code{get_option("new_data_path")} into the directory \code{"NEW_DATA_PATH/../new_data_archive"}
 }

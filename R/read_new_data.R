@@ -1,8 +1,8 @@
 #' Read new data file
 #'
-#' Funcrtion to read a new data file. The function looks for the file in the \code{get_option("new_data_path)}.
+#' Function to read a new data file. The function looks for the file in the \code{get_option("new_data_path")} directory.
 #' It sets values to define the format used to guarantee consistency.
-#' @param file name of the file in \code{get_option("new_data_path)} to be read
+#' @param file name of the file in \code{get_option("new_data_path")} to be read
 #'
 #' @return data frame containing the new data
 #' @export

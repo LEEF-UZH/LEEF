@@ -1,18 +1,29 @@
 #' Create hash file of new_data
 #'
 #'
-#' @param tts if \code(TRUE), request Trusted Time Stamp from OriginStamp and results saved to \code{TTS.yml}; default \code{FALSE}
+#' @param tts if \code{TRUE}, request Trusted Time Stamp from OriginStamp and results saved to \code{TTS.yml}; default \code{FALSE}
+#' @param overwrite if \code{TRUE}, the file \code{hash.sha512} will be re-generated nd overwritten! default is \code{FALSE}
 #'
-#' @return invisibly \code(TRUE)
+#' @return invisibly \code{TRUE}
+#'
+#' @importFrom openssl sha512
+#' @importFrom yaml write_yaml
 #' @export
 #'
 #' @examples
 hash_new_data <- function(
-  tts = FALSE
+  tts = FALSE,
+  overwrite = FALSE
 ){
   new_data_dir <- get_option("new_data_dir")
   new_data_extension <- get_option("config")$new_data_extension
   new_files <- list.files( path = new_data_dir, pattern = new_data_extension )
+
+# Stop if files exist -----------------------------------------------------
+
+  if (file.exists( file.path( new_data_dir, "hash.sha512") ) & !overwrite) {
+    stop("The new data has been hashed already - please set `overwrite = TRUE` if you want to overwrite them!")
+  }
 
 # Hash files and save hashes ----------------------------------------------
 

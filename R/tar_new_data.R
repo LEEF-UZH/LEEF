@@ -1,15 +1,21 @@
-#' Compress and checksum the \code{get_option("new_data_path)}
+#' Compress and checksum the \code{get_option("new_data_path")}
 #'
-#' Compress all files in \code{get_option("new_data_path")} into the directory \code{"NEW_DATA_PATH/../new_data_archive}
-#' @return invisibly returns \code(TRUE)
+#' Compress all files in \code{get_option("new_data_path")} into the directory \code{"NEW_DATA_PATH/../new_data_archive"}
+#'
+#' @param overwrite if \code{TRUE}, overwrite existing tar file; default is \code{FALSE}
+#'
+#' @return invisibly returns the name of the tarfile
 #' @importFrom openssl sha512
 #' @export
 #'
 #' @examples
-tar_new_data <- function(){
+tar_new_data <- function(
+  overwrite = FALSE
+){
   on.exit(
     setwd(oldwd)
   )
+  ##
   oldwd <- getwd()
   ##
   new_data_dir <-  get_option("new_data_dir")
@@ -17,13 +23,20 @@ tar_new_data <- function(){
   # new_files <- list.files( path = new_data_dir, pattern = new_data_extension )
   ##
   tarpath <- get_option("new_data_archive")
+
+  if ( !file.exists( file.path( new_data_dir, "hash.sha512") ) ) {
+    stop("The new data has not been hashed - please run `hash_new_data() before running this command!")
+  }
   tarname <- paste(
     "new_data",
-    format(Sys.time(), "%Y-%m-%d"),
+    format( file.mtime( file.path( new_data_dir, "hash.sha512") ) , "%Y-%m-%d--%H-%M-%S"),
     "tar.gz",
     sep = "."
   )
   tarfile <- file.path(tarpath, tarname)
+  if ( file.exists( tarfile ) & !overwrite) {
+    stop("The tar archive exists already - please set `overwrite = TRUE` if you want to overwrite them!")
+  }
   ##
 
   oldwd <- setwd(get_option("new_data_dir"))
@@ -48,5 +61,5 @@ tar_new_data <- function(){
   close(f)
   rm(f)
 
-  invisible(TRUE)
+  invisible(tarname)
 }

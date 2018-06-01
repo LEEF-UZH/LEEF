@@ -14,9 +14,11 @@ LazyData: true
 Imports:
     DBI,
     RSQLite,
+    openssl,
     ROriginStamp,
     testthat,
-    config
+    config,
+    yaml
 Suggests: 
     covr
 RoxygenNote: 6.0.1

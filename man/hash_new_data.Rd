@@ -4,13 +4,15 @@
 \alias{hash_new_data}
 \title{Create hash file of new_data}
 \usage{
-hash_new_data(tts = FALSE)
+hash_new_data(tts = FALSE, overwrite = FALSE)
 }
 \arguments{
-\item{tts}{if \code(TRUE), request Trusted Time Stamp from OriginStamp and results saved to \code{TTS.yml}; default \code{FALSE}}
+\item{tts}{if \code{TRUE}, request Trusted Time Stamp from OriginStamp and results saved to \code{TTS.yml}; default \code{FALSE}}
+
+\item{overwrite}{if \code{TRUE}, the file \code{hash.sha512} will be re-generated nd overwritten! default is \code{FALSE}}
 }
 \value{
-invisibly \code(TRUE)
+invisibly \code{TRUE}
 }
 \description{
 Create hash file of new_data

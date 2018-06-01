@@ -174,8 +174,8 @@ In addition, it contains the function
 and finally
 
 - `do_all()` which is doing everything in the order of
-    1) `existing_data_ok()`
-    1) `new_data_ok()`
+    1) `check_existing_data()`
+    1) `check_new_data()`
     2) `merge_all()`    
     1) `existing_data_ok()`
 
@@ -188,8 +188,8 @@ package "LEEF.Data" {
   }
 
   Group("Data Check") {
-    + existing_data_ok(...)
-    + new_data_ok(...)
+    + check_existing_data(...)
+    + check_new_data(...)
     ....
     + check_existing_...(...)
     + check_new_...(...)
@@ -218,12 +218,12 @@ package "LEEF.Data" {
 '
 start
 :""import_new_data(repo)"";
-if (""existing_data_ok()"") then (FALSE)
+if (""check_existing_data()"") then (FALSE)
   stop
 else (TRUE)
 endif
 if (check ""repo"") then 
-  if (""new_data_ok()"") then (FALSE)
+  if (""check_new_data()"") then (FALSE)
     stop
   else (TRUE)
   endif

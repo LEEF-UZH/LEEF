@@ -14,7 +14,7 @@
 
   set_option(
     "pkg_path",
-    system.file(package = packageName())
+    system.file(package = utils::packageName())
   )
 
   # Set Config name --------------------------------------------------------

@@ -7,12 +7,12 @@
 read_new_data(file)
 }
 \arguments{
-\item{file}{name of the file in \code{get_option("new_data_path)} to be read}
+\item{file}{name of the file in \code{get_option("new_data_path")} to be read}
 }
 \value{
 data frame containing the new data
 }
 \description{
-Funcrtion to read a new data file. The function looks for the file in the \code{get_option("new_data_path)}.
+Function to read a new data file. The function looks for the file in the \code{get_option("new_data_path")} directory.
 It sets values to define the format used to guarantee consistency.
 }
