@@ -79,8 +79,8 @@ test_that(
   {
     skip("I have to see if this test is usefull!")
     expect_equal(
-      read.table( sha512file, stringsAsFactors = FALSE )[[1]],
-      read.table( file.path( get_option("new_data_archive"), "ref.new_data.xxx.tar.gz.sha512" ), stringsAsFactors = FALSE )[[1]]
+      utils::read.table( sha512file, stringsAsFactors = FALSE )[[1]],
+      utils::read.table( file.path( get_option("new_data_archive"), "ref.new_data.xxx.tar.gz.sha512" ), stringsAsFactors = FALSE )[[1]]
     )
   }
 )

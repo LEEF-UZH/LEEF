@@ -5,6 +5,8 @@
 #' @param file name of the file in \code{get_option("new_data_path")} to be read
 #'
 #' @return data frame containing the new data
+#'
+#' @importFrom utils read.csv
 #' @export
 #'
 #' @examples
@@ -12,7 +14,7 @@ read_new_data <- function(
   file
 ) {
   if (get_option("config")$new_data_extension == ".csv") {
-    read.csv(
+    utils::read.csv(
       file.path( get_option("new_data_dir"), file),
       header = TRUE,
       sep = ",",

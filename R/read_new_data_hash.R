@@ -9,13 +9,16 @@
 #'   containing the columns \code{file} containing the file names and
 #'   \code{hash} containing the hashes. The row names are the file names as
 #'   well.
+#'
+#' @importFrom utils read.table
+#'
 #' @export
 #'
 #' @examples
 read_new_data_hash <- function(
   file
 ) {
-  result <- read.table(
+  result <- utils::read.table(
       file.path( get_option("new_data_dir"), "hash.sha512"),
       header = FALSE,
       stringsAsFactors = FALSE

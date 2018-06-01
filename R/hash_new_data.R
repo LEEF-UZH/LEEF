@@ -8,6 +8,8 @@
 #'
 #' @importFrom openssl sha512
 #' @importFrom yaml write_yaml
+#' @importFrom utils read.table
+#'
 #' @export
 #'
 #' @examples
@@ -51,7 +53,7 @@ hash_new_data <- function(
 
   if (tts) {
     stop("Not Implemented Yet!")
-    hash <- read.table(
+    hash <- utils::read.table(
       file.path(new_data_dir, "hash.sha512"),
       stringsAsFactors = FALSE
     )

@@ -6,6 +6,8 @@
 #'
 #' @return invisibly returns the name of the tarfile
 #' @importFrom openssl sha512
+#' @importFrom utils tar
+#'
 #' @export
 #'
 #' @examples
@@ -40,7 +42,7 @@ tar_new_data <- function(
   ##
 
   oldwd <- setwd(get_option("new_data_dir"))
-  tar(
+  utils::tar(
     tarfile = tarfile,
     files = "./",
     compression = "gz",
