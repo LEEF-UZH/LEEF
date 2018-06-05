@@ -78,7 +78,7 @@ test_that(
 
 # Teardown ----------------------------------------------------------------
 
-unlink(get_option("new_data_dir"), recursive = TRUE, force = TRUE)
+unlink(tmpdir, recursive = TRUE, force = TRUE)
 set_option("new_data_dir", old_dir)
 
 

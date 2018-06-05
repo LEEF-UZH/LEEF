@@ -2,7 +2,7 @@
 #'
 #'
 #' @param create_new_table if \code{TRUE}, create a new table if it does not exist. Default \code{FALSE}, i.e. raises error if the table does not exist.
-#'
+#' @param ... additional arguments for \code{check_new_data()}
 #' @return \code{TRUE} if import succedded. If failed, report with why it failed TODO
 #' @importFrom openssl sha512
 #' @importFrom ROriginStamp store_hash
@@ -10,9 +10,10 @@
 #'
 #' @examples
 import_new_data <- function(
-  create_new_table = FALSE
+  create_new_table = FALSE,
+  ...
 ) {
-  check <- check_new_data()
+  check <- check_new_data(...)
   if (check$OK) {
 
 # Create hashes of new data ---------------------------------------

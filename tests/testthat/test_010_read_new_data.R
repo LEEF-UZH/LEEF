@@ -19,6 +19,7 @@ test_that( "Reads data correctly",
            }
 )
 
+
 # Teardown ----------------------------------------------------------------
 
 set_option("new_data_dir", old_dir)

@@ -4,10 +4,12 @@
 \alias{import_new_data}
 \title{Title}
 \usage{
-import_new_data(create_new_table = FALSE)
+import_new_data(create_new_table = FALSE, ...)
 }
 \arguments{
 \item{create_new_table}{if \code{TRUE}, create a new table if it does not exist. Default \code{FALSE}, i.e. raises error if the table does not exist.}
+
+\item{...}{additional arguments for \code{check_new_data()}}
 }
 \value{
 \code{TRUE} if import succedded. If failed, report with why it failed TODO

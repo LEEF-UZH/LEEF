@@ -239,8 +239,8 @@ end note
 
 endif
 :""clean_all()"";
-:""merge_all(repo = "master")"";
-if (""existing_data_ok()"") then (FALSE)
+:""add_new_data()"";
+if (""check_existing_data()"") then (FALSE)
   stop
 else (TRUE)
 endif

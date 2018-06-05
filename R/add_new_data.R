@@ -15,7 +15,7 @@ add_new_data <- function(
 on.exit(
   {
     if (closeAgain) {
-      disconnect_raw_data()
+      db_disconnect_raw_data()
     }
   }
 )
@@ -24,7 +24,7 @@ on.exit(
 
   closeAgain <- FALSE
   if (is.null(get_option("raw_data_connection"))) {
-    connect_raw_data()
+    db_connect_raw_data()
     closeAgain <- TRUE
   }
 
@@ -56,7 +56,6 @@ on.exit(
   for (i in 1:length(new_files)) {
     x <- read_new_data(new_files[i])
     x[["hash"]] <- read_new_data_hash(new_files[[i]])
-    x[["timestamp"]] <- timestamp
     # TODO: CHECK IF ALREADY IMPORTED!
     DBI::dbWriteTable(
       conn = get_option("raw_data_connection"),

@@ -1,31 +1,23 @@
 
 # Setup -------------------------------------------------------------------
 
-tmpdir <- file.path(tempdir(check = TRUE), "new_data_archive")
-dir.create(tmpdir, showWarnings = FALSE)
-file.copy(
-  from = list.files(
-    file.path( get_option("pkg_path"), "test_data", "new_data_archive"),
-    full.names = TRUE
-  ),
-  to = tmpdir,
-  recursive = TRUE
-)
+tmparch <- file.path(tempdir(check = TRUE), "new_data_archive")
+dir.create(tmparch, showWarnings = FALSE)
 old_archive <- set_option(
   "new_data_archive",
-  tmpdir
+  tmparch
 )
 
-tmpdir <- file.path(tempdir(check = TRUE), "new_data")
-dir.create(tmpdir, showWarnings = FALSE)
+tmpnew <- file.path(tempdir(check = TRUE), "new_data")
+dir.create(tmpnew, showWarnings = FALSE)
 file.copy(
   from = list.files( file.path( get_option("pkg_path"), "test_data", "new_data", "false"), full.names = TRUE ),
-  to = tmpdir,
+  to = tmpnew,
   recursive = TRUE
 )
 old_dir <- set_option(
   "new_data_dir",
-  tmpdir
+  tmpnew
 )
 
 tarpath <- get_option("new_data_archive")
@@ -67,6 +59,13 @@ test_that(
 )
 
 test_that(
+  "Error as tar file exists",
+  expect_error(
+    tar_new_data()
+  )
+)
+
+test_that(
   "Created tar.gz file is identical to reference",
     expect_equal(
       tools::md5sum( tarfile    )[[1]],
@@ -104,10 +103,10 @@ test_that(
 
 # Teardown ----------------------------------------------------------------
 
-unlink( get_option("new_data_archive"), recursive = TRUE, force = TRUE )
-set_option("new_data_archive", old_archive)
+unlink( tmpnew, recursive = TRUE, force = TRUE )
+unlink( tmparch, recursive = TRUE, force = TRUE )
 
-unlink( get_option("new_data_dir"), recursive = TRUE, force = TRUE )
+set_option("new_data_archive", old_archive)
 set_option("new_data_dir", old_dir)
 
 rm( tarpath, tarname, tarfile, sha512file )

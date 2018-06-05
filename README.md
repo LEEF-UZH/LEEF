@@ -190,8 +190,8 @@ In addition, it contains the function
 and finally
 
   - `do_all()` which is doing everything in the order of
-    1)  `existing_data_ok()`
-    2)  `new_data_ok()`
+    1)  `check_existing_data()`
+    2)  `check_new_data()`
     3)  `merge_all()`  
     4)  `existing_data_ok()`
 
