@@ -1,14 +1,14 @@
 #' Create hash file of new_data
 #'
 #' This function is calculating the \bold{file hash} for each file and storing
-#' it in a \code{files.sha256.txt} file and finally calculates the
+#' it in a \code{files.sha256} file and finally calculates the
 #' \bold{directory hash} for this file and saves it in the file
-#' \code{dir.sh256.txt}
+#' \code{dir.sh256}
 #' @param tts if \code{TRUE}, request Trusted Time Stamp for \bold{directory
-#'   hash} from OriginStamp and results saved to \code{TTS.yml} and download the
-#'   seed into the file \code{seed.HASH.txt}; default \code{FALSE}
-#' @param overwrite if \code{TRUE}, the files \code{file.sha256.txt} and
-#'   \code{dir.sha256.txt} will be re-generated and overwritten! default is
+#'   hash} from OriginStamp and results saved to \code{TTS.result.yml} and download the
+#'   seed into the file \code{TTS.seed}; default \code{FALSE}
+#' @param overwrite if \code{TRUE}, the files \code{file.sha256} and
+#'   \code{dir.sha256} will be re-generated and overwritten! default is
 #'   \code{FALSE}. Only one ore none of these files exist, both will be
 #'   re-generated.
 #'
@@ -33,14 +33,14 @@ hash_new_data <- function(
 # Stop if files exist -----------------------------------------------------
 
   if (
-    file.exists( file.path( new_data_dir, "file.sha256.txt") ) &
-    file.exists( file.path( new_data_dir, "dir.sha256.txt") )  &
+    file.exists( file.path( new_data_dir, "file.sha256") ) &
+    file.exists( file.path( new_data_dir, "dir.sha256") )  &
     !overwrite
   ) {
     stop("The new data has been hashed already - please set `overwrite = TRUE` if you want to overwrite them!")
   }
 
-# Hash create files.sha256.txt ----------------------------------------------
+# Hash create files.sha256 ----------------------------------------------
 
   hash <- lapply(
     new_files,
@@ -54,7 +54,7 @@ hash_new_data <- function(
     }
   )
   hash <- simplify2array(hash)
-  f <- file( file.path(new_data_dir, "file.sha256.txt") )
+  f <- file( file.path(new_data_dir, "file.sha256") )
   writeLines(
     text = hash,
     con = f
@@ -63,14 +63,14 @@ hash_new_data <- function(
   rm(f)
 
 
-# Create dir.sha256.txt ---------------------------------------------------
+# Create dir.sha256 ---------------------------------------------------
 
-  f <- file(  file.path(new_data_dir, "file.sha256.txt"), open = "rb" )
+  f <- file(  file.path(new_data_dir, "file.sha256"), open = "rb" )
   hash <- as.character( openssl::sha256( f ) )
   close(f)
   rm(f)
-  hash <- paste(hash, "file.sha256.txt", sep = "  ")
-  f <- file( file.path(new_data_dir, "dir.sha256.txt") )
+  hash <- paste(hash, "file.sha256", sep = "  ")
+  f <- file( file.path(new_data_dir, "dir.sha256") )
   writeLines(
     text = hash,
     con = f
@@ -83,7 +83,7 @@ hash_new_data <- function(
   if (tts) {
     stop("Not Implemented Yet!")
     hash <- utils::read.table(
-      file.path(new_data_dir, "hash.sha256"),
+      file.path(new_data_dir, "dir.sha256"),
       stringsAsFactors = FALSE
     )
     hash <- as.list( as.data.frame(t(hash), stringsAsFactors = FALSE) )
@@ -105,12 +105,12 @@ hash_new_data <- function(
     )
     yaml::write_yaml(
       x = result,
-      file = file.path(new_data_dir, "TTS.yml")
+      file = file.path(new_data_dir, "TTS.result.yml")
     )
 
     ROriginStamp::get_complete_seed_file(
       hash = hash,
-      file = paste("seed.", hash, ".txt")
+      file = "TTS.seed"
     )
   }
 
