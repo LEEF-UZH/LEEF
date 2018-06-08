@@ -1,12 +1,12 @@
 #' Create hash file of new_data
 #'
-#'
+#' This function is calculating
 #' @param tts if \code{TRUE}, request Trusted Time Stamp from OriginStamp and results saved to \code{TTS.yml}; default \code{FALSE}
-#' @param overwrite if \code{TRUE}, the file \code{hash.sha512} will be re-generated nd overwritten! default is \code{FALSE}
+#' @param overwrite if \code{TRUE}, the file \code{hash.sha256} will be re-generated nd overwritten! default is \code{FALSE}
 #'
 #' @return invisibly \code{TRUE}
 #'
-#' @importFrom openssl sha512
+#' @importFrom openssl sha256
 #' @importFrom yaml write_yaml
 #' @importFrom utils read.table
 #'
@@ -23,7 +23,7 @@ hash_new_data <- function(
 
 # Stop if files exist -----------------------------------------------------
 
-  if (file.exists( file.path( new_data_dir, "hash.sha512") ) & !overwrite) {
+  if (file.exists( file.path( new_data_dir, "hash.sha256") ) & !overwrite) {
     stop("The new data has been hashed already - please set `overwrite = TRUE` if you want to overwrite them!")
   }
 
@@ -34,14 +34,14 @@ hash_new_data <- function(
     function(fn) {
       fnc <- file.path(new_data_dir, fn)
       f <- file( fnc, open = "rb" )
-      hash <- as.character( openssl::sha512( f ) )
+      hash <- as.character( openssl::sha256( f ) )
       close(f)
       rm(f)
       hash <- paste(hash, fn, sep = "  ")
     }
   )
   hash <- simplify2array(hash)
-  f <- file( file.path(new_data_dir, "hash.sha512") )
+  f <- file( file.path(new_data_dir, "hash.sha256") )
   writeLines(
     text = hash,
     con = f
@@ -54,7 +54,7 @@ hash_new_data <- function(
   if (tts) {
     stop("Not Implemented Yet!")
     hash <- utils::read.table(
-      file.path(new_data_dir, "hash.sha512"),
+      file.path(new_data_dir, "hash.sha256"),
       stringsAsFactors = FALSE
     )
     hash <- as.list( as.data.frame(t(hash), stringsAsFactors = FALSE) )

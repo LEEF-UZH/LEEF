@@ -32,10 +32,10 @@ on.exit(
 
   new_data_dir <-  get_option("new_data_dir")
   new_data_extension <- get_option("config")$new_data_extension
-  new_files <- list.files( path = new_data_dir, pattern = new_data_extension )
-  table_names <- gsub(new_data_extension, "", new_files)
+  table_names <- list.files( path = new_data_dir, pattern = new_data_extension )
+  table_names <- gsub(new_data_extension, "", table_names)
 
-  if ( !file.exists( file.path( new_data_dir, "hash.sha512") ) ) {
+  if ( !file.exists( file.path( new_data_dir, "hash.sha256") ) ) {
     stop("The new data has not been hashed - please run `hash_new_data() before running this command!")
   }
 
@@ -51,12 +51,16 @@ on.exit(
     }
   }
 
+  ####
+  ## TODO
+  ####
+  ## Check before writing, that all hashes are new - maybe use the hash for the new_data_set?
+
 # Write data --------------------------------------------------------------
-  timestamp <- format( file.mtime( file.path( new_data_dir, "hash.sha512") ) , "%Y-%m-%d--%H-%M-%S")
-  for (i in 1:length(new_files)) {
-    x <- read_new_data(new_files[i])
-    x[["hash"]] <- read_new_data_hash(new_files[[i]])
-    # TODO: CHECK IF ALREADY IMPORTED!
+  # timestamp <- format( file.mtime( file.path( new_data_dir, "hash.sha256") ) , "%Y-%m-%d--%H-%M-%S")
+  for (i in 1:length(table_names)) {
+    x <- read_new_data(table_names[i])
+    x[["hash"]] <- read_new_data_hash(table_names[[i]])
     DBI::dbWriteTable(
       conn = get_option("raw_data_connection"),
       name = table_names[i],

@@ -9,11 +9,11 @@ hash_new_data(tts = FALSE, overwrite = FALSE)
 \arguments{
 \item{tts}{if \code{TRUE}, request Trusted Time Stamp from OriginStamp and results saved to \code{TTS.yml}; default \code{FALSE}}
 
-\item{overwrite}{if \code{TRUE}, the file \code{hash.sha512} will be re-generated nd overwritten! default is \code{FALSE}}
+\item{overwrite}{if \code{TRUE}, the file \code{hash.sha256} will be re-generated nd overwritten! default is \code{FALSE}}
 }
 \value{
 invisibly \code{TRUE}
 }
 \description{
-Create hash file of new_data
+This function is calculating
 }

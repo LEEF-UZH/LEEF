@@ -1,7 +1,7 @@
 #' Read hash from new data file
 #'
 #' Function to read the hash of a new data file. The function looks for the file
-#' \code{hash.sha512} in the \code{get_option("new_data_path")} directory.
+#' \code{hash.sha256} in the \code{get_option("new_data_path")} directory.
 #' @param file if given, function returns the hash of the file, if not, a
 #'   dataframe containing the hashes
 #'
@@ -19,7 +19,7 @@ read_new_data_hash <- function(
   file
 ) {
   result <- utils::read.table(
-      file.path( get_option("new_data_dir"), "hash.sha512"),
+      file.path( get_option("new_data_dir"), "hash.sha256"),
       header = FALSE,
       stringsAsFactors = FALSE
   )

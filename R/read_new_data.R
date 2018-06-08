@@ -2,7 +2,7 @@
 #'
 #' Function to read a new data file. The function looks for the file in the \code{get_option("new_data_path")} directory.
 #' It sets values to define the format used to guarantee consistency.
-#' @param file name of the file in \code{get_option("new_data_path")} to be read
+#' @param name of the file in \code{get_option("new_data_path")} to be read \bold{without} externsion
 #'
 #' @return data frame containing the new data
 #'
@@ -15,7 +15,7 @@ read_new_data <- function(
 ) {
   if (get_option("config")$new_data_extension == ".csv") {
     utils::read.csv(
-      file.path( get_option("new_data_dir"), file),
+      file.path( get_option("new_data_dir"), paste0(file, get_option("config")$new_data_extension) ),
       header = TRUE,
       sep = ",",
       quote = "\"",

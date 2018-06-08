@@ -16,7 +16,7 @@ delete_new_data <- function(
   if (all) {
     result <- unlink( file.path(new_data_dir, "*") )
   } else {
-    result <- unlink( file.path(new_data_dir, c(new_files, "hash.sha512", "TTS.yml") ) )
+    result <- unlink( file.path(new_data_dir, c(new_files, "hash.sha256", "TTS.yml") ) )
   }
   ##
   invisible(result)

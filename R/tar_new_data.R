@@ -5,7 +5,7 @@
 #' @param overwrite if \code{TRUE}, overwrite existing tar file; default is \code{FALSE}
 #'
 #' @return invisibly returns the name of the tarfile
-#' @importFrom openssl sha512
+#' @importFrom openssl sha256
 #' @importFrom utils tar
 #'
 #' @export
@@ -26,12 +26,12 @@ tar_new_data <- function(
   ##
   tarpath <- get_option("new_data_archive")
 
-  if ( !file.exists( file.path( new_data_dir, "hash.sha512") ) ) {
+  if ( !file.exists( file.path( new_data_dir, "hash.sha256") ) ) {
     stop("The new data has not been hashed - please run `hash_new_data() before running this command!")
   }
   tarname <- paste(
     "new_data",
-    format( file.mtime( file.path( new_data_dir, "hash.sha512") ) , "%Y-%m-%d--%H-%M-%S"),
+    format( file.mtime( file.path( new_data_dir, "hash.sha256") ) , "%Y-%m-%d--%H-%M-%S"),
     "tar.gz",
     sep = "."
   )
@@ -51,11 +51,11 @@ tar_new_data <- function(
   setwd(oldwd)
 
   f <- file( tarfile, open = "rb" )
-  hash <- as.character( openssl::sha512( f ) )
+  hash <- as.character( openssl::sha256( f ) )
   close(f)
   rm(f)
   hash <- paste(hash, tarname, sep = "  ")
-  f <- file( file.path(tarpath, paste0(tarname, ".sha512") ) )
+  f <- file( file.path(tarpath, paste0(tarname, ".sha256") ) )
   writeLines(
     text = hash,
     con = f

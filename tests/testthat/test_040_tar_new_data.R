@@ -24,14 +24,14 @@ tarpath <- get_option("new_data_archive")
 
 tarname <- paste(
   "new_data",
-  format( file.mtime( file.path( get_option("new_data_dir"), "hash.sha512") ) , "%Y-%m-%d--%H-%M-%S"),
+  format( file.mtime( file.path( get_option("new_data_dir"), "hash.sha256") ) , "%Y-%m-%d--%H-%M-%S"),
   "tar.gz",
   sep = "."
 )
 
 tarfile <- file.path(tarpath, tarname)
 
-sha512file <-  file.path(tarpath, paste0(tarname, ".sha512") )
+sha256file <-  file.path(tarpath, paste0(tarname, ".sha256") )
 
 # Tests -------------------------------------------------------------------
 
@@ -46,8 +46,8 @@ test_that(
 )
 
 file.rename(
-  file.path( get_option("new_data_dir"), "ref.hash.sha512"),
-  file.path( get_option("new_data_dir"), "hash.sha512")
+  file.path( get_option("new_data_dir"), "ref.hash.sha256"),
+  file.path( get_option("new_data_dir"), "hash.sha256")
 )
 
 test_that(
@@ -74,12 +74,12 @@ test_that(
 )
 
 test_that(
-  "Created hash in .sha512 file is identical to reference",
+  "Created hash in .sha256 file is identical to reference",
   {
     skip("I have to see if this test is usefull!")
     expect_equal(
-      utils::read.table( sha512file, stringsAsFactors = FALSE )[[1]],
-      utils::read.table( file.path( get_option("new_data_archive"), "ref.new_data.xxx.tar.gz.sha512" ), stringsAsFactors = FALSE )[[1]]
+      utils::read.table( sha256file, stringsAsFactors = FALSE )[[1]],
+      utils::read.table( file.path( get_option("new_data_archive"), "ref.new_data.xxx.tar.gz.sha256" ), stringsAsFactors = FALSE )[[1]]
     )
   }
 )
@@ -93,9 +93,9 @@ test_that(
 )
 
 test_that(
-  ".sha512 file can be deleted",
+  ".sha256 file can be deleted",
   expect_error(
-    unlink( sha512file ),
+    unlink( sha256file ),
     regexp = NA
   )
 )
@@ -109,6 +109,6 @@ unlink( tmparch, recursive = TRUE, force = TRUE )
 set_option("new_data_archive", old_archive)
 set_option("new_data_dir", old_dir)
 
-rm( tarpath, tarname, tarfile, sha512file )
+rm( tarpath, tarname, tarfile, sha256file )
 
 

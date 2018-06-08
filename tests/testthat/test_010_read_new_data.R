@@ -13,7 +13,7 @@ context("Test read_new_data()")
 test_that( "Reads data correctly",
            {
              expect_equal_to_reference(
-               read_new_data("fcam.csv"),
+               read_new_data("fcam"),
                file.path( get_option("new_data_dir"), "fcam.rds" )
              )
            }

@@ -44,15 +44,15 @@ test_that(
 test_that(
   "Created hash file is identical to reference",
   expect_equal(
-    tools::md5sum( file.path( get_option("new_data_dir"), "hash.sha512"     ) )[[1]],
-    tools::md5sum( file.path( get_option("new_data_dir"), "ref.hash.sha512" ) )[[1]]
+    tools::md5sum( file.path( get_option("new_data_dir"), "hash.sha265"     ) )[[1]],
+    tools::md5sum( file.path( get_option("new_data_dir"), "ref.hash.sha265" ) )[[1]]
   )
 )
 
 test_that(
-  "hash.sha512 file can be deleted",
+  "hash.sha265 file can be deleted",
   expect_error(
-    unlink( file.path( get_option("new_data_dir"), "hash.sha512") ),
+    unlink( file.path( get_option("new_data_dir"), "hash.sha265") ),
     regexp = NA
   )
 )
@@ -69,9 +69,9 @@ test_that(
 )
 
 test_that(
-  "hash.sha512 file can be deleted",
+  "hash.sha265 file can be deleted",
   expect_error(
-    unlink( file.path( get_option("new_data_dir"), "hash.sha512") ),
+    unlink( file.path( get_option("new_data_dir"), "hash.sha265") ),
     regexp = NA
   )
 )
