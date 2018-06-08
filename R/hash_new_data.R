@@ -4,8 +4,9 @@
 #' it in a \code{files.sha256.txt} file and finally calculates the
 #' \bold{directory hash} for this file and saves it in the file
 #' \code{dir.sh256.txt}
-#' @param tts if \code{TRUE}, request Trusted Time Stamp for directory hash from
-#'   OriginStamp and results saved to \code{TTS.yml}; default \code{FALSE}
+#' @param tts if \code{TRUE}, request Trusted Time Stamp for \bold{directory
+#'   hash} from OriginStamp and results saved to \code{TTS.yml} and download the
+#'   seed into the file \code{seed.HASH.txt}; default \code{FALSE}
 #' @param overwrite if \code{TRUE}, the files \code{file.sha256.txt} and
 #'   \code{dir.sha256.txt} will be re-generated and overwritten! default is
 #'   \code{FALSE}. Only one ore none of these files exist, both will be
@@ -16,6 +17,7 @@
 #' @importFrom openssl sha256
 #' @importFrom yaml write_yaml
 #' @importFrom utils read.table
+#' @importFrom ROriginStamp store_hash get_complete_seed_file
 #'
 #' @export
 #'
@@ -105,7 +107,13 @@ hash_new_data <- function(
       x = result,
       file = file.path(new_data_dir, "TTS.yml")
     )
+
+    ROriginStamp::get_complete_seed_file(
+      hash = hash,
+      file = paste("seed.", hash, ".txt")
+    )
   }
+
 # finalize ----------------------------------------------------------------
 
   invisible(TRUE)

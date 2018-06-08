@@ -7,8 +7,9 @@
 hash_new_data(tts = FALSE, overwrite = FALSE)
 }
 \arguments{
-\item{tts}{if \code{TRUE}, request Trusted Time Stamp for directory hash from
-OriginStamp and results saved to \code{TTS.yml}; default \code{FALSE}}
+\item{tts}{if \code{TRUE}, request Trusted Time Stamp for \bold{directory
+hash} from OriginStamp and results saved to \code{TTS.yml} and download the
+seed into the file \code{seed.HASH.txt}; default \code{FALSE}}
 
 \item{overwrite}{if \code{TRUE}, the files \code{file.sha256.txt} and
 \code{dir.sha256.txt} will be re-generated and overwritten! default is
