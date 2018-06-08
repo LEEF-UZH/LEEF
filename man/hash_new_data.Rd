@@ -7,13 +7,20 @@
 hash_new_data(tts = FALSE, overwrite = FALSE)
 }
 \arguments{
-\item{tts}{if \code{TRUE}, request Trusted Time Stamp from OriginStamp and results saved to \code{TTS.yml}; default \code{FALSE}}
+\item{tts}{if \code{TRUE}, request Trusted Time Stamp for directory hash from
+OriginStamp and results saved to \code{TTS.yml}; default \code{FALSE}}
 
-\item{overwrite}{if \code{TRUE}, the file \code{hash.sha256} will be re-generated nd overwritten! default is \code{FALSE}}
+\item{overwrite}{if \code{TRUE}, the files \code{file.sha256.txt} and
+\code{dir.sha256.txt} will be re-generated and overwritten! default is
+\code{FALSE}. Only one ore none of these files exist, both will be
+re-generated.}
 }
 \value{
 invisibly \code{TRUE}
 }
 \description{
-This function is calculating
+This function is calculating the \bold{file hash} for each file and storing
+it in a \code{files.sha256.txt} file and finally calculates the
+\bold{directory hash} for this file and saves it in the file
+\code{dir.sh256.txt}
 }
