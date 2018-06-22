@@ -83,8 +83,9 @@
     list()
   )
 
-  add_pre_processor( pre_process_flowcam )
   add_pre_processor( pre_process_bemovi )
+  add_pre_processor( pre_process_flowcam )
+  add_pre_processor( pre_process_flowcytometer )
 
 # And the end -------------------------------------------------------------
 
