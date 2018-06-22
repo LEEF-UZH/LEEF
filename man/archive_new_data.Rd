@@ -13,7 +13,8 @@ archive_new_data(compression = get_option("config")$archive_compression,
    \item{\code{"none"}}{copy the to be imported data folder into archive}
    \item{\code{"tar"}}{tar the to be imported data folder}
    \item{\code{"tar.gz"}}{tar and gz compress the to be imported data folder}
-}}
+}
+Default is the value as defined in the config file.}
 
 \item{overwrite}{if \code{TRUE}, overwrite existing tar file; default is \code{FALSE}}
 }

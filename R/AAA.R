@@ -74,7 +74,20 @@
     "LEEF"
   )
 
-}
 
+
+# Add preprocessors -------------------------------------------------------
+
+  set_option(
+    "pre_processor",
+    list()
+  )
+
+  add_pre_processor( pre_process_flowcam )
+  add_pre_processor( pre_process_bemovi )
+
+# And the end -------------------------------------------------------------
+
+}
 
 
