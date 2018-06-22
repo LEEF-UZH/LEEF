@@ -2,7 +2,7 @@
 #'
 #' Run all the pre-processors registered with \code{add_pre_processor}.
 #'
-#' They are saved in a list in the option \code{pre_processor} and processed in order.
+#' They are saved in a list in the option \code{pre_processors} and processed in order.
 #' @return
 #'
 #' @export
@@ -11,7 +11,7 @@
 pre_process_new_data <- function() {
 
   result <- lapply(
-    X = get_option("pre_processor"),
+    X = get_option("pre_processors"),
     FUN = do.call,
     list()
   )

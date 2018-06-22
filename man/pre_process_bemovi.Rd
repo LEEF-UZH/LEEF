@@ -10,5 +10,5 @@ pre_process_bemovi()
 
 }
 \description{
-TODO convert to non-proprietory format
+convert all \code{.cxd} files in \code{bemovi} folder to non-proprietory avi format
 }

@@ -1,6 +1,6 @@
 #' Preprocessor bemovi data
 #'
-#' TODO convert to non-proprietory format
+#' convert all \code{.cxd} files in \code{bemovi} folder to non-proprietory avi format
 #' @return
 #'
 #' @importFrom R.utils bzip2
@@ -9,18 +9,29 @@
 #' @examples
 pre_process_bemovi <- function(
 ) {
-
-  cat("\nProcessing bemovi...")
-  cat("\n TODO convert to non-proprietary format!\n")
-  # cxd <- list.files(
-  #   path = file.path( get_option("to_be_imported"), "bemovi" ),
-  #   pattern = "*",
-  #   full.names = TRUE
-  # )
-  # if (length(cxd) > 0) {
-  #   R.utils::bzip2( cxd, remove = TRUE )
-  # }
+  cat("\n########################################################\n")
+  cat("\nProcessing bemovi...\n")
+  cxd <- list.files(
+    path = file.path( get_option("to_be_imported"), "bemovi" ),
+    pattern = "*.cxd",
+    full.names = TRUE
+  )
+  for (fn in cxd) {
+    cmd <- file.path( get_option("pkg_path"), "bftools", "bfconvert" )
+    arguments = paste(
+      "-overwrite",
+      fn,
+      gsub(".cxd", ".avi", fn),
+      sep = " "
+    )
+    system2(
+      command = cmd,
+      args = arguments
+    )
+    rm(fn)
+  }
   cat("done\n")
+  cat("\n########################################################\n")
 
   invisible(TRUE)
 }

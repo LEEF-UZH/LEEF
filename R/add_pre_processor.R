@@ -11,12 +11,12 @@ add_pre_processor <- function(fun) {
   if (!is.function(fun)) {
     stop( "fun needs to be a function!")
   }
-  pp <- get_option("pre_processor")
+  pp <- get_option("pre_processors")
   funname <- deparse(substitute(fun))
   pp[[funname]] <- fun
   set_option(
-    name = "pre_processor",
+    name = "pre_processors",
     value = pp
   )
-  invisible( get_option("pre_processor") )
+  invisible( get_option("pre_processors") )
 }

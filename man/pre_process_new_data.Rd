@@ -13,5 +13,5 @@ pre_process_new_data()
 Run all the pre-processors registered with \code{add_pre_processor}.
 }
 \details{
-They are saved in a list in the option \code{pre_processor} and processed in order.
+They are saved in a list in the option \code{pre_processors} and processed in order.
 }
