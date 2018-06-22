@@ -5,7 +5,5 @@
 ^README.*$
 ^dataDownload$
 ^codecov\.yml$
-
-^CONFIG.NAME$
-^config\.yml$
-
+^ToBeImported$
+^Archive$

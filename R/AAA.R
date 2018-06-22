@@ -34,6 +34,7 @@
   )
 
   # Set Config -------------------------------------------------------------
+
   set_option(
     "config",
     config::get(
@@ -45,27 +46,33 @@
     )
   )
 
-
-  # Set new_data_dir -___-------------------------------------------------------
+  # Set to_be_imported -----------------------------------------------------------
 
   set_option(
-    "new_data_dir",
-    file.path( get_option("pkg_path"), "new_data"  )
+    "to_be_imported",
+    file.path( getwd(), "ToBeImported"  )
   )
 
-  # Set new_data_archiver -___-------------------------------------------------------
+  # Set archive -----------------------------------------------------------
 
   set_option(
-    "new_data_archive",
-    file.path( get_option("pkg_path"), "new_data_archive"  )
+    "archive",
+    file.path( getwd(), "Archive"  )
   )
 
-  # Set raw_data_connection -----------------------------------------------------
+  # Set data_connection -----------------------------------------------------
   set_option(
-    "raw_data_connection",
+    "data_connection",
     NULL
   )
 
+
+# Set archive name --------------------------------------------------------
+
+  set_option(
+    "archive_name",
+    "LEEF"
+  )
 
 }
 

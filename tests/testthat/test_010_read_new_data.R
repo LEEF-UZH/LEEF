@@ -2,7 +2,7 @@
 # Setup -------------------------------------------------------------------
 
 old_dir <- set_option(
-  "new_data_dir",
+  "to_be_imported",
   file.path( get_option("pkg_path"), "test_data", "new_data", "true")
 )
 
@@ -14,7 +14,7 @@ test_that( "Reads data correctly",
            {
              expect_equal_to_reference(
                read_new_data("fcam"),
-               file.path( get_option("new_data_dir"), "fcam.rds" )
+               file.path( get_option("to_be_imported"), "fcam.rds" )
              )
            }
 )
@@ -22,6 +22,6 @@ test_that( "Reads data correctly",
 
 # Teardown ----------------------------------------------------------------
 
-set_option("new_data_dir", old_dir)
+set_option("to_be_imported", old_dir)
 
 

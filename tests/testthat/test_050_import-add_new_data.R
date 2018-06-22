@@ -11,11 +11,11 @@ file.copy(
 )
 
 old_dir <- set_option(
-  "new_data_dir",
+  "to_be_imported",
   file.path( tmpnew, "true")
 )
 
-tmpraw <- file.path(tempdir(check = TRUE), "raw_data")
+tmpraw <- file.path(tempdir(check = TRUE), "data")
 unlink( tmpraw, recursive = TRUE, force = TRUE)
 dir.create(tmpraw, showWarnings = FALSE)
 old_dir <- set_option(
@@ -28,7 +28,7 @@ old_dir <- set_option(
 context("Test faulty import_new_data()")
 
 old_dir <- set_option(
-  "new_data_dir",
+  "to_be_imported",
   file.path( tmpnew, "true")
 )
 
@@ -56,7 +56,7 @@ test_that(
 )
 
 old_dir <- set_option(
-  "new_data_dir",
+  "to_be_imported",
   file.path( tmpnew, "false")
 )
 
@@ -90,5 +90,5 @@ test_that(
 unlink(tmpnew, recursive = TRUE, force = TRUE)
 unlink(tmpraw, recursive = TRUE, force = TRUE)
 
-set_option("new_data_dir", old_dir)
+set_option("to_be_imported", old_dir)
 

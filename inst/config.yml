@@ -1,9 +1,10 @@
 default:
   maintainer:
-    name: Max Mustermann
-    email: Max@musterfabrik.example
-  description: This is my fantastic repo
-               with lots of data.
+    name: Rainer M. Krug
+    email: Rainer@uzh.ch
+  description: LEEF Data from an long term experiment.
+               Some more detaled info has to follow.
+  archive_compression: none
 
 Master:
   doi: FALSE
@@ -13,7 +14,7 @@ Master:
     backend:
       driver: "RSQLite::SQLite()"
       dbpath: NULL
-      dbname: "rawData.sqlite"
+      dbname: "LEEFData.sqlite"
 
 Main:
   doi: FALSE

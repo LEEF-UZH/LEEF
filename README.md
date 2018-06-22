@@ -5,11 +5,107 @@ R Notebook
 
 -----
 
-[![Coverage
-status](https://codecov.io/gh/rkrug/LEEF.Data/branch/master/graph/badge.svg)](https://codecov.io/github/rkrug/LEEF.Data?branch=master)
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+<!-- [![Coverage status](https://codecov.io/gh/rkrug/LEEF.Data/branch/master/graph/badge.svg)](https://codecov.io/github/rkrug/LEEF.Data?branch=master) -->
+
+<!-- [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) -->
 
 -----
+
+# **<span style="color:red">TODO</span>**
+
+## request DOI **<span style="color:red">TODO</span>**
+
+This is only necessary for public repos, but the functionality needs to
+be included here. This needs to be done in a github repo - gitlab
+possible?
+
+## Hashing and TTS for new\_data **<span style="color:red">TODO</span>**
+
+Request TTS (Trusted Time Stamp) only for new\_data package
+
+The hash should be for the directory containing the new data in `.csv`
+format. This guarantees the portability. So the calculation should be as
+follow:
+
+``` sh
+find ./path/to/directory/ -type f -print0  | xargs -0 sha1sum > sha1sum_list_unsorted.txt
+sort sha1sum_list_unsorted.txt > sha1sum_list_sorted.txt
+sha1sum sha1sum_list_sorted.txt > sha1sum.directory.txt
+```
+
+sha1sum.directory.txt will be used to obtain the TTS.
+
+After the TTS is obtained, the seed is downloiaded and saved in the
+directory as
+well.
+
+## build hash / checksum of `.tar.gz` archive **<span style="color:red">TODO</span>**
+
+This is used only to checksum the archive. The timestamp, including the
+seed file to verify it, is in the rchive.
+
+## degree of ‘rawness’ of data
+
+Different data sources (flowcam, video analysis, …) result in raw data
+which is usually processed further before archived. The question is at
+which stage the data needs to be archived. Ideally, the rawest possible,
+but the amount of raw data is im many cases imense. A triage of the
+ideal of storing the rawness and the storage available needs to be done.
+Processing of the data could be done through an SQL query or an R
+function.
+
+## Metadata storage **<span style="color:red">TODO</span>**
+
+Which metadata should be stored and in which format? Metadata is
+required at different levels:
+
+1.  new data package
+
+<!-- end list -->
+
+  - date, experiment, who collated the data package (responsible for
+    it), comments, …
+  - linked via the hash used for the TTS
+
+<!-- end list -->
+
+2.  data source
+
+<!-- end list -->
+
+  - machine, type, version, person who processed the data, comments, …
+
+<!-- end list -->
+
+3.  per experiment
+
+<!-- end list -->
+
+  - name, person responsible, info about experiment, comments, …
+    
+    How to store the description of the experiment - link to paper /
+    outline?
+
+<!-- end list -->
+
+4.  I am sure we need more\!\!\!\!\!\!
+
+## local processing **<span style="color:red">TODO</span>**
+
+  - Have to discuss with Frank the individual analys scripts and
+    algorythms used to include them in the local automation —
+    **crucial**. This will also be discussed with Francesco at the
+    meeting on the 4th of July.
+  - compile new\_data which includes:
+      - TABLENAME.csv files
+      - metadata in a certain format
+      - hash file following debian standards, i.e. one
+  - needs to be designed so that it can be adapted and modified at a
+    later stage. Initially, only embedd the existing scripts and
+    workflows into a package for
+automation
+
+## investigat the possiblility of using the gitlab installation from MAthematics for the local storage. **<span style="color:red">TODO</span>**
 
 # Info
 
@@ -200,11 +296,3 @@ and finally
 ## Activity Diagram of `import_new_data()` function
 
 ![](README_files/figure-gfm/leef.processing.activity-1.png)<!-- -->
-
-# **<span style="color:red">TODO</span>**
-
-  - request DOI and TTS only for sqlite database or snapshot of external
-    database - how can I do this?
-  - Which data needs to be archived from which source?
-  - how to store metdata?
-  - how to store experimental conditions?

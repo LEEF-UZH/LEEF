@@ -15,7 +15,7 @@ add_new_data <- function(
 on.exit(
   {
     if (closeAgain) {
-      db_disconnect_raw_data()
+      db_disconnect_data()
     }
   }
 )
@@ -23,19 +23,19 @@ on.exit(
 # Check if connection should be closed again ------------------------------
 
   closeAgain <- FALSE
-  if (is.null(get_option("raw_data_connection"))) {
-    db_connect_raw_data()
+  if (is.null(get_option("data_connection"))) {
+    db_connect_data()
     closeAgain <- TRUE
   }
 
 # Get new_data file names, extension and path -----------------------------
 
-  new_data_dir <-  get_option("new_data_dir")
+  to_be_imported <-  get_option("to_be_imported")
   new_data_extension <- get_option("config")$new_data_extension
-  table_names <- list.files( path = new_data_dir, pattern = new_data_extension )
+  table_names <- list.files( path = to_be_imported, pattern = new_data_extension )
   table_names <- gsub(new_data_extension, "", table_names)
 
-  if ( !file.exists( file.path( new_data_dir, "hash.sha256") ) ) {
+  if ( !file.exists( file.path( to_be_imported, "hash.sha256") ) ) {
     stop("The new data has not been hashed - please run `hash_new_data() before running this command!")
   }
 
@@ -44,7 +44,7 @@ on.exit(
 
   for (tbl in table_names) {
     if (
-      (!DBI::dbExistsTable( conn = get_option("raw_data_connection"), name = tbl ) ) &
+      (!DBI::dbExistsTable( conn = get_option("data_connection"), name = tbl ) ) &
       (!create_new_table)
     ) {
       stop("Table '", tbl, "' does not exist!", "\n", "If you want to create the table, set 'create_new_table = TRUE' when calling 'write_new_table!")
@@ -57,12 +57,12 @@ on.exit(
   ## Check before writing, that all hashes are new - maybe use the hash for the new_data_set?
 
 # Write data --------------------------------------------------------------
-  # timestamp <- format( file.mtime( file.path( new_data_dir, "hash.sha256") ) , "%Y-%m-%d--%H-%M-%S")
+  # timestamp <- format( file.mtime( file.path( to_be_imported, "hash.sha256") ) , "%Y-%m-%d--%H-%M-%S")
   for (i in 1:length(table_names)) {
     x <- read_new_data(table_names[i])
     x[["hash"]] <- read_new_data_hash(table_names[[i]])
     DBI::dbWriteTable(
-      conn = get_option("raw_data_connection"),
+      conn = get_option("data_connection"),
       name = table_names[i],
       value = x,
       overwrite = FALSE,

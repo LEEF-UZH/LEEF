@@ -16,15 +16,15 @@ db_hash_exists <- function(
   on.exit(
     {
       if (closeAgain) {
-        db_disconnect_raw_data()
+        db_disconnect_data()
       }
     }
   )
 # Check if connection should be closed again ------------------------------
 
   closeAgain <- FALSE
-  if (is.null(get_option("raw_data_connection"))) {
-    db_connect_raw_data()
+  if (is.null(get_option("data_connection"))) {
+    db_connect_data()
     closeAgain <- TRUE
   }
   if (length(table) != 1) {
@@ -34,7 +34,7 @@ db_hash_exists <- function(
   result <- sapply(
     hash,
     function(i) {
-      i %in% dbGetQuery( get_option("raw_data_connection"), paste("SELECT DISTINCT hash FROM",  table ) )
+      i %in% dbGetQuery( get_option("data_connection"), paste("SELECT DISTINCT hash FROM",  table ) )
     }
   )
   names(result) <- hash

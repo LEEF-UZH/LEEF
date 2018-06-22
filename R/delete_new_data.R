@@ -9,14 +9,14 @@
 delete_new_data <- function(
   all = FALSE
 ){
-  new_data_dir <-  get_option("new_data_dir")
+  to_be_imported <-  get_option("to_be_imported")
   new_data_extension <- get_option("config")$new_data_extension
-  new_files <- list.files( path = new_data_dir, pattern = new_data_extension )
+  new_files <- list.files( path = to_be_imported, pattern = new_data_extension )
   ##
   if (all) {
-    result <- unlink( file.path(new_data_dir, "*") )
+    result <- unlink( file.path(to_be_imported, "*") )
   } else {
-    result <- unlink( file.path(new_data_dir, c(new_files, "hash.sha256", "TTS.yml") ) )
+    result <- unlink( file.path(to_be_imported, c(new_files, "hash.sha256", "TTS.yml") ) )
   }
   ##
   invisible(result)

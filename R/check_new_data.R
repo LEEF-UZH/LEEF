@@ -1,6 +1,6 @@
 #' Check new data
 #'
-#' Check the data in the directory \code{new_data_dir} for conformity with database rules
+#' Check the data in the directory \code{to_be_imported} for conformity with database rules
 #'
 #' @param ... aditional arguments for the test function \code{testthat::test_dir}
 #'
@@ -25,11 +25,11 @@
 check_new_data <- function(
   ...
 ){
-  new_data_dir <-  get_option("new_data_dir")
+  to_be_imported <-  get_option("to_be_imported")
   ##
   result <- list(
     OK = FALSE,
-    new_data_dir = new_data_dir,
+    to_be_imported = to_be_imported,
     details = NA
   )
   class(result) <- "data_test_results"

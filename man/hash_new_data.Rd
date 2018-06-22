@@ -8,8 +8,8 @@ hash_new_data(tts = FALSE, overwrite = FALSE)
 }
 \arguments{
 \item{tts}{if \code{TRUE}, request Trusted Time Stamp for \bold{directory
-hash} from OriginStamp and results saved to \code{TTS.result.yml} and download the
-seed into the file \code{TTS.seed}; default \code{FALSE}}
+hash} from OriginStamp and results saved to \code{TTS.result.yml} and
+download the seed into the file \code{TTS.seed}; default \code{FALSE}}
 
 \item{overwrite}{if \code{TRUE}, the files \code{file.sha256} and
 \code{dir.sha256} will be re-generated and overwritten! default is
@@ -20,8 +20,9 @@ re-generated.}
 invisibly \code{TRUE}
 }
 \description{
-This function is calculating the \bold{file hash} for each file and storing
-it in a \code{files.sha256} file and finally calculates the
+This function is calculating the \bold{file hash} for each subdirectory and
+file and storing it in a \code{files.sha256} file and finally calculates the
 \bold{directory hash} for this file and saves it in the file
-\code{dir.sh256}
+\code{dir.sh256}. It is calculating one checksum file for the whole dataset
+as well which is stored in the ToBeImported directory.
 }

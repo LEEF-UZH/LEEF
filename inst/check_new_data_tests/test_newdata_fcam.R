@@ -6,9 +6,7 @@ test_that(
     expect_error(
       set_option(
         "tmp",
-        read_new_data(
-            "fcam.csv"
-        )
+        read_new_data("fcam")
       ),
       regexp = NA
     )

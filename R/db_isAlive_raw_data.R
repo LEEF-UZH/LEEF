@@ -7,15 +7,15 @@
 #' @export
 #'
 #' @examples
-db_isAlive_raw_data <- function() {
+db_isAlive_data <- function() {
   result <- FALSE
-  conn <- get_option("raw_data_connection")
+  conn <- get_option("data_connection")
   try(
     result <- DBI::dbGetQuery(conn, "SELECT 1")[[1]] == 1,
     silent = TRUE
   )
   if (!result & !is.null(conn)) {
-      db_disconnect_raw_data()
+      db_disconnect_data()
   }
   invisible(result)
 }

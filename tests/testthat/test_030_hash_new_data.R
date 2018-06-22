@@ -10,7 +10,7 @@ file.copy(
 )
 
 old_dir <- set_option(
-  "new_data_dir",
+  "to_be_imported",
   tmpdir
 )
 
@@ -44,15 +44,15 @@ test_that(
 test_that(
   "Created hash file is identical to reference",
   expect_equal(
-    tools::md5sum( file.path( get_option("new_data_dir"), "hash.sha265"     ) )[[1]],
-    tools::md5sum( file.path( get_option("new_data_dir"), "ref.hash.sha265" ) )[[1]]
+    tools::md5sum( file.path( get_option("to_be_imported"), "hash.sha265"     ) )[[1]],
+    tools::md5sum( file.path( get_option("to_be_imported"), "ref.hash.sha265" ) )[[1]]
   )
 )
 
 test_that(
   "hash.sha265 file can be deleted",
   expect_error(
-    unlink( file.path( get_option("new_data_dir"), "hash.sha265") ),
+    unlink( file.path( get_option("to_be_imported"), "hash.sha265") ),
     regexp = NA
   )
 )
@@ -71,7 +71,7 @@ test_that(
 test_that(
   "hash.sha265 file can be deleted",
   expect_error(
-    unlink( file.path( get_option("new_data_dir"), "hash.sha265") ),
+    unlink( file.path( get_option("to_be_imported"), "hash.sha265") ),
     regexp = NA
   )
 )
@@ -79,6 +79,6 @@ test_that(
 # Teardown ----------------------------------------------------------------
 
 unlink(tmpdir, recursive = TRUE, force = TRUE)
-set_option("new_data_dir", old_dir)
+set_option("to_be_imported", old_dir)
 
 

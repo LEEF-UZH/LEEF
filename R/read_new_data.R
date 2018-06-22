@@ -15,7 +15,7 @@ read_new_data <- function(
 ) {
   if (get_option("config")$new_data_extension == ".csv") {
     utils::read.csv(
-      file.path( get_option("new_data_dir"), paste0(file, get_option("config")$new_data_extension) ),
+      file.path( get_option("to_be_imported"), paste0(file, get_option("config")$new_data_extension) ),
       header = TRUE,
       sep = ",",
       quote = "\"",

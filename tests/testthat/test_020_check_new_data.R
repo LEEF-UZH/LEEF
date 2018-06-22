@@ -2,7 +2,7 @@
 # Setup -------------------------------------------------------------------
 
 old_dir <- set_option(
-  "new_data_dir",
+  "to_be_imported",
   file.path( get_option("pkg_path"), "test_data", "new_data", "false")
 )
 
@@ -34,7 +34,7 @@ test_that(
 )
 
 set_option(
-  "new_data_dir",
+  "to_be_imported",
   file.path( get_option("pkg_path"), "test_data", "new_data", "true"  )
 )
 
@@ -64,6 +64,6 @@ test_that(
 
 # teardown ----------------------------------------------------------------
 
-set_option("new_data_dir", old_dir)
+set_option("to_be_imported", old_dir)
 set_option("tmp", NULL)
 

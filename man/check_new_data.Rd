@@ -17,7 +17,7 @@ invisibly returns list of two elements as class \code{data_test_results}
 }
 }
 \description{
-Check the data in the directory \code{new_data_dir} for conformity with database rules
+Check the data in the directory \code{to_be_imported} for conformity with database rules
 }
 \examples{
 

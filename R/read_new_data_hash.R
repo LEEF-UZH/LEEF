@@ -19,7 +19,7 @@ read_new_data_hash <- function(
   file
 ) {
   result <- utils::read.table(
-      file.path( get_option("new_data_dir"), "hash.sha256"),
+      file.path( get_option("to_be_imported"), "file.sha256"),
       header = FALSE,
       stringsAsFactors = FALSE
   )

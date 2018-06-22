@@ -19,7 +19,9 @@ Imports:
     testthat,
     config,
     yaml,
-    utils
+    utils,
+    R.utils,
+    tiff
 Suggests: 
     covr
 RoxygenNote: 6.0.1
