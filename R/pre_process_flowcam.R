@@ -1,6 +1,6 @@
 #' Preprocessor flowcam data
 #'
-#' Conversion of uncompressed TIFF to compressed TIFF.
+#' Convert all \code{.tif} files in \code{flowcam} folder to zip compressed TIFF.
 #' @return
 #'
 #' @importFrom R.utils bzip2
@@ -12,6 +12,7 @@
 pre_process_flowcam <- function(
 ) {
 
+  cat("\n########################################################\n")
   cat("\nProcessing flowcam...")
   tif <- list.files(
     path = file.path( get_option("to_be_imported"), "flowcam" ),
@@ -28,10 +29,11 @@ pre_process_flowcam <- function(
           compression = "deflate"
         )
       },
-      mc.cores = parallel::detectCores() - 4
+      mc.cores = parallel::detectCores() - 2
     )
   }
   cat(" done\n")
+  cat("\n########################################################\n")
 
   invisible(TRUE)
 }

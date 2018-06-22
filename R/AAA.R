@@ -79,7 +79,7 @@
 # Add preprocessors -------------------------------------------------------
 
   set_option(
-    "pre_processor",
+    "pre_processors",
     list()
   )
 

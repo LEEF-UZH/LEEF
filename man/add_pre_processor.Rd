@@ -15,3 +15,6 @@ invisiby the pre-processor queue. A \code{list} which is processed
 \description{
 Adding a named function to the queue of pre-processors. If the named function already exists will it be replaced.
 }
+\details{
+The functions must not require any arguments.
+}

@@ -10,5 +10,5 @@ pre_process_flowcam()
 
 }
 \description{
-Conversion of uncompressed TIFF to compressed TIFF.
+Convert all \code{.tif} files in \code{flowcam} folder to zip compressed TIFF.
 }
