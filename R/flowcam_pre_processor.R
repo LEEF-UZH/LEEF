@@ -9,11 +9,11 @@
 #' @export
 #'
 #' @examples
-pre_process_flowcam <- function(
+flowcam_pre_processor <- function(
 ) {
 
   cat("\n########################################################\n")
-  cat("\nProcessing flowcam...")
+  cat("\nProcessing flowcam...\n")
   tif <- list.files(
     path = file.path( get_option("to_be_imported"), "flowcam" ),
     pattern = "*.tif",
@@ -32,7 +32,7 @@ pre_process_flowcam <- function(
       mc.cores = parallel::detectCores() - 2
     )
   }
-  cat(" done\n")
+  cat("done\n")
   cat("\n########################################################\n")
 
   invisible(TRUE)

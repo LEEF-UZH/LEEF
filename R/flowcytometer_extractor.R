@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-pre_process_flowcytometer <- function(
+flowcytometer_pre_processor <- function(
 ) {
   on.exit(
     setwd(oldwd)
@@ -37,7 +37,7 @@ pre_process_flowcytometer <- function(
     to = gsub( "/fcs/", "/", fcs )
   )
   unlink( file.path( get_option("to_be_imported"), "flowcytometer", "fcs" ), recursive = TRUE )
-  cat(" done\n")
+  cat("done\n")
   cat("\n########################################################\n")
 
   invisible(TRUE)

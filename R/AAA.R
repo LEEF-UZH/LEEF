@@ -83,9 +83,20 @@
     list()
   )
 
-  add_pre_processor( pre_process_bemovi )
-  add_pre_processor( pre_process_flowcam )
-  add_pre_processor( pre_process_flowcytometer )
+  add_pre_processor( bemovi_pre_processor )
+  add_pre_processor( flowcam_pre_processor )
+  add_pre_processor( flowcytometer_pre_processor )
+
+# Add Extractors ----------------------------------------------------------
+
+  set_option(
+    "extractors",
+    list()
+  )
+
+  # add_pre_processor( bemovi_extractor )
+  # add_pre_processor( flowcam_extractor)
+  # add_pre_processor( flowcytometer_extractor )
 
 # And the end -------------------------------------------------------------
 

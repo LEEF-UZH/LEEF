@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-pre_process_bemovi <- function(
+bemovi_pre_processor <- function(
 ) {
   cat("\n########################################################\n")
   cat("\nProcessing bemovi...\n")
