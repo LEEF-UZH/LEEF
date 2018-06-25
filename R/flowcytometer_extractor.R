@@ -1,6 +1,6 @@
 #' Preprocessor flowcytometer data
 #'
-#' Convert all \code{.c6} files in \code{flowcytometrie} folder to \code{.fcs} files and delete \code{.c6} file..
+#' Convert all \code{.fxs} files in \code{flowcytometrie} folder to \code{data.frame} and save as \code{.rds} file.
 #' @return
 #'
 #' @importFrom flowCore read.flowSet pData phenoData exprs logTransform truncateTransform transform rectangleGate
