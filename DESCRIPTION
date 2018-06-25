@@ -21,7 +21,9 @@ Imports:
     yaml,
     utils,
     R.utils,
-    tiff
+    tiff,
+    flowCore,
+    plyr
 Suggests: 
     covr
 RoxygenNote: 6.0.1

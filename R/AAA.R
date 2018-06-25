@@ -96,7 +96,7 @@
 
   # add_pre_processor( bemovi_extractor )
   # add_pre_processor( flowcam_extractor)
-  # add_pre_processor( flowcytometer_extractor )
+  add_extractor( flowcytometer_extractor )
 
 # And the end -------------------------------------------------------------
 

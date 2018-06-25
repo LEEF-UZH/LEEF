@@ -4,8 +4,10 @@
 #' @param create_new_table if \code{TRUE}, create a new table if it does not exist. Default \code{FALSE}, i.e. raises error if the table does not exist.
 #' @param ... additional arguments for \code{check_new_data()}
 #' @return \code{TRUE} if import succedded. If failed, report with why it failed TODO
+#'
 #' @importFrom openssl sha256
 #' @importFrom ROriginStamp store_hash
+#'
 #' @export
 #'
 #' @examples
@@ -42,9 +44,13 @@ import_new_data <- function(
       }
     )
 
+# Remove Hashes for further processing ------------------------------------
+
+delete_hash_new_data()
+
 # Prepare new data for adding to database ---------------------------------
 
-    if (!prepare_new_data()) {
+    if (!extract_new_data()) {
       hf <- c(
         list.files(
           path = get_option("to_be_imported"),
