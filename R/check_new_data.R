@@ -1,5 +1,6 @@
 #' Check new data
 #'
+#' ONLY DUMMY
 #' Check the data in the directory \code{to_be_imported} for conformity with database rules
 #'
 #' @param ... aditional arguments for the test function \code{testthat::test_dir}
@@ -25,19 +26,21 @@
 check_new_data <- function(
   ...
 ){
-  to_be_imported <-  get_option("to_be_imported")
-  ##
-  result <- list(
-    OK = FALSE,
-    to_be_imported = to_be_imported,
-    details = NA
-  )
-  class(result) <- "data_test_results"
-  #
-  result$details <- testthat::test_dir(
-    file.path( get_option("pkg_path"), "check_new_data_tests"),
-    ...
-  )
-  result$OK <- all( !as.data.frame(result$details)$failed )
+  warning("Check only dummy!!!!")
+  result <- TRUE
+  # to_be_imported <-  get_option("to_be_imported")
+  # ##
+  # result <- list(
+  #   OK = FALSE,
+  #   to_be_imported = to_be_imported,
+  #   details = NA
+  # )
+  # class(result) <- "data_test_results"
+  # #
+  # result$details <- testthat::test_dir(
+  #   file.path( get_option("pkg_path"), "check_new_data_tests"),
+  #   ...
+  # )
+  # result$OK <- all( !as.data.frame(result$details)$failed )
   invisible( result )
 }
