@@ -23,11 +23,11 @@ archive_new_data <- function(
   compression = get_option("config")$archive_compression,
   overwrite = FALSE
 ){
+  ##
+  oldwd <- getwd()
   on.exit(
     setwd(oldwd)
   )
-  ##
-  oldwd <- getwd()
   ##
   if (!(compression %in% c("none", "tar", "tar.gz"))) {
     stop("Conmpression", compression, "not supported!")

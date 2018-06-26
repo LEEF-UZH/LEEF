@@ -11,11 +11,11 @@
 #' @examples
 flowcytometer_pre_processor <- function(
 ) {
+  ##
+  oldwd <- getwd()
   on.exit(
     setwd(oldwd)
   )
-  ##
-  oldwd <- getwd()
   ##
 
   cat("\n########################################################\n")
