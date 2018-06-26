@@ -12,3 +12,7 @@ flowcytometer_extractor()
 \description{
 Convert all \code{.fxs} files in \code{flowcytometrie} folder to \code{data.frame} and save as \code{.rds} file.
 }
+\details{
+This function is extracting data to be added to the database (and therefore make accessible for further analysis and forecasting)
+from \code{.fcs} files.
+}

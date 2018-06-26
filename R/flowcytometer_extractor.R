@@ -1,6 +1,9 @@
 #' Preprocessor flowcytometer data
 #'
 #' Convert all \code{.fxs} files in \code{flowcytometrie} folder to \code{data.frame} and save as \code{.rds} file.
+#'
+#' This function is extracting data to be added to the database (and therefore make accessible for further analysis and forecasting)
+#' from \code{.fcs} files.
 #' @return
 #'
 #' @importFrom flowCore read.flowSet pData phenoData exprs logTransform truncateTransform transform rectangleGate
@@ -9,7 +12,7 @@
 #' @examples
 flowcytometer_extractor <- function() {
   cat("\n########################################################\n")
-  cat("\nProcessing flowcytometer...\n")
+  cat("Extracting flowcytometer...\n")
 
 # Based on flowcyt_1_c6_to_RData.R ----------------------------------------
   # Converting the Flowcytometer Output of bacterial abundances into a usable data frame
