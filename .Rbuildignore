@@ -6,4 +6,5 @@
 ^dataDownload$
 ^codecov\.yml$
 ^ToBeImported$
+^ToBeAdded$
 ^Archive$

@@ -33,7 +33,7 @@
     cn
   )
 
-  # Set Config -------------------------------------------------------------
+# Set Config -------------------------------------------------------------
 
   set_option(
     "config",
@@ -46,32 +46,39 @@
     )
   )
 
-  # Set to_be_imported -----------------------------------------------------------
+# Set to_be_imported -----------------------------------------------------------
 
   set_option(
     "to_be_imported",
     file.path( getwd(), "ToBeImported"  )
   )
 
-  # Set archive -----------------------------------------------------------
+# Set to_be_added name --------------------------------------------------------
+
+  set_option(
+    "to_be_added",
+    "ToBeAdded"
+  )
+
+# Set archive -----------------------------------------------------------
 
   set_option(
     "archive",
     file.path( getwd(), "Archive"  )
   )
 
-  # Set data_connection -----------------------------------------------------
-  set_option(
-    "data_connection",
-    NULL
-  )
-
-
 # Set archive name --------------------------------------------------------
 
   set_option(
     "archive_name",
     "LEEF"
+  )
+
+# Set data_connection -----------------------------------------------------
+
+  set_option(
+    "data_connection",
+    NULL
   )
 
 
@@ -95,7 +102,7 @@
   )
 
   # add_pre_processor( bemovi_extractor )
-  # add_pre_processor( flowcam_extractor)
+  add_extractor( flowcam_extractor)
   add_extractor( flowcytometer_extractor )
 
 # And the end -------------------------------------------------------------

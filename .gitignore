@@ -19,3 +19,4 @@ local/
 # Data directories which do not belong to the package
 Archive/
 ToBeImported/
+ToBeAdded/

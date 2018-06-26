@@ -23,7 +23,10 @@ Imports:
     R.utils,
     tiff,
     flowCore,
-    plyr
+    plyr,
+    dplyr,
+    magrittr,
+    readr
 Suggests: 
     covr
 RoxygenNote: 6.0.1
