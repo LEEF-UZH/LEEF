@@ -17,7 +17,8 @@ flowcam_pre_processor <- function(
   tif <- list.files(
     path = file.path( get_option("to_be_imported"), "flowcam" ),
     pattern = "*.tif",
-    full.names = TRUE
+    full.names = TRUE,
+    recursive = TRUE
   )
   if ( length(tif) > 0 ) {
     parallel::mclapply(
