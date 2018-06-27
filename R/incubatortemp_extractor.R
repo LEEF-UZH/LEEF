@@ -48,7 +48,7 @@ incubatortemp_extractor <- function() {
 
 # SAVE --------------------------------------------------------------------
 
-  add_path <- file.path( get_option("to_be_added"), "incubatortemp" )
+  add_path <- file.path( get_option("last_added"), "incubatortemp" )
   dir.create( add_path )
   saveRDS(
     object = itmp,

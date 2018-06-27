@@ -20,14 +20,14 @@ import_new_data <- function(
   lockfile <- file.path( get_option( "to_be_imported" ), "LOCKFILE.importing" )
   set_option( "to_be_imported_org", get_option("to_be_imported") )
   set_option( "archive_org", get_option("archive") )
-  set_option( "to_be_added_org", get_option("to_be_added") )
+  set_option( "last_added_org", get_option("last_added") )
   on.exit(
     {
       set_option( "to_be_imported", get_option("to_be_imported_org") )
       set_option( "to_be_imported_org", NULL )
       #
-      set_option( "to_be_added", get_option("to_be_added_org") )
-      set_option( "to_be_added_org", NULL )
+      set_option( "last_added", get_option("last_added_org") )
+      set_option( "last_added_org", NULL )
       #
       set_option( "archive", get_option("archive_org") )
       set_option( "archive_org", NULL )
@@ -43,8 +43,8 @@ import_new_data <- function(
   set_option( "to_be_imported", paste0( tempfile( pattern = "ToBeImported.")  ) )
   dir.create( get_option("to_be_imported") )
   #
-  set_option( "to_be_added", paste0( tempfile( pattern = "LastAdded.")  ) )
-  dir.create( get_option("to_be_added") )
+  set_option( "last_added", paste0( tempfile( pattern = "LastAdded.")  ) )
+  dir.create( get_option("last_added") )
   ## TODO - REPLACE WITH MOVE WHEN FINISHED DEBUGGING!!!!!!!
   file.create( file.path( get_option( "to_be_imported_org" ), "IMPORT.copying_to_be_imported") )
   file.copy(
@@ -109,14 +109,14 @@ import_new_data <- function(
     )
     unlink( file.path( get_option( "to_be_imported_org" ), "IMPORT.copy_archive") )
     #
-    file.create( file.path( get_option( "to_be_imported_org" ), "IMPORT.copy_to_be_added") )
-    dir.create( path = get_option("to_be_added_org"), showWarnings = FALSE, recursive = TRUE )
+    file.create( file.path( get_option( "to_be_imported_org" ), "IMPORT.copy_last_added") )
+    dir.create( path = get_option("last_added_org"), showWarnings = FALSE, recursive = TRUE )
     file.copy(
-      from = file.path( get_option("to_be_added"), "."),
-      to = get_option("to_be_added_org"),
+      from = file.path( get_option("last_added"), "."),
+      to = get_option("last_added_org"),
       recursive = TRUE
     )
-    unlink( file.path( get_option( "to_be_imported_org" ), "IMPORT.copy_to_be_added") )
+    unlink( file.path( get_option( "to_be_imported_org" ), "IMPORT.copy_last_added") )
 
     file.create( file.path( get_option( "to_be_imported_org" ), "IMPORT.completed") )
   }

@@ -211,7 +211,7 @@ flowcytometer_extractor <- function() {
 
 # SAVE --------------------------------------------------------------------
 
-  add_path <- file.path( get_option("to_be_added"), "flowcytometer" )
+  add_path <- file.path( get_option("last_added"), "flowcytometer" )
   dir.create( add_path )
   saveRDS(
     object = flow.data,

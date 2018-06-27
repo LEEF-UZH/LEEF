@@ -45,7 +45,7 @@ respirometer_extractor <- function() {
 
 # SAVE --------------------------------------------------------------------
 
-  add_path <- file.path( get_option("to_be_added"), "respirometer" )
+  add_path <- file.path( get_option("last_added"), "respirometer" )
   dir.create( add_path )
   saveRDS(
     object = res,

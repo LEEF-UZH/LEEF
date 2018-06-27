@@ -131,7 +131,7 @@ flowcam_extractor <- function() {
     )
 
 # SAVE --------------------------------------------------------------------
-  add_path <- file.path( get_option("to_be_added"), "flowcam" )
+  add_path <- file.path( get_option("last_added"), "flowcam" )
   dir.create( add_path )
   #
   saveRDS(

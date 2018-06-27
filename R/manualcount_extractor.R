@@ -43,7 +43,7 @@ manualcount_extractor <- function() {
 
 # SAVE --------------------------------------------------------------------
 
-  add_path <- file.path( get_option("to_be_added"), "manualcount" )
+  add_path <- file.path( get_option("last_added"), "manualcount" )
   dir.create( add_path )
   saveRDS(
     object = mc,

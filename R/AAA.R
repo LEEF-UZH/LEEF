@@ -53,10 +53,10 @@
     file.path( getwd(), "ToBeImported"  )
   )
 
-# Set to_be_added name --------------------------------------------------------
+# Set last_added name --------------------------------------------------------
 
   set_option(
-    "to_be_added",
+    "last_added",
     "LastAdded"
   )
 
