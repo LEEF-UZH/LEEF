@@ -43,7 +43,7 @@ import_new_data <- function(
   set_option( "to_be_imported", paste0( tempfile( pattern = "ToBeImported.")  ) )
   dir.create( get_option("to_be_imported") )
   #
-  set_option( "to_be_added", paste0( tempfile( pattern = "ToBeAdded.")  ) )
+  set_option( "to_be_added", paste0( tempfile( pattern = "LastAdded.")  ) )
   dir.create( get_option("to_be_added") )
   ## TODO - REPLACE WITH MOVE WHEN FINISHED DEBUGGING!!!!!!!
   file.create( file.path( get_option( "to_be_imported_org" ), "IMPORT.copying_to_be_imported") )
@@ -101,14 +101,16 @@ import_new_data <- function(
 # Finalize ----------------------------------------------------------------
 
     file.create( file.path( get_option( "to_be_imported_org" ), "IMPORT.copy_archive") )
+    dir.create( path = get_option("archive_org"), showWarnings = FALSE, recursive = TRUE )
     file.copy(
       from = file.path( get_option("archive"), "."),
       to = get_option("archive_org"),
       recursive = TRUE
     )
     unlink( file.path( get_option( "to_be_imported_org" ), "IMPORT.copy_archive") )
-
+    #
     file.create( file.path( get_option( "to_be_imported_org" ), "IMPORT.copy_to_be_added") )
+    dir.create( path = get_option("to_be_added_org"), showWarnings = FALSE, recursive = TRUE )
     file.copy(
       from = file.path( get_option("to_be_added"), "."),
       to = get_option("to_be_added_org"),

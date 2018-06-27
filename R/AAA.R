@@ -57,7 +57,7 @@
 
   set_option(
     "to_be_added",
-    "ToBeAdded"
+    "LastAdded"
   )
 
 # Set archive -----------------------------------------------------------
@@ -102,8 +102,11 @@
   )
 
   # add_pre_processor( bemovi_extractor )
-  add_extractor( flowcam_extractor)
+  add_extractor( flowcam_extractor )
+  add_extractor( incubatortemp_extractor )
   add_extractor( flowcytometer_extractor )
+  add_extractor( manualcount_extractor)
+  add_extractor( respirometer_extractor)
 
 # And the end -------------------------------------------------------------
 

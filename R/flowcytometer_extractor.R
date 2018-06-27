@@ -209,10 +209,6 @@ flowcytometer_extractor <- function() {
   ## Here some metadata was added - maybe later.
 
 
-# delete all files in flowcytometer directory -----------------------------
-
-  unlink( fcs_files )
-
 # SAVE --------------------------------------------------------------------
 
   add_path <- file.path( get_option("to_be_added"), "flowcytometer" )
