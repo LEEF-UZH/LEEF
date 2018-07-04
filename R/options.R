@@ -10,7 +10,7 @@
 #'
 set_option <- function(name, value) {
   if (exists(name, .DATA_CACHE)) {
-    res <- base::get(name, envir = .DATA_CACHE)
+    res <- base::get(name, envir = .DATA_CACHE, inherits = FALSE)
   } else {
     res <- NULL
   }
@@ -27,7 +27,7 @@ set_option <- function(name, value) {
 #'
 #' @examples
 get_option <- function(name) {
-  base::get(name, envir = .DATA_CACHE)
+  base::get(name, envir = .DATA_CACHE, inherits = FALSE)
 }
 
 #' Check if option exists
@@ -39,5 +39,5 @@ get_option <- function(name) {
 #'
 #' @examples
 exists_option <- function(name) {
-  exists(name, .DATA_CACHE)
+  exists(name, .DATA_CACHE, inherits = FALSE)
 }
