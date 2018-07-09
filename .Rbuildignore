@@ -5,6 +5,10 @@
 ^README.*$
 ^dataDownload$
 ^codecov\.yml$
+## Folders to be excluded
 ^ToBeImported$
 ^LastAdded$
 ^Archive$
+^SAMPLE_DATA$
+^tools/ImageJ$
+^tools/Fiji\.app$

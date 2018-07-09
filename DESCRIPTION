@@ -26,7 +26,10 @@ Imports:
     plyr,
     dplyr,
     magrittr,
-    readr
+    readr,
+    bemovi
 Suggests: 
     covr
+Remotes:
+    rkrug/bemovi@LEEF
 RoxygenNote: 6.0.1

@@ -6,18 +6,18 @@
 .DATA_CACHE <- new.env(FALSE, parent = globalenv())
 
 .onLoad <- function(lib, pkg) {
-  # Set fcam option ------------------------------------------------------
+# Set fcam option ------------------------------------------------------
 
   set_option("fcam", NULL)
 
-  # Set pkg_path ------------------------------------------------------------
+# Set pkg_path ------------------------------------------------------------
 
   set_option(
     "pkg_path",
     system.file(package = utils::packageName())
   )
 
-  # Set Config name --------------------------------------------------------
+# Set Config name --------------------------------------------------------
 
   fn <- file.path(
     get_option("pkg_path"),
@@ -81,8 +81,6 @@
     NULL
   )
 
-
-
 # Add preprocessors -------------------------------------------------------
 
   set_option(
@@ -93,6 +91,7 @@
   add_pre_processor( bemovi_pre_processor )
   add_pre_processor( flowcam_pre_processor )
   add_pre_processor( flowcytometer_pre_processor )
+  add_pre_processor( bemovi_pre_processor )
 
 # Add Extractors ----------------------------------------------------------
 
@@ -105,8 +104,9 @@
   add_extractor( flowcam_extractor )
   add_extractor( incubatortemp_extractor )
   add_extractor( flowcytometer_extractor )
-  add_extractor( manualcount_extractor)
-  add_extractor( respirometer_extractor)
+  add_extractor( manualcount_extractor )
+  add_extractor( respirometer_extractor )
+  add_extractor( bemovi_extractor )
 
 # And the end -------------------------------------------------------------
 

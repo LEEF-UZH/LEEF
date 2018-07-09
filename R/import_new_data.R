@@ -15,7 +15,7 @@ import_new_data <- function(
   create_new_table = FALSE,
   ...
 ) {
-  # Move data into temporary folder for impoirt and set lock file -----------
+  # Move data into temporary folder for import and set lock file -----------
   unlink( file.path( get_option( "to_be_imported" ), "IMPORT.completed") )
   lockfile <- file.path( get_option( "to_be_imported" ), "LOCKFILE.importing" )
   set_option( "to_be_imported_org", get_option("to_be_imported") )

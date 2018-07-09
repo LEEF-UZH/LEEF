@@ -23,8 +23,6 @@ init_folder <- function(){
 
   dir.create( get_option("last_added"), showWarnings = FALSE )
 
-# Database folder structure -----------------------------------------------
 
-  # dir.create( get_option("archive"), showWarnings = FALSE )
 
 }

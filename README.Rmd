@@ -27,6 +27,8 @@ knitr::opts_chunk$set(
 <!-- [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) -->
 
 ----
+bftools from https://docs.openmicroscopy.org/bio-formats/5.8.2/users/comlinetools/conversion.html (2018/06/22)
+
 
 # **<span style="color:red">TODO</span>**
 ## request DOI **<span style="color:red">TODO</span>**
@@ -95,7 +97,24 @@ The repo's function is to
 1. request the import of new data
 2. request new foreacasts
 
+# Dependencies
+## bioconductor packages
+The extaction of the datra from the flowcytometer depends on bioconductor packages. They can be ionstalled  as followed (details see https://bioconductor.org/install/#install-bioconductor-packages )
 
+```{r eval = FALSE}
+source("https://bioconductor.org/biocLite.R")
+biocLite(
+  c(
+    "flowCore"
+  )
+)
+```
+
+It is also possible, that the following packages have to be installed by hand:
+
+```{r eval = FALSE}
+install.packages("later")
+```
 # Installation of R package
 ## Prerequisites
 As the package is only on github, you need `devtools` to install it easily as a prerequisite
@@ -125,6 +144,41 @@ This package provides functions for **read-only** acces to the data as well as f
 - `read_data()`
 - **<span style="color:red">more functions are needed depending on the type of the data and will be added later</span>**
 - ...
+
+# Import new data
+Data can be imported from the folder
+
+```{r eval = FALSE}
+get_option("to_be_imported")
+```
+
+It can be set by using
+
+```{r eval = FALSE}
+set_option("to_be_imported", "ImportFolder")
+```
+
+The default is to a folder named **ToBeImported** in the current working directory when the library is loaded.
+
+This folder contains subfolder, which are equal to the name of the table in the database where the results will be imported to. Details will follow later.
+
+```{r leef.import.activity, fig.width = 8, fig.height = 16}
+'
+start
+if (""check_new_data()"") then (FALSE)
+  stop
+else (TRUE)
+endif
+:""pre_process_new_data()"";
+:""hash_new_data()"";
+:""archive_new_data()"";
+:""extract_new_data()"";
+:""add_new_data()"";
+:""delete_new_data()"";
+' %>%
+  plantuml %>%
+  plot
+```
 
 # Infrastructure
 ## Configuration files of the infrastructure

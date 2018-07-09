@@ -11,6 +11,10 @@ R Notebook
 
 -----
 
+bftools from
+<https://docs.openmicroscopy.org/bio-formats/5.8.2/users/comlinetools/conversion.html>
+(2018/06/22)
+
 # **<span style="color:red">TODO</span>**
 
 ## request DOI **<span style="color:red">TODO</span>**
@@ -129,6 +133,17 @@ The repo’s function is to
 1.  request the import of new data
 2.  request new foreacasts
 
+# Dependencies
+
+## bioconductor packages
+
+The extaction of the datra from the flowcytometer depends on
+bioconductor packages. They can be ionstalled as followed (details see
+<https://bioconductor.org/install/#install-bioconductor-packages> )
+
+It is also possible, that the following packages have to be installed by
+hand:
+
 # Installation of R package
 
 ## Prerequisites
@@ -169,6 +184,21 @@ well as functions to check the integrity if the data. The functions are
   - **<span style="color:red">more functions are needed depending on the
     type of the data and will be added later</span>**
   - …
+
+# Import new data
+
+Data can be imported from the folder
+
+It can be set by using
+
+The default is to a folder named **ToBeImported** in the current working
+directory when the library is loaded.
+
+This folder contains subfolder, which are equal to the name of the table
+in the database where the results will be imported to. Details will
+follow later.
+
+![](README_files/figure-gfm/leef.import.activity-1.png)<!-- -->
 
 # Infrastructure
 
