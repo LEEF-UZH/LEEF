@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-flowcam_pre_processor <- function(
+pre_processor_flowcam <- function(
 ) {
 
   cat("\n########################################################\n")

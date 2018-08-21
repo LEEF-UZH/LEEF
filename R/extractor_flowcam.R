@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-flowcam_extractor <- function() {
+extractor_flowcam <- function() {
   cat("\n########################################################\n")
   cat("\nExtracting flowcam...\n")
 

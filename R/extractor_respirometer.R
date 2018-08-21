@@ -1,6 +1,6 @@
-#' Extractor incubatortemp data
+#' Extractor respirometer data
 #'
-#' Convert all \code{.cvs} files in \code{incubatortemp} folder to \code{data.frame} and save as \code{.rds} file.
+#' Convert all \code{.cvs} files in \code{respirometer} folder to \code{data.frame} and save as \code{.rds} file.
 #'
 #' This function is extracting data to be added to the database (and therefore make accessible for further analysis and forecasting)
 #' from \code{.csv} files.
@@ -8,25 +8,25 @@
 #'
 #' @importFrom dplyr bind_rows
 #' @importFrom magrittr %>% %<>%
-#' @importFrom readr read_file locale read_tsv
+#' @importFrom readr read_csv
 #' @export
 #'
 #' @examples
-incubatortemp_extractor <- function() {
+extractor_respirometer <- function() {
   cat("\n########################################################\n")
-  cat("Extracting incubatortemp\n")
+  cat("Extracting respirometer\n")
 
   # Get csv file names ------------------------------------------------------
 
-  incubatortemp_path <- file.path( get_option("to_be_imported"), "incubatortemp" )
-  incubatortemp_files <- list.files(
-    path = incubatortemp_path,
-    pattern = "*.txt",
+  respirometer_path <- file.path( get_option("to_be_imported"), "respirometer" )
+  respirometer_files <- list.files(
+    path = respirometer_path,
+    pattern = "*.csv",
     full.names = TRUE,
     recursive = TRUE
   )
 
-  if (length(incubatortemp_files) == 0) {
+  if (length(respirometer_files) == 0) {
     cat("nothing to extract\n")
     cat("\n########################################################\n")
     return(invisible(FALSE))
@@ -34,25 +34,22 @@ incubatortemp_extractor <- function() {
 
 # Read file ---------------------------------------------------------------
 
-  itmp <- lapply(
-    incubatortemp_files,
-    function(fn) {
-      fn %>%
-        readr::read_file( locale = readr::locale(encoding = "UTF-16LE") ) %>%
-        read_tsv %>%
-        return
-    }
+  res <- lapply(
+    respirometer_files,
+    readr::read_csv2,
+    skip = 1
   ) %>%
     # combine intu one large tibble
-    dplyr::bind_rows(.)
+    dplyr::bind_rows(.) %>%
+    dplyr::filter(Date != "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
 # SAVE --------------------------------------------------------------------
 
-  add_path <- file.path( get_option("last_added"), "incubatortemp" )
+  add_path <- file.path( get_option("last_added"), "respirometer" )
   dir.create( add_path )
   saveRDS(
-    object = itmp,
-    file = file.path(add_path, "incubatortemp.rds")
+    object = res,
+    file = file.path(add_path, "respirometer.rds")
   )
 
 # Finalize ----------------------------------------------------------------

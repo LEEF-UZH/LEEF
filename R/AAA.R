@@ -88,10 +88,9 @@
     list()
   )
 
-  add_pre_processor( bemovi_pre_processor )
-  add_pre_processor( flowcam_pre_processor )
-  add_pre_processor( flowcytometer_pre_processor )
-  add_pre_processor( bemovi_pre_processor )
+  add_pre_processor( pre_processor_flowcam )
+  add_pre_processor( pre_processor_flowcytometer )
+  add_pre_processor( pre_processor_bemovi )
 
 # Add Extractors ----------------------------------------------------------
 
@@ -100,13 +99,13 @@
     list()
   )
 
-  # add_pre_processor( bemovi_extractor )
-  add_extractor( flowcam_extractor )
-  add_extractor( incubatortemp_extractor )
-  add_extractor( flowcytometer_extractor )
-  add_extractor( manualcount_extractor )
-  add_extractor( respirometer_extractor )
-  add_extractor( bemovi_extractor )
+  # add_pre_processor( bemovi )
+  add_extractor( extractor_flowcam )
+  add_extractor( extractor_incubatortemp )
+  add_extractor( extractor_flowcytometer )
+  add_extractor( extractor_manualcount )
+  add_extractor( extractor_respirometer )
+  add_extractor( extractor_bemovi )
 
 # And the end -------------------------------------------------------------
 

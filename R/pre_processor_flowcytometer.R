@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-flowcytometer_pre_processor <- function(
+pre_processor_flowcytometer <- function(
 ) {
   ##
   oldwd <- getwd()

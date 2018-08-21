@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples
-flowcytometer_extractor <- function() {
+extractor_flowcytometer <- function() {
   cat("\n########################################################\n")
   cat("Extracting flowcytometer...\n")
 

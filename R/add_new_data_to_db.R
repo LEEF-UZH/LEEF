@@ -9,20 +9,23 @@
 #' @export
 #'
 #' @examples
-add_new_data <- function(
+add_new_data_to_db <- function(
   create_new_table = FALSE
 ){
-on.exit(
-  {
-    if (closeAgain) {
-      db_disconnect_data()
+  stop( "TODO to be implemented!" )
+
+  closeAgain <- FALSE
+
+  on.exit(
+    {
+      if (closeAgain) {
+        db_disconnect_data()
+      }
     }
-  }
-)
+  )
 
 # Check if connection should be closed again ------------------------------
 
-  closeAgain <- FALSE
   if (is.null(get_option("data_connection"))) {
     db_connect_data()
     closeAgain <- TRUE

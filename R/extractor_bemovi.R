@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @examples
-bemovi_extractor <- function() {
+extractor_bemovi <- function() {
   cat("\n########################################################\n")
   cat("Extracting bemovi...\n")
 
