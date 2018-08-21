@@ -9,6 +9,7 @@
 delete_new_data <- function(
   all = FALSE
 ){
+  stop( "TODO to be implemented!" )
   to_be_imported <-  get_option("to_be_imported")
   new_data_extension <- get_option("config")$new_data_extension
   new_files <- list.files( path = to_be_imported, pattern = new_data_extension )

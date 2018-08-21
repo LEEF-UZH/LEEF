@@ -13,6 +13,7 @@
 read_new_data <- function(
   file
 ) {
+  stop( "TODO Is this realy needxed now?????" )
   if (get_option("config")$new_data_extension == ".csv") {
     utils::read.csv(
       file.path( get_option("to_be_imported"), paste0(file, get_option("config")$new_data_extension) ),

@@ -9,7 +9,6 @@ default:
 Master:
   doi: FALSE
   tts: TRUE
-  new_data_extension: .csv
   data:
     backend:
       driver: "RSQLite::SQLite()"

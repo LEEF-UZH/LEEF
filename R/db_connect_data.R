@@ -13,7 +13,7 @@ db_connect_data <- function() {
   }
   if (get_option("config")$data$backend$driver == "RSQLite::SQLite()") {
     if (is.null(get_option("config")$data$backend$dbpath)) {
-      dbname = file.path(get_option("pkg_path"), "data", get_option("config")$data$backend$dbname)
+      stop( "Plese set data -- backend -- dbpath in config.yml!")
     } else {
       dbname = file.path(get_option("config")$data$backend$dbpath, get_option("config")$data$backend$dbname)
     }
