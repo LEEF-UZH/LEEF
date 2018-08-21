@@ -4,13 +4,9 @@
 \alias{hash_new_data}
 \title{Create hash file of new_data}
 \usage{
-hash_new_data(tts = FALSE, overwrite = FALSE)
+hash_new_data(overwrite = FALSE)
 }
 \arguments{
-\item{tts}{if \code{TRUE}, request Trusted Time Stamp for \bold{directory
-hash} from OriginStamp and results saved to \code{TTS.result.yml} and
-download the seed into the file \code{TTS.seed}; default \code{FALSE}}
-
 \item{overwrite}{if \code{TRUE}, the files \code{file.sha256} and
 \code{dir.sha256} will be re-generated and overwritten! default is
 \code{FALSE}. Only one ore none of these files exist, both will be

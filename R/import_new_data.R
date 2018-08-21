@@ -15,7 +15,7 @@ import_new_data <- function(
   create_new_table = FALSE,
   ...
 ) {
-  # Move data into temporary folder for import and set lock file -----------
+# Move data into temporary folder for import and set lock file -----------
   unlink( file.path( get_option( "to_be_imported" ), "IMPORT.completed") )
   lockfile <- file.path( get_option( "to_be_imported" ), "LOCKFILE.importing" )
   set_option( "to_be_imported_org", get_option("to_be_imported") )
@@ -45,8 +45,11 @@ import_new_data <- function(
   #
   set_option( "last_added", paste0( tempfile( pattern = "LastAdded.")  ) )
   dir.create( get_option("last_added") )
+
   ## TODO - REPLACE WITH MOVE WHEN FINISHED DEBUGGING!!!!!!!
   file.create( file.path( get_option( "to_be_imported_org" ), "IMPORT.copying_to_be_imported") )
+  cat("\n########################################################\n")
+  cat("\nCopying new data...\n")
   file.copy(
     from = file.path( get_option("to_be_imported_org"), "." ),
     to = get_option("to_be_imported"),
@@ -54,6 +57,8 @@ import_new_data <- function(
   )
   unlink( file.path( get_option( "to_be_imported" ), "IMPORT.copying_to_be_imported") )
   unlink( file.path( get_option( "to_be_imported" ), "LOCKFILE.importing") )
+  cat("done\n")
+  cat("\n########################################################\n")
   #
   unlink( file.path( get_option( "to_be_imported_org" ), "IMPORT.copying_to_be_imported") )
 
@@ -70,15 +75,23 @@ import_new_data <- function(
 
 # Create hashes of new data ---------------------------------------
 
+    cat("\n########################################################\n")
+    cat("\nHashing new data...\n")
     file.create( file.path( get_option( "to_be_imported_org" ), "IMPORT.hash_new_data") )
-    hash_new_data( tts = FALSE, overwrite = FALSE )
+    hash_new_data( overwrite = FALSE )
     unlink( file.path( get_option( "to_be_imported_org" ), "IMPORT.hash_new_data") )
+    cat("done\n")
+    cat("\n########################################################\n")
 
 # Create archive tar ------------------------------------------------------
 
+    cat("\n########################################################\n")
+    cat("\nArchiving new data...\n")
     file.create( file.path( get_option( "to_be_imported_org" ), "IMPORT.archive_new_data") )
     archive_new_data()
     unlink( file.path( get_option( "to_be_imported_org" ), "IMPORT.archive_new_data") )
+    cat("done\n")
+    cat("\n########################################################\n")
 
 # Remove Hashes for further processing ------------------------------------
 

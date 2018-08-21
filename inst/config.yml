@@ -4,7 +4,12 @@ default:
     email: Rainer@uzh.ch
   description: LEEF Data from an long term experiment.
                Some more detaled info has to follow.
-  archive_compression: none
+  archive_compression: tar
+  tts_info:
+    name: Rainer M Krug
+    email: Rainer.Krug@uzh.ch
+    comment: testdata
+    archivename: To Be Set
 
 Master:
   doi: FALSE

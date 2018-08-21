@@ -33,45 +33,28 @@ archive_new_data <- function(
     stop("Conmpression", compression, "not supported!")
   }
   to_be_imported <-  get_option("to_be_imported")
-  # new_data_extension <- get_option("config")$new_data_extension
-  # new_files <- list.files( path = to_be_imported, pattern = new_data_extension )
-  ##
-  archivepath <- get_option("archive")
-
   if (
     !file.exists( file.path( to_be_imported, "file.sha256") ) |
     !file.exists( file.path( to_be_imported, "dir.sha256") )
   ) {
     stop("The new data has not been hashed - please run `hash_new_data() before running this command!")
   }
-  ### TODO ### THIS TIME SHOULD BE TAKEN FROM THE RESULT FROM THE TTS WHEN TTS AVAILABLE
-  if ( file.exists(file.path(to_be_imported, "TTS.result.yml")) ) {
-    stop("TODO!")
-    # timestamp <-
-    # timestamp <- format( timestamp , "%Y-%m-%d--%H-%M-%S.TTS")
-  } else {
-    timestamp <- Sys.time()
-    timestamp <- format( timestamp , "%Y-%m-%d--%H-%M-%S")
-  }
   ##
-  archivename <- ifelse(
-    compression == "none",
-    yes = paste(
-      get_option("archive_name"),
-      timestamp,
-      sep = "."
-    ),
-    no = paste(
-      get_option("archive_name"),
-      timestamp,
-      compression == "none",
-      sep = "."
-    )
+  archivepath <- get_option("archive")
+  timestamp <- Sys.time()
+  timestamp <- format( timestamp , "%Y-%m-%d--%H-%M-%S")
+  archivename <- paste(
+    get_option("archive_name"),
+    timestamp,
+    compression,
+    sep = "."
   )
-
+  if (compression == "none") {
+    gsub( ".none", "", archivename)
+  }
   archivefile <- file.path(archivepath, archivename)
   if ( file.exists( archivefile ) & !overwrite) {
-    stop("The tar archive exists already - please set `overwrite = TRUE` if you want to overwrite them!")
+    stop("The archive exists already - please set `overwrite = TRUE` if you want to overwrite them!")
   }
   ##
   switch(
@@ -81,22 +64,34 @@ archive_new_data <- function(
       utils::tar(
         tarfile = archivefile,
         files = "./",
-        # compression = "gz",
-        compression_level = 9
       )
       setwd(oldwd)
       f <- file( archivefile, open = "rb" )
       hash <- as.character( openssl::sha256( f ) )
       close(f)
       rm(f)
-      hash <- paste(hash, archivename, sep = "  ")
+      hashln <- paste(hash, archivename, sep = "  ")
       f <- file( file.path(archivepath, paste0(archivename, ".sha256") ) )
       writeLines(
-        text = hash,
+        text = hashln,
         con = f
       )
       close(f)
       rm(f)
+      ##
+      information <- get_option("config")$tts_info
+      information$archivename <- archivefile
+      #
+      ROriginStamp::store_hash(
+        hash = hash,
+        error_on_fail = TRUE,
+        information = information
+      )
+      cat("\n\nTODO Get Complete Seed File and save!!!\n\n")
+      ROriginStamp::get_hash_info(
+        hash,
+        file = paste0( archivefile, ".OriginStamp.hash-info.yml")
+        )
     },
     tar.gz = {
       oldwd <- setwd(get_option("to_be_imported"))
@@ -111,14 +106,27 @@ archive_new_data <- function(
       hash <- as.character( openssl::sha256( f ) )
       close(f)
       rm(f)
-      hash <- paste(hash, archivename, sep = "  ")
+      hashln <- paste(hash, archivename, sep = "  ")
       f <- file( file.path(archivepath, paste0(archivename, ".sha256") ) )
       writeLines(
-        text = hash,
+        text = hashln,
         con = f
       )
       close(f)
       rm(f)
+      ##
+      information <- get_option("config")$tts_info
+      information$archivename <- archivefile
+      #
+      ROriginStamp::store_hash(
+        hash = hash,
+        error_on_fail = TRUE,
+        information = information
+      )
+      ROriginStamp::get_hash_info(
+        hash,
+        file = paste0( archivename, ".OriginStamp.hash-info.yml")
+      )
     },
     none = {
       dir.create( archivefile )
