@@ -19,7 +19,7 @@ old_dir <- set_option(
 context("Test hash_new_data()")
 
 test_that(
-  "Creates Hashes correctly with default (i.e. tts = FALSE)",
+  "Creates Hashes correctly with default values",
   expect_error(
     hash_new_data(),
     regexp = NA
@@ -46,25 +46,6 @@ test_that(
   expect_equal(
     tools::md5sum( file.path( get_option("to_be_imported"), "hash.sha265"     ) )[[1]],
     tools::md5sum( file.path( get_option("to_be_imported"), "ref.hash.sha265" ) )[[1]]
-  )
-)
-
-test_that(
-  "hash.sha265 file can be deleted",
-  expect_error(
-    unlink( file.path( get_option("to_be_imported"), "hash.sha265") ),
-    regexp = NA
-  )
-)
-
-# tts = TRUE --------------------------------------------------------------
-context("Test hash_new_data( tts = TRUE)")
-
-test_that(
-  "Creates Hashes correctly with tts = TRUE, i.e. aborts with error message",
-  expect_error(
-    hash_new_data(tts = TRUE),
-    regexp = NULL
   )
 )
 
