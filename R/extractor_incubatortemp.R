@@ -14,7 +14,7 @@
 #' @examples
 extractor_incubatortemp <- function() {
   cat("\n########################################################\n")
-  cat("Extracting incubatortemp\n")
+  cat("\nExtracting Incubatortemp\n")
 
   # Get csv file names ------------------------------------------------------
 
