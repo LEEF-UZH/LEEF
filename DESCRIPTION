@@ -32,4 +32,5 @@ Suggests:
     covr
 Remotes:
     rkrug/bemovi@LEEF
+    rkrug/ROriginStamp
 RoxygenNote: 6.0.1
