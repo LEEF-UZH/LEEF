@@ -87,7 +87,6 @@ archive_new_data <- function(
         error_on_fail = TRUE,
         information = information
       )
-      cat("\n\nTODO Get Complete Seed File and save!!!\n\n")
       ROriginStamp::get_hash_info(
         hash,
         file = paste0( archivefile, ".OriginStamp.hash-info.yml")
