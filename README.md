@@ -15,7 +15,20 @@ bftools from
 <https://docs.openmicroscopy.org/bio-formats/5.8.2/users/comlinetools/conversion.html>
 (2018/06/22)
 
-# **<span style="color:red">TODO</span>**
+# TODO List
+
+## **UPDATE THIS LIST\!\!\!\!**
+
+## Documentation and tests need to be revised and completed
+
+  - revise Tests
+  - revise documentation
+
+## Define datsbsse structure including hash and id fields
+
+  - define fields and linkages between tables
+  - add hash and id fields to rds in LastAdded files
+  - Write code to write LastAdded to SQLite database
 
 ## request DOI **<span style="color:red">TODO</span>**
 
