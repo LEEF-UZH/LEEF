@@ -4,6 +4,7 @@
 #' \code{hash.sha256} in the \code{get_option("new_data_path")} directory.
 #' @param file if given, function returns the hash of the file, if not, a
 #'   dataframe containing the hashes
+#' @param hash_file name of the hash file which should be read
 #'
 #' @return the hash of the file (if given), otherwise a \code{data.frame}
 #'   containing the columns \code{file} containing the file names and
@@ -16,10 +17,11 @@
 #'
 #' @examples
 read_new_data_hash <- function(
-  file
+  file,
+  hash_file = "file.sha256"
 ) {
   result <- utils::read.table(
-      file.path( get_option("to_be_imported"), "file.sha256"),
+      file.path( get_option("to_be_imported"), hash_file),
       header = FALSE,
       stringsAsFactors = FALSE
   )
