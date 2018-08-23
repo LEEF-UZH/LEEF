@@ -29,6 +29,21 @@ archive_new_data <- function(
     setwd(oldwd)
   )
   ##
+  getTTS <- function(hash, archivename, archivefile) {
+    information <- get_option("config")$tts_info
+    information$archivename <- archivename
+    #
+    ROriginStamp::store_hash(
+      hash = hash,
+      error_on_fail = TRUE,
+      information = information
+    )
+    ROriginStamp::get_hash_info(
+      hash,
+      file = paste0( archivefile, ".OriginStamp.hash-info.yml")
+    )
+  }
+  ##
   if (!(compression %in% c("none", "tar", "tar.gz"))) {
     stop("Conmpression", compression, "not supported!")
   }
@@ -79,18 +94,11 @@ archive_new_data <- function(
       close(f)
       rm(f)
       ##
-      information <- get_option("config")$tts_info
-      information$archivename <- archivefile
-      #
-      ROriginStamp::store_hash(
+      getTTS(
         hash = hash,
-        error_on_fail = TRUE,
-        information = information
+        archivename = archivename,
+        archivefile = archivefile
       )
-      ROriginStamp::get_hash_info(
-        hash,
-        file = paste0( archivefile, ".OriginStamp.hash-info.yml")
-        )
     },
     tar.gz = {
       oldwd <- setwd(get_option("to_be_imported"))
@@ -114,17 +122,11 @@ archive_new_data <- function(
       close(f)
       rm(f)
       ##
-      information <- get_option("config")$tts_info
-      information$archivename <- archivefile
-      #
-      ROriginStamp::store_hash(
+      ##
+      getTTS(
         hash = hash,
-        error_on_fail = TRUE,
-        information = information
-      )
-      ROriginStamp::get_hash_info(
-        hash,
-        file = paste0( archivename, ".OriginStamp.hash-info.yml")
+        archivename = archivename,
+        archivefile = archivefile
       )
     },
     none = {
@@ -134,6 +136,17 @@ archive_new_data <- function(
         to = archivefile,
         recursive = TRUE,
         copy.date = TRUE
+      )
+      ##
+      information <- get_option("config")$tts_info
+      information$archivename <- archivefile
+      #
+      hash <- read_new_data_hash(file = "file.sha256", hash_file = "dir.sha256")
+      ##
+      getTTS(
+        hash = hash,
+        archivename = archivename,
+        archivefile = archivefile
       )
     }
   )
