@@ -35,7 +35,7 @@ hash_new_data <- function(
       recursive = recursiveHash
     )
     if (length(new_files) == 0) {
-      break()
+      return()
     }
     new_files <- sort(new_files)
 
