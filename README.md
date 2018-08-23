@@ -15,61 +15,14 @@ bftools from
 <https://docs.openmicroscopy.org/bio-formats/5.8.2/users/comlinetools/conversion.html>
 (2018/06/22)
 
-# TODO List
+-----
 
-## **UPDATE THIS LIST\!\!\!\!**
+# TODO
 
 ## Documentation and tests need to be revised and completed
 
   - revise Tests
   - revise documentation
-
-## Define datsbsse structure including hash and id fields
-
-  - define fields and linkages between tables
-  - add hash and id fields to rds in LastAdded files
-  - Write code to write LastAdded to SQLite database
-
-## request DOI **<span style="color:red">TODO</span>**
-
-This is only necessary for public repos, but the functionality needs to
-be included here. This needs to be done in a github repo - gitlab
-possible?
-
-## Hashing and TTS for new\_data **<span style="color:red">TODO</span>**
-
-Request TTS (Trusted Time Stamp) only for new\_data package
-
-The hash should be for the directory containing the new data in `.csv`
-format. This guarantees the portability. So the calculation should be as
-follow:
-
-``` sh
-find ./path/to/directory/ -type f -print0  | xargs -0 sha1sum > sha1sum_list_unsorted.txt
-sort sha1sum_list_unsorted.txt > sha1sum_list_sorted.txt
-sha1sum sha1sum_list_sorted.txt > sha1sum.directory.txt
-```
-
-sha1sum.directory.txt will be used to obtain the TTS.
-
-After the TTS is obtained, the seed is downloiaded and saved in the
-directory as
-well.
-
-## build hash / checksum of `.tar.gz` archive **<span style="color:red">TODO</span>**
-
-This is used only to checksum the archive. The timestamp, including the
-seed file to verify it, is in the rchive.
-
-## degree of ‘rawness’ of data
-
-Different data sources (flowcam, video analysis, …) result in raw data
-which is usually processed further before archived. The question is at
-which stage the data needs to be archived. Ideally, the rawest possible,
-but the amount of raw data is im many cases imense. A triage of the
-ideal of storing the rawness and the storage available needs to be done.
-Processing of the data could be done through an SQL query or an R
-function.
 
 ## Metadata storage **<span style="color:red">TODO</span>**
 
@@ -107,22 +60,59 @@ required at different levels:
 
 4.  I am sure we need more\!\!\!\!\!\!
 
-## local processing **<span style="color:red">TODO</span>**
+## Define database structure including hash and id fields
 
-  - Have to discuss with Frank the individual analys scripts and
-    algorythms used to include them in the local automation —
-    **crucial**. This will also be discussed with Francesco at the
-    meeting on the 4th of July.
-  - compile new\_data which includes:
-      - TABLENAME.csv files
-      - metadata in a certain format
-      - hash file following debian standards, i.e. one
-  - needs to be designed so that it can be adapted and modified at a
-    later stage. Initially, only embedd the existing scripts and
-    workflows into a package for
-automation
+1)  define fields and linkages between tables
+2)  add hash and id fields to `.rds` files in the `LastAdded` folder
+3)  Write code to write LastAdded to SQLite database
 
-## investigat the possiblility of using the gitlab installation from MAthematics for the local storage. **<span style="color:red">TODO</span>**
+## function to request DOI
+
+This function will publish the data at the is only necessary for public
+repos, but the functionality needs to be included here. This needs to be
+done in a github repo - gitlab possible?
+
+## Download seed file
+
+After the TTS is obtained, the seed is downloiaded and saved in the
+directory as well. This needs to be automated and done later, as the
+seed is only avvailable about 24 hours after the initial
+submission.
+
+## Investigate the possiblility of using the gitlab installation from Mathematics department for the local storage.
+
+This is unlikely using the current structure and hopefully new options
+will materialise after the Bern meeting.
+
+-----
+
+# DONE
+
+## Hashing and TTS for new\_data **<span style="color:red">TODO</span>**
+
+Request TTS (Trusted Time Stamp) is obtained from `archive_new_data()`
+and is stored in the samd directory as the archive
+
+## build hash / checksum of archive
+
+This is used only to checksum the archive and for obtaining the TTS for
+the archive hash.
+
+## Pre-processing of data
+
+Conversion to open formats for archiving and fuerther procesing
+
+## Extraction of data
+
+Extraction of dat and storage in data.table / tibble for addition to
+database
+
+## Confirm on what `raw data` is for archiving, DOI, …
+
+At the moment, data is converted from proprietory to open formats and
+archived afterwards.
+
+-----
 
 # Info
 

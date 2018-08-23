@@ -17,7 +17,7 @@ pre_processor_bemovi <- function(
     full.names = TRUE
   )
   for (fn in cxd) {
-    cmd <- file.path( get_option("pkg_path"), "tools", "bftools", "bfconvert" )
+    cmd <- file.path( system.file(package = utils::packageName()), "tools", "bftools", "bfconvert" )
     arguments = paste(
       "-overwrite",
       "-no-upgrade",

@@ -38,7 +38,7 @@ check_new_data <- function(
   # class(result) <- "data_test_results"
   # #
   # result$details <- testthat::test_dir(
-  #   file.path( get_option("pkg_path"), "check_new_data_tests"),
+  #   file.path( system.file(package = utils::packageName()), "check_new_data_tests"),
   #   ...
   # )
   # result$OK <- all( !as.data.frame(result$details)$failed )

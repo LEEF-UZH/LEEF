@@ -22,7 +22,7 @@ pre_processor_flowcytometer <- function(
   cat("\nProcessing flowcytometer...\n")
   setwd( file.path( get_option("to_be_imported"), "flowcytometer" ) )
   cmd <- "python"
-  arguments <- file.path( get_option("pkg_path"), "tools", "accuri2fcs", "accuri2fcs", "accuri2fcs.py" )
+  arguments <- file.path( system.file(package = utils::packageName()), "tools", "accuri2fcs", "accuri2fcs", "accuri2fcs.py" )
   system2(
     command = cmd,
     args = arguments

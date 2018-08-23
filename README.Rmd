@@ -29,42 +29,27 @@ knitr::opts_chunk$set(
 ----
 bftools from https://docs.openmicroscopy.org/bio-formats/5.8.2/users/comlinetools/conversion.html (2018/06/22)
 
+****************
 
-# TODO List
-## **UPDATE THIS LIST!!!!**
+# TODO
+
+## revise configuration and initialisation
+Remove the `CONFIG.NAME` file and incorporate it in the `config.yml` file.
+
+Configuration should be done by running a `initialize_db()` function which
+  1) reads `config.yml` from working directory
+  2) creates directory structure (if not already existing)
+  3) creates empty database (if not slready existing)
+  4) adds `pre-processors`, `extractors`, ...
+This will make the usage of different databases much easier and the package much more versatile
+
+## Move `pre-processors` and `extractors` into separate packages
+These will contain the functions and the code to add it to the queue for processing.
+This adds flexibility as additional data sources can be added easier.
+
 ## Documentation and tests need to be revised and completed
 * revise Tests
 * revise documentation
-
-## Define datsbsse structure including hash and id fields
-* define fields and linkages between tables
-* add hash and id fields to rds in LastAdded files
-* Write code to write LastAdded to SQLite database
-
-## request DOI **<span style="color:red">TODO</span>**
-This is only necessary for public repos, but the functionality needs to be included here. This needs to be done in a github repo - gitlab possible?
-
-## Hashing and TTS for new_data **<span style="color:red">TODO</span>**
-Request TTS (Trusted Time Stamp) only for new_data package
-
-The hash should be for the directory containing the new data in `.csv` format. This guarantees the portability.
-So the calculation should be as follow:
-
-```sh
-find ./path/to/directory/ -type f -print0  | xargs -0 sha1sum > sha1sum_list_unsorted.txt
-sort sha1sum_list_unsorted.txt > sha1sum_list_sorted.txt
-sha1sum sha1sum_list_sorted.txt > sha1sum.directory.txt
-```
-
-sha1sum.directory.txt will be used to obtain the TTS.
-
-After the TTS is obtained, the seed is downloiaded and saved in the directory as well.
-
-## build hash / checksum of `.tar.gz` archive **<span style="color:red">TODO</span>**
-This is used only to checksum the archive. The timestamp, including the seed file to verify it, is in the rchive.
-
-## degree of 'rawness' of data
-Different data sources (flowcam, video analysis, ...) result in raw data which is usually processed further before archived. The question is at which stage the data needs to be archived. Ideally, the rawest possible, but the amount of raw data is im many cases imense. A triage of the ideal of storing the rawness and the storage available needs to be done. Processing of the data could be done through an SQL query or an R function.
 
 ## Metadata storage **<span style="color:red">TODO</span>**
 Which metadata should be stored and in which format?
@@ -81,30 +66,63 @@ Metadata is required at different levels:
     How to store the description of the experiment - link to paper / outline?
 4. I am sure we need more!!!!!!
 
-## local processing **<span style="color:red">TODO</span>**
-- Have to discuss with Frank the individual analys scripts and algorythms used to include them in the local automation --- **crucial**. This will also be discussed with Francesco at the meeting on the 4th of July.
-- compile new_data which includes:
-    - TABLENAME.csv files
-    - metadata in a certain format
-    - hash file following debian standards, i.e. one 
-- needs to be designed so that it can be adapted and modified at a later stage. Initially, only embedd the existing scripts and workflows into a package for automation
+## Define database structure including hash and id fields
+1) define fields and linkages between tables
+2) add hash and id fields to `.rds` files in the `LastAdded` folder
+3) Write code to write LastAdded to SQLite database
 
-## investigat the possiblility of using the gitlab installation from MAthematics for the local storage. **<span style="color:red">TODO</span>**
+## function to request DOI
+This function will publish the data at the is only necessary for public repos, but the functionality needs to be included here. This needs to be done in a github repo - gitlab possible?
 
-# Info
+## Download seed file
+After the TTS is obtained, the seed is downloiaded and saved in the directory as well.
+This needs to be automated and done later, as the seed is only avvailable about 24 hours after the initial submission.
 
-This repo contains an R package for accessing (and possibly even storing), checking new to be iported data,  as well as the control center on github (referred to as the **infrastructure** of this repo) to coordinate the import and processing of data.
+## Investigate the possiblility of using the gitlab installation from Mathematics department for the local storage.
+This is unlikely using the current structure and hopefully new options will materialise after the Bern meeting.
 
-It contains an R package with
+## Add remote storage instead of SQLite database
 
-- R functions to access all data generated, if it is a **master** repo,
-- R functions to access a subset of the data in the master repo, e.g. an experiment, if it is a **child** repo
+****************
 
-while the data is either stored locally (as sqlite database in `inst/data`) or remotely.
+# DONE
 
-The repo's function is to 
+## Hashing and TTS for new_data **<span style="color:red">TODO</span>**
+Request TTS (Trusted Time Stamp) is obtained from `archive_new_data()` and is stored in the samd directory as the archive
 
-1. request the import of new data
+## build hash / checksum of  archive
+This is used only to checksum the archive and for obtaining the TTS for the archive hash.
+
+## Pre-processing of data
+Conversion to open formats for archiving and fuerther procesing
+
+## Extraction of data
+Extraction of dat and storage in data.table / tibble for addition to database
+
+## Confirm on what `raw data` is for archiving, DOI, ...
+At the moment, data is converted from proprietory to open formats and archived afterwards. 
+
+****************
+
+# Introduction
+
+This repo contains an R package for 
+
+* importing new data into the data base
+* accessing the data base
+
+which contains data from the experiments.
+
+It only contains the infrastructure, while the source specific processing is provided by source specific packages which are called from this package.
+
+The data is stored locally in a directory structure an SQLite database, but remote storage is planned.
+
+Functions which need to be called by the user are:
+* `initialize_DB()`: to read the config file and to setup the needed directory structure
+* `import_new_data()`: to import new data
+* **<span style="color:red">TODO</span>** `
+
+1. import of new data
 2. request new foreacasts
 
 # Dependencies
@@ -125,6 +143,7 @@ It is also possible, that the following packages have to be installed by hand:
 ```{r eval = FALSE}
 install.packages("later")
 ```
+
 # Installation of R package
 ## Prerequisites
 As the package is only on github, you need `devtools` to install it easily as a prerequisite
@@ -146,6 +165,7 @@ devtools::install_github("rkrug/LEEF.Data")
 ```
 
 If the data is stored externally, the data retreival functions will automatically retreive the newest data.
+
 
 # Usage of package
 ## Functions to access the data
