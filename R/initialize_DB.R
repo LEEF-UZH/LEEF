@@ -4,7 +4,7 @@
 #' @export
 #'
 #' @examples
-initialize_DB <- function(){
+initialize_db <- function(){
 
 # ToBeImported folder structure -------------------------------------------
   dir.create(            get_option("to_be_imported"),                    showWarnings = FALSE )
