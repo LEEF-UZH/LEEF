@@ -19,6 +19,27 @@ bftools from
 
 # TODO
 
+## **<span style="color:red">WORKING ON IT</span>** — revise configuration and initialisation
+
+**<span style="color:red">Should be working, but have to adjust the
+tests to make sure\!\!\!\!\!\!\!</span>**
+
+Remove the `CONFIG.NAME` file and incorporate it in the `config.yml`
+file.
+
+Configuration should be done by running a `initialize_db()` function
+which 1) reads `config.yml` from working directory 2) creates directory
+structure (if not already existing) 3) creates empty database (if not
+slready existing) 4) adds `pre-processors`, `extractors`, … This will
+make the usage of different databases much easier and the package much
+more versatile
+
+## Move `pre-processors` and `extractors` into separate packages
+
+These will contain the functions and the code to add it to the queue for
+processing. This adds flexibility as additional data sources can be
+added easier.
+
 ## Documentation and tests need to be revised and completed
 
   - revise Tests
@@ -84,6 +105,8 @@ submission.
 This is unlikely using the current structure and hopefully new options
 will materialise after the Bern meeting.
 
+## Add remote storage instead of SQLite database
+
 -----
 
 # DONE
@@ -114,26 +137,28 @@ archived afterwards.
 
 -----
 
-# Info
+# Introduction
 
-This repo contains an R package for accessing (and possibly even
-storing), checking new to be iported data, as well as the control center
-on github (referred to as the **infrastructure** of this repo) to
-coordinate the import and processing of data.
+This repo contains an R package for
 
-It contains an R package with
+  - importing new data into the data base
+  - accessing the data base
 
-  - R functions to access all data generated, if it is a **master**
-    repo,
-  - R functions to access a subset of the data in the master repo,
-    e.g. an experiment, if it is a **child** repo
+which contains data from the experiments.
 
-while the data is either stored locally (as sqlite database in
-`inst/data`) or remotely.
+It only contains the infrastructure, while the source specific
+processing is provided by source specific packages which are called from
+this package.
 
-The repo’s function is to
+The data is stored locally in a directory structure an SQLite database,
+but remote storage is planned.
 
-1.  request the import of new data
+Functions which need to be called by the user are: \* `initialize_DB()`:
+to read the config file and to setup the needed directory structure \*
+`import_new_data()`: to import new data \*
+**<span style="color:red">TODO</span>** \`
+
+1.  import of new data
 2.  request new foreacasts
 
 # Dependencies

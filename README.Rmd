@@ -33,7 +33,9 @@ bftools from https://docs.openmicroscopy.org/bio-formats/5.8.2/users/comlinetool
 
 # TODO
 
-## revise configuration and initialisation
+## **<span style="color:red">WORKING ON IT</span>** --- revise configuration and initialisation
+**<span style="color:red">Should be working, but have to adjust the tests to make sure!!!!!!!</span>**
+
 Remove the `CONFIG.NAME` file and incorporate it in the `config.yml` file.
 
 Configuration should be done by running a `initialize_db()` function which
