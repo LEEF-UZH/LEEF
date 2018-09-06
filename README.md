@@ -19,21 +19,6 @@ bftools from
 
 # TODO
 
-## **<span style="color:red">WORKING ON IT</span>** — revise configuration and initialisation
-
-**<span style="color:red">Should be working, but have to adjust the
-tests to make sure\!\!\!\!\!\!\!</span>**
-
-Remove the `CONFIG.NAME` file and incorporate it in the `config.yml`
-file.
-
-Configuration should be done by running a `initialize_db()` function
-which 1) reads `config.yml` from working directory 2) creates directory
-structure (if not already existing) 3) creates empty database (if not
-slready existing) 4) adds `pre-processors`, `extractors`, … This will
-make the usage of different databases much easier and the package much
-more versatile
-
 ## Move `pre-processors` and `extractors` into separate packages
 
 These will contain the functions and the code to add it to the queue for
@@ -42,7 +27,7 @@ added easier.
 
 ## Documentation and tests need to be revised and completed
 
-  - revise Tests
+  - **<span style="color:green">DONE</span>** revise Tests
   - revise documentation
 
 ## Metadata storage **<span style="color:red">TODO</span>**
@@ -72,10 +57,8 @@ required at different levels:
 
 <!-- end list -->
 
-  - name, person responsible, info about experiment, comments, …
-    
-    How to store the description of the experiment - link to paper /
-    outline?
+  - name, person responsible, info about experiment, comments, … How to
+    store the description of the experiment - link to paper / outline?
 
 <!-- end list -->
 
@@ -133,7 +116,20 @@ database
 ## Confirm on what `raw data` is for archiving, DOI, …
 
 At the moment, data is converted from proprietory to open formats and
-archived afterwards.
+archived
+afterwards.
+
+## **<span style="color:green">DONE</span>** — revise configuration and initialisation
+
+Remove the `CONFIG.NAME` file and incorporate it in the `config.yml`
+file.
+
+Configuration should be done by running a `initialize_db()` function
+which 1) reads `config.yml` from working directory 2) creates directory
+structure (if not already existing) 3) creates empty database (if not
+slready existing) 4) adds `pre-processors`, `extractors`, … This will
+make the usage of different databases much easier and the package much
+more versatile
 
 -----
 
@@ -153,7 +149,7 @@ this package.
 The data is stored locally in a directory structure an SQLite database,
 but remote storage is planned.
 
-Functions which need to be called by the user are: \* `initialize_DB()`:
+Functions which need to be called by the user are: \* `initialize_db()`:
 to read the config file and to setup the needed directory structure \*
 `import_new_data()`: to import new data \*
 **<span style="color:red">TODO</span>** \`
@@ -165,8 +161,8 @@ to read the config file and to setup the needed directory structure \*
 
 ## bioconductor packages
 
-The extaction of the datra from the flowcytometer depends on
-bioconductor packages. They can be ionstalled as followed (details see
+The extaction of the data from the flowcytometer depends on bioconductor
+packages. They can be ionstalled as followed (details see
 <https://bioconductor.org/install/#install-bioconductor-packages> )
 
 It is also possible, that the following packages have to be installed by
@@ -189,42 +185,74 @@ install.packages("devtools")
 devtools::install_github("rkrug/LEEF.Data")
 ```
 
-## Update of the data
-
-If the repo contains the data (in `inst/data/` folder in sqlite format),
-the package needs to be updated when new data is available via
-
-``` r
-devtools::install_github("rkrug/LEEF.Data")
-```
-
-If the data is stored externally, the data retreival functions will
-automatically retreive the newest data.
-
 # Usage of package
 
-## Functions to access the data
+## Initialization
 
-This package provides functions for **read-only** acces to the data as
-well as functions to check the integrity if the data. The functions are
+The package needs some information to be able to handle the import,
+storage and retrieval of the data. This information is stored in a file
+called by default `config.yml`.
 
-  - `read_data()`
-  - **<span style="color:red">more functions are needed depending on the
-    type of the data and will be added later</span>**
-  - …
+The default `config.yml` included in the package looks as folloewed:
+
+    config_name: LEEFData
+    description: LEEF Data from an long term experiment.
+                 Some more detaled info has to follow.
+    maintainer: Rainer M. Krug <Rainer@uzh.ch>
+    
+    root_dir:
+    to_be_imported: ToBeImported
+    last_added: LastAdded
+    archive: Archive
+    
+    archive_name: LEEF
+    archive_compression: tar
+    
+    tts: TRUE
+    tts_info:
+      name: Rainer M Krug
+      email: Rainer.Krug@uzh.ch
+      comment: testdata
+      archivename: To Be Set
+    doi: FALSE
+    
+    database:
+      driver: "RSQLite::SQLite()"
+      dbpath:
+      dbname: "LEEFData.sqlite"
+
+The fastest way to start a new data storage infrastructure is to create
+an empty directory and to copy the config file into this directory.
+Afterwards, change the working directory to that directoryt and
+initialise the folder structure and the package:
+
+``` r
+# library("LEEF.Data")
+devtools::load_all(here::here())
+nd <- "Data_directory"
+dir.create( nd )
+setwd( nd )
+file.copy(
+  from = system.file("config.yml", package = "LEEF.Data"),
+  to = "."
+)
+initialize_db()
+```
+
+After that, the data to be imported can be placed into the ToBeImported
+folder and imported by calling
+
+``` r
+import_new_data()
+```
+
+The `ToBeImported` folder contains subfolder, which are equal to the
+name of the table in the database where the results will be imported to.
+Details will follow later.
 
 # Import new data
 
 Data can be imported from the folder
-
-It can be set by using
-
-The default is to a folder named **ToBeImported** in the current working
-directory when the library is loaded.
-
-This folder contains subfolder, which are equal to the name of the table
-in the database where the results will be imported to. Details will
-follow later.
 
 ![](README_files/figure-gfm/leef.import.activity-1.png)<!-- -->
 
@@ -354,3 +382,10 @@ and finally
 ## Activity Diagram of `import_new_data()` function
 
 ![](README_files/figure-gfm/leef.processing.activity-1.png)<!-- -->
+
+# Database Structure
+
+Layout Based on
+<https://gist.github.com/QuantumGhost/0955a45383a0b6c0bc24f9654b3cb561>
+
+![](README_files/figure-gfm/databaseModell-1.png)<!-- -->

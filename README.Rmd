@@ -33,24 +33,13 @@ bftools from https://docs.openmicroscopy.org/bio-formats/5.8.2/users/comlinetool
 
 # TODO
 
-## **<span style="color:red">WORKING ON IT</span>** --- revise configuration and initialisation
-**<span style="color:red">Should be working, but have to adjust the tests to make sure!!!!!!!</span>**
-
-Remove the `CONFIG.NAME` file and incorporate it in the `config.yml` file.
-
-Configuration should be done by running a `initialize_db()` function which
-  1) reads `config.yml` from working directory
-  2) creates directory structure (if not already existing)
-  3) creates empty database (if not slready existing)
-  4) adds `pre-processors`, `extractors`, ...
-This will make the usage of different databases much easier and the package much more versatile
 
 ## Move `pre-processors` and `extractors` into separate packages
 These will contain the functions and the code to add it to the queue for processing.
 This adds flexibility as additional data sources can be added easier.
 
 ## Documentation and tests need to be revised and completed
-* revise Tests
+* **<span style="color:green">DONE</span>** revise Tests
 * revise documentation
 
 ## Metadata storage **<span style="color:red">TODO</span>**
@@ -64,7 +53,6 @@ Metadata is required at different levels:
   - machine, type, version, person who processed the data, comments, ...
 3. per experiment
   - name, person responsible, info about experiment, comments, ...
-
     How to store the description of the experiment - link to paper / outline?
 4. I am sure we need more!!!!!!
 
@@ -104,6 +92,18 @@ Extraction of dat and storage in data.table / tibble for addition to database
 ## Confirm on what `raw data` is for archiving, DOI, ...
 At the moment, data is converted from proprietory to open formats and archived afterwards. 
 
+## **<span style="color:green">DONE</span>** --- revise configuration and initialisation
+
+Remove the `CONFIG.NAME` file and incorporate it in the `config.yml` file.
+
+Configuration should be done by running a `initialize_db()` function which
+  1) reads `config.yml` from working directory
+  2) creates directory structure (if not already existing)
+  3) creates empty database (if not slready existing)
+  4) adds `pre-processors`, `extractors`, ...
+This will make the usage of different databases much easier and the package much more versatile
+
+
 ****************
 
 # Introduction
@@ -120,7 +120,7 @@ It only contains the infrastructure, while the source specific processing is pro
 The data is stored locally in a directory structure an SQLite database, but remote storage is planned.
 
 Functions which need to be called by the user are:
-* `initialize_DB()`: to read the config file and to setup the needed directory structure
+* `initialize_db()`: to read the config file and to setup the needed directory structure
 * `import_new_data()`: to import new data
 * **<span style="color:red">TODO</span>** `
 
@@ -129,7 +129,7 @@ Functions which need to be called by the user are:
 
 # Dependencies
 ## bioconductor packages
-The extaction of the datra from the flowcytometer depends on bioconductor packages. They can be ionstalled  as followed (details see https://bioconductor.org/install/#install-bioconductor-packages )
+The extaction of the data from the flowcytometer depends on bioconductor packages. They can be ionstalled  as followed (details see https://bioconductor.org/install/#install-bioconductor-packages )
 
 ```{r eval = FALSE}
 source("https://bioconductor.org/biocLite.R")
@@ -159,23 +159,39 @@ install.packages("devtools")
 devtools::install_github("rkrug/LEEF.Data")
 ```
 
-## Update of the data
-If the repo contains the data (in `inst/data/` folder in sqlite format), the package needs to be updated when new data is available via
-
-```{r update, eval = FALSE, echo = TRUE}
-devtools::install_github("rkrug/LEEF.Data")
-```
-
-If the data is stored externally, the data retreival functions will automatically retreive the newest data.
-
 
 # Usage of package
-## Functions to access the data
-This package provides functions for **read-only** acces to the data as well as functions to check the integrity if the data. The functions are
+## Initialization
+The package needs some information to be able to handle the import, storage and retrieval of the data. This information is stored in a file called by default `config.yml`.
 
-- `read_data()`
-- **<span style="color:red">more functions are needed depending on the type of the data and will be added later</span>**
-- ...
+The default `config.yml` included in the package looks as folloewed:
+
+```{bash comment=''}
+cat "./inst/config.yml"
+```
+
+The fastest way to start a new data storage infrastructure is to create an empty directory and to copy the config file into this directory. Afterwards, change the working directory to that directoryt and initialise the folder structure and the package:
+
+```{r init_db, eval = FALSE, echo = TRUE}
+# library("LEEF.Data")
+devtools::load_all(here::here())
+nd <- "Data_directory"
+dir.create( nd )
+setwd( nd )
+file.copy(
+  from = system.file("config.yml", package = "LEEF.Data"),
+  to = "."
+)
+initialize_db()
+```
+
+After that, the data to be imported can be placed into the ToBeImported folder and imported by calling
+
+```{r import, eval = FALSE, echo = TRUE}
+import_new_data()
+```
+
+The `ToBeImported` folder contains subfolder, which are equal to the name of the table in the database where the results will be imported to. Details will follow later.
 
 # Import new data
 Data can be imported from the folder
@@ -184,15 +200,7 @@ Data can be imported from the folder
 DATA_options("to_be_imported")
 ```
 
-It can be set by using
 
-```{r eval = FALSE}
-DATA_options( to_be_imported = "ImportFolder")
-```
-
-The default is to a folder named **ToBeImported** in the current working directory when the library is loaded.
-
-This folder contains subfolder, which are equal to the name of the table in the database where the results will be imported to. Details will follow later.
 
 ```{r leef.import.activity, fig.width = 8, fig.height = 16}
 '
@@ -201,12 +209,14 @@ if (""check_new_data()"") then (FALSE)
   stop
 else (TRUE)
 endif
+:copy data to temporary directory;
 :""pre_process_new_data()"";
 :""hash_new_data()"";
 :""archive_new_data()"";
 :""extract_new_data()"";
 :""add_new_data()"";
-:""delete_new_data()"";
+:""delete data in ToBeImported"";
+:copy new database\nand the generated content\nback to the original location;
 ' %>%
   plantuml %>%
   plot
@@ -387,3 +397,113 @@ endif
   plot
 ```
 
+# Database Structure
+Layout Based on https://gist.github.com/QuantumGhost/0955a45383a0b6c0bc24f9654b3cb561
+
+```{r databaseModell, eval = TRUE, fig.width = 20}
+'
+skinparam dpi 300
+!define Table(name,desc) class name as "desc" << (T,#FFAAAA) >>
+\' we use bold for primary key
+\' green color for unique
+\' and underscore for not_null
+!define primary_key(x) <b>x</b>
+!define unique(x) <color:green>x</color>
+!define not_null(x) <u>x</u>
+!define field(x) <color:black>x</color>
+\' other tags available:
+\' <i></i>
+\' <back:COLOR></color>, where color is a color name or html color code
+\' (#FFAACC)
+\' see: http://plantuml.com/classes.html#More
+hide methods
+hide stereotypes
+
+\' entities
+
+Table(import, "import (import meta data)") {
+primary_key(tts_hash) INTEGER
+date_import DATE
+import_data:
+...
+}
+
+Table(bemovi, "bemovi (data from bemovi analysis)") {
+primary_key(id) INTEGER
+not_null(tts_hash) VARCHAR[32]
+bemovi_data:
+...
+}
+
+Table(flowcam, "flowcam (data from flowcam analysis)") {
+primary_key(id) INTEGER
+not_null(tts_hash) VARCHAR[32]
+flowcam_data:
+...
+}
+
+Table(flowcytometer, "flowcytometer (data from flowcytometer analysis)") {
+primary_key(id) INTEGER
+not_null(tts_hash) VARCHAR[32]
+flowcytometer_data:
+...
+}
+
+Table(incubatortemp, "incubatortemp (data from incubatortemp analysis)") {
+primary_key(id) INTEGER
+not_null(tts_hash) VARCHAR[32]
+incubatortemp_data:
+...
+}
+
+Table(manualcount, "manualcount (data from manualcount analysis)") {
+primary_key(id) INTEGER
+not_null(tts_hash) VARCHAR[32]
+manualcount_data 
+...
+}
+
+Table(respirometer, "respirometer (data from respirometer analysis)") {
+primary_key(id) INTEGER
+not_null(tts_hash) VARCHAR[32]
+respirometer_data:
+...
+}
+
+
+\' Table(user_profile, "user_profile (Some info of user)") {
+\' primary_key(user_id) INTEGER
+\' age SMALLINT
+\' gender SMALLINT
+\' birthday DATETIME
+\' }
+
+\' Table(group, "group (group of users)") {
+\' primary_key(id) INTEGER
+\' not_null(name) VARCHAR[32]
+\' }
+
+\' Table(user_group, "user_group (relationship of user and group)") {
+\' primary_key(user_id) INTEGER
+\' primary_key(group_id) INTEGER
+\' joined_at DATETIME
+\' }
+
+\' relationships
+\' one-to-one relationship
+\'   user -- user_profile : "A user only has one profile"
+\' one to may relationship
+import --> bemovi : "tts_hash"
+import --> flowcam : "tts_hash"
+import --> flowcytometer : "tts_hash"
+import --> incubatortemp : "tts_hash"
+import --> manualcount : "tts_hash"
+import --> respirometer : "tts_hash"
+\' many to many relationship
+\' Add mark if you like
+\'   user "1" --> "*" user_group : "A user may be in many groups"
+\'   group "1" --> "0..N" user_group : "A group may contain many users"
+' %>%
+  plantuml %>%
+  plot
+```
