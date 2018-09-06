@@ -93,7 +93,7 @@ hash_new_data <- function(
 
 # Iterate through subdirectories ------------------------------------------
 
-  dirs <- list.dirs( get_option("to_be_imported"), recursive = TRUE )
+  dirs <- list.dirs( DATA_options("to_be_imported"), recursive = TRUE )
   hash_in_dir(
     dir = dirs[1],
     recursiveHash = TRUE

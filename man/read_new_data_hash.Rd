@@ -20,5 +20,5 @@ the hash of the file (if given), otherwise a \code{data.frame}
 }
 \description{
 Function to read the hash of a new data file. The function looks for the file
-\code{hash.sha256} in the \code{get_option("new_data_path")} directory.
+\code{hash.sha256} in the \code{DATA_options("to_be_imported")} directory.
 }

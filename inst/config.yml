@@ -1,20 +1,25 @@
-default:
-  configname: LEEFData
-  description: LEEF Data from an long term experiment.
-               Some more detaled info has to follow.
-  maintainer:
-    name: Rainer M. Krug
-    email: Rainer@uzh.ch
-  archive_compression: tar
-  tts: TRUE
-  tts_info:
-    name: Rainer M Krug
-    email: Rainer.Krug@uzh.ch
-    comment: testdata
-    archivename: To Be Set
-  doi: FALSE
-  data:
-    backend:
-      driver: "RSQLite::SQLite()"
-      dbpath: NULL
-      dbname: "LEEFData.sqlite"
+config_name: LEEFData
+description: LEEF Data from an long term experiment.
+             Some more detaled info has to follow.
+maintainer: Rainer M. Krug <Rainer@uzh.ch>
+
+root_dir:
+to_be_imported: ToBeImported
+last_added: LastAdded
+archive: Archive
+
+archive_name: LEEF
+archive_compression: tar
+
+tts: TRUE
+tts_info:
+  name: Rainer M Krug
+  email: Rainer.Krug@uzh.ch
+  comment: testdata
+  archivename: To Be Set
+doi: FALSE
+
+database:
+  driver: "RSQLite::SQLite()"
+  dbpath:
+  dbname: "LEEFData.sqlite"

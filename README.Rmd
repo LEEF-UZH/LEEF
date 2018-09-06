@@ -181,13 +181,13 @@ This package provides functions for **read-only** acces to the data as well as f
 Data can be imported from the folder
 
 ```{r eval = FALSE}
-get_option("to_be_imported")
+DATA_options("to_be_imported")
 ```
 
 It can be set by using
 
 ```{r eval = FALSE}
-set_option("to_be_imported", "ImportFolder")
+DATA_options( to_be_imported = "ImportFolder")
 ```
 
 The default is to a folder named **ToBeImported** in the current working directory when the library is loaded.

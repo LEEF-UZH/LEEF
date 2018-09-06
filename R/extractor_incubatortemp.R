@@ -18,7 +18,7 @@ extractor_incubatortemp <- function() {
 
   # Get csv file names ------------------------------------------------------
 
-  incubatortemp_path <- file.path( get_option("to_be_imported"), "incubatortemp" )
+  incubatortemp_path <- file.path( DATA_options("to_be_imported"), "incubatortemp" )
   incubatortemp_files <- list.files(
     path = incubatortemp_path,
     pattern = "*.txt",
@@ -48,7 +48,7 @@ extractor_incubatortemp <- function() {
 
 # SAVE --------------------------------------------------------------------
 
-  add_path <- file.path( get_option("last_added"), "incubatortemp" )
+  add_path <- file.path( DATA_options("last_added"), "incubatortemp" )
   dir.create( add_path )
   saveRDS(
     object = itmp,

@@ -12,7 +12,7 @@ pre_processor_bemovi <- function(
   cat("\n########################################################\n")
   cat("\nProcessing bemovi...\n")
   cxd <- list.files(
-    path = file.path( get_option("to_be_imported"), "bemovi" ),
+    path = file.path( DATA_options("to_be_imported"), "bemovi" ),
     pattern = "*.cxd",
     full.names = TRUE
   )

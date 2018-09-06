@@ -11,7 +11,7 @@
 pre_process_new_data <- function() {
 
   result <- lapply(
-    X = get_option("pre_processors"),
+    X = DATA_options("pre_processors"),
     FUN = do.call,
     list()
   )

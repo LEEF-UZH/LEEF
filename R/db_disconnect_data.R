@@ -7,12 +7,12 @@
 #' @examples
 db_disconnect_data <- function() {
   result <- NULL
-  if (!is.null(get_option("data_connection"))) {
+  if (!is.null(DATA_options("data_connection"))) {
     try(
-      result <- DBI::dbDisconnect(get_option("data_connection")),
+      result <- DBI::dbDisconnect(DATA_options("data_connection")),
       silent = TRUE
     )
-    set_option("data_connection", NULL)
+    DATA_options( data_connection = NULL)
   }
   invisible(result)
 }

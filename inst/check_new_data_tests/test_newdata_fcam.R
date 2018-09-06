@@ -4,17 +4,14 @@ test_that(
   "Data can be loaded",
   {
     expect_error(
-      set_option(
-        "tmp",
-        read_new_data("fcam")
-      ),
+      DATA_options( tmp = read_new_data("fcam") ),
       regexp = NA
     )
   }
 )
 
-nd <- get_option("tmp")
-set_option("tmp", NULL)
+nd <- DATA_options("tmp")
+DATA_options( tmp = NULL )
 
 test_that(
   "Names are OK",

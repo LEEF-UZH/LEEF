@@ -18,7 +18,7 @@ extractor_respirometer <- function() {
 
   # Get csv file names ------------------------------------------------------
 
-  respirometer_path <- file.path( get_option("to_be_imported"), "respirometer" )
+  respirometer_path <- file.path( DATA_options("to_be_imported"), "respirometer" )
   respirometer_files <- list.files(
     path = respirometer_path,
     pattern = "*.csv",
@@ -45,7 +45,7 @@ extractor_respirometer <- function() {
 
 # SAVE --------------------------------------------------------------------
 
-  add_path <- file.path( get_option("last_added"), "respirometer" )
+  add_path <- file.path( DATA_options("last_added"), "respirometer" )
   dir.create( add_path )
   saveRDS(
     object = res,

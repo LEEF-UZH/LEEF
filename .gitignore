@@ -2,28 +2,23 @@
 .Rhistory
 .RData
 .Ruserdata
-
 # knitr and R markdown default cache directories
 /*_cache/
 *_cache/
 /cache/
-
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
 .Rproj.user
-
 # some local data
 local/
-
 # Data directories which do not belong to the package
 Archive/
 ToBeImported/
 LastAdded/
 SAMPLE_DATA/
-
 # Tools to ignore due to size
 inst/tools/Fiji.app
 inst/tools/ImageJ/
-
-
+config.yml
+testdir

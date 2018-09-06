@@ -1,9 +1,9 @@
 Package: LEEF.Data
 Type: Package
 Title: Data package containing only data and data information
-Version: 0.1.0
+Version: 0.1.1_1
 Authors@R: c(
-  person("Rainer", "M.", "Krug", email = "Rainer.Krug@uzh.zch", role = c("aut", "cre")),
+  person("Rainer M.", "Krug", email = "Rainer.Krug@uzh.zch", role = c("aut", "cre")),
   person("Owen", "Petchey", email = "Owen.Petchey@uzh.zch", role = c("aut"))
   )
 Description: More about what it does (maybe more than one line)
@@ -17,7 +17,6 @@ Imports:
     openssl,
     ROriginStamp,
     testthat,
-    config,
     yaml,
     utils,
     R.utils,
@@ -27,7 +26,8 @@ Imports:
     dplyr,
     magrittr,
     readr,
-    bemovi
+    bemovi,
+    tools
 Suggests: 
     covr
 Remotes:

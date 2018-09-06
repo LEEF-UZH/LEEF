@@ -9,7 +9,7 @@
 #' @examples
 db_isAlive_data <- function() {
   result <- FALSE
-  conn <- get_option("data_connection")
+  conn <- DATA_options("data_connection")
   try(
     result <- DBI::dbGetQuery(conn, "SELECT 1")[[1]] == 1,
     silent = TRUE

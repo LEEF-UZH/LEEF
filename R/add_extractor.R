@@ -13,12 +13,9 @@ add_extractor <- function(fun) {
   if (!is.function(fun)) {
     stop( "fun needs to be a function!")
   }
-  pp <- get_option("extractors")
+  pp <- DATA_options("extractors")
   funname <- deparse(substitute(fun))
   pp[[funname]] <- fun
-  set_option(
-    name = "extractors",
-    value = pp
-  )
-  invisible( get_option("extractors") )
+  DATA_options( extractors = pp )
+  invisible( DATA_options("extractors") )
 }

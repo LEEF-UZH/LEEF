@@ -26,15 +26,14 @@ add_new_data_to_db <- function(
 
 # Check if connection should be closed again ------------------------------
 
-  if (is.null(get_option("data_connection"))) {
+  if (is.null(DATA_options("data_connection"))) {
     db_connect_data()
     closeAgain <- TRUE
   }
 
 # Get new_data file names, extension and path -----------------------------
 
-  to_be_imported <-  get_option("to_be_imported")
-  new_data_extension <- get_option("config")$new_data_extension
+  to_be_imported <-  DATA_options("to_be_imported")
   table_names <- list.files( path = to_be_imported, pattern = new_data_extension )
   table_names <- gsub(new_data_extension, "", table_names)
 
@@ -47,7 +46,7 @@ add_new_data_to_db <- function(
 
   for (tbl in table_names) {
     if (
-      (!DBI::dbExistsTable( conn = get_option("data_connection"), name = tbl ) ) &
+      (!DBI::dbExistsTable( conn = DATA_options("data_connection"), name = tbl ) ) &
       (!create_new_table)
     ) {
       stop("Table '", tbl, "' does not exist!", "\n", "If you want to create the table, set 'create_new_table = TRUE' when calling 'write_new_table!")
@@ -65,7 +64,7 @@ add_new_data_to_db <- function(
     x <- read_new_data(table_names[i])
     x[["hash"]] <- read_new_data_hash(table_names[[i]])
     DBI::dbWriteTable(
-      conn = get_option("data_connection"),
+      conn = DATA_options("data_connection"),
       name = table_names[i],
       value = x,
       overwrite = FALSE,

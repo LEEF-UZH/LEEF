@@ -1,6 +1,6 @@
-#' Compress and checksum the \code{get_option("new_data_path")}
+#' Compress and checksum the \code{DATA_options("new_data_path")}
 #'
-#' Compress all files in \code{get_option("new_data_path")} into the directory \code{"NEW_DATA_PATH/../archive"}
+#' Compress all files in \code{DATA_options("new_data_path")} into the directory \code{"NEW_DATA_PATH/../archive"}
 #'
 #' @param compression which compression should be used for the archive. Thge following values are supported at the moment:
 #' \describe{
@@ -10,7 +10,7 @@
 #' }
 #' Default is the value as defined in the config file.
 #'
-#' @param overwrite if \code{TRUE}, overwrite existing tar file; default is \code{FALSE}
+#' @param get_tts if \coide{TRUE}, a Trusted Time Stamp will be obtained from OriginStamp
 #'
 #' @return invisibly returns the name of the archivefile
 #' @importFrom openssl sha256
@@ -20,8 +20,8 @@
 #'
 #' @examples
 archive_new_data <- function(
-  compression = get_option("config")$archive_compression,
-  overwrite = FALSE
+  compression = DATA_options("archive_compression"),
+  get_tts = DATA_options("tts")
 ){
   ##
   oldwd <- getwd()
@@ -30,24 +30,26 @@ archive_new_data <- function(
   )
   ##
   getTTS <- function(hash, archivename, archivefile) {
-    information <- get_option("config")$tts_info
-    information$archivename <- archivename
-    #
-    ROriginStamp::store_hash(
-      hash = hash,
-      error_on_fail = TRUE,
-      information = information
-    )
-    ROriginStamp::get_hash_info(
-      hash,
-      file = paste0( archivefile, ".OriginStamp.hash-info.yml")
-    )
+    if (get_tts) {
+      information <- DATA_options("tts_info")
+      information$archivename <- archivename
+      #
+      ROriginStamp::store_hash(
+        hash = hash,
+        error_on_fail = TRUE,
+        information = information
+      )
+      ROriginStamp::get_hash_info(
+        hash,
+        file = paste0( archivefile, ".OriginStamp.hash-info.yml")
+      )
+    }
   }
   ##
   if (!(compression %in% c("none", "tar", "tar.gz"))) {
     stop("Conmpression", compression, "not supported!")
   }
-  to_be_imported <-  get_option("to_be_imported")
+  to_be_imported <-  DATA_options("to_be_imported")
   if (
     !file.exists( file.path( to_be_imported, "file.sha256") ) |
     !file.exists( file.path( to_be_imported, "dir.sha256") )
@@ -55,11 +57,11 @@ archive_new_data <- function(
     stop("The new data has not been hashed - please run `hash_new_data() before running this command!")
   }
   ##
-  archivepath <- get_option("archive")
+  archivepath <- DATA_options("archive")
   timestamp <- Sys.time()
   timestamp <- format( timestamp , "%Y-%m-%d--%H-%M-%S")
   archivename <- paste(
-    get_option("archive_name"),
+    DATA_options("archive_name"),
     timestamp,
     compression,
     sep = "."
@@ -68,14 +70,11 @@ archive_new_data <- function(
     gsub( ".none", "", archivename)
   }
   archivefile <- file.path(archivepath, archivename)
-  if ( file.exists( archivefile ) & !overwrite) {
-    stop("The archive exists already - please set `overwrite = TRUE` if you want to overwrite them!")
-  }
   ##
   switch(
     compression,
     tar = {
-      oldwd <- setwd(get_option("to_be_imported"))
+      oldwd <- setwd(DATA_options("to_be_imported"))
       utils::tar(
         tarfile = archivefile,
         files = "./",
@@ -101,7 +100,7 @@ archive_new_data <- function(
       )
     },
     tar.gz = {
-      oldwd <- setwd(get_option("to_be_imported"))
+      oldwd <- setwd(DATA_options("to_be_imported"))
       utils::tar(
         tarfile = archivefile,
         files = "./",
@@ -132,13 +131,13 @@ archive_new_data <- function(
     none = {
       dir.create( archivefile )
       file.copy(
-        from = file.path( get_option("to_be_imported"), "." ),
+        from = file.path( DATA_options("to_be_imported"), "." ),
         to = archivefile,
         recursive = TRUE,
         copy.date = TRUE
       )
       ##
-      information <- get_option("config")$tts_info
+      information <- DATA_options("tts_info")
       information$archivename <- archivefile
       #
       hash <- read_new_data_hash(file = "file.sha256", hash_file = "dir.sha256")

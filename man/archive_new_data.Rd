@@ -2,10 +2,10 @@
 % Please edit documentation in R/archive_new_data.R
 \name{archive_new_data}
 \alias{archive_new_data}
-\title{Compress and checksum the \code{get_option("new_data_path")}}
+\title{Compress and checksum the \code{DATA_options("new_data_path")}}
 \usage{
-archive_new_data(compression = get_option("config")$archive_compression,
-  overwrite = FALSE)
+archive_new_data(compression = DATA_options("archive_compression"),
+  get_tts = DATA_options("tts"))
 }
 \arguments{
 \item{compression}{which compression should be used for the archive. Thge following values are supported at the moment:
@@ -16,11 +16,11 @@ archive_new_data(compression = get_option("config")$archive_compression,
 }
 Default is the value as defined in the config file.}
 
-\item{overwrite}{if \code{TRUE}, overwrite existing tar file; default is \code{FALSE}}
+\item{get_tts}{if \coide{TRUE}, a Trusted Time Stamp will be obtained from OriginStamp}
 }
 \value{
 invisibly returns the name of the archivefile
 }
 \description{
-Compress all files in \code{get_option("new_data_path")} into the directory \code{"NEW_DATA_PATH/../archive"}
+Compress all files in \code{DATA_options("new_data_path")} into the directory \code{"NEW_DATA_PATH/../archive"}
 }

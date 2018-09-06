@@ -1,10 +1,7 @@
 
 # Setup -------------------------------------------------------------------
 
-old_dir <- set_option(
-  "to_be_imported",
-  file.path( get_option("pkg_path"), "test_data", "new_data", "false")
-)
+old_dir <- DATA_options( to_be_imported = file.path( DATA_options("pkg_path"), "test_data", "new_data", "false") )
 
 # Tests -------------------------------------------------------------------
 
@@ -13,7 +10,7 @@ context("Test check_new_data()")
 test_that(
   "Runs without error",
   expect_error(
-    set_option("tmp", check_new_data(reporter = SilentReporter)),
+    DATA_options( tmp = check_new_data(reporter = SilentReporter) ),
     regexp = NA
   )
 )
@@ -21,7 +18,7 @@ test_that(
 test_that(
   "Returns data_test_results class",
   expect_s3_class(
-    get_option("tmp"),
+    DATA_options("tmp"),
     "data_test_results"
   )
 )
@@ -29,19 +26,16 @@ test_that(
 test_that(
   "Result is FALSE from false dataset",
   expect_false(
-    get_option(("tmp"))$OK
+    DATA_options(("tmp"))$OK
   )
 )
 
-set_option(
-  "to_be_imported",
-  file.path( get_option("pkg_path"), "test_data", "new_data", "true"  )
-)
+DATA_options( to_be_imported = file.path( DATA_options("pkg_path"), "test_data", "new_data", "true"  ) )
 
 test_that(
   "Runs without error",
   expect_error(
-    set_option("tmp", check_new_data(reporter = SilentReporter)),
+    DATA_options( tmp = check_new_data(reporter = SilentReporter) ),
     regexp = NA
   )
 )
@@ -49,7 +43,7 @@ test_that(
 test_that(
   "Returns data_test_results class",
   expect_s3_class(
-    get_option("tmp"),
+    DATA_options("tmp"),
     "data_test_results"
   )
 )
@@ -57,13 +51,13 @@ test_that(
 test_that(
   "Result is TRUE from true dataset",
   expect_true(
-    get_option(("tmp"))$OK
+    DATA_options(("tmp"))$OK
   )
 )
 
 
 # teardown ----------------------------------------------------------------
 
-set_option("to_be_imported", old_dir)
-set_option("tmp", NULL)
+DATA_options( to_be_imported = old_dir)
+DATA_options( tmp = NULL)
 

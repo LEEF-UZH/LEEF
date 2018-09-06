@@ -28,7 +28,7 @@ check_new_data <- function(
 ){
   warning("Check only dummy!!!!")
   result <- TRUE
-  # to_be_imported <-  get_option("to_be_imported")
+  # to_be_imported <-  DATA_options("to_be_imported")
   # ##
   # result <- list(
   #   OK = FALSE,

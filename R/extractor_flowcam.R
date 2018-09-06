@@ -18,7 +18,7 @@ extractor_flowcam <- function() {
 
 # Get csv file names ------------------------------------------------------
 
-  flowcam_path <- file.path( get_option("to_be_imported"), "flowcam" )
+  flowcam_path <- file.path( DATA_options("to_be_imported"), "flowcam" )
   flowcam_files <- list.files(
     path = flowcam_path,
     pattern = ".*_classes_.*_data.csv",
@@ -131,7 +131,7 @@ extractor_flowcam <- function() {
     )
 
 # SAVE --------------------------------------------------------------------
-  add_path <- file.path( get_option("last_added"), "flowcam" )
+  add_path <- file.path( DATA_options("last_added"), "flowcam" )
   dir.create( add_path )
   #
   saveRDS(

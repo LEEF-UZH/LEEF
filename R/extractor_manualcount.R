@@ -18,7 +18,7 @@ extractor_manualcount <- function() {
 
   # Get csv file names ------------------------------------------------------
 
-  manualcount_path <- file.path( get_option("to_be_imported"), "manualcount" )
+  manualcount_path <- file.path( DATA_options("to_be_imported"), "manualcount" )
   manualcount_files <- list.files(
     path = manualcount_path,
     pattern = "*.csv",
@@ -43,7 +43,7 @@ extractor_manualcount <- function() {
 
 # SAVE --------------------------------------------------------------------
 
-  add_path <- file.path( get_option("last_added"), "manualcount" )
+  add_path <- file.path( DATA_options("last_added"), "manualcount" )
   dir.create( add_path )
   saveRDS(
     object = mc,

@@ -15,7 +15,7 @@ pre_processor_flowcam <- function(
   cat("\n########################################################\n")
   cat("\nProcessing flowcam...\n")
   tif <- list.files(
-    path = file.path( get_option("to_be_imported"), "flowcam" ),
+    path = file.path( DATA_options("to_be_imported"), "flowcam" ),
     pattern = "*.tif",
     full.names = TRUE,
     recursive = TRUE

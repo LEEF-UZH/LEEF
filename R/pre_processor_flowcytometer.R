@@ -20,7 +20,7 @@ pre_processor_flowcytometer <- function(
 
   cat("\n########################################################\n")
   cat("\nProcessing flowcytometer...\n")
-  setwd( file.path( get_option("to_be_imported"), "flowcytometer" ) )
+  setwd( file.path( DATA_options("to_be_imported"), "flowcytometer" ) )
   cmd <- "python"
   arguments <- file.path( system.file(package = utils::packageName()), "tools", "accuri2fcs", "accuri2fcs", "accuri2fcs.py" )
   system2(
@@ -29,14 +29,14 @@ pre_processor_flowcytometer <- function(
   )
   unlink("*.c6")
   fcs <- list.files(
-    path = file.path( get_option("to_be_imported"), "flowcytometer", "fcs" ),
+    path = file.path( DATA_options("to_be_imported"), "flowcytometer", "fcs" ),
     full.names = TRUE
   )
   file.rename(
     from = fcs,
     to = gsub( "/fcs/", "/", fcs )
   )
-  unlink( file.path( get_option("to_be_imported"), "flowcytometer", "fcs" ), recursive = TRUE )
+  unlink( file.path( DATA_options("to_be_imported"), "flowcytometer", "fcs" ), recursive = TRUE )
   cat("done\n")
   cat("\n########################################################\n")
 

@@ -11,7 +11,7 @@
 extract_new_data <- function() {
 
   result <- lapply(
-    X = get_option("extractors"),
+    X = DATA_options("extractors"),
     FUN = do.call,
     list()
   )

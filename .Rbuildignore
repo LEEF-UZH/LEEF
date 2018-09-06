@@ -12,3 +12,6 @@
 ^SAMPLE_DATA$
 ^tools/ImageJ$
 ^tools/Fiji\.app$
+^config\.yml$
+
+^testdir$

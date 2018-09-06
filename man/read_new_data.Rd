@@ -7,12 +7,12 @@
 read_new_data(file)
 }
 \arguments{
-\item{name}{of the file in \code{get_option("new_data_path")} to be read \bold{without} externsion}
+\item{name}{of the file in \code{DATA_options("new_data_path")} to be read \bold{without} externsion}
 }
 \value{
 data frame containing the new data
 }
 \description{
-Function to read a new data file. The function looks for the file in the \code{get_option("new_data_path")} directory.
+Function to read a new data file. The function looks for the file in the \code{DATA_options("new_data_path")} directory.
 It sets values to define the format used to guarantee consistency.
 }

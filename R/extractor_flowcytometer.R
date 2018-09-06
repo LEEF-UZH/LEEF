@@ -21,7 +21,7 @@ extractor_flowcytometer <- function() {
 
 # Get fcs file names ------------------------------------------------------
 
-  fcs_path <- file.path( get_option("to_be_imported"), "flowcytometer" )
+  fcs_path <- file.path( DATA_options("to_be_imported"), "flowcytometer" )
   fcs_files <- list.files(
     path = fcs_path,
     pattern = "*.fcs",
@@ -211,7 +211,7 @@ extractor_flowcytometer <- function() {
 
 # SAVE --------------------------------------------------------------------
 
-  add_path <- file.path( get_option("last_added"), "flowcytometer" )
+  add_path <- file.path( DATA_options("last_added"), "flowcytometer" )
   dir.create( add_path )
   saveRDS(
     object = flow.data,

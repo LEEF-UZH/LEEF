@@ -21,7 +21,7 @@ extractor_bemovi <- function() {
 
   # Get avi file names ------------------------------------------------------
 
-  bemovi_path <- file.path( get_option("to_be_imported"), "bemovi" )
+  bemovi_path <- file.path( DATA_options("to_be_imported"), "bemovi" )
   bemovi_path <- gsub("xxx", "", bemovi_path )
   bemovi_files <- list.files(
     path = bemovi_path,
@@ -39,7 +39,7 @@ extractor_bemovi <- function() {
 
 # Load behove_extract.yml parameter ---------------------------------------
 
-  bemovi::load_parameter( file.path(get_option("to_be_imported"), "bemovi", "bemovi_extract.yml") )
+  bemovi::load_parameter( file.path(DATA_options("to_be_imported"), "bemovi", "bemovi_extract.yml") )
 
 # Define and create folder structure -------------------------------------------------
 
@@ -278,7 +278,7 @@ extractor_bemovi <- function() {
 
 # SAVE --------------------------------------------------------------------
 
-  add_path <- file.path( get_option("last_added"), "bemovi" )
+  add_path <- file.path( DATA_options("last_added"), "bemovi" )
   dir.create( add_path, showWarnings = FALSE )
   file.copy(
     from = c(

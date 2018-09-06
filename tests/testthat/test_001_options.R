@@ -1,71 +1,56 @@
 
 # Setup -------------------------------------------------------------------
 
-
+testdir <- tempfile( pattern = "test_001_options.")
+dir.create( testdir )
+file.copy(
+  from = system.file("sample_data", "test_001_options", "config.yml", package = "LEEF.Data"),
+  to = testdir
+)
+setwd( testdir )
+initialize_db( )
 
 # Tests -------------------------------------------------------------------
 
-context("Test exists_option()")
+context("Test Options")
 
 test_that( "TRUE if option exists",
            {
-             expect_true(
-               exists_option("config_name")
+             expect_error(
+               DATA_options("config_name"),
+               regexp = NA
              )
            }
 )
 
-test_that( "FALSE if option does not exists",
-           {
-             expect_false(
-               exists_option("some_nonsense")
-             )
-           }
-)
-
-test_that( "get_option returns correct value",
-           {
-             expect_equal(
-               get_option("config_name"),
-               "Master"
-             )
-           }
-)
-
-test_that( "get_option returns NULL if it does not exist",
+test_that( "Error if option does not exists",
            {
              expect_error(
-               get_option("some_nonsense")
+               DATA_options("some_nonsense")
              )
            }
 )
 
-test_that( "set new option and expect NULL",
+test_that( "DATA_options returns correct value",
            {
-             expect_null(
-               set_option("some_nonsense", "test")
-             )
              expect_equal(
-               get_option("some_nonsense"),
-               "test"
+               DATA_options("config_name"),
+               "LEEFData"
              )
            }
 )
 
-test_that( "set option and expect old value in return",
+
+test_that( "Set option raises error if option does not exist",
            {
-             expect_equal(
-               set_option("some_nonsense", "nothing"),
-               "test"
-             )
-             expect_equal(
-               get_option("some_nonsense"),
-               "nothing"
+             expect_error(
+               DATA_options( some_nonsense = "nothing" )
              )
            }
 )
 
 # Teardown ----------------------------------------------------------------
 
+unlink( testdir, recursive = TRUE, force = TRUE )
 
 

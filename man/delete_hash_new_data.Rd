@@ -10,5 +10,5 @@ delete_hash_new_data()
 invisibly the result from \code{unlink}
 }
 \description{
-Deleta all \code{*.sha256} files in the \code{get_option("to_be_imported")} folder recursively.
+Deleta all \code{*.sha256} files in the \code{DATA_options("to_be_imported")} folder recursively.
 }

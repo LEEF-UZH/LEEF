@@ -1,70 +1,88 @@
 #' Create folder structure for data import and processing
 #'
+#' @param config_file config file to use. If none is specified, \code{cofig.yml} in the current working directory will be used.
 #' @return invisible \code{TRUE}
+#'
+#' @importFrom yaml yaml.load_file
 #' @importFrom magrittr %>%
 #' @export
 #'
 #' @examples
-initialize_db <- function(){
+initialize_db <- function(
+  config_file
+){
+
+  if (missing(config_file)) {
+    config_file <- file.path( getwd(), "config.yml" )
+  }
 
   # Load Config -------------------------------------------------------------
 
-  set_option(
-    "config",
-    config::get(
-      file = file.path( getwd(), "config.yml" )
+  cfg <- yaml::yaml.load_file(config_file)
+
+# Fill in default values if data missing ----------------------------------
+
+  if (is.null(cfg[["root_dir"]])) {
+    cfg[["root_dir"]] <- getwd()
+  }
+
+    if (is.null(cfg[["to_be_imported"]])) {
+    cfg[["to_be_imported"]] <- "ToBeImported"
+  }
+
+  if (is.null(cfg[["last_added"]])) {
+    cfg[["last_added"]] <- "LastAdded"
+  }
+  if (is.null(cfg[["archive"]])) {
+    cfg[["archive"]] <- "Archive"
+  }
+
+  if (is.null(cfg[["database"]][["dbpath"]])) {
+    cfg[["database"]][["dbpath"]] <- file.path(
+      getwd(),
+      strsplit( cfg[["database"]][["dbname"]], "\\.")[[1]][[1]]
     )
+  }
+
+  # Set Directories --------------------------------------------------------
+
+  DATA_options(
+    root_dir = cfg[["root_dir"]],
+    config_name = cfg[["config_name"]],
+    to_be_imported = file.path( cfg[["root_dir"]], cfg[["to_be_imported"]] ),
+    last_added = file.path( cfg[["root_dir"]], cfg[["last_added"]] ),
+    archive = file.path( cfg[["root_dir"]], cfg[["archive"]] )
   )
 
 
-  # Set Config name --------------------------------------------------------
+  # Set Archive Options -----------------------------------------------------
 
-  set_option(
-    "config_name",
-    get_option("config")$configname
+  DATA_options(
+    archive_name = cfg[["archive_name"]],
+    archive_compression = cfg[["archive_compression"]]
   )
 
 
-  # Set to_be_imported -----------------------------------------------------------
 
-  set_option(
-    "to_be_imported",
-    file.path( getwd(), "ToBeImported" )
-  )
+  # Set TTS and DOI ---------------------------------------------------------
 
-  # Set last_added name --------------------------------------------------------
-
-  set_option(
-    "last_added",
-    file.path( getwd(), "LastAdded" )
-  )
-
-  # Set archive -----------------------------------------------------------
-
-  set_option(
-    "archive",
-    file.path( getwd(), "Archive"  )
-  )
-
-  # Set archive name --------------------------------------------------------
-
-  set_option(
-    "archive_name",
-    "LEEF"
+  DATA_options(
+    tts = cfg[["tts"]],
+    tts_info = cfg[["tts_info"]],
+    doi = cfg[["doi"]]
   )
 
   # Set data_connection -----------------------------------------------------
 
-  set_option(
-    "data_connection",
-    NULL
+  DATA_options(
+    database = cfg[["database"]],
+    data_connection = NULL
   )
 
   # Add preprocessors -------------------------------------------------------
 
-  set_option(
-    "pre_processors",
-    list()
+  DATA_options(
+    pre_processors = list()
   )
 
   add_pre_processor( pre_processor_flowcam )
@@ -73,12 +91,10 @@ initialize_db <- function(){
 
   # Add Extractors ----------------------------------------------------------
 
-  set_option(
-    "extractors",
-    list()
+  DATA_options(
+    extractors = list()
   )
 
-  # add_pre_processor( bemovi )
   add_extractor( extractor_flowcam )
   add_extractor( extractor_incubatortemp )
   add_extractor( extractor_flowcytometer )
@@ -92,31 +108,25 @@ initialize_db <- function(){
 
 # ToBeImported folder structure -------------------------------------------
 
-  dir.create( get_option("to_be_imported"), showWarnings = FALSE )
+  dir.create( DATA_options("to_be_imported"), showWarnings = FALSE )
   sources <- c(
-    get_option("pre_processors") %>% names() %>% gsub("pre_processor_", "", .),
-    get_option("extractors") %>% names() %>% gsub("extractor_", "", .)
+    DATA_options("pre_processors") %>% names() %>% gsub("pre_processor_", "", .),
+    DATA_options("extractors") %>% names() %>% gsub("extractor_", "", .)
   ) %>% unique()
   for (d in sources) {
-    dir.create( file.path(get_option("to_be_imported"), d), showWarnings = FALSE )
+    dir.create( file.path(DATA_options("to_be_imported"), d), showWarnings = FALSE )
   }
 
 # Archive folder structure ------------------------------------------------
 
-  dir.create( get_option("archive"), showWarnings = FALSE )
+  dir.create( DATA_options("archive"), showWarnings = FALSE )
 
 # LastAdded folder structure ----------------------------------------------
 
-  dir.create( get_option("last_added"), showWarnings = FALSE )
+  dir.create( DATA_options("last_added"), showWarnings = FALSE )
 
 # DB folder structure -----------------------------------------------------
 
-  ## dir.create( get_option("last_added"), showWarnings = FALSE )
-  cfg <- get_option("config")
-  if (is.null(cfg$data$backend$dbpath)) {
-    cfg$data$backend$dbpath <- file.path( getwd(), "DB" )
-    set_option("config", cfg)
-  }
-  dir.create( get_option("config")$data$backend$dbpath, showWarnings = FALSE )
-  file.create( file.path( get_option("config")$data$backend$dbpath, get_option("config")$data$backend$dbname ) )
+  dir.create( DATA_options("database")$dbpath, showWarnings = FALSE )
+  file.create( file.path( DATA_options("database")$dbpath, DATA_options("database")$dbname ) )
 }

@@ -1,65 +1,68 @@
+context("Test hash_new_data()")
 
 # Setup -------------------------------------------------------------------
 
-tmpdir <- file.path(tempdir(check = TRUE), "new_data")
-dir.create(tmpdir, showWarnings = FALSE)
+testdir <- tempfile( pattern = "test_030_hash_new_data.")
+dir.create( testdir )
 file.copy(
-  from = list.files( file.path( get_option("pkg_path"), "test_data", "new_data", "false"), full.names = TRUE ),
-  to = tmpdir,
-  recursive = TRUE
+  from = system.file("sample_data", "test_030_hash_new_data", "config.yml", package = "LEEF.Data"),
+  to = testdir
 )
-
-old_dir <- set_option(
-  "to_be_imported",
-  tmpdir
-)
+setwd( testdir )
+initialize_db( )
 
 # Test --------------------------------------------------------------------
 
-context("Test hash_new_data()")
+test_that(
+  "Returns TRUE if no files present",
+  expect_true(
+    hash_new_data()
+  )
+)
+
+file.copy(
+  from = list.files( system.file( "sample_data", "test_030_hash_new_data", "ToBeImported", package = "LEEF.Data" ), full.names = TRUE ),
+  to = DATA_options( "to_be_imported" ),
+  recursive = TRUE
+)
 
 test_that(
   "Creates Hashes correctly with default values",
-  expect_error(
-    hash_new_data(),
-    regexp = NA
+  expect_true(
+    hash_new_data()
   )
 )
 
 test_that(
-  "Abort if hashes exist with default (i.e. overwrite = FALSE)",
+  "Error if hashes exist with default (i.e. overwrite = FALSE)",
   expect_error(
     hash_new_data()
   )
 )
 
 test_that(
-  "Abort if hashes exist with default (i.e. overwrite = TRUE)",
-  expect_error(
-    hash_new_data( overwrite = TRUE),
-    regexp = NA
+  "Success if hashes exist with default overwrite = TRUE",
+  expect_true(
+    hash_new_data( overwrite = TRUE)
   )
 )
 
 test_that(
-  "Created hash file is identical to reference",
+  "Created hash dir.sha256 is identical to expected",
   expect_equal(
-    tools::md5sum( file.path( get_option("to_be_imported"), "hash.sha265"     ) )[[1]],
-    tools::md5sum( file.path( get_option("to_be_imported"), "ref.hash.sha265" ) )[[1]]
+    tools::md5sum( file.path( DATA_options("to_be_imported"), "dir.sha256"     ) )[[1]],
+    "124c9695a06de34f6b145f74607430eb"
   )
 )
 
 test_that(
   "hash.sha265 file can be deleted",
   expect_error(
-    unlink( file.path( get_option("to_be_imported"), "hash.sha265") ),
+    delete_hash_new_data(),
     regexp = NA
   )
 )
 
 # Teardown ----------------------------------------------------------------
 
-unlink(tmpdir, recursive = TRUE, force = TRUE)
-set_option("to_be_imported", old_dir)
-
-
+unlink( testdir, recursive = TRUE, force = TRUE )
