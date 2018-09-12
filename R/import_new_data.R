@@ -21,17 +21,23 @@ import_new_data <- function(
 
   org_options <- settings::clone_and_merge( options = LEEF.Data:::pkg_options )
 
+  tmproot <- tempfile( pattern = "import.")
+  dir.create( tmproot )
   DATA_options(
-    to_be_imported = paste0( tempfile( pattern = "ToBeImported.") ),
-    archive = paste0( tempfile( pattern = "Archive.") ),
-    last_added =  paste0( tempfile( pattern = "LastAdded.") )
+    to_be_imported = file.path( tmproot,  "ToBeImported"),
+    archive = file.path( tmproot, "Archive"),
+    last_added =  file.path( tmproot, "LastAdded")
   )
+  dir.create( DATA_options("archive") )
+  dir.create( DATA_options("to_be_imported") )
+  dir.create( DATA_options("last_added") )
 
 # Move data into temporary folder for import and set lock file -----------
   unlink( file.path( org_options( "to_be_imported" ), "IMPORT.completed") )
   lockfile <- file.path( org_options( "to_be_imported" ), "LOCKFILE.importing" )
   on.exit(
     {
+      unlink( tmproot, recursive = TRUE )
       DATA_options(
         to_be_imported = org_options( "to_be_imported" ),
         archive = org_options("archive" ),
@@ -42,11 +48,6 @@ import_new_data <- function(
   )
   file.create( lockfile )
   #
-  dir.create( DATA_options("archive") )
-  #
-  dir.create( DATA_options("to_be_imported") )
-  #
-  dir.create( DATA_options("last_added") )
 
   ## TODO - REPLACE WITH MOVE WHEN FINISHED DEBUGGING!!!!!!!
   file.create( file.path( org_options( "to_be_imported" ), "IMPORT.copying_to_be_imported") )
@@ -90,7 +91,7 @@ import_new_data <- function(
     cat("\n########################################################\n")
     cat("\nArchiving new data...\n")
     file.create( file.path( org_options( "to_be_imported" ), "IMPORT.archive_new_data") )
-    archive_new_data()
+    archive_file <- archive_new_data()
     unlink( file.path( org_options( "to_be_imported" ), "IMPORT.archive_new_data") )
     cat("done\n")
     cat("\n########################################################\n")

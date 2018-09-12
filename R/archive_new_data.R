@@ -15,6 +15,7 @@
 #' @return invisibly returns the name of the archivefile
 #' @importFrom openssl sha256
 #' @importFrom utils tar
+#' @importFrom yaml write_yaml
 #'
 #' @export
 #'
@@ -33,6 +34,7 @@ archive_new_data <- function(
     if (get_tts) {
       information <- DATA_options("tts_info")
       information$archivename <- archivename
+      DATA_options("tts_info" = information)
       #
       ROriginStamp::store_hash(
         hash = hash,
@@ -150,6 +152,19 @@ archive_new_data <- function(
     }
   )
 
+
+# Extract Metadata and store in file --------------------------------------
+
+  metadata <- list(
+    data_package_name = basename( archivefile ),
+    data_package_hash = hash,
+    tts = DATA_options("tts"),
+    tts_info = DATA_options("tts_info")
+  )
+  yaml::write_yaml(
+    x = metadata,
+    file = paste0(archivefile, ".metadata.yml")
+  )
 
 
   invisible(archivefile)
