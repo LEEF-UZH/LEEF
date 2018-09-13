@@ -400,7 +400,7 @@ endif
 # Database Structure
 Layout Based on https://gist.github.com/QuantumGhost/0955a45383a0b6c0bc24f9654b3cb561
 
-```{r databaseModell, eval = TRUE, fig.width = 20}
+```{r databaseModell, eval = TRUE, fig.width = 30, fig.height = 10}
 '
 skinparam dpi 300
 !define Table(name,desc) class name as "desc" << (T,#FFAAAA) >>
@@ -421,51 +421,53 @@ hide stereotypes
 
 \' entities
 
-Table(import, "import (import meta data)") {
+Table(import, "dapa_package (meta data from data package with TTS)") {
 primary_key(tts_hash) INTEGER
-date_import DATE
 import_data:
+person_importing TEXT
+date_import DATE
+remarks TEXT
 ...
 }
 
 Table(bemovi, "bemovi (data from bemovi analysis)") {
 primary_key(id) INTEGER
-not_null(tts_hash) VARCHAR[32]
+not_null(tts_hash) TEXT
 bemovi_data:
 ...
 }
 
 Table(flowcam, "flowcam (data from flowcam analysis)") {
 primary_key(id) INTEGER
-not_null(tts_hash) VARCHAR[32]
+not_null(tts_hash) TEXT
 flowcam_data:
 ...
 }
 
 Table(flowcytometer, "flowcytometer (data from flowcytometer analysis)") {
 primary_key(id) INTEGER
-not_null(tts_hash) VARCHAR[32]
+not_null(tts_hash) TEXT
 flowcytometer_data:
 ...
 }
 
 Table(incubatortemp, "incubatortemp (data from incubatortemp analysis)") {
 primary_key(id) INTEGER
-not_null(tts_hash) VARCHAR[32]
+not_null(tts_hash) TEXT
 incubatortemp_data:
 ...
 }
 
 Table(manualcount, "manualcount (data from manualcount analysis)") {
 primary_key(id) INTEGER
-not_null(tts_hash) VARCHAR[32]
+not_null(tts_hash) TEXT
 manualcount_data 
 ...
 }
 
 Table(respirometer, "respirometer (data from respirometer analysis)") {
 primary_key(id) INTEGER
-not_null(tts_hash) VARCHAR[32]
+not_null(tts_hash) TEXT
 respirometer_data:
 ...
 }
@@ -492,6 +494,7 @@ respirometer_data:
 \' relationships
 \' one-to-one relationship
 \'   user -- user_profile : "A user only has one profile"
+
 \' one to may relationship
 import --> bemovi : "tts_hash"
 import --> flowcam : "tts_hash"
@@ -499,6 +502,8 @@ import --> flowcytometer : "tts_hash"
 import --> incubatortemp : "tts_hash"
 import --> manualcount : "tts_hash"
 import --> respirometer : "tts_hash"
+
+
 \' many to many relationship
 \' Add mark if you like
 \'   user "1" --> "*" user_group : "A user may be in many groups"
@@ -507,3 +512,14 @@ import --> respirometer : "tts_hash"
   plantuml %>%
   plot
 ```
+
+
+
+
+
+
+
+
+
+
+
