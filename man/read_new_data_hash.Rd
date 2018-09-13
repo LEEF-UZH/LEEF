@@ -4,13 +4,16 @@
 \alias{read_new_data_hash}
 \title{Read hash from new data file}
 \usage{
-read_new_data_hash(file, hash_file = "file.sha256")
+read_new_data_hash(file, hash_file = "file.sha256",
+  hash_dir = DATA_options("to_be_imported"))
 }
 \arguments{
 \item{file}{if given, function returns the hash of the file, if not, a
 dataframe containing the hashes}
 
 \item{hash_file}{name of the hash file which should be read}
+
+\item{hash_dir}{directory of hash file}
 }
 \value{
 the hash of the file (if given), otherwise a \code{data.frame}
