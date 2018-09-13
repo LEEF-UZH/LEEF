@@ -5,10 +5,10 @@
 #'
 #' @importFrom dplyr bind_rows group_by summarise
 #' @importFrom magrittr %>% %<>%
-#' @importFrom readr read_csv
-#' @export
+#' @importFrom readr read_csv cols col_double col_integer col_character col_date col_time col_datetime
 #'
 #' @examples
+#' @export
 extractor_flowcam <- function() {
   cat("\n########################################################\n")
   cat("\nExtracting flowcam...\n")
@@ -36,7 +36,27 @@ extractor_flowcam <- function() {
 
   classes <- lapply(
     flowcam_files,
-    readr::read_csv
+    readr::read_csv,
+    col_types =
+      cols(
+        .default = col_double(),
+        `Particle ID` = col_integer(),
+        Class = col_character(),
+        `Calibration Image` = col_integer(),
+        Camera = col_integer(),
+        `Capture X` = col_integer(),
+        `Capture Y` = col_integer(),
+        Date = col_date(format = ""),
+        `Image File` = col_character(),
+        `Image Height` = col_integer(),
+        `Image Width` = col_integer(),
+        `Image X` = col_integer(),
+        `Image Y` = col_integer(),
+        `Particles Per Chain` = col_integer(),
+        `Source Image` = col_integer(),
+        Time = col_time(format = ""),
+        Timestamp = col_datetime(format = "")
+      )
   ) %>%
     # combine intu one large tibble
     dplyr::bind_rows(.) %>%
