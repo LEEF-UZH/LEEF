@@ -20,6 +20,7 @@ pkg_options <- settings::options_manager(
   # Processors and hooks
   pre_processors = list(),
   extractors = list(),
+  db_additors = list(),
   # for temporary storage
   tmp = NULL
 )
@@ -37,12 +38,6 @@ pkg_options <- settings::options_manager(
 #'
 #' @importFrom settings stop_if_reserved is_setting
 #' @examples
-#'   ROriginStamp_options("api_key")
-#'   # [1] "Please get valid API key from Originstamp.org!"
-#'
-#'   ROriginStamp_options( api_key = "My new API key")
-#'   ROriginStamp_options("api_key")
-#'   # [1] "My new API key"
 #' @export
 DATA_options <- function(...){
   # protect against the use of reserved words.
