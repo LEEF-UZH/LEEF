@@ -1,16 +1,29 @@
 #' Create folder structure for data import and processing
 #'
 #' @param config_file config file to use. If none is specified, \code{cofig.yml} in the current working directory will be used.
+#' @param tts_api_key api key for getting the Trusted Timestamp from OriginStamp. Default is reading from the environmental variable \code{api_key}.
+#'
 #' @return invisible \code{TRUE}
 #'
 #' @importFrom yaml yaml.load_file
 #' @importFrom magrittr %>%
+#' @importFrom ROriginStamp ROriginStamp_options
+#'
 #' @export
 #'
 #' @examples
 initialize_db <- function(
-  config_file
+  config_file,
+  tts_api_key = Sys.getenv("api_key")
 ){
+
+  # Set api key from environmental variable ---------------------------------
+
+  ROriginStamp::ROriginStamp_options(
+    api_key = tts_api_key
+  )
+
+  # Define default config file ----------------------------------------------
 
   if (missing(config_file)) {
     config_file <- file.path( getwd(), "config.yml" )
@@ -20,13 +33,13 @@ initialize_db <- function(
 
   cfg <- yaml::yaml.load_file(config_file)
 
-# Fill in default values if data missing ----------------------------------
+  # Fill in default values if data missing ----------------------------------
 
   if (is.null(cfg[["root_dir"]])) {
     cfg[["root_dir"]] <- getwd()
   }
 
-    if (is.null(cfg[["to_be_imported"]])) {
+  if (is.null(cfg[["to_be_imported"]])) {
     cfg[["to_be_imported"]] <- "ToBeImported"
   }
 
@@ -106,7 +119,7 @@ initialize_db <- function(
 
 
 
-# ToBeImported folder structure -------------------------------------------
+  # ToBeImported folder structure -------------------------------------------
 
   dir.create( DATA_options("to_be_imported"), showWarnings = FALSE )
   sources <- c(
@@ -117,15 +130,15 @@ initialize_db <- function(
     dir.create( file.path(DATA_options("to_be_imported"), d), showWarnings = FALSE )
   }
 
-# Archive folder structure ------------------------------------------------
+  # Archive folder structure ------------------------------------------------
 
   dir.create( DATA_options("archive"), showWarnings = FALSE )
 
-# LastAdded folder structure ----------------------------------------------
+  # LastAdded folder structure ----------------------------------------------
 
   dir.create( DATA_options("last_added"), showWarnings = FALSE )
 
-# DB folder structure -----------------------------------------------------
+  # DB folder structure -----------------------------------------------------
 
   dir.create( DATA_options("database")$dbpath, showWarnings = FALSE )
   file.create( file.path( DATA_options("database")$dbpath, DATA_options("database")$dbname ) )
