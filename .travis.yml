@@ -1,14 +1,12 @@
-# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
-
 language: R
 sudo: false
 cache: packages
-
-
 r_packages:
-  - covr
-  - lintr
-
+- covr
+- lintr
 after_success:
-  - Rscript -e 'covr::codecov()'
-  - Rscript -e 'lintr::lint_package()'
+- Rscript -e 'covr::codecov()'
+- Rscript -e 'lintr::lint_package()'
+env:
+  global:
+    secure: Ql5PugK/5VPZrIXXZ0z4Z/xTj+R/X6E+nM68t3apisoNngOVHEtxHUHJNsyBoXuzWZfi+mRDs/UNTbisDR9ZRnfgeyICsXPXrlGt4JY0kcJ+GLk4s8GQK+BVOwaEFlzREOZXCeno1VI7hk9FkQKLJAxFTkYr+sFuuvgaPcbkTLKRdsGawKD1pTZerW4P1pdnrKmREjbcNWR4Fx3WbQlFJf3SAlTPaEAEMOX6KDqClrFpgWEKQbJNdOJM6vCcWKTJc8MyjWQqottYkj8CzoWxqgzXpGygcRXtPm0Xbk/8U7PnQuFwzcazf+cXDlP+M2yBPWeGhmYkqiSpy4ZAqDeFPIiHIahOt0bgnMYndCq/d/mWWHxriGk0zftH7dWfSWkaMifQBiJixN0q5K+va17ol9U+3P7b8R1F4H8muBAqcf4xNldXAW4pf0SmRLvqOK7FOkh2JKILRY/Z3CvF6UWHhzMfuchYIUigDv5BhBzkCs/j2sQFT6TF+CWjCI70hY3BWcDERWPrkhfD36BVHEi6ipNH3YgR85LhNJm1nvqw1aAPzDcbHIqykqb/gPOQA3UzhDChG8njeicaik34P311mRkv+U7yGd45G8GDmg6cHodOA8ZkloKlZsSR1muOXw2J/m3/NCAefQ76gm2Y7QhB9zBr95I8lgscSbPeUp0piuo=
