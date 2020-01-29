@@ -34,7 +34,7 @@ Suggests:
     knitr,
     rmarkdown
 Remotes:
-    rkrug/bemovi@LEEF
+    rkrug/bemovi@LEEF,
     rkrug/ROriginStamp
 RoxygenNote: 7.0.2
 VignetteBuilder: knitr
