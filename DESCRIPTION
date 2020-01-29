@@ -27,10 +27,14 @@ Imports:
     magrittr,
     readr,
     bemovi,
-    tools
+    tools,
+    openssl
 Suggests: 
-    covr
+    covr,
+    knitr,
+    rmarkdown
 Remotes:
     rkrug/bemovi@LEEF
     rkrug/ROriginStamp
-RoxygenNote: 6.0.1
+RoxygenNote: 7.0.2
+VignetteBuilder: knitr

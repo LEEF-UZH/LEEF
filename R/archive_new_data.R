@@ -10,7 +10,7 @@
 #' }
 #' Default is the value as defined in the config file.
 #'
-#' @param get_tts if \coide{TRUE}, a Trusted Time Stamp will be obtained from OriginStamp
+#' @param get_tts if \code{TRUE}, a Trusted Time Stamp will be obtained from OriginStamp
 #'
 #' @return invisibly returns the name of the archivefile
 #' @importFrom openssl sha256

@@ -13,7 +13,10 @@ pre_process_new_data <- function() {
   result <- lapply(
     X = DATA_options("pre_processors"),
     FUN = do.call,
-    list()
+    args = list(
+      input = LEEF.Data::DATA_options("to_be_imported"),
+      output = LEEF.Data::DATA_options("to_be_imported")
+    )
   )
 
   invisible(result)

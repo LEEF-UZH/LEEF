@@ -100,7 +100,6 @@ initialize_db <- function(
 
   add_pre_processor( pre_processor_flowcam )
   add_pre_processor( pre_processor_flowcytometer )
-  add_pre_processor( pre_processor_bemovi )
 
   # Add Extractors ----------------------------------------------------------
 
@@ -113,7 +112,7 @@ initialize_db <- function(
   add_extractor( extractor_flowcytometer )
   add_extractor( extractor_manualcount )
   add_extractor( extractor_respirometer )
-  add_extractor( extractor_bemovi )
+
 
   # And the end -------------------------------------------------------------
 

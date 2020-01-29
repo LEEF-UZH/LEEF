@@ -4,8 +4,11 @@
 \alias{read_new_data_hash}
 \title{Read hash from new data file}
 \usage{
-read_new_data_hash(file, hash_file = "file.sha256",
-  hash_dir = DATA_options("to_be_imported"))
+read_new_data_hash(
+  file,
+  hash_file = "file.sha256",
+  hash_dir = DATA_options("to_be_imported")
+)
 }
 \arguments{
 \item{file}{if given, function returns the hash of the file, if not, a

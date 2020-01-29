@@ -2,7 +2,6 @@
 % Please edit documentation in R/add_additor.R, R/add_extractor.R
 \name{add_extractor}
 \alias{add_extractor}
-\alias{add_extractor}
 \title{Add or replace additor}
 \usage{
 add_extractor(fun)
@@ -10,8 +9,6 @@ add_extractor(fun)
 add_extractor(fun)
 }
 \arguments{
-\item{fun}{function which is run during addittion of the data to the database.}
-
 \item{fun}{function which is run during extracting of the data.}
 }
 \value{

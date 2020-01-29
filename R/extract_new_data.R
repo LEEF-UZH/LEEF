@@ -13,7 +13,11 @@ extract_new_data <- function() {
   result <- lapply(
     X = DATA_options("extractors"),
     FUN = do.call,
-    list()
+    args = list(
+      input = LEEF.Data::DATA_options("to_be_imported"),
+      output = LEEF.Data::DATA_options("last_added")
+      
+    )
   )
 
   invisible(result)

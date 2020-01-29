@@ -3,7 +3,6 @@
 \docType{package}
 \name{LEEF.Data}
 \alias{LEEF.Data}
-\alias{LEEF.Data-package}
 \title{LEEF.Data.}
 \description{
 LEEF.Data.

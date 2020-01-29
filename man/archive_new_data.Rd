@@ -4,8 +4,10 @@
 \alias{archive_new_data}
 \title{Compress and checksum the \code{DATA_options("new_data_path")}}
 \usage{
-archive_new_data(compression = DATA_options("archive_compression"),
-  get_tts = DATA_options("tts"))
+archive_new_data(
+  compression = DATA_options("archive_compression"),
+  get_tts = DATA_options("tts")
+)
 }
 \arguments{
 \item{compression}{which compression should be used for the archive. Thge following values are supported at the moment:
@@ -16,7 +18,7 @@ archive_new_data(compression = DATA_options("archive_compression"),
 }
 Default is the value as defined in the config file.}
 
-\item{get_tts}{if \coide{TRUE}, a Trusted Time Stamp will be obtained from OriginStamp}
+\item{get_tts}{if \code{TRUE}, a Trusted Time Stamp will be obtained from OriginStamp}
 }
 \value{
 invisibly returns the name of the archivefile
