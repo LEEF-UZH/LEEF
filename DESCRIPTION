@@ -11,6 +11,8 @@ Description: More about what it does (maybe more than one line)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+Depends:
+    R (>= 3.5.0)
 Imports:
     DBI,
     RSQLite,
@@ -20,21 +22,12 @@ Imports:
     yaml,
     utils,
     R.utils,
-    tiff,
-    flowCore,
-    plyr,
-    dplyr,
-    magrittr,
-    readr,
-    bemovi,
-    tools,
-    openssl
+    tools
 Suggests: 
     covr,
     knitr,
     rmarkdown
 Remotes:
-    rkrug/bemovi@LEEF,
     rkrug/ROriginStamp
 RoxygenNote: 7.0.2
 VignetteBuilder: knitr
