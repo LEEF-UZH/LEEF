@@ -23,3 +23,7 @@ inst/tools/ImageJ/
 config.yml
 testdir
 inst/doc
+
+## Example Data Folder
+0.raw.data
+

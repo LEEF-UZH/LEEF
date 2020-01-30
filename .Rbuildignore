@@ -5,6 +5,7 @@
 ^README.*$
 ^dataDownload$
 ^codecov\.yml$
+
 ## Folders to be excluded
 ^ToBeImported$
 ^LastAdded$
@@ -12,6 +13,12 @@
 ^SAMPLE_DATA$
 ^tools/ImageJ$
 ^tools/Fiji\.app$
+
+
+## Example Data Folder
+^inst/0.raw.data$
+
+
 ^config\.yml$
 
 ^testdir$
