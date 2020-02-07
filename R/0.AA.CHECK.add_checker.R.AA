@@ -1,0 +1,20 @@
+#' @title Add or replace a function in a queue
+#'
+#' @details \bold{add_additor}: Adding a named function to the queue of checkers. If the named function
+#' already exists will it be replaced.
+#'
+#' @rdname add
+#'
+#' @export
+#'
+#' @examples
+add_checker <- function(fun) {
+  if (!is.function(fun)) {
+    stop( "fun needs to be a function!")
+  }
+  pp <- DATA_options("checkers")
+  funname <- deparse(substitute(fun))
+  pp[[funname]] <- fun
+  DATA_options( db_additors = pp )
+  invisible( DATA_options("checkers") )
+}

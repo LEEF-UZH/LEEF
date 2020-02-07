@@ -14,10 +14,6 @@ LazyData: true
 Depends:
     R (>= 3.5.0)
 Imports:
-    DBI,
-    RSQLite,
-    openssl,
-    ROriginStamp,
     testthat,
     yaml,
     utils,

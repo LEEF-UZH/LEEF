@@ -17,6 +17,7 @@
 
 ## Example Data Folder
 ^inst/0.raw.data$
+^inst/1.pre-processed.data$
 
 
 ^config\.yml$

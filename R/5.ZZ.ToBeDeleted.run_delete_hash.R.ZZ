@@ -5,9 +5,9 @@
 #' @export
 #'
 #' @examples
-delete_hash_new_data <- function() {
+run_delete_hash <- function() {
   fn <- list.files(
-    path = DATA_options("to_be_imported"),
+    path = options()$LEEF.Data$to_be_imported,
     pattern = "*.sha256",
     full.names = TRUE,
     recursive = TRUE

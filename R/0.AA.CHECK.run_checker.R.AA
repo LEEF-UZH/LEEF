@@ -1,0 +1,23 @@
+#' @title Run process queue
+#'
+#' @description Run all the functions in the respective queue registered with \code{add_...}.
+#'
+#' @return
+#'
+#' @export
+#'
+#' @examples
+run_checker <- function() {
+
+  result <- lapply(
+    X = DATA_options("checkers"),
+    FUN = do.call,
+    args = list(
+      input = LEEF.Data::DATA_options("to_be_imported"),
+      output = LEEF.Data::DATA_options("last_added")
+
+    )
+  )
+
+  invisible(result)
+}

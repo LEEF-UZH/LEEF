@@ -1,0 +1,84 @@
+## General info
+##
+config_name: LEEFData
+description: LEEF Data from an long term experiment.
+             Some more detaled info has to follow.
+maintainer: Rainer M. Krug <Rainer@uzh.ch>
+
+## Packages which contain the pre_processors, extractors, additors, ...
+##
+measurement_packages:
+  LEEF.measurement.bemovi:
+    name: LEEF.measurement.bemovi
+    InstallCommand: cat(13)
+    RegisterCommand: cat(15)
+  LEEF.measurement.flocam:
+    name: LEEF.measurement.flocam
+    InstallCommand: cat(13)
+    RegisterCommand: cat(15)
+  LEEF.measurement.flowcytometer:
+    name: LEEF.measurement.
+    InstallCommand: cat(13)
+    RegisterCommand: cat(15)
+  LEEF.measurement.incubatortemp:
+    name: LEEF.measurement.incubatortemp
+    InstallCommand: cat(13)
+    RegisterCommand: cat(15)
+  LEEF.measurement.manualcount:
+    name: LEEF.measurement.manualcount
+    InstallCommand: cat(13)
+    RegisterCommand: cat(15)
+  LEEF.measurement.respirometer:
+    name: LEEF.measurement.respirometer
+    InstallCommand: cat(13)
+    RegisterCommand: cat(15)
+  LEEF.measurement.toc:
+    name: LEEF.measurement.toc
+    InstallCommand: cat(13)
+    RegisterCommand: cat(15)
+
+archival_packages:
+  LEEF.archive.default:
+    name: LEEF.archive.default
+    InstallCommand: cat(13)
+    RegisterCommand: cat(15)
+
+## Directorie for the processing.
+## The folder structure in this directory
+## has to be one folder for each measurement type.
+##
+directories:
+  raw:
+  pre_processed:
+  extracted:
+  archive:
+
+
+## queues containing functions.
+## These should be left blank, as they will be owerwritten.
+##
+queues:
+  pre_processors:
+  extractors:
+  archivers:
+  additors:
+
+
+
+archive:
+  name: LEEF
+  compression: tar
+
+tts: TRUE
+tts_info:
+  name: Rainer M Krug
+  email: Rainer.Krug@uzh.ch
+  comment: testdata
+  archivename: To Be Set
+
+doi: FALSE
+
+database:
+  driver: "RSQLite::SQLite()"
+  dbpath:
+  dbname: "LEEFData.sqlite"

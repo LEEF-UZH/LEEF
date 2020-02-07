@@ -1,21 +1,14 @@
-#' Add or replace extractor
+#' @title Add or replace a function in a queue
 #'
-#' Adding a named function to the queue of extractors. If the named function already exists will it be replaced.
+#' @details \bold{add_extractor}: Adding a named function to the queue of extractors. If the named function
+#' already exists will it be replaced.
 #'
-#' The functions must not require any arguments.
-#' @param fun function which is run during extracting of the data.
+#' @rdname add
 #'
-#' @return invisiby the extractor queue. A \code{list} which is processed
 #' @export
 #'
 #' @examples
+#' add_extractor( fun = paste )
 add_extractor <- function(fun) {
-  if (!is.function(fun)) {
-    stop( "fun needs to be a function!")
-  }
-  pp <- DATA_options("extractors")
-  funname <- deparse(substitute(fun))
-  pp[[funname]] <- fun
-  DATA_options( extractors = pp )
-  invisible( DATA_options("extractors") )
+  invisible( add(fun, "extractors") )
 }
