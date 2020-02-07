@@ -17,6 +17,8 @@ Archive/
 ToBeImported/
 LastAdded/
 SAMPLE_DATA/
+local/
+
 # Tools to ignore due to size
 inst/tools/Fiji.app
 inst/tools/ImageJ/
