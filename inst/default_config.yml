@@ -5,43 +5,7 @@ description: LEEF Data from an long term experiment.
              Some more detaled info has to follow.
 maintainer: Rainer M. Krug <Rainer@uzh.ch>
 
-## Packages which contain the pre_processors, extractors, additors, ...
-##
-measurement_packages:
-  LEEF.measurement.bemovi:
-    name: LEEF.measurement.bemovi
-    InstallCommand: cat(13)
-    RegisterCommand: cat(15)
-  LEEF.measurement.flocam:
-    name: LEEF.measurement.flocam
-    InstallCommand: cat(13)
-    RegisterCommand: cat(15)
-  LEEF.measurement.flowcytometer:
-    name: LEEF.measurement.
-    InstallCommand: cat(13)
-    RegisterCommand: cat(15)
-  LEEF.measurement.incubatortemp:
-    name: LEEF.measurement.incubatortemp
-    InstallCommand: cat(13)
-    RegisterCommand: cat(15)
-  LEEF.measurement.manualcount:
-    name: LEEF.measurement.manualcount
-    InstallCommand: cat(13)
-    RegisterCommand: cat(15)
-  LEEF.measurement.respirometer:
-    name: LEEF.measurement.respirometer
-    InstallCommand: cat(13)
-    RegisterCommand: cat(15)
-  LEEF.measurement.toc:
-    name: LEEF.measurement.toc
-    InstallCommand: cat(13)
-    RegisterCommand: cat(15)
 
-archival_packages:
-  LEEF.archive.default:
-    name: LEEF.archive.default
-    InstallCommand: cat(13)
-    RegisterCommand: cat(15)
 
 ## Directorie for the processing.
 ## The folder structure in this directory
@@ -53,7 +17,6 @@ directories:
   extracted:
   archive:
 
-
 ## queues containing functions.
 ## These should be left blank, as they will be owerwritten.
 ##
@@ -63,7 +26,48 @@ queues:
   archivers:
   additors:
 
+## R library for packages installed by initilize()
+## leave blank for temporary location
+#
+library_path:
 
+## Packages which contain the pre_processors, extractors, additors, ...
+##
+measurement_packages:
+  LEEF.measurement.bemovi:
+    name: LEEF.measurement.bemovi
+    InstallCommand: remotes::install_github('rkrug/LEEF.measurement.bemovi', upgrade = "never")
+    RegisterCommand: LEEF.measurement.bemovi::tools_path(tools_path = '.'); LEEF.measurement.bemovi::register()
+  LEEF.measurement.flocam:
+    name: LEEF.measurement.flowcam
+    InstallCommand: remotes::install_github('rkrug/LEEF.measurement.flowcam', upgrade = "never")
+    RegisterCommand: LEEF.measurement.flowcam::register()
+  LEEF.measurement.flowcytometer:
+    name: LEEF.measurement.flowcytometer
+    InstallCommand: remotes::install_github('rkrug/LEEF.measurement.flowcytometer', upgrade = "never")
+    RegisterCommand: LEEF.measurement.flowcytometer::register()
+  LEEF.measurement.incubatortemp:
+    name: LEEF.measurement.incubatortemp
+    InstallCommand: remotes::install_github('rkrug/LEEF.measurement.incubatortemp', upgrade = "never")
+    RegisterCommand: LEEF.measurement.incubatortemp::register()
+  LEEF.measurement.manualcount:
+    name: LEEF.measurement.manualcount
+    InstallCommand: remotes::install_github('rkrug/LEEF.measurement.manualcount', upgrade = "never")
+    RegisterCommand: LEEF.measurement.manualcount::register()
+  LEEF.measurement.respirometer:
+    name: LEEF.measurement.respirometer
+    InstallCommand: remotes::install_github('rkrug/LEEF.measurement.respirometer', upgrade = "never")
+    RegisterCommand: LEEF.measurement.respirometer::register()
+  LEEF.measurement.toc:
+    name: LEEF.measurement.toc
+    InstallCommand: remotes::install_github('rkrug/LEEF.measurement.toc', upgrade = "never")
+    RegisterCommand: LEEF.measurement.toc::register()
+
+# archival_packages:
+#   LEEF.archive.default:
+#    name: LEEF.archive.default
+#    InstallCommand: remotes::install_github('rkrug/LEEF.archive.default', upgrade = "never")
+#    RegisterCommand: RegisterCommand:LEEF.archive.default::register()
 
 archive:
   name: LEEF
@@ -79,6 +83,6 @@ tts_info:
 doi: FALSE
 
 database:
-  driver: "RSQLite::SQLite()"
+  driver: 'RSQLite::SQLite()'
   dbpath:
-  dbname: "LEEFData.sqlite"
+  dbname: 'LEEFData.sqlite'

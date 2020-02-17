@@ -13,8 +13,8 @@
 run_pre_processors <- function() {
 
   result <- run(
-    input = options()$LEEF.Data$directory$raw,
-    output = options()$LEEF.Data$directory$pre_processed,
+    input = opt_directories()$raw,
+    output = opt_directories()$pre_processed,
     queue = "pre_processors"
   )
 

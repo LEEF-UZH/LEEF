@@ -6,7 +6,7 @@
 #'   of the methodology (e.g. \code{bemovi})
 #' @param output directory in which the results will be written in a folder with
 #'   the name of the methodology (e.g. \code{bemovi})
-#' @param queue name of queue in \code{options()$LEEF.Data}
+#' @param queue name of queue in \code{getOption("LEEF.Data")}
 #'
 #' @return returns the results of the queue as a vector of length of the queue.
 #'   If an element is \code{TRUE}, the function was run successfully (i.e.
@@ -29,7 +29,7 @@ run <- function(
 ) {
 
   result <- lapply(
-    X = options()$LEEF.Data[[queue]],
+    X = getOption("LEEF.Data")$queues[[queue]],
     FUN = do.call,
     args = list(
       input = input,

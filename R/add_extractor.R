@@ -10,5 +10,10 @@
 #' @examples
 #' add_extractor( fun = paste )
 add_extractor <- function(fun) {
-  invisible( add(fun, "extractors") )
+  funname <- paste0(
+    getNamespaceName(environment(fun))[[1]],
+    "::",
+    deparse(substitute(fun))
+  )
+  invisible( add(fun, funname, "extractors") )
 }

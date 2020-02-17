@@ -12,5 +12,10 @@
 #' @examples
 #' add_additor( fun = cat )
 add_additor <- function(fun) {
-  invisible( add(fun, "additors") )
+  funname <- paste0(
+    getNamespaceName(environment(fun))[[1]],
+    "::",
+    deparse(substitute(fun))
+  )
+  invisible( add(fun, funname, "additors") )
 }

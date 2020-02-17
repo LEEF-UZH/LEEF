@@ -30,8 +30,8 @@ process <- function(
   message("\n########################################################\n")
   message("\narchivingg...\n")
   run_archivers(
-    input = options()$LEEF.Data$directories$extracted,
-    output = options()$LEEF.Data$directories$archive)
+    input = getOption("LEEF.Data")$directories$extracted,
+    output = getOption("LEEF.Data")$directories$archive)
   message("done\n")
   message("\n########################################################\n")
 

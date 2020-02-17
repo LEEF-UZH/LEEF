@@ -7,7 +7,7 @@
 #' already exists will it be replaced.
 #'
 #' @param fun function which is run when calling \code{run_...()} The functions must not require any arguments!
-#' @param queue name of queue in \code{options()$LEEF.Data}
+#' @param queue name of queue in \code{getOption("LEEF.Data")}
 #'
 #' @return invisiby the function queue.
 #'
@@ -20,26 +20,22 @@
 #' add (fun = cat, .queue = "additor")
 #'
 #' ## To add the function `paste` to the `extractor` queue
-#' add (cat, "extractor")
+#' add (cat, "cat", "extractor")
 #'
 add <- function(
   fun,
+  funname,
   queue
 ) {
   if (!is.function(fun)) {
     stop( "fun needs to be a function!")
   }
-  funname <- paste0(
-    getNamespaceName(environment(fun))[[1]],
-    "::",
-    deparse(substitute(fun))
-  )
   ##
-  LEEF_options <- options()$LEEF.Data
-  if (is.null(LEEF_options$queue[[queue]])) {
-    LEEF_options$queue[[queue]] <- list()
+  LEEF_options <- getOption("LEEF.Data")
+  if (is.null(LEEF_options$queues[[queue]])) {
+    LEEF_options$queues[[queue]] <- list()
   }
-  LEEF_options$queue[[queue]][[funname]] <- fun
+  LEEF_options$queues[[queue]][[funname]] <- fun
   options(LEEF.Data = LEEF_options)
   ##
   invisible(  )

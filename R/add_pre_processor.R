@@ -10,6 +10,11 @@
 #' @examples
 #' add_pre_processor( fun = paste )
 add_pre_processor <- function(fun) {
-  invisible( add(fun, "pre_processor") )
+  funname <- paste0(
+    getNamespaceName(environment(fun))[[1]],
+    "::",
+    deparse(substitute(fun))
+  )
+  invisible( add(fun, funname, queue = "pre_processors") )
 
 }

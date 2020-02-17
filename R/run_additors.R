@@ -13,8 +13,8 @@
 run_additors <- function() {
 
   result <- run(
-    input = options()$LEEF.Data$directory$raw,
-    output = options()$LEEF.Data$directory$pre_processed,
+    input = opt_directories()$directory$raw,
+    output = opt_directories()$pre_processed,
     queue = "additors"
   )
 

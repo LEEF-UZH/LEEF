@@ -9,7 +9,7 @@
 \alias{add_pre_processor}
 \title{Add or replace a function in a queue}
 \usage{
-add(fun, queue)
+add(fun, funname, queue)
 
 add_additor(fun)
 
@@ -56,7 +56,7 @@ already exists will it be replaced.
 add (fun = cat, .queue = "additor")
 
 ## To add the function `paste` to the `extractor` queue
-add (cat, "extractor")
+add (cat, "cat", "extractor")
 
 add_additor( fun = cat )
 add_additor( fun = cat )

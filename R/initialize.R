@@ -15,7 +15,8 @@
 #' initialize(system.file("default_config.yml", package = "LEEF.Data"))
 #' }
 initialize <- function(
-  config_file
+  config_file,
+  library_path
 ){
 
   # Define default config file ----------------------------------------------
@@ -30,41 +31,47 @@ initialize <- function(
     system.file("default_config.yml", package = "LEEF.Data")
   )
 
+  options(LEEF.Data = LEEF_options)
+
+
   # Fix missing directories -------------------------------------------------
 
 
-  if (is.null(LEEF_options$directories$raw)) {
-    LEEF_options$directories$raw <- getwd()
+  if ( is.null(opt_directories()$raw) ) {
+    opt_directories( raw = getwd() )
   }
 
-  if (is.null(LEEF_options$directories$pre_processed)) {
-    LEEF_options$directories$pre_processed <- file.path(
-      LEEF_options$directories$raw,
-      "..",
-      "pre_processed"
-    )
+  if (is.null(opt_directories()$pre_processed)) {
+    opt_directories( pre_processed = file.path( opt_directories()$raw, "..", "pre_processed" ) )
   }
 
-  if (is.null(LEEF_options$directories$extracted)) {
-    LEEF_options$directories$extracted <- file.path(
-      LEEF_options$directories$raw,
-      "..",
-      "extracted"
-    )
+  if (is.null(opt_directories()$extracted)) {
+    opt_directories( extracted = file.path( opt_directories()$raw, "..", "extracted" ) )
   }
 
-  if (is.null(LEEF_options$directories$archive)) {
-    LEEF_options$directories$archive <- file.path(
-      LEEF_options$directories$raw,
-      "..",
-      "archived"
-    )
+  if (is.null(opt_directories()$archive)) {
+    opt_directories( archive = file.path( opt_directories()$raw, "..", "archive" ) )
   }
+
+  # Set library path --------------------------------------------------------
+
+  if (missing(library_path)) {
+    library_path <- opt_library()
+  }
+  if (is.null(library_path)) {
+    library_path <- tempfile("library_")
+  }
+  if (library_path == "") {
+    library_path <- tempfile("library_")
+  }
+  opt_library(library_path = library_path)
 
 
   # Load measurement packages -----------------------------------------------
 
+
   install_register_packages(LEEF_options$measurement_packages)
+
 
   # Load archival packages --------------------------------------------------
 
@@ -72,9 +79,6 @@ initialize <- function(
   install_register_packages(LEEF_options$archival_packages)
 
 
-  # Write to options() ------------------------------------------------------
-
-  options(LEEF.Data = LEEF_options)
 
 
 }

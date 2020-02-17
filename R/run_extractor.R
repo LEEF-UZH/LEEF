@@ -12,8 +12,8 @@
 run_extractors <- function() {
 
   result <- run(
-    input = options()$LEEF.Data$directory$pre_processed,
-    output = options()$LEEF.Data$directory$extracted,
+    input = opt_directories()$pre_processed,
+    output = opt_directories()$extracted,
     queue = "extractors"
   )
 

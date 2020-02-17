@@ -4,7 +4,7 @@
 \alias{initialize}
 \title{Create folder structure for data import and processing}
 \usage{
-initialize(config_file)
+initialize(config_file, library_path)
 }
 \arguments{
 \item{config_file}{config file to use. If none is specified, \code{cofig.yml} in the current working directory will be used.}

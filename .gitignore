@@ -18,14 +18,13 @@ ToBeImported/
 LastAdded/
 SAMPLE_DATA/
 local/
-
 # Tools to ignore due to size
 inst/tools/Fiji.app
 inst/tools/ImageJ/
 config.yml
 testdir
 inst/doc
-
 ## Example Data Folder
 0.raw.data
 1.pre-processed.data
+temp

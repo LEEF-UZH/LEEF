@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' \dontrun{
-#'  install_register_packages(options()$LEEF.Data$measurement_packages)
+#'  install_register_packages(getOption("LEEF.Data")$measurement_packages)
 #' }
 install_register_packages <- function(
   packages
@@ -20,10 +20,14 @@ install_register_packages <- function(
   result <- lapply(
     packages,
     function(x) {
+      message("\n")
+      message("###################################################")
+      message("##### Installing and Registering ", x$name)
       eval(parse(text = x$InstallCommand))
       library(x$name[[1]], character.only = TRUE)
       eval(parse(text = x$RegisterCommand))
+      message("###################################################")
     }
   )
-  invisibly(result)
+  invisible(result)
 }
