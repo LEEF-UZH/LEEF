@@ -1,38 +1,50 @@
-## General info
-##
+# General info --------------------------------------------------------------------
+# General info regarding the processing
+
+
 config_name: LEEFData
 description: LEEF Data from an long term experiment.
              Some more detaled info has to follow.
 maintainer: Rainer M. Krug <Rainer@uzh.ch>
 
 
-
-## Directorie for the processing.
+# Directorie for the processing  --------------------------------------------------------------------
 ## The folder structure in this directory
 ## has to be one folder for each measurement type.
 ##
+
+
 directories:
   raw:
   pre_processed:
   extracted:
   archive:
 
-## queues containing functions.
+
+# queues containing functions  --------------------------------------------------------------------
 ## These should be left blank, as they will be owerwritten.
-##
+
+
 queues:
   pre_processors:
   extractors:
   archivers:
   additors:
 
-## R library for packages installed by initilize()
+
+# R library for packages installed by initilize()  --------------------------------------------------------------------
 ## leave blank for temporary location
-#
+
+
 library_path:
 
-## Packages which contain the pre_processors, extractors, additors, ...
-##
+
+# Packages which contain the pre_processors, extractors, additors, ...  --------------------------------------------------------------------
+# These will be installed using the `InstallCommand` and registered
+# in the queue using the `RegisterCommand`.
+# The RegisterCommand` can also contain additional customizations needed by the processors.
+
+
 measurement_packages:
   LEEF.measurement.bemovi:
     name: LEEF.measurement.bemovi
@@ -63,15 +75,46 @@ measurement_packages:
     InstallCommand: remotes::install_github('rkrug/LEEF.measurement.toc', upgrade = "never")
     RegisterCommand: LEEF.measurement.toc::register()
 
-# archival_packages:
-#   LEEF.archive.default:
-#    name: LEEF.archive.default
-#    InstallCommand: remotes::install_github('rkrug/LEEF.archive.default', upgrade = "never")
-#    RegisterCommand: RegisterCommand:LEEF.archive.default::register()
 
-archive:
-  name: LEEF
-  compression: tar
+# archival_packages  --------------------------------------------------------------------
+# These will be installed using the `InstallCommand` and registered
+# in the queue using the `RegisterCommand`.
+# The RegisterCommand` can also contain additional customizations needed by the processors.
+# Additional values are arcival package specific.
+
+
+archive_packages:
+  LEEF.archive.default:
+    name: LEEF.archive.default
+    InstallCommand: remotes::install_github('rkrug/LEEF.archive.default', upgrade = "never")
+    RegisterCommand: LEEF.archive.default::register()
+    archive_name: LEEF
+    archive_compression: tar
+
+
+# backend packages ()  --------------------------------------------------------------------
+# These will be installed using the `InstallCommand` and registered
+# in the queue using the `RegisterCommand`.
+# The RegisterCommand` can also contain additional customizations needed by the processors.
+# Additional values are arcival package specific.
+
+## NOT IMPLEMENTED YET
+## SOME MORE THOUGHT NEEDED HERE!
+
+
+backend_packages:
+  LEEF.backend.sqlite:
+    name: LEEF.backend.sqlite
+    InstallCommand: remotes::install_github('rkrug/LEEF.backend.sqlite', upgrade = "never")
+    RegisterCommand: LEEF.backend.sqlite::register()
+    dbpath:
+    dbname: 'LEEFData.sqlite'
+
+
+# Trusted Time Stamps  --------------------------------------------------------------------
+## NOT IMPLEMENTED YET
+## SOME MORE THOUGHT NEEDED HERE!
+
 
 tts: TRUE
 tts_info:
@@ -80,9 +123,10 @@ tts_info:
   comment: testdata
   archivename: To Be Set
 
+
+# DOI   --------------------------------------------------------------------
+## NOT IMPLEMENTED YET
+
+
 doi: FALSE
 
-database:
-  driver: 'RSQLite::SQLite()'
-  dbpath:
-  dbname: 'LEEFData.sqlite'
