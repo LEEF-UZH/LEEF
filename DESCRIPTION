@@ -12,7 +12,8 @@ License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 Depends:
-    R (>= 3.5.0)
+    R (>= 3.5.0),
+    ROriginStamp
 Imports:
     testthat,
     yaml,
@@ -23,7 +24,6 @@ Suggests:
     covr,
     knitr,
     rmarkdown
-Remotes:
-    rkrug/ROriginStamp
+Additional_repositories: https://leef-uzh.github.io/drat/
 RoxygenNote: 7.0.2
 VignetteBuilder: knitr
