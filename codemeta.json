@@ -1,0 +1,202 @@
+{
+  "@context": [
+    "https://doi.org/10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
+  "@type": "SoftwareSourceCode",
+  "identifier": "LEEF",
+  "description": null,
+  "name": "LEEF: Data package containing only data and data information",
+  "license": "What license is it under?",
+  "version": "0.2.0",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 4.0.2 (2020-06-22)",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Rainer M.",
+      "familyName": "Krug",
+      "email": "Rainer.Krug@uzh.zch"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Owen L.",
+      "familyName": "Petchey",
+      "email": "Owen.Petchey@uzh.zch"
+    }
+  ],
+  "contributor": {},
+  "copyrightHolder": {},
+  "funder": {},
+  "maintainer": [
+    {
+      "@type": "Person",
+      "givenName": "Rainer M.",
+      "familyName": "Krug",
+      "email": "Rainer.Krug@uzh.zch"
+    }
+  ],
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "covr",
+      "name": "covr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=covr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "knitr",
+      "name": "knitr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=knitr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "rmarkdown",
+      "name": "rmarkdown",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "drat",
+      "name": "drat",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=drat"
+    }
+  ],
+  "softwareRequirements": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": ">= 3.5.0"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "LEEF.archive.default",
+      "name": "LEEF.archive.default"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "LEEF.measurement.bemovi",
+      "name": "LEEF.measurement.bemovi"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "LEEF.measurement.flowcam",
+      "name": "LEEF.measurement.flowcam"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "LEEF.measurement.flowcytometer",
+      "name": "LEEF.measurement.flowcytometer"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "LEEF.measurement.incubatortemp",
+      "name": "LEEF.measurement.incubatortemp"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "LEEF.measurement.manualcount",
+      "name": "LEEF.measurement.manualcount"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "LEEF.measurement.respirometer",
+      "name": "LEEF.measurement.respirometer"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "LEEF.measurement.toc",
+      "name": "LEEF.measurement.toc"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=testthat"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "yaml",
+      "name": "yaml",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=yaml"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "utils",
+      "name": "utils"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "R.utils",
+      "name": "R.utils",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=R.utils"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "tools",
+      "name": "tools"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "ROriginStamp",
+      "name": "ROriginStamp"
+    }
+  ],
+  "codeRepository": "https://github.com/LEEF-UZH/LEEF",
+  "readme": "https://github.com/LEEF-UZH/LEEF/blob/master/README.md",
+  "fileSize": "0KB",
+  "keywords": [
+    "leef",
+    "r",
+    "data-analysis",
+    "data-processing"
+  ],
+  "issueTracker": "https://github.com/LEEF-UZH/LEEF/issues"
+}

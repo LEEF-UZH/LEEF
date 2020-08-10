@@ -25,3 +25,4 @@
 ^testdir$
 ^local$
 ^temp$
+^codemeta\.json$
