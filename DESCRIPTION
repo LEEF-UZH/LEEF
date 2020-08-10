@@ -1,29 +1,37 @@
-Package: LEEF.Data
+Package: LEEF
 Type: Package
 Title: Data package containing only data and data information
-Version: 0.1.1.5
+Version: 0.1.2
 Authors@R: c(
-  person("Rainer M.", "Krug", email = "Rainer.Krug@uzh.zch", role = c("aut", "cre")),
-  person("Owen", "Petchey", email = "Owen.Petchey@uzh.zch", role = c("aut"))
+  person(given = "Rainer M.", family = "Krug", email = "Rainer.Krug@uzh.zch", role = c("aut", "cre")),
+  person(given = "Owen L.", family = "Petchey", email = "Owen.Petchey@uzh.zch", role = c("aut"))
   )
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Maintainer: Rainer M. Krug <Rainer.Krug@uzh.ch>
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+Additional_repositories: https://leef-uzh.github.io/drat/
 Depends:
-    R (>= 3.5.0),
-    ROriginStamp
+  R (>= 3.5.0),
 Imports:
+	  LEEF.archive.default,
+    LEEF.measurement.bemovi,
+    LEEF.measurement.flowcam,
+    LEEF.measurement.flowcytometer,
+    LEEF.measurement.incubatortemp,
+    LEEF.measurement.manualcount,
+    LEEF.measurement.respirometer,
+    LEEF.measurement.toc,
     testthat,
     yaml,
     utils,
     R.utils,
-    tools
+    tools,
+    ROriginStamp,
+    drat
 Suggests: 
     covr,
     knitr,
     rmarkdown
-Additional_repositories: https://leef-uzh.github.io/drat/
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1.9000
 VignetteBuilder: knitr

@@ -22,7 +22,7 @@ add_pre_processor(fun)
 \arguments{
 \item{fun}{function which is run when calling \code{run_...()} The functions must not require any arguments!}
 
-\item{queue}{name of queue in \code{options()$LEEF.Data}}
+\item{queue}{name of queue in \code{getOption("LEEF.Data")}}
 }
 \value{
 invisiby the function queue.

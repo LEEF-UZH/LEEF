@@ -53,30 +53,17 @@ initialize <- function(
     opt_directories( archive = file.path( opt_directories()$raw, "..", "archive" ) )
   }
 
-  # Set library path --------------------------------------------------------
-
-  if (missing(library_path)) {
-    library_path <- opt_library()
-  }
-  if (is.null(library_path)) {
-    library_path <- tempfile("library_")
-  }
-  if (library_path == "") {
-    library_path <- tempfile("library_")
-  }
-  opt_library(library_path = library_path)
-
 
   # Load measurement packages -----------------------------------------------
 
 
-  install_register_packages(LEEF_options$measurement_packages)
+  register_packages(LEEF_options$measurement_packages)
 
 
   # Load archival packages --------------------------------------------------
 
 
-  install_register_packages(LEEF_options$archival_packages)
+  register_packages(LEEF_options$archival_packages)
 
 
 

@@ -76,58 +76,5 @@ opt_directories <- function(
 }
 
 
-# opt_library -------------------------------------------------------------
 
 
-#' Functions to read and write options
-#'
-#' Read or write the library path to be used to install the R packages in. Directories do
-#' not have to exist and will be created. Content will be overwritten without
-#' confirmation! If no parameter is given, the directories will be returned a a list.
-#' @param archive \code{character} \code{vector} of length one containing the
-#'   directory for the archived data
-#'
-#' @return list of directories. If values have set, the value before the change.
-#'
-#' @rdname options
-#'
-#' @export
-#'
-#' @examples
-#' opt_directories()
-#'
-#' opt_directories(library_path = "./temp")
-#'
-opt_library <- function(
-  library_path
-){
-  LEEF_options <- getOption("LEEF.Data")
-  if (is.null(LEEF_options)) {
-    stop("Something is wrong - Options not initialized!")
-  }
-  ##
-  old_lib_path <- LEEF_options$library_path
-  read <- TRUE
-  ##
-  if (!missing(library_path)) {
-    if (length(library_path) != 1) {
-      stop("length of the vector has to be one!")
-    }
-    LEEF_options$library_path <- library_path
-    read <- FALSE
-  }
-  ##
-  if (!read) {
-    if (!is.null(old_lib_path)) {
-      if (.libPaths()[[1]] == old_lib_path) {
-        .libPaths(.libPaths()[-1])
-      }
-    }
-    dir.create(library_path, recursive = TRUE, showWarnings = FALSE)
-    .libPaths(library_path)
-    options(LEEF.Data = LEEF_options)
-  }
-  ##
-  ##
-  invisible( old_lib_path )
-}

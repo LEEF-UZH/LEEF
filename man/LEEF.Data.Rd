@@ -4,6 +4,3 @@
 \name{LEEF.Data}
 \alias{LEEF.Data}
 \title{LEEF.Data.}
-\description{
-LEEF.Data.
-}

@@ -36,7 +36,7 @@ queues:
 ## leave blank for temporary location
 
 
-library_path:
+# library_path:
 
 
 # Packages which contain the pre_processors, extractors, additors, ...  --------------------------------------------------------------------
@@ -48,31 +48,31 @@ library_path:
 measurement_packages:
   LEEF.measurement.bemovi:
     name: LEEF.measurement.bemovi
-    InstallCommand: remotes::install_github('rkrug/LEEF.measurement.bemovi', upgrade = "never")
+    InstallCommand: drat::addRepo("LEEF-UZH"); install.packages('rkrug/LEEF.measurement.bemovi')
     RegisterCommand: LEEF.measurement.bemovi::tools_path(tools_path = '.'); LEEF.measurement.bemovi::register()
   LEEF.measurement.flocam:
     name: LEEF.measurement.flowcam
-    InstallCommand: remotes::install_github('rkrug/LEEF.measurement.flowcam', upgrade = "never")
+    InstallCommand: drat::addRepo("LEEF-UZH"); install.packages(('rkrug/LEEF.measurement.flowcam')
     RegisterCommand: LEEF.measurement.flowcam::register()
   LEEF.measurement.flowcytometer:
     name: LEEF.measurement.flowcytometer
-    InstallCommand: remotes::install_github('rkrug/LEEF.measurement.flowcytometer', upgrade = "never")
+    InstallCommand: drat::addRepo("LEEF-UZH"); install.packages('rkrug/LEEF.measurement.flowcytometer')
     RegisterCommand: LEEF.measurement.flowcytometer::register()
   LEEF.measurement.incubatortemp:
     name: LEEF.measurement.incubatortemp
-    InstallCommand: remotes::install_github('rkrug/LEEF.measurement.incubatortemp', upgrade = "never")
+    InstallCommand: drat::addRepo("LEEF-UZH"); install.packages('rkrug/LEEF.measurement.incubatortemp')
     RegisterCommand: LEEF.measurement.incubatortemp::register()
   LEEF.measurement.manualcount:
     name: LEEF.measurement.manualcount
-    InstallCommand: remotes::install_github('rkrug/LEEF.measurement.manualcount', upgrade = "never")
+    InstallCommand: drat::addRepo("LEEF-UZH"); install.packages('rkrug/LEEF.measurement.manualcount')
     RegisterCommand: LEEF.measurement.manualcount::register()
   LEEF.measurement.respirometer:
     name: LEEF.measurement.respirometer
-    InstallCommand: remotes::install_github('rkrug/LEEF.measurement.respirometer', upgrade = "never")
+    InstallCommand: drat::addRepo("LEEF-UZH"); install.packages('rkrug/LEEF.measurement.respirometer')
     RegisterCommand: LEEF.measurement.respirometer::register()
   LEEF.measurement.toc:
     name: LEEF.measurement.toc
-    InstallCommand: remotes::install_github('rkrug/LEEF.measurement.toc', upgrade = "never")
+    InstallCommand: drat::addRepo("LEEF-UZH"); install.packages('rkrug/LEEF.measurement.toc')
     RegisterCommand: LEEF.measurement.toc::register()
 
 
@@ -86,7 +86,7 @@ measurement_packages:
 archive_packages:
   LEEF.archive.default:
     name: LEEF.archive.default
-    InstallCommand: remotes::install_github('rkrug/LEEF.archive.default', upgrade = "never")
+    InstallCommand: drat::addRepo("LEEF-UZH"); install.packages('rkrug/LEEF.archive.default')
     RegisterCommand: LEEF.archive.default::register()
     archive_name: LEEF
     archive_compression: tar
@@ -105,7 +105,7 @@ archive_packages:
 backend_packages:
   LEEF.backend.sqlite:
     name: LEEF.backend.sqlite
-    InstallCommand: remotes::install_github('rkrug/LEEF.backend.sqlite', upgrade = "never")
+    InstallCommand: drat::addRepo("LEEF-UZH"); install.packages('rkrug/LEEF.backend.sqlite')
     RegisterCommand: LEEF.backend.sqlite::register()
     dbpath:
     dbname: 'LEEFData.sqlite'

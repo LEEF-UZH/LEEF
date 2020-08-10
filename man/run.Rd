@@ -13,7 +13,7 @@ of the methodology (e.g. \code{bemovi})}
 \item{output}{directory in which the results will be written in a folder with
 the name of the methodology (e.g. \code{bemovi})}
 
-\item{queue}{name of queue in \code{options()$LEEF.Data}}
+\item{queue}{name of queue in \code{getOption("LEEF.Data")}}
 }
 \value{
 returns the results of the queue as a vector of length of the queue.

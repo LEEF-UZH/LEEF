@@ -1,5 +1,4 @@
-#' Install packages from config file and register the functions to be used
-#'
+#' Register the functions to be usedfrom packages in the config file
 #' @param list of packages. Each element \bold{must} contain the elements
 #' \describe{
 #'   \item{\code{name}}{the name of the package,}
@@ -12,9 +11,9 @@
 #'
 #' @examples
 #' \dontrun{
-#'  install_register_packages(getOption("LEEF.Data")$measurement_packages)
+#'  register_packages(getOption("LEEF.Data")$measurement_packages)
 #' }
-install_register_packages <- function(
+register_packages <- function(
   packages
 ){
   result <- lapply(
@@ -22,9 +21,7 @@ install_register_packages <- function(
     function(x) {
       message("\n")
       message("###################################################")
-      message("##### Installing and Registering ", x$name)
-      eval(parse(text = x$InstallCommand))
-      library(x$name[[1]], character.only = TRUE)
+      message("##### Registering ", x$name)
       eval(parse(text = x$RegisterCommand))
       message("###################################################")
     }
