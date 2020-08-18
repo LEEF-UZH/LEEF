@@ -15,10 +15,11 @@ maintainer: Rainer M. Krug <Rainer@uzh.ch>
 
 
 directories:
-  raw:
-  pre_processed:
-  extracted:
-  archive:
+  raw: "0.raw.data"
+  pre_processed: "1.pre-processed.data"
+  extracted: "2.extracted.data"
+  archive: "3.archived.data"
+  tools: "tools"
 
 
 # queues containing functions  --------------------------------------------------------------------
@@ -30,13 +31,6 @@ queues:
   extractors:
   archivers:
   additors:
-
-
-# R library for packages installed by initilize()  --------------------------------------------------------------------
-## leave blank for temporary location
-
-
-# library_path:
 
 
 # Packages which contain the pre_processors, extractors, additors, ...  --------------------------------------------------------------------
@@ -54,10 +48,10 @@ measurement_packages:
     name: LEEF.measurement.flowcam
     InstallCommand: drat::addRepo('LEEF-UZH'); install.packages(('rkrug/LEEF.measurement.flowcam')
     RegisterCommand: LEEF.measurement.flowcam::register()
-  LEEF.measurement.flowcytometer:
-    name: LEEF.measurement.flowcytometer
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('rkrug/LEEF.measurement.flowcytometer')
-    RegisterCommand: LEEF.measurement.flowcytometer::register()
+  # LEEF.measurement.flowcytometer:
+  #   name: LEEF.measurement.flowcytometer
+  #   InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('rkrug/LEEF.measurement.flowcytometer')
+  #   RegisterCommand: LEEF.measurement.flowcytometer::register()
   LEEF.measurement.incubatortemp:
     name: LEEF.measurement.incubatortemp
     InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('rkrug/LEEF.measurement.incubatortemp')
@@ -87,7 +81,7 @@ archive_packages:
   LEEF.archive.default:
     name: LEEF.archive.default
     InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('rkrug/LEEF.archive.default')
-    RegisterCommand: LEEF.archive.default::register()
+    RegisterCommand: LEEF.archive.default::register(compression = "none")
     archive_name: LEEF
     archive_compression: tar
 

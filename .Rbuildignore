@@ -6,18 +6,21 @@
 ^dataDownload$
 ^codecov\.yml$
 
+^Makefile$
+
 ## Folders to be excluded
 ^ToBeImported$
 ^LastAdded$
 ^Archive$
 ^SAMPLE_DATA$
-^tools/ImageJ$
-^tools/Fiji\.app$
+^tests_disabled$
+
 
 
 ## Example Data Folder
-^inst/0.raw.data$
-^inst/1.pre-processed.data$
+^0\.raw\.data$
+^1\.pre-processed\.data$
+^2\.extracted\.data$
 
 
 ^config\.yml$

@@ -3,6 +3,8 @@
 #' This function is an example and can be used as a template for processing the queues in a script
 #' @return invisibly \code{TRUE}
 #'
+#' @param ... additional arguments for the different queues
+#'
 #' @export
 #'
 #' @examples
@@ -11,7 +13,6 @@
 #' }
 
 process <- function(
-  create_new_table = FALSE,
   ...
 ) {
 
@@ -30,8 +31,8 @@ process <- function(
   message("\n########################################################\n")
   message("\narchivingg...\n")
   run_archivers(
-    input = getOption("LEEF.Data")$directories$extracted,
-    output = getOption("LEEF.Data")$directories$archive)
+    input = getOption("LEEF")$directories$extracted,
+    output = getOption("LEEF")$directories$archive)
   message("done\n")
   message("\n########################################################\n")
 

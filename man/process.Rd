@@ -4,7 +4,10 @@
 \alias{process}
 \title{Process all ques in the correct order}
 \usage{
-process(create_new_table = FALSE, ...)
+process(...)
+}
+\arguments{
+\item{...}{additional arguments for the different queues}
 }
 \value{
 invisibly \code{TRUE}

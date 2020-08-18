@@ -27,9 +27,10 @@ opt_directories <- function(
   raw,
   pre_processed,
   extracted,
-  archive
+  archive,
+  tools
 ){
-  LEEF_options <- getOption("LEEF.Data")
+  LEEF_options <- getOption("LEEF")
   if (is.null(LEEF_options)) {
     stop("Something is wrong - Options not initialized!")
   }
@@ -66,13 +67,22 @@ opt_directories <- function(
     dirs$archive <- archive
     read <- FALSE
   }
+  if (!missing(tools)) {
+    if (length(tools) != 1) {
+      stop("length of the vector has to be one!")
+    }
+    dirs$tools <- tools
+    read <- FALSE
+  }
   ##
   if (!read) {
     LEEF_options$directories <- dirs
-    options(LEEF.Data = LEEF_options)
+    options(LEEF = LEEF_options)
+    invisible( old_dirs )
+  } else {
+    return( old_dirs )
   }
-  ##
-  invisible( old_dirs )
+
 }
 
 

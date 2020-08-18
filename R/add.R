@@ -7,7 +7,8 @@
 #' already exists will it be replaced.
 #'
 #' @param fun function which is run when calling \code{run_...()} The functions must not require any arguments!
-#' @param queue name of queue in \code{getOption("LEEF.Data")}
+#' @param funname name of the function
+#' @param queue name of queue in \code{getOption("LEEF")}
 #'
 #' @return invisiby the function queue.
 #'
@@ -16,12 +17,13 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' ## To add the function `cat` to the `additor` queue
 #' add (fun = cat, .queue = "additor")
 #'
 #' ## To add the function `paste` to the `extractor` queue
 #' add (cat, "cat", "extractor")
-#'
+#' }
 add <- function(
   fun,
   funname,
@@ -31,12 +33,12 @@ add <- function(
     stop( "fun needs to be a function!")
   }
   ##
-  LEEF_options <- getOption("LEEF.Data")
+  LEEF_options <- getOption("LEEF")
   if (is.null(LEEF_options$queues[[queue]])) {
     LEEF_options$queues[[queue]] <- list()
   }
   LEEF_options$queues[[queue]][[funname]] <- fun
-  options(LEEF.Data = LEEF_options)
+  options(LEEF = LEEF_options)
   ##
   invisible(  )
 }

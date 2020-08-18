@@ -4,7 +4,7 @@
 \alias{opt_directories}
 \title{Functions to read and write options}
 \usage{
-opt_directories(raw, pre_processed, extracted, archive)
+opt_directories(raw, pre_processed, extracted, archive, tools)
 }
 \arguments{
 \item{raw}{\code{character} \code{vector} of length one containing the

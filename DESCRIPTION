@@ -3,20 +3,20 @@ Type: Package
 Title: Data package containing only data and data information
 Version: 0.2.0
 Authors@R: c(
-  person(given = "Rainer M.", family = "Krug", email = "Rainer.Krug@uzh.zch", role = c("aut", "cre")),
-  person(given = "Owen L.", family = "Petchey", email = "Owen.Petchey@uzh.zch", role = c("aut"))
+  person(given = "Rainer M.", family = "Krug", email = "Rainer.Krug@uzh.zch", role = c("aut", "cre"))
   )
 Maintainer: Rainer M. Krug <Rainer.Krug@uzh.ch>
 BugReports: https://github.com/LEEF-UZH/LEEF/issues
 URL: https://github.com/LEEF-UZH/LEEF
-License: What license is it under?
+Description: Setup package for the LEEF pipeline which loads / installs all necessary packages and functions to run the pipeline.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Additional_repositories: https://leef-uzh.github.io/drat/
 Depends:
   R (>= 3.5.0),
 Imports:
-	LEEF.archive.default,
+	  LEEF.archive.default,
     LEEF.measurement.bemovi,
     LEEF.measurement.flowcam,
     LEEF.measurement.flowcytometer,
@@ -35,5 +35,5 @@ Suggests:
     knitr,
     rmarkdown,
     drat
-RoxygenNote: 7.1.1.9000
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr

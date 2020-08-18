@@ -1,14 +1,14 @@
-## .LEEF.Data_options <- new.env(FALSE, parent = globalenv())
+## .LEEF_options <- new.env(FALSE, parent = globalenv())
 
 .onAttach <- function(libname, pkgname) {
 
   # Load default options --------------------------------------------------
 
   LEEF_options <- yaml::yaml.load_file(
-    system.file("default_config.yml", package = "LEEF.Data")
+    system.file("default_config.yml", package = "LEEF")
   )
 
-  options(LEEF.Data = LEEF_options)
+  options(LEEF = LEEF_options)
 }
 
 
@@ -19,7 +19,7 @@
 #   settings::stop_if_reserved(...)
 #
 #   if (!missing(...)) {
-#     x <- options("Leef.Data")
+#     x <- options("LEEF")
 #
 #     if ( settings::is_setting(...) ) {
 #       opt = names( list(...) )

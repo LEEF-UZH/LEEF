@@ -4,7 +4,7 @@
 \alias{initialize}
 \title{Create folder structure for data import and processing}
 \usage{
-initialize(config_file, library_path)
+initialize(config_file = system.file("default_config.yml", package = "LEEF"))
 }
 \arguments{
 \item{config_file}{config file to use. If none is specified, \code{cofig.yml} in the current working directory will be used.}
@@ -17,6 +17,6 @@ Create folder structure for data import and processing
 }
 \examples{
 \dontrun{
-initialize(system.file("default_config.yml", package = "LEEF.Data"))
+initialize(system.file("default_config.yml", package = "LEEF"))
 }
 }

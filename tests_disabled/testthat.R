@@ -1,7 +1,7 @@
 library(testthat)
-library(LEEF.Data)
+library(LEEF)
 
 test_check(
-  "LEEF.Data"
+  "LEEF"
 )
 

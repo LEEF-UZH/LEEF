@@ -4,7 +4,7 @@
 testdir <- tempfile( pattern = "test_001_options.")
 dir.create( testdir )
 file.copy(
-  from = system.file("sample_data", "test_001_options", "config.yml", package = "LEEF.Data"),
+  from = system.file("sample_data", "test_001_options", "config.yml", package = "LEEF"),
   to = testdir
 )
 setwd( testdir )

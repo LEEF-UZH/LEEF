@@ -22,7 +22,9 @@ add_pre_processor(fun)
 \arguments{
 \item{fun}{function which is run when calling \code{run_...()} The functions must not require any arguments!}
 
-\item{queue}{name of queue in \code{getOption("LEEF.Data")}}
+\item{funname}{name of the function}
+
+\item{queue}{name of queue in \code{getOption("LEEF")}}
 }
 \value{
 invisiby the function queue.
@@ -52,12 +54,13 @@ already exists will it be replaced.
 already exists will it be replaced.
 }
 \examples{
+\dontrun{
 ## To add the function `cat` to the `additor` queue
 add (fun = cat, .queue = "additor")
 
 ## To add the function `paste` to the `extractor` queue
 add (cat, "cat", "extractor")
-
+}
 add_additor( fun = cat )
 add_additor( fun = cat )
 add_extractor( fun = paste )

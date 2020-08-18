@@ -6,14 +6,14 @@ context("Test archive_new_data()")
 testdir <- tempfile( pattern = "test_030_archive_new_data.")
 dir.create( testdir )
 file.copy(
-  from = system.file("sample_data", "test_030_archive_new_data", "config.yml", package = "LEEF.Data"),
+  from = system.file("sample_data", "test_030_archive_new_data", "config.yml", package = "LEEF"),
   to = testdir
 )
 setwd( testdir )
 initialize_db( )
 
 file.copy(
-  from = list.files( system.file( "sample_data", "test_030_archive_new_data", "ToBeImported", package = "LEEF.Data" ), full.names = TRUE ),
+  from = list.files( system.file( "sample_data", "test_030_archive_new_data", "ToBeImported", package = "LEEF" ), full.names = TRUE ),
   to = DATA_options( "to_be_imported" ),
   recursive = TRUE
 )

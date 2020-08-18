@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 
 ----
 
-<!-- [![Coverage status](https://codecov.io/gh/rkrug/LEEF.Data/branch/master/graph/badge.svg)](https://codecov.io/github/rkrug/LEEF.Data?branch=master) -->
+<!-- [![Coverage status](https://codecov.io/gh/rkrug/LEEF/branch/master/graph/badge.svg)](https://codecov.io/github/rkrug/LEEF?branch=master) -->
 <!-- [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) -->
 
 ----
@@ -156,7 +156,7 @@ install.packages("devtools")
 
 ## Installation of the package
 ```{r install, eval = FALSE, echo = TRUE}
-devtools::install_github("rkrug/LEEF.Data")
+devtools::install_github("rkrug/LEEF")
 ```
 
 
@@ -173,13 +173,13 @@ cat "./inst/config.yml"
 The fastest way to start a new data storage infrastructure is to create an empty directory and to copy the config file into this directory. Afterwards, change the working directory to that directoryt and initialise the folder structure and the package:
 
 ```{r init_db, eval = FALSE, echo = TRUE}
-# library("LEEF.Data")
+# library("LEEF")
 devtools::load_all(here::here())
 nd <- "Data_directory"
 dir.create( nd )
 setwd( nd )
 file.copy(
-  from = system.file("config.yml", package = "LEEF.Data"),
+  from = system.file("config.yml", package = "LEEF"),
   to = "."
 )
 initialize_db()
@@ -328,7 +328,7 @@ and finally
 
 ```{r leef.processing.content}
 '
-package "LEEF.Data" {
+package "LEEF" {
 !define Group(name) class "name" << (G,#FFAAAA) >>
 
   Group("Unit Check") {

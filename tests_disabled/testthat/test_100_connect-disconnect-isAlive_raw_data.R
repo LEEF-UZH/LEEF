@@ -6,7 +6,7 @@ context("Test connect_data()")
 testdir <- tempfile( pattern = "test_030_archive_new_data.")
 dir.create( testdir )
 file.copy(
-  from = system.file("config.yml", package = "LEEF.Data"),
+  from = system.file("config.yml", package = "LEEF"),
   to = testdir
 )
 setwd( testdir )

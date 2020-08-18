@@ -12,7 +12,9 @@ run_archivers(input, output)
 \item{output}{director in which the archive will be created}
 }
 \value{
-
+returns the results of the queue as a vector of length of the queue.
+  If an element is \code{TRUE}, the function was run successfully (i.e.
+  returned \code{TRUE})
 }
 \description{
 Run all the archivers registered with \code{add_archiver()}.

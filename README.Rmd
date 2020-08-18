@@ -322,10 +322,10 @@ deactivate trv
 entity Experiment as exp
 actor Local as lpr
 box "Github"
-  database "fork of LEEF.Data.Master" as ghbr #red
-  database "LEEF.Data.Master" as ghbd #red
+  database "fork of LEEF.Master" as ghbr #red
+  database "LEEF.Master" as ghbd #red
   database "LEEF.Forecast.Master" as ghbf #red
-  database "LEEF.Data.Child" as ghbdp #green
+  database "LEEF.Child" as ghbdp #green
 end box
 control Travis as trv
 box "R Packages"
@@ -417,7 +417,7 @@ end
 actor Local as lpr
 
 box "Github"
-  database "LEEF.Data.public" as ghbdp #green
+  database "LEEF.public" as ghbdp #green
   database "LEEF.Forecast.public" as ghbfp #green
 end box
 control Travis as trv
@@ -570,29 +570,29 @@ If there are not to may, a YAML config file could be used, otherwise a table. Th
 
 child repo key | child repo              | from        | until      |
 --- | --- | --- | --- |
-public_MSC_Peter | LEEF.Data.public      | 12.05.2019  |            |
-public_PhD_Mary | LEEF.Data.public       | 12.05.2022  |            |
-heatwave_e_1 | LEEF.Data.heatwave.public | 01.01.2019  | 01.01.2019 |
-heatwave_private | LEEF.Data.heatwave    | 01.01.2018  | 01.01.2020 |
+public_MSC_Peter | LEEF.public      | 12.05.2019  |            |
+public_PhD_Mary | LEEF.public       | 12.05.2022  |            |
+heatwave_e_1 | LEEF.heatwave.public | 01.01.2019  | 01.01.2019 |
+heatwave_private | LEEF.heatwave    | 01.01.2018  | 01.01.2020 |
     
 ##### YAML file
 ```{r echo = TRUE, eval = FALSE}
 public_MSC_Peter:
     from:  12.05.2019
     until:
-    repo: LEEF.Data.public
+    repo: LEEF.public
 public_PhD_Mary:
     from:  12.05.2022`
     until:
-    repo: LEEF.Data.public
+    repo: LEEF.public
 heatwave_e_1:
     from:  01.01.2019
     until: 01.03.2019
-    repo: LEEF.Data.heatwave.public
+    repo: LEEF.heatwave.public
 heatwave_private:
     from:  01.01.2018
     until: 01.01.2020
-    repo: LEEF.Data.heatwave
+    repo: LEEF.heatwave
 ```
 
 # Activity Diagrams
@@ -803,7 +803,7 @@ Repo comntaining this document and all information about the other repos and lin
 #### GitHub apps
 - Trusted Timestamp for all transactions
 
-### LEEF.Data.Master
+### LEEF.Master
 This repo is used for archiving all data. It will contain the checked and cleaned data. Functions from the Publishing R package can be used to calculate summary stats and show these on a website.
 
 The repo is structured as an R package which contains all the data. In addition, the data is stored in a csv format in the `rawData` folder for access from other programs. The easiest way to get the updated data is to update the package in R.
