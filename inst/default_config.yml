@@ -1,4 +1,5 @@
-# General info --------------------------------------------------------------------
+# General info 
+# --------------------------------------------------------------------
 # General info regarding the processing
 
 
@@ -8,7 +9,9 @@ description: LEEF Data from an long term experiment.
 maintainer: Rainer M. Krug <Rainer@uzh.ch>
 
 
-# Directorie for the processing  --------------------------------------------------------------------
+# --------------------------------------------------------------------
+# Directorie for the processing  
+# --------------------------------------------------------------------
 ## The folder structure in this directory
 ## has to be one folder for each measurement type.
 ##
@@ -22,18 +25,9 @@ directories:
   tools: "tools"
 
 
-# queues containing functions  --------------------------------------------------------------------
-## These should be left blank, as they will be owerwritten.
-
-
-queues:
-  pre_processors:
-  extractors:
-  archivers:
-  additors:
-
-
-# Packages which contain the pre_processors, extractors, additors, ...  --------------------------------------------------------------------
+# --------------------------------------------------------------------
+# Packages which contain the pre_processors, extractors, additors, ...  
+# --------------------------------------------------------------------
 # These will be installed using the `InstallCommand` and registered
 # in the queue using the `RegisterCommand`.
 # The RegisterCommand` can also contain additional customizations needed by the processors.
@@ -42,51 +36,53 @@ queues:
 measurement_packages:
   LEEF.measurement.bemovi:
     name: LEEF.measurement.bemovi
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('rkrug/LEEF.measurement.bemovi')
+    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.bemovi')
     RegisterCommand: LEEF.measurement.bemovi::tools_path(tools_path = '.'); LEEF.measurement.bemovi::register()
   LEEF.measurement.flocam:
     name: LEEF.measurement.flowcam
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages(('rkrug/LEEF.measurement.flowcam')
+    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages(('LEEF.measurement.flowcam')
     RegisterCommand: LEEF.measurement.flowcam::register()
   # LEEF.measurement.flowcytometer:
   #   name: LEEF.measurement.flowcytometer
-  #   InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('rkrug/LEEF.measurement.flowcytometer')
+  #   InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.flowcytometer')
   #   RegisterCommand: LEEF.measurement.flowcytometer::register()
   LEEF.measurement.incubatortemp:
     name: LEEF.measurement.incubatortemp
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('rkrug/LEEF.measurement.incubatortemp')
+    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.incubatortemp')
     RegisterCommand: LEEF.measurement.incubatortemp::register()
   LEEF.measurement.manualcount:
     name: LEEF.measurement.manualcount
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('rkrug/LEEF.measurement.manualcount')
+    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.manualcount')
     RegisterCommand: LEEF.measurement.manualcount::register()
   LEEF.measurement.respirometer:
     name: LEEF.measurement.respirometer
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('rkrug/LEEF.measurement.respirometer')
+    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.respirometer')
     RegisterCommand: LEEF.measurement.respirometer::register()
   LEEF.measurement.toc:
     name: LEEF.measurement.toc
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('rkrug/LEEF.measurement.toc')
+    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.toc')
     RegisterCommand: LEEF.measurement.toc::register()
 
 
-# archival_packages  --------------------------------------------------------------------
+# --------------------------------------------------------------------
+# archival_packages  
+# --------------------------------------------------------------------
 # These will be installed using the `InstallCommand` and registered
 # in the queue using the `RegisterCommand`.
 # The RegisterCommand` can also contain additional customizations needed by the processors.
-# Additional values are arcival package specific.
+# Additional values are archival package specific.
 
 
 archive_packages:
   LEEF.archive.default:
     name: LEEF.archive.default
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('rkrug/LEEF.archive.default')
+    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.archive.default')
     RegisterCommand: LEEF.archive.default::register(compression = "none")
     archive_name: LEEF
-    archive_compression: tar
 
-
-# backend packages ()  --------------------------------------------------------------------
+# --------------------------------------------------------------------
+# backend packages ()  
+# --------------------------------------------------------------------
 # These will be installed using the `InstallCommand` and registered
 # in the queue using the `RegisterCommand`.
 # The RegisterCommand` can also contain additional customizations needed by the processors.
@@ -99,13 +95,15 @@ archive_packages:
 backend_packages:
   LEEF.backend.sqlite:
     name: LEEF.backend.sqlite
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('rkrug/LEEF.backend.sqlite')
+    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.backend.sqlite')
     RegisterCommand: LEEF.backend.sqlite::register()
     dbpath:
     dbname: 'LEEFData.sqlite'
 
 
-# Trusted Time Stamps  --------------------------------------------------------------------
+# --------------------------------------------------------------------
+# Trusted Time Stamps  
+# --------------------------------------------------------------------
 ## NOT IMPLEMENTED YET
 ## SOME MORE THOUGHT NEEDED HERE!
 
@@ -118,9 +116,23 @@ tts_info:
   archivename: To Be Set
 
 
-# DOI   --------------------------------------------------------------------
+# --------------------------------------------------------------------
+# DOI   
+# --------------------------------------------------------------------
 ## NOT IMPLEMENTED YET
 
 
 doi: FALSE
+
+# --------------------------------------------------------------------
+# queues containing functions  
+# --------------------------------------------------------------------
+## These should be left blank, as they WILL be owerwritten.
+
+
+queues:
+  pre_processors:
+  extractors:
+  archivers:
+  additors:
 

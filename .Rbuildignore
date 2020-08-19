@@ -28,4 +28,5 @@
 ^testdir$
 ^local$
 ^temp$
+^tools$
 ^codemeta\.json$

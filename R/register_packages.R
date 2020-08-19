@@ -1,5 +1,5 @@
 #' Register the functions to be usedfrom packages in the config file
-#' @param packages of packages. Each element \bold{must} contain the elements
+#' @param list of packages. Each element \bold{must} contain the elements
 #' \describe{
 #'   \item{\code{name}}{the name of the package,}
 #'   \item{\code{InstallCommand}}{the command to be executed to install the package, and }
@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' \dontrun{
-#'  register_packages(getOption("LEEF")$measurement_packages)
+#'  register_packages(getOption("LEEF.Data")$measurement_packages)
 #' }
 register_packages <- function(
   packages

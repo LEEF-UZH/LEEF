@@ -113,9 +113,9 @@ check: build-cran
 clean_check:
 	$(RM) -r ./../$(PKGNAME).Rcheck/
 
-drat: build
+drat: docs build
 	cd 
-	@Rscript -e "drat::insertPackage('./../$(PKGNAME)_$(PKGVERS).tar.gz', repodir = './../drat/', commit = TRUE)"
+	@Rscript -e "drat::insertPackage('./../$(PKGNAME)_$(PKGVERS).tar.gz', repodir = './../../drat/', commit = TRUE)"
 
 ####
 ####
