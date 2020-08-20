@@ -1,16 +1,16 @@
-# General info 
+# General info
 # --------------------------------------------------------------------
 # General info regarding the processing
 
 
-config_name: LEEFData
+name: LEEF
 description: LEEF Data from an long term experiment.
              Some more detaled info has to follow.
 maintainer: Rainer M. Krug <Rainer@uzh.ch>
 
 
 # --------------------------------------------------------------------
-# Directorie for the processing  
+# Directorie for the processing
 # --------------------------------------------------------------------
 ## The folder structure in this directory
 ## has to be one folder for each measurement type.
@@ -22,11 +22,12 @@ directories:
   pre_processed: "1.pre-processed.data"
   extracted: "2.extracted.data"
   archive: "3.archived.data"
+  backend: "9.backend"
   tools: "tools"
 
 
 # --------------------------------------------------------------------
-# Packages which contain the pre_processors, extractors, additors, ...  
+# Packages which contain the pre_processors, extractors, additors, ...
 # --------------------------------------------------------------------
 # These will be installed using the `InstallCommand` and registered
 # in the queue using the `RegisterCommand`.
@@ -58,14 +59,14 @@ measurement_packages:
     name: LEEF.measurement.respirometer
     InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.respirometer')
     RegisterCommand: LEEF.measurement.respirometer::register()
-  LEEF.measurement.toc:
-    name: LEEF.measurement.toc
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.toc')
-    RegisterCommand: LEEF.measurement.toc::register()
+  # LEEF.measurement.toc:
+  #   name: LEEF.measurement.toc
+  #   InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.toc')
+  #   RegisterCommand: LEEF.measurement.toc::register()
 
 
 # --------------------------------------------------------------------
-# archival_packages  
+# archival_packages
 # --------------------------------------------------------------------
 # These will be installed using the `InstallCommand` and registered
 # in the queue using the `RegisterCommand`.
@@ -78,10 +79,9 @@ archive_packages:
     name: LEEF.archive.default
     InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.archive.default')
     RegisterCommand: LEEF.archive.default::register(compression = "none")
-    archive_name: LEEF
 
 # --------------------------------------------------------------------
-# backend packages ()  
+# backend packages ()
 # --------------------------------------------------------------------
 # These will be installed using the `InstallCommand` and registered
 # in the queue using the `RegisterCommand`.
@@ -93,16 +93,20 @@ archive_packages:
 
 
 backend_packages:
-  LEEF.backend.sqlite:
-    name: LEEF.backend.sqlite
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.backend.sqlite')
-    RegisterCommand: LEEF.backend.sqlite::register()
-    dbpath:
-    dbname: 'LEEFData.sqlite'
+  LEEF.backend.csv:
+    name: LEEF.backend.csv
+    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.backend.csv')
+    RegisterCommand: LEEF.backend.csv::register()
+  # LEEF.backend.sqlite:
+  #   name: LEEF.backend.sqlite
+  #   InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.backend.sqlite')
+  #   RegisterCommand: LEEF.backend.sqlite::register()
+  #   dbpath:
+  #   dbname: 'LEEFData.sqlite'
 
 
 # --------------------------------------------------------------------
-# Trusted Time Stamps  
+# Trusted Time Stamps
 # --------------------------------------------------------------------
 ## NOT IMPLEMENTED YET
 ## SOME MORE THOUGHT NEEDED HERE!
@@ -117,7 +121,7 @@ tts_info:
 
 
 # --------------------------------------------------------------------
-# DOI   
+# DOI
 # --------------------------------------------------------------------
 ## NOT IMPLEMENTED YET
 
@@ -125,7 +129,7 @@ tts_info:
 doi: FALSE
 
 # --------------------------------------------------------------------
-# queues containing functions  
+# queues containing functions
 # --------------------------------------------------------------------
 ## These should be left blank, as they WILL be owerwritten.
 

@@ -15,8 +15,8 @@
 run_additors <- function() {
 
   result <- run(
-    input = opt_directories()$directory$raw,
-    output = opt_directories()$pre_processed,
+    input = opt_directories()$extracted,
+    output = opt_directories()$backend,
     queue = "additors"
   )
 

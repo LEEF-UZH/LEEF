@@ -5,10 +5,10 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "LEEF",
-  "description": null,
+  "description": "Setup package for the LEEF pipeline which loads / installs all necessary packages and functions to run the pipeline.",
   "name": "LEEF: Data package containing only data and data information",
-  "license": "What license is it under?",
-  "version": "0.2.0",
+  "license": "https://spdx.org/licenses/MIT",
+  "version": "0.7.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -20,13 +20,7 @@
       "@type": "Person",
       "givenName": "Rainer M.",
       "familyName": "Krug",
-      "email": "Rainer.Krug@uzh.zch"
-    },
-    {
-      "@type": "Person",
-      "givenName": "Owen L.",
-      "familyName": "Petchey",
-      "email": "Owen.Petchey@uzh.zch"
+      "email": "Rainer.Krug@uzh.ch"
     }
   ],
   "contributor": {},
@@ -37,7 +31,7 @@
       "@type": "Person",
       "givenName": "Rainer M.",
       "familyName": "Krug",
-      "email": "Rainer.Krug@uzh.zch"
+      "email": "Rainer.Krug@uzh.ch"
     }
   ],
   "softwareSuggestions": [
@@ -182,11 +176,6 @@
       "@type": "SoftwareApplication",
       "identifier": "tools",
       "name": "tools"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "ROriginStamp",
-      "name": "ROriginStamp"
     }
   ],
   "codeRepository": "https://github.com/LEEF-UZH/LEEF",

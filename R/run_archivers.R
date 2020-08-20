@@ -23,6 +23,8 @@ run_archivers <- function(
   output
 ) {
 
+  dir.create( output, showWarnings = FALSE, recursive = TRUE)
+
   result <- run(
     input = input,
     output = output,

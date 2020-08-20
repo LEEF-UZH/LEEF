@@ -22,6 +22,6 @@ Register the functions to be usedfrom packages in the config file
 }
 \examples{
 \dontrun{
- register_packages(getOption("LEEF.Data")$measurement_packages)
+ register_packages(getOption("LEEF")$measurement_packages)
 }
 }

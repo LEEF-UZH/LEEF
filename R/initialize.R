@@ -4,8 +4,7 @@
 #'
 #' @return invisible \code{TRUE}
 #'
-#' @importFrom yaml yaml.load_file
-#' @importFrom ROriginStamp ROriginStamp_options
+#' @importFrom yaml yaml.load_file write_yaml
 #'
 #' @export
 #'
@@ -55,6 +54,21 @@ initialize <- function(
   dir.create(opt_directories()$tools, recursive = TRUE, showWarnings = FALSE)
 
 
+  # Create sample_metadata.yml ----------------------------------------------
+
+  yaml::write_yaml(
+    list(
+      submitter   = "<<TO BE ENTERED>>",
+      timestamp  = "<<TO BE ENTERED>>",
+      name        = getOption("LEEF")$name,
+      description = getOption("LEEF")$description,
+      doi        = "<<AUTOMATICALLY>>",
+      hash       = "<<AUTOMATICALLY>>"
+    ),
+    file.path(opt_directories()$raw, "sample_metadata.yml")
+  )
+
+
   # Load measurement packages -----------------------------------------------
 
 
@@ -66,8 +80,13 @@ initialize <- function(
 
   register_packages(LEEF_options$archive_packages)
 
+  # Load backend packages --------------------------------------------------
 
-# setup tools --------------------------------------------------------------
+
+  register_packages(LEEF_options$backend_packages)
+
+
+  # setup tools --------------------------------------------------------------
 
   LEEF.measurement.bemovi::tools_path(opt_directories()$tools)
 
@@ -81,4 +100,9 @@ initialize <- function(
     message("d###################################################")
   }
 
+# Finaly the end ----------------------------------------------------------
+
+  message("\n###################################################")
+  message("## done!")
+  message("###################################################")
 }

@@ -1,7 +1,7 @@
 Package: LEEF
 Type: Package
 Title: Data package containing only data and data information
-Version: 0.2.0
+Version: 0.7.0
 Authors@R: c(
   person(given = "Rainer M.", family = "Krug", email = "Rainer.Krug@uzh.ch", role = c("aut", "cre"))
   )
@@ -28,8 +28,7 @@ Imports:
     yaml,
     utils,
     R.utils,
-    tools,
-    ROriginStamp
+    tools
 Suggests: 
     covr,
     knitr,

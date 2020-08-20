@@ -24,9 +24,13 @@ inst/tools/ImageJ/
 config.yml
 testdir
 inst/doc
+
 ## Example Data Folder
 0.raw.data
 1.pre-processed.data
 2.extracted.data
+3.archived.data
+9.backend
+
 temp
 tools

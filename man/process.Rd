@@ -4,7 +4,7 @@
 \alias{process}
 \title{Process all ques in the correct order}
 \usage{
-process(...)
+process(submitter, timestamp, ...)
 }
 \arguments{
 \item{...}{additional arguments for the different queues}

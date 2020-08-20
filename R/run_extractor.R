@@ -13,6 +13,19 @@
 #' }
 run_extractors <- function() {
 
+  unlink( opt_directories()$extracted, recursive = TRUE, force = TRUE)
+  dir.create( opt_directories()$extracted, showWarnings = FALSE, recursive = TRUE)
+
+  root_files <- setdiff(
+    list.files(opt_directories()$pre_processed, recursive = FALSE, full.names = FALSE),
+    list.dirs(opt_directories()$pre_processed, recursive = FALSE, full.names = FALSE)
+  )
+  file.copy(
+    from = file.path( opt_directories()$pre_processed, root_files),
+    to   = file.path( opt_directories()$extracted, root_files),
+    overwrite = TRUE
+  )
+
   result <- run(
     input = opt_directories()$pre_processed,
     output = opt_directories()$extracted,
