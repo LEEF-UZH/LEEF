@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' \dontrun{
-#'  register_packages(getOption("LEEF.Data")$measurement_packages)
+#'  register_packages(getOption("LEEF")$measurement_packages)
 #' }
 register_packages <- function(
   packages
