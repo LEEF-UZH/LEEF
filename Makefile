@@ -88,7 +88,7 @@ clean_readme:
 docs:
 	Rscript -e "devtools::document(roclets = c('rd', 'collate', 'namespace', 'vignette'))"
 	Rscript -e "codemetar::write_codemeta()"
-	
+
 build:
 	cd ..;\
 	R CMD build $(PKGSRC)
@@ -115,8 +115,8 @@ clean_check:
 	$(RM) -r ./../$(PKGNAME).Rcheck/
 
 drat: docs build
-	cd 
-	@Rscript -e "drat::insertPackage('./../$(PKGNAME)_$(PKGVERS).tar.gz', repodir = './../../drat/', commit = TRUE)"
+	cd
+	@Rscript -e "drat::insertPackage('./../$(PKGNAME)_$(PKGVERS).tar.gz', repodir = './../drat/', commit = TRUE)"
 
 ####
 ####
