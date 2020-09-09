@@ -112,12 +112,12 @@ backend_packages:
 ## SOME MORE THOUGHT NEEDED HERE!
 
 
-tts: TRUE
-tts_info:
-  name: Rainer M Krug
-  email: Rainer.Krug@uzh.ch
-  comment: testdata
-  archivename: To Be Set
+tts:
+  create: TRUE
+  api_key: PRIVATE
+  notification:
+    notification_type: 0
+    target: tsg@LEEF-UZH.ch
 
 
 # --------------------------------------------------------------------
