@@ -16,7 +16,6 @@ Additional_repositories: https://leef-uzh.github.io/drat/
 Depends:
   R (>= 3.5.0),
 Imports:
-	LEEF.archive.default,
     LEEF.measurement.bemovi,
     LEEF.measurement.flowcam,
     LEEF.measurement.flowcytometer,
@@ -24,6 +23,8 @@ Imports:
     LEEF.measurement.manualcount,
     LEEF.measurement.respirometer,
     LEEF.measurement.toc,
+	  LEEF.archive.default,
+	  LEEF.backend.csv,
     testthat,
     yaml,
     utils,
