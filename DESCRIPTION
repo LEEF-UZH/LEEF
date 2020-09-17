@@ -21,7 +21,7 @@ Imports:
     LEEF.measurement.flowcytometer,
     LEEF.measurement.incubatortemp,
     LEEF.measurement.manualcount,
-    LEEF.measurement.respirometer,
+    LEEF.measurement.o2meter,
     LEEF.measurement.toc,
 	  LEEF.archive.default,
 	  LEEF.backend.csv,
@@ -34,6 +34,7 @@ Suggests:
     covr,
     knitr,
     rmarkdown,
-    drat
+    drat,
+    shiny
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr
