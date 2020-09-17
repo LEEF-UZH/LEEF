@@ -35,6 +35,7 @@ Suggests:
     knitr,
     rmarkdown,
     drat,
-    shiny
+    shiny,
+    shinyFiles
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr

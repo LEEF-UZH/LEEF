@@ -55,10 +55,10 @@ measurement_packages:
     name: LEEF.measurement.manualcount
     InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.manualcount')
     RegisterCommand: LEEF.measurement.manualcount::register()
-  LEEF.measurement.respirometer:
-    name: LEEF.measurement.respirometer
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.respirometer')
-    RegisterCommand: LEEF.measurement.respirometer::register()
+  LEEF.measurement.o2meter:
+    name: LEEF.measurement.o2meter
+    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.o2meter')
+    RegisterCommand: LEEF.measurement.o2meter::register()
   LEEF.measurement.toc:
     name: LEEF.measurement.toc
     InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.toc')
