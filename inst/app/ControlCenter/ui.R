@@ -9,6 +9,14 @@
 
 library(shiny)
 
+sapply(
+    file.path("~", "LEEF", "000.NewData", c("bemovi", "flowcam", "flowcytometer", "incubatortemp", "manualcount", "o2meter", "toc")),
+    dir.create,
+    recursive = TRUE,
+    showWarnings = FALSE
+)
+setwd("~/LEEF")
+
 # Define UI for application that draws a histogram
 shinyUI(
     fluidPage(
@@ -20,45 +28,125 @@ shinyUI(
         sidebarLayout(
             # Sidebar panel for inputs ----
             sidebarPanel(
+                width = 13,
 
                 tabsetPanel(
                     type = "tabs",
                     selected = 1,
                     tabPanel(
                         "Initialize",
-                        fileInput("configfile", label = h3("Config File")),
-                        hr(),
+                        fileInput("configfile", label = shiny::h4("Config File")),
                         verbatimTextOutput("configfilename", placeholder = TRUE),
                         actionButton("initialize", label = "Initialize")
                     ),
                     tabPanel(
                         "Bemovi",
-                        actionButton("check_bemovi", label = "Check"),
-                        verbatimTextOutput("cb_result", placeholder = TRUE),
+                        ##
+                        shiny::h4("Files left to import"),
+                        verbatimTextOutput("files_bemovi_input", placeholder = TRUE),
+                        ##
+                        actionButton("new_data_bemovi", label = "Import new Data"),
+                        verbatimTextOutput("new_data_bemovi_result", placeholder = TRUE),
+                        ##
+                        shiny::h4("Files in raw data folder"),
+                        verbatimTextOutput("files_bemovi_output", placeholder = TRUE),
+                        ##
+                        shiny::h4("Can Raw data be processed"),
+                        verbatimTextOutput("ok_bemovi_output", placeholder = TRUE)
                     ),
                     tabPanel(
                         "Flowcam",
-                        actionButton("check_flowcam", label = "Check")
+                        ##
+                        shiny::h4("Files left to import"),
+                        verbatimTextOutput("files_flowcam_input", placeholder = TRUE),
+                        ##
+                        actionButton("new_data_flowcam", label = "Import new Data"),
+                        verbatimTextOutput("new_data_flowcam_result", placeholder = TRUE),
+                        ##
+                        shiny::h4("Files in raw data folder"),
+                        verbatimTextOutput("files_flowcam_output", placeholder = TRUE),
+                        ##
+                        shiny::h4("Can Raw data be processed"),
+                        verbatimTextOutput("ok_flowcam_output", placeholder = TRUE)
                     ),
                     tabPanel(
                         "Flowcytometer",
-                        actionButton("check_flowcytometer", label = "Check")
+                        ##
+                        shiny::h4("Files left to import"),
+                        verbatimTextOutput("files_flowcytometer_input", placeholder = TRUE),
+                        ##
+                        actionButton("new_data_flowcytometer", label = "Import new Data"),
+                        verbatimTextOutput("new_data_flowcytometer_result", placeholder = TRUE),
+                        ##
+                        shiny::h4("Files in raw data folder"),
+                        verbatimTextOutput("files_flowcytometer_output", placeholder = TRUE),
+                        ##
+                        shiny::h4("Can Raw data be processed"),
+                        verbatimTextOutput("ok_flowcytometer_output", placeholder = TRUE)
                     ),
                     tabPanel(
                         "Incubator temp",
-                        actionButton("check_incubatortemp", label = "Check")
+                        ##
+                        shiny::h4("Files left to import"),
+                        verbatimTextOutput("files_incubatortemp_input", placeholder = TRUE),
+                        ##
+                        actionButton("new_data_incubatortemp", label = "Import new Data"),
+                        verbatimTextOutput("new_data_incubatortemp_result", placeholder = TRUE),
+                        ##
+                        shiny::h4("Files in raw data folder"),
+                        verbatimTextOutput("files_incubatortemp_output", placeholder = TRUE),
+                        ##
+                        shiny::h4("Can Raw data be processed"),
+                        verbatimTextOutput("ok_incubatortemp_output", placeholder = TRUE)
+
                     ),
                     tabPanel(
                         "Manualcount",
-                        actionButton("check_manualcount", label = "Check")
+                        ##
+                        shiny::h4("Files left to import"),
+                        verbatimTextOutput("files_manualcount_input", placeholder = TRUE),
+                        ##
+                        actionButton("new_data_manualcount", label = "Import new Data"),
+                        verbatimTextOutput("new_data_manualcount_result", placeholder = TRUE),
+                        ##
+                        shiny::h4("Files in raw data folder"),
+                        verbatimTextOutput("files_manualcount_output", placeholder = TRUE),
+                        ##
+                        shiny::h4("Can Raw data be processed"),
+                        verbatimTextOutput("ok_manualcount_output", placeholder = TRUE)
+
                     ),
                     tabPanel(
                         "o2meter",
-                        actionButton("check_o2meter", label = "Check")
+                        ##
+                        shiny::h4("Files left to import"),
+                        verbatimTextOutput("files_o2meter_input", placeholder = TRUE),
+                        ##
+                        actionButton("new_data_o2meter", label = "Import new Data"),
+                        verbatimTextOutput("new_data_o2meter_result", placeholder = TRUE),
+                        ##
+                        shiny::h4("Files in raw data folder"),
+                        verbatimTextOutput("files_o2meter_output", placeholder = TRUE),
+                        ##
+                        shiny::h4("Can Raw data be processed"),
+                        verbatimTextOutput("ok_o2meter_output", placeholder = TRUE)
+
                     ),
                     tabPanel(
                         "TOC",
-                        actionButton("check_toc", label = "Check")
+                        ##
+                        shiny::h4("Files left to import"),
+                        verbatimTextOutput("files_toc_input", placeholder = TRUE),
+                        ##
+                        actionButton("new_data_toc", label = "Import new Data"),
+                        verbatimTextOutput("new_data_toc_result", placeholder = TRUE),
+                        ##
+                        shiny::h4("Files in raw data folder"),
+                        verbatimTextOutput("files_toc_output", placeholder = TRUE),
+                        ##
+                        shiny::h4("Can Raw data be processed"),
+                        verbatimTextOutput("ok_toc_output", placeholder = TRUE)
+
                     )
                 )
             ),
