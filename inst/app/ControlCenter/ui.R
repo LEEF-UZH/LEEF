@@ -8,6 +8,7 @@
 #
 
 library(shiny)
+library(LEEF)
 
 sapply(
     file.path("~", "LEEF", "000.NewData", c("bemovi", "flowcam", "flowcytometer", "incubatortemp", "manualcount", "o2meter", "toc")),

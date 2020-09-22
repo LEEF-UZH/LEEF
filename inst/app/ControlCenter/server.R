@@ -8,7 +8,7 @@
 #
 
 library(shiny)
-
+library(LEEF)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
@@ -55,7 +55,7 @@ shinyServer(function(input, output) {
       value = 0,
       {
         output$new_data_bemovi_result <- renderPrint("Processing...")
-        x <- LEEF.measurement.bemovi::add_new_cxd(
+        x <- LEEF.measurement.bemovi::add_new_data(
           input = file.path( "~", "LEEF", "000.NewData", "bemovi"),
           output = file.path("~", "LEEF", opt_directories()$raw)
         )
@@ -78,7 +78,7 @@ shinyServer(function(input, output) {
       value = 0,
       {
         output$new_data_flowcam_result <- renderPrint("Processing...")
-        x <- LEEF.measurement.flowcam::add_new_cxd(
+        x <- LEEF.measurement.flowcam::add_new_data(
           input = file.path( "~", "LEEF", "000.NewData", "flowcam"),
           output = file.path("~", "LEEF", opt_directories()$raw)
         )
@@ -101,7 +101,7 @@ shinyServer(function(input, output) {
       value = 0,
       {
         output$new_data_flowcytometer_result <- renderPrint("Processing...")
-        x <- LEEF.measurement.flowcytometer::add_new_cxd(
+        x <- LEEF.measurement.flowcytometer::add_new_data(
           input = file.path( "~", "LEEF", "000.NewData", "flowcytometer"),
           output = file.path("~", "LEEF", opt_directories()$raw)
         )
@@ -124,7 +124,7 @@ shinyServer(function(input, output) {
       value = 0,
       {
         output$new_data_incubatortemp_result <- renderPrint("Processing...")
-        x <- LEEF.measurement.incubatortemp::add_new_cxd(
+        x <- LEEF.measurement.incubatortemp::add_new_data(
           input = file.path( "~", "LEEF", "000.NewData", "incubatortemp"),
           output = file.path("~", "LEEF", opt_directories()$raw)
         )
@@ -147,7 +147,7 @@ shinyServer(function(input, output) {
       value = 0,
       {
         output$new_data_manualcount_result <- renderPrint("Processing...")
-        x <- LEEF.measurement.manualcount::add_new_cxd(
+        x <- LEEF.measurement.manualcount::add_new_data(
           input = file.path( "~", "LEEF", "000.NewData", "manualcount"),
           output = file.path("~", "LEEF", opt_directories()$raw)
         )
@@ -170,7 +170,7 @@ shinyServer(function(input, output) {
       value = 0,
       {
         output$new_data_o2meter_result <- renderPrint("Processing...")
-        x <- LEEF.measurement.o2meter::add_new_cxd(
+        x <- LEEF.measurement.o2meter::add_new_data(
           input = file.path( "~", "LEEF", "000.NewData", "o2meter"),
           output = file.path("~", "LEEF", opt_directories()$raw)
         )
@@ -193,7 +193,7 @@ shinyServer(function(input, output) {
       value = 0,
       {
         output$new_data_toc_result <- renderPrint("Processing...")
-        x <- LEEF.measurement.toc::add_new_cxd(
+        x <- LEEF.measurement.toc::add_new_data(
           input = file.path( "~", "LEEF", "000.NewData", "toc"),
           output = file.path("~", "LEEF", opt_directories()$raw)
         )
@@ -222,32 +222,32 @@ shinyServer(function(input, output) {
     ## autoupdate Flowcam  ------------------------------------------------------------------
     output$files_flowcam_input <- renderPrint( cat(list.files(file.path("~", "LEEF", "000.NewData", "flowcam")), sep = "\n") )
     output$files_flowcam_output <- renderPrint( cat(list.files(file.path("~", "LEEF", "0.raw.data", "flowcam")), sep = "\n") )
-    # output$ok_flowcam_output <- renderPrint( LEEF.measurement.flowcam::raw_data_ok( file.path("~", "LEEF", "0.raw.data") ) )
+    output$ok_flowcam_output <- renderPrint( LEEF.measurement.flowcam::raw_data_ok( file.path("~", "LEEF", "0.raw.data") ) )
 
     ## autoupdate flowcytometer  ------------------------------------------------------------------
     output$files_flowcytometer_input <- renderPrint( cat(list.files(file.path("~", "LEEF", "000.NewData", "flowcytometer")), sep = "\n") )
     output$files_flowcytometer_output <- renderPrint( cat(list.files(file.path("~", "LEEF", "0.raw.data", "flowcytometer")), sep = "\n") )
-    # output$ok_flowcytometeri_output <- renderPrint( LEEF.measurement.flowcytometer::raw_data_ok( file.path("~", "LEEF", "0.raw.data") ) )
+    output$ok_flowcytometer_output <- renderPrint( LEEF.measurement.flowcytometer::raw_data_ok( file.path("~", "LEEF", "0.raw.data") ) )
 
     ## autoupdate incubatortemp  ------------------------------------------------------------------
     output$files_incubatortemp_input <- renderPrint( cat(list.files(file.path("~", "LEEF", "000.NewData", "incubatortemp")), sep = "\n") )
     output$files_incubatortemp_output <- renderPrint( cat(list.files(file.path("~", "LEEF", "0.raw.data", "incubatortemp")), sep = "\n") )
-    # output$ok_incubatortempi_output <- renderPrint( LEEF.measurement.incubatortemp::raw_data_ok( file.path("~", "LEEF", "0.raw.data") ) )
+    output$ok_incubatortemp_output <- renderPrint( LEEF.measurement.incubatortemp::raw_data_ok( file.path("~", "LEEF", "0.raw.data") ) )
 
     ## autoupdate manualcount  ------------------------------------------------------------------
     output$files_manualcount_input <- renderPrint( cat(list.files(file.path("~", "LEEF", "000.NewData", "manualcount")), sep = "\n") )
     output$files_manualcount_output <- renderPrint( cat(list.files(file.path("~", "LEEF", "0.raw.data", "manualcount")), sep = "\n") )
-    # output$ok_manualcounti_output <- renderPrint( LEEF.measurement.manualcount::raw_data_ok( file.path("~", "LEEF", "0.raw.data") ) )
+    output$ok_manualcount_output <- renderPrint( LEEF.measurement.manualcount::raw_data_ok( file.path("~", "LEEF", "0.raw.data") ) )
 
     ## autoupdate o2meter  ------------------------------------------------------------------
     output$files_o2meter_input <- renderPrint( cat(list.files(file.path("~", "LEEF", "000.NewData", "o2meter")), sep = "\n") )
     output$files_o2meter_output <- renderPrint( cat(list.files(file.path("~", "LEEF", "0.raw.data", "o2meter")), sep = "\n") )
-    # output$ok_o2meteri_output <- renderPrint( LEEF.measurement.o2meter::raw_data_ok( file.path("~", "LEEF", "0.raw.data") ) )
+    output$ok_o2meter_output <- renderPrint( LEEF.measurement.o2meter::raw_data_ok( file.path("~", "LEEF", "0.raw.data") ) )
 
     ## autoupdate toc  ------------------------------------------------------------------
     output$files_toc_input <- renderPrint( cat(list.files(file.path("~", "LEEF", "000.NewData", "toc")), sep = "\n") )
     output$files_toc_output <- renderPrint( cat(list.files(file.path("~", "LEEF", "0.raw.data", "toc")), sep = "\n") )
-    # output$ok_toci_output <- renderPrint( LEEF.measurement.toc::raw_data_ok( file.path("~", "LEEF", "0.raw.data") ) )
+    output$ok_toc_output <- renderPrint( LEEF.measurement.toc::raw_data_ok( file.path("~", "LEEF", "0.raw.data") ) )
 
   })
 }
