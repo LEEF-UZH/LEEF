@@ -18,7 +18,7 @@ sapply(
 )
 setwd("~/LEEF")
 
-# Define UI for application that draws a histogram
+# Define UI for application
 shinyUI(
     fluidPage(
 
@@ -148,7 +148,13 @@ shinyUI(
                         shiny::h4("Can Raw data be processed"),
                         verbatimTextOutput("ok_toc_output", placeholder = TRUE)
 
+                    ),
+
+                    # Queue Processing --------------------------------------------------------
+                    tabPanel(
+                        "Process All Data"
                     )
+
                 )
             ),
 

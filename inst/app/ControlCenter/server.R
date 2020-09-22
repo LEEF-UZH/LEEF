@@ -10,7 +10,7 @@
 library(shiny)
 library(LEEF)
 
-# Define server logic required to draw a histogram
+# Define server logic
 shinyServer(function(input, output) {
 
   # Anything that calls autoInvalidate will automatically invalidate
@@ -29,6 +29,8 @@ shinyServer(function(input, output) {
   #     output$cb_result
   # )
   ##
+
+
 
 # Actions -----------------------------------------------------------------
 
