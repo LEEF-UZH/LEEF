@@ -12,7 +12,7 @@
 #' control_center()
 #' }
 #'
-control_center <- function() {
+control_center <- function( rootdir = "." ) {
   if (!requireNamespace("shiny", quietly = TRUE)) {
     stop(
       "This function only works when the package `shiny` is instaled.\n",
@@ -24,5 +24,6 @@ control_center <- function() {
   if (app_dir == "") {
     stop("Could not find app directory. Try re-installing `LEEF`.", call. = FALSE)
   }
+
   shiny::runApp(app_dir, display.mode = "normal")
 }

@@ -4,7 +4,7 @@
 \alias{control_center}
 \title{Run the Control Center shiny app included in the LEEF package.}
 \usage{
-control_center()
+control_center(rootdir = ".")
 }
 \value{
 return value from \code{runApp()}

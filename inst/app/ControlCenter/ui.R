@@ -10,13 +10,23 @@
 library(shiny)
 library(LEEF)
 
+
+# Some setup action -------------------------------------------------------
+
+root <- file.path("~", "LEEF")
+dir.create(root)
+setwd(root)
 sapply(
-    file.path("~", "LEEF", "000.NewData", c("bemovi", "flowcam", "flowcytometer", "incubatortemp", "manualcount", "o2meter", "toc")),
+    file.path(
+        ".",
+        "000.NewData",
+        c("bemovi", "flowcam", "flowcytometer", "incubatortemp", "manualcount", "o2meter", "toc")
+    ),
     dir.create,
     recursive = TRUE,
     showWarnings = FALSE
 )
-setwd("~/LEEF")
+
 
 # Define UI for application
 shinyUI(
