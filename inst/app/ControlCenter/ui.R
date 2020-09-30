@@ -63,7 +63,11 @@ shinyUI(
                         verbatimTextOutput("files_bemovi_output", placeholder = TRUE),
                         ##
                         shiny::h4("Can Raw data be processed"),
-                        verbatimTextOutput("ok_bemovi_output", placeholder = TRUE)
+                        verbatimTextOutput("ok_bemovi_output", placeholder = TRUE),
+                        ##
+                        shiny::h4("When done and Raw Data can be Processed, extract points"),
+                        actionButton("extract_points_bemovi", label = "Extract Points"),
+                        verbatimTextOutput("extract_points_bemovi_result", placeholder = TRUE)
                     ),
                     tabPanel(
                         "Flowcam",

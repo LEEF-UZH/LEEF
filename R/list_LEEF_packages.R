@@ -8,6 +8,7 @@
 #' @return list of all packages which are installed which contain \bold{.LEEF} or \bold{LEEF.} and the package \bold{LEEF} itself
 #' @export
 #' @importFrom tools package_dependencies
+#' @importFrom drat addRepo
 #'
 #' @examples
 #' \dontrun{
@@ -16,6 +17,7 @@
 list_LEEF_packages <- function(
   recursive = TRUE
 ) {
+  drat::addRepo("LEEF-UZH")
   result <- tools::package_dependencies("LEEF", which = "all", recursive = recursive)
   return(
     c(

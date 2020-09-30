@@ -27,6 +27,7 @@ Imports:
 	  LEEF.backend.csv,
     testthat,
     yaml,
+    drat,
     utils,
     R.utils,
     tools
@@ -34,7 +35,6 @@ Suggests:
     covr,
     knitr,
     rmarkdown,
-    drat,
     shiny,
     shinyFiles
 RoxygenNote: 7.1.1
