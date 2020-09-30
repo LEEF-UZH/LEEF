@@ -13,7 +13,10 @@
 #' }
 run_extractors <- function() {
 
-  unlink( opt_directories()$extracted, recursive = TRUE, force = TRUE)
+  if ( Sys.info()['sysname'] != "Linux" ){
+    unlink( opt_directories()$extracted, recursive = TRUE, force = TRUE)
+  }
+
   dir.create( opt_directories()$extracted, showWarnings = FALSE, recursive = TRUE)
 
   root_files <- setdiff(
