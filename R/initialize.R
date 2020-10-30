@@ -19,7 +19,7 @@ initialize <- function(
   # Load Config -------------------------------------------------------------
 
   LEEF_options <- yaml::yaml.load_file(
-    system.file("default_config.yml", package = "LEEF")
+    config_file
   )
 
   options(LEEF = LEEF_options)
