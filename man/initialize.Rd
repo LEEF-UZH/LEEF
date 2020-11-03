@@ -4,10 +4,15 @@
 \alias{initialize}
 \title{Create folder structure for data import and processing}
 \usage{
-initialize(config_file = system.file("default_config.yml", package = "LEEF"))
+initialize(
+  config_file = system.file("default_config.yml", package = "LEEF"),
+  id = NULL
+)
 }
 \arguments{
 \item{config_file}{config file to use. If none is specified, \code{cofig.yml} in the current working directory will be used.}
+
+\item{id}{id which will be appended to the name in the config file, using a '.'}
 }
 \value{
 invisible \code{TRUE}

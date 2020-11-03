@@ -1,8 +1,8 @@
 #' Process all ques in the correct order
 #'
 #' This function is an example and can be used as a template for processing the
-#' queues in a script,. Raw data is always archived using the "none"
-#' compression.
+#' queues in a script. It uses the archiver "none" for the raw and pre-processed
+#' data, useful for already compressed and large data, e.g. bemovi.
 #' @return invisibly \code{TRUE}
 #'
 #' @param ... additional arguments for the different queues
@@ -16,7 +16,7 @@
 #'  process()
 #' }
 
-process <- function(
+process_raw_comp_none <- function(
   submitter,
   timestamp,
   ...
@@ -69,7 +69,7 @@ process <- function(
 
   message("\n########################################################\n")
   message("\narchiving pre-processed data...\n")
-  run_archivers(
+  LEEF.archive.default::run_archive_none(
     input = getOption("LEEF")$directories$pre_processed,
     output = file.path(getOption("LEEF")$directories$archive, "pre_processed")
   )

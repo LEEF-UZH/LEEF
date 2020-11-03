@@ -1,6 +1,7 @@
 #' Create folder structure for data import and processing
 #'
 #' @param config_file config file to use. If none is specified, \code{cofig.yml} in the current working directory will be used.
+#' @param id id which will be appended to the name in the config file, using a '.'
 #'
 #' @return invisible \code{TRUE}
 #'
@@ -13,7 +14,8 @@
 #' initialize(system.file("default_config.yml", package = "LEEF"))
 #' }
 initialize <- function(
-  config_file = system.file("default_config.yml", package = "LEEF")
+  config_file = system.file("default_config.yml", package = "LEEF"),
+  id = NULL
 ){
 
   # Load Config -------------------------------------------------------------
@@ -21,6 +23,12 @@ initialize <- function(
   LEEF_options <- yaml::yaml.load_file(
     config_file
   )
+
+  if (!is.null(id)) {
+    if (id != "" ) {
+      LEEF_options$name <- paste(LEEF_options$name, id, sep = ".")
+    }
+  }
 
   options(LEEF = LEEF_options)
 
@@ -56,18 +64,19 @@ initialize <- function(
 
   # Create sample_metadata.yml ----------------------------------------------
 
-  yaml::write_yaml(
-    list(
-      submitter   = "<<TO BE ENTERED>>",
-      timestamp  = "<<TO BE ENTERED>>",
-      name        = getOption("LEEF")$name,
-      description = getOption("LEEF")$description,
-      doi        = "<<AUTOMATICALLY>>",
-      hash       = "<<AUTOMATICALLY>>"
-    ),
-    file.path(opt_directories()$raw, "sample_metadata.yml")
-  )
-
+  if (!file.exists(file.path(opt_directories()$raw, "sample_metadata.yml"))){
+    yaml::write_yaml(
+      list(
+        submitter   = "<<TO BE ENTERED>>",
+        timestamp  = "<<TO BE ENTERED>>",
+        name        = getOption("LEEF")$name,
+        description = getOption("LEEF")$description,
+        doi        = "<<AUTOMATICALLY>>",
+        hash       = "<<AUTOMATICALLY>>"
+      ),
+      file.path(opt_directories()$raw, "sample_metadata.yml")
+    )
+  }
 
   # Load measurement packages -----------------------------------------------
 
