@@ -1,0 +1,73 @@
+## basic stuff
+	sudo apt-get update
+	sudo apt-get update
+	sudo apt-get -y upgrade
+	sudo apt-get -y install mc zile
+
+	# sudo reboot now
+
+## Install and setup samba client
+### install cifs samba client
+	sudo apt-get -y install cifs-utils
+	
+### Prepare for the mounting of the volume
+	 sudo mkdir /mnt/leef_data
+	 sudo chown -R ubuntu:ubuntu /mnt/leef_data
+	 mkdir ~ubuntu/LEEF
+
+### add leef_data to hosts file
+	
+	sudo zile /etc/hosts
+	# 172.23.43.172 leef_data
+
+### add credentials file `/usr/local/etc/whisper.credential` for leef_data
+	sudo zile /usr/local/etc/whisper.credential
+	
+	# username=leef
+	# password="leef is long"
+	
+### add mounting to fstab
+
+	sudo cp /etc/fstab /etc/fstab.old
+	sudo zile /etc/fstab
+	
+	# ADD THE SAMBA SHARE
+	#THIS DOES NOT WORK# leef_data/leef_data /mnt/leef_data cifs 	-o user,credentials=/usr/local/etc/whisper.credentials,uid=1000,umask=000,noauto,x-systemd.automount,x-systemd.idle-timeout=300 0 0
+	# //leef_data/leef_data   /mnt/leef_data cifs     rw,credentials=/usr/local/etc/whisper.credential,uid=ubuntu,gid=ubuntu,file_mode=0770,dir_mode=0770,x-systemd.mount-timeout=300 0 0
+	# /mnt/leef_data/LEEF /home/ubuntu/LEEF        none    bind
+	sudo mount -a
+	
+
+## [install docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-10) and setup of user
+
+### install docker
+	sudo apt-get -y install apt-transport-https ca-certificates curl gnupg2 software-properties-common	
+	
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+	
+	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+	
+	sudo apt update
+	
+	# apt-cache policy docker-ce 
+	
+	sudo apt -y install docker-ce
+
+### Check if running
+	sudo systemctl status docker
+	
+### Add user `ubuntu` to docker group
+
+	sudo usermod -aG docker ${USER}
+	
+	# logout and in again to active=ate the new membership
+
+## Pull LEEF-UZH/docker repo
+	
+	cd
+	git clone https://github.com/LEEF-UZH/docker.git
+	cd docker
+	sudo apt-get -y install make
+	make pull
+	
+	

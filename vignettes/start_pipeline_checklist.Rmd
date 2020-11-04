@@ -1,0 +1,22 @@
+---
+title: "Start Pipeline Checklist"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Start Pipeline Checklist}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup}
+knitr::opts_chunk$set(
+	collapse = TRUE,
+	comment = "#>",
+	include = FALSE
+)
+library(LEEF)
+```
+
+- [ ] make sure that all files are uploaded
+## Edit file `sample_metadata_yml`
+- [ ] set `submitter` to your name
+- [ ] check that `timestamp` refers to sampling date in the format `YYYY-MM-DD--hh-mm-ss` `2020-09-16--16-03-45`. The time can be skipped.

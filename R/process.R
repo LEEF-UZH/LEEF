@@ -5,6 +5,13 @@
 #' compression.
 #' @return invisibly \code{TRUE}
 #'
+#' @param submitter name of submitter. When provided, will override the one in
+#'   the `sample_metadata.yml` file.
+#' @param timestamp timestamp for the data. When provided, will override the one in
+#'   the `sample_metadata.yml` file.
+#' @param process if \code{TRUE}, the pipeline will be processed. if
+#'   \code{FALSE}, only the checks of the config file will be done nd no actual
+#'   processing is happening.
 #' @param ... additional arguments for the different queues
 #'
 #' @importFrom yaml yaml.load_file write_yaml
@@ -19,6 +26,7 @@
 process <- function(
   submitter,
   timestamp,
+  process = TRUE,
   ...
 ) {
 
@@ -51,55 +59,59 @@ process <- function(
   )
 
   # Process queues ----------------------------------------------------------
+  if (process) {
+    message("\n########################################################\n")
+    message("\narchiving raw data ...\n")
+    LEEF.archive.default::run_archive_none(
+      input = getOption("LEEF")$directories$raw,
+      output = file.path(getOption("LEEF")$directories$archive, "raw")
+    )
+    message("done\n")
+    message("\n########################################################\n")
 
-  message("\n########################################################\n")
-  message("\narchiving raw data ...\n")
-  LEEF.archive.default::run_archive_none(
-    input = getOption("LEEF")$directories$raw,
-    output = file.path(getOption("LEEF")$directories$archive, "raw")
-  )
-  message("done\n")
-  message("\n########################################################\n")
+    message("\n########################################################\n")
+    message("\npre_processing ...\n")
+    run_pre_processors()
+    message("done\n")
+    message("\n########################################################\n")
 
-  message("\n########################################################\n")
-  message("\npre_processing ...\n")
-  run_pre_processors()
-  message("done\n")
-  message("\n########################################################\n")
+    message("\n########################################################\n")
+    message("\narchiving pre-processed data...\n")
+    run_archivers(
+      input = getOption("LEEF")$directories$pre_processed,
+      output = file.path(getOption("LEEF")$directories$archive, "pre_processed")
+    )
+    message("done\n")
+    message("\n########################################################\n")
 
-  message("\n########################################################\n")
-  message("\narchiving pre-processed data...\n")
-  run_archivers(
-    input = getOption("LEEF")$directories$pre_processed,
-    output = file.path(getOption("LEEF")$directories$archive, "pre_processed")
-  )
-  message("done\n")
-  message("\n########################################################\n")
+    message("\n########################################################\n")
+    message("\nextracting ...\n")
+    run_extractors()
+    message("done\n")
+    message("\n########################################################\n")
 
-  message("\n########################################################\n")
-  message("\nextracting ...\n")
-  run_extractors()
-  message("done\n")
-  message("\n########################################################\n")
+    message("\n########################################################\n")
+    message("\narchiving extracted data ...\n")
+    run_archivers(
+      input = getOption("LEEF")$directories$extracted,
+      output = file.path(getOption("LEEF")$directories$archive, "extracted")
+    )
+    message("done\n")
+    message("\n########################################################\n")
 
-  message("\n########################################################\n")
-  message("\narchiving extracted data ...\n")
-  run_archivers(
-    input = getOption("LEEF")$directories$extracted,
-    output = file.path(getOption("LEEF")$directories$archive, "extracted")
-  )
-  message("done\n")
-  message("\n########################################################\n")
+    message("\n########################################################\n")
+    message("\nadding...\n")
+    run_additors()
+    message("done\n")
+    message("\n########################################################\n")
 
-  message("\n########################################################\n")
-  message("\nadding...\n")
-  run_additors()
-  message("done\n")
-  message("\n########################################################\n")
-
+  } else {
+    message("\n########################################################")
+    message("\nskipping processing of process(process = FALSE) command)")
+    message("\n########################################################")
+  }
 
   # Finalize ----------------------------------------------------------------
 
-
   invisible(TRUE)
-}
+  }

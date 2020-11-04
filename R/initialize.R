@@ -64,7 +64,7 @@ initialize <- function(
 
   # Create sample_metadata.yml ----------------------------------------------
 
-  if (!file.exists(file.path(opt_directories()$raw, "sample_metadata.yml"))){
+  if (!file.exists(file.path(".", opt_directories()$raw, "sample_metadata.yml"))){
     yaml::write_yaml(
       list(
         submitter   = "<<TO BE ENTERED>>",

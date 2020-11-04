@@ -4,9 +4,19 @@
 \alias{process}
 \title{Process all ques in the correct order}
 \usage{
-process(submitter, timestamp, ...)
+process(submitter, timestamp, process = TRUE, ...)
 }
 \arguments{
+\item{submitter}{name of submitter. When provided, will override the one in
+the `sample_metadata.yml` file.}
+
+\item{timestamp}{timestamp for the data. When provided, will override the one in
+the `sample_metadata.yml` file.}
+
+\item{process}{if \code{TRUE}, the pipeline will be processed. if
+\code{FALSE}, only the checks of the config file will be done nd no actual
+processing is happening.}
+
 \item{...}{additional arguments for the different queues}
 }
 \value{
