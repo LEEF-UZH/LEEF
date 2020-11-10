@@ -120,11 +120,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "LEEF.measurement.incubatortemp",
-      "name": "LEEF.measurement.incubatortemp"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "LEEF.measurement.manualcount",
       "name": "LEEF.measurement.manualcount"
     },
