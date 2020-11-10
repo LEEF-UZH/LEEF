@@ -19,7 +19,6 @@ Imports:
     LEEF.measurement.bemovi,
     LEEF.measurement.flowcam,
     LEEF.measurement.flowcytometer,
-    LEEF.measurement.incubatortemp,
     LEEF.measurement.manualcount,
     LEEF.measurement.o2meter,
     LEEF.measurement.toc,
