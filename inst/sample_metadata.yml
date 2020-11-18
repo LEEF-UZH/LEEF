@@ -1,0 +1,17 @@
+submitter: <<TO BE ENTERED>>
+timestamp: <<TO BE ENTERED>>
+name: <<IN INITIALIZE ADDED>>
+description: <<IN INITIALIZE ADDED>
+doi: <<AUTOMATICALLY>>
+hash: <<AUTOMATICALLY>>
+date: YYYY.MM.DD
+Sampling day: xx
+treatment_temperature: xx
+sampling:
+    microcosm: Name of person
+    flowcytometer: Name of person
+    flowcam: Name of person
+    bemovi: Name of person
+    manualcounts: Name of person
+    o2meter: Name of person
+    toc: Name of person

@@ -65,15 +65,11 @@ initialize <- function(
   # Create sample_metadata.yml ----------------------------------------------
 
   if (!file.exists(file.path(".", opt_directories()$raw, "sample_metadata.yml"))){
+    md <- yaml::read_yaml(system.file("sample_metadata.yml", package = "LEEF"))
+    md$name        = getOption("LEEF")$name
+    md$description = getOption("LEEF")$description
     yaml::write_yaml(
-      list(
-        submitter   = "<<TO BE ENTERED>>",
-        timestamp  = "<<TO BE ENTERED>>",
-        name        = getOption("LEEF")$name,
-        description = getOption("LEEF")$description,
-        doi        = "<<AUTOMATICALLY>>",
-        hash       = "<<AUTOMATICALLY>>"
-      ),
+      md,
       file.path(opt_directories()$raw, "sample_metadata.yml")
     )
   }
