@@ -90,7 +90,26 @@ Now restart samba
    	
 	sudo service smbd restart
 	
-## **SKIP FOR NOW** setup NFS server and share
+# Install cifs to be able to mount smb shares
+
+	sudo apt-get install cifs-utils
+	sudo mkdir /mnt/LEEF_IEU
+	
+# Install syncthing and configure for leef_data volume
+
+	sudo systemctl enable syncthing@ubuntu.service
+	sudo systemctl start syncthing@ubuntu.service
+	echo "deb https://apt.syncthing.net/ syncthing stable" | sudo tee /etc/apt/sources.list.d/syncthing.list
+	curl -s https://syncthing.net/release-key.txt | sudo apt-key add -
+	printf "Package: *\nPin: origin apt.syncthing.net\nPin-Priority: 990\n" | sudo tee /etc/apt/preferences.d/syncthing
+	sudo apt-get update
+	sudo apt-get install syncthing	
+	
+	sudo systemctl enable syncthing@ubuntu.service
+	sudo systemctl start syncthing@ubuntu.service
+
+	
+# **SKIP FOR NOW** setup NFS server and share
 	sudo apt-get install nfs-kernel-server
 	sudo mkdir /var/nfs
 	sudo chown nobody:nogroup /var/nfs

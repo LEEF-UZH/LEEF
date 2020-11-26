@@ -6,7 +6,7 @@
   "@type": "SoftwareSourceCode",
   "identifier": "LEEF",
   "description": "Setup package for the LEEF pipeline which loads / installs all necessary packages and functions to run the pipeline.",
-  "name": "LEEF: Data package containing only data and data information",
+  "name": "LEEF: Data Package Containing Only Data and Data Information",
   "license": "https://spdx.org/licenses/MIT",
   "version": "0.7.0",
   "programmingLanguage": {

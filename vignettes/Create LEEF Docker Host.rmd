@@ -32,7 +32,7 @@
 	sudo zile /etc/fstab
 	
 	# ADD THE SAMBA SHARE
-	#THIS DOES NOT WORK# leef_data/leef_data /mnt/leef_data cifs 	-o user,credentials=/usr/local/etc/whisper.credentials,uid=1000,umask=000,noauto,x-systemd.automount,x-systemd.idle-timeout=300 0 0
+	# THIS DOES NOT WORK# leef_data/leef_data /mnt/leef_data cifs 	-o user,credentials=/usr/local/etc/whisper.credentials,uid=1000,umask=000,noauto,x-systemd.automount,x-systemd.idle-timeout=300 0 0
 	# //leef_data/leef_data   /mnt/leef_data cifs     rw,credentials=/usr/local/etc/whisper.credential,uid=ubuntu,gid=ubuntu,file_mode=0770,dir_mode=0770,x-systemd.mount-timeout=300 0 0
 	# /mnt/leef_data/LEEF /home/ubuntu/LEEF        none    bind
 	sudo mount -a

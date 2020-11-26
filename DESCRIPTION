@@ -1,6 +1,6 @@
 Package: LEEF
 Type: Package
-Title: Data package containing only data and data information
+Title: Data Package Containing Only Data and Data Information
 Version: 0.7.0
 Authors@R: c(
   person(given = "Rainer M.", family = "Krug", email = "Rainer.Krug@uzh.ch", role = c("aut", "cre"))
@@ -25,7 +25,7 @@ Imports:
 	  LEEF.archive.default,
 	  LEEF.backend.csv,
     testthat,
-    yaml,
+     yaml,
     drat,
     utils,
     R.utils,
