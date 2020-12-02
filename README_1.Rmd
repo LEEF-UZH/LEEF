@@ -305,7 +305,7 @@ For relevance here are two actions:
 
 # Package structure
 
-The DAata package contains the code to
+The Data package contains the code to
 
 - `check_existing_...()` to check the existing data 
 - `check_new_...()` to check the incoming new data 
@@ -451,13 +451,6 @@ flowcytometer_data:
 ...
 }
 
-Table(incubatortemp, "incubatortemp (data from incubatortemp analysis)") {
-primary_key(id) INTEGER
-not_null(tts_hash) TEXT
-incubatortemp_data:
-...
-}
-
 Table(manualcount, "manualcount (data from manualcount analysis)") {
 primary_key(id) INTEGER
 not_null(tts_hash) TEXT
@@ -499,7 +492,6 @@ respirometer_data:
 import --> bemovi : "tts_hash"
 import --> flowcam : "tts_hash"
 import --> flowcytometer : "tts_hash"
-import --> incubatortemp : "tts_hash"
 import --> manualcount : "tts_hash"
 import --> respirometer : "tts_hash"
 

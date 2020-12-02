@@ -8,7 +8,7 @@
   "description": "Setup package for the LEEF pipeline which loads / installs all necessary packages and functions to run the pipeline.",
   "name": "LEEF: Data Package Containing Only Data and Data Information",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -140,8 +140,8 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "LEEF.backend.csv",
-      "name": "LEEF.backend.csv"
+      "identifier": "LEEF.backend.sqlite",
+      "name": "LEEF.backend.sqlite"
     },
     {
       "@type": "SoftwareApplication",

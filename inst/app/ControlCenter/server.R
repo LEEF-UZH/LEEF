@@ -147,28 +147,6 @@ shinyServer(function(input, output) {
     )
   )
 
-  # actions incubatortemp  ---------------------------------------------------------------------
-
-  observeEvent(
-    input$new_data_incubatortemp,
-    ignoreNULL = TRUE,
-    handlerExpr = withProgress(
-      message = 'Checking and importing files - this might take some time',
-      min = 0,
-      max = 1,
-      value = 0,
-      {
-        output$new_data_incubatortemp_result <- renderPrint("Processing...")
-        x <- LEEF.measurement.incubatortemp::add_new_data(
-          input = file.path( "~", "LEEF", "000.NewData", "incubatortemp"),
-          output = file.path("~", "LEEF", opt_directories()$raw)
-        )
-        output$new_data_incubatortemp_result <- renderPrint( cat("Done.", "Please Check input directory for possible error messages!", sep = "\n") )
-        output$files_incubatortempi_input <- renderPrint( cat(list.files(file.path("~", "LEEF", "000.NewData", "incubatortemp")), sep = "\n") )
-        output$files_incubatortemp_output <- renderPrint( cat(list.files(file.path("~", "LEEF", "0.raw.data", "incubatortemp")), sep = "\n") )
-      }
-    )
-  )
 
   # actions manualcount  ---------------------------------------------------------------------
 
@@ -263,11 +241,6 @@ shinyServer(function(input, output) {
     output$files_flowcytometer_input <- renderPrint( cat(list.files(file.path("~", "LEEF", "000.NewData", "flowcytometer")), sep = "\n") )
     output$files_flowcytometer_output <- renderPrint( cat(list.files(file.path("~", "LEEF", "0.raw.data", "flowcytometer")), sep = "\n") )
     output$ok_flowcytometer_output <- renderPrint( LEEF.measurement.flowcytometer::raw_data_ok( file.path("~", "LEEF", "0.raw.data") ) )
-
-    ## autoupdate incubatortemp  ------------------------------------------------------------------
-    output$files_incubatortemp_input <- renderPrint( cat(list.files(file.path("~", "LEEF", "000.NewData", "incubatortemp")), sep = "\n") )
-    output$files_incubatortemp_output <- renderPrint( cat(list.files(file.path("~", "LEEF", "0.raw.data", "incubatortemp")), sep = "\n") )
-    output$ok_incubatortemp_output <- renderPrint( LEEF.measurement.incubatortemp::raw_data_ok( file.path("~", "LEEF", "0.raw.data") ) )
 
     ## autoupdate manualcount  ------------------------------------------------------------------
     output$files_manualcount_input <- renderPrint( cat(list.files(file.path("~", "LEEF", "000.NewData", "manualcount")), sep = "\n") )

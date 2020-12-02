@@ -20,7 +20,7 @@ sapply(
     file.path(
         ".",
         "000.NewData",
-        c("bemovi", "flowcam", "flowcytometer", "incubatortemp", "manualcount", "o2meter", "toc")
+        c("bemovi", "flowcam", "flowcytometer", "manualcount", "o2meter", "toc")
     ),
     dir.create,
     recursive = TRUE,
@@ -98,22 +98,6 @@ shinyUI(
                         ##
                         shiny::h4("Can Raw data be processed"),
                         verbatimTextOutput("ok_flowcytometer_output", placeholder = TRUE)
-                    ),
-                    tabPanel(
-                        "Incubator temp",
-                        ##
-                        shiny::h4("Files left to import"),
-                        verbatimTextOutput("files_incubatortemp_input", placeholder = TRUE),
-                        ##
-                        actionButton("new_data_incubatortemp", label = "Import new Data"),
-                        verbatimTextOutput("new_data_incubatortemp_result", placeholder = TRUE),
-                        ##
-                        shiny::h4("Files in raw data folder"),
-                        verbatimTextOutput("files_incubatortemp_output", placeholder = TRUE),
-                        ##
-                        shiny::h4("Can Raw data be processed"),
-                        verbatimTextOutput("ok_incubatortemp_output", placeholder = TRUE)
-
                     ),
                     tabPanel(
                         "Manualcount",
