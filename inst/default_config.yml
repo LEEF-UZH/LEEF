@@ -42,7 +42,7 @@ measurement_packages:
   LEEF.measurement.flocam:
     name: LEEF.measurement.flowcam
     InstallCommand: drat::addRepo('LEEF-UZH'); install.packages(('LEEF.measurement.flowcam')
-    RegisterCommand: LEEF.measurement.flowcam::register()0
+    RegisterCommand: LEEF.measurement.flowcam::register()
   LEEF.measurement.flowcytometer:
     name: LEEF.measurement.flowcytometer
     InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.flowcytometer')
