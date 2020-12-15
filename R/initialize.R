@@ -11,9 +11,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' initialize(system.file("default_config.yml", package = "LEEF"))
+#' init_LEEF(system.file("default_config.yml", package = "LEEF"))
 #' }
-initialize <- function(
+init_LEEF <- function(
   config_file = system.file("default_config.yml", package = "LEEF"),
   id = NULL
 ){

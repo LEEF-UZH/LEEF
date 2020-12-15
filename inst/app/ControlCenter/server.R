@@ -35,12 +35,12 @@ shinyServer(function(input, output) {
 # Actions -----------------------------------------------------------------
 
   observeEvent(
-    input$initialize,
+    input$init_LEEF,
     {
       if ( is.null(input$configfile$datapath) ) {
-        initialize()
+        init_LEEF()
       } else {
-        initialize(config_file = input$configfile$datapath)
+        init_LEEF(config_file = input$configfile$datapath)
       }
     }
   )
