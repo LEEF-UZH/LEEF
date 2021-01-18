@@ -55,10 +55,7 @@ measurement_packages:
     name: LEEF.measurement.o2meter
     InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.o2meter')
     RegisterCommand: LEEF.measurement.o2meter::register()
-  LEEF.measurement.toc:
-    name: LEEF.measurement.toc
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.toc')
-    RegisterCommand: LEEF.measurement.toc::register()
+
 
 
 # --------------------------------------------------------------------

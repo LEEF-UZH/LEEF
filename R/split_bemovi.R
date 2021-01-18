@@ -7,6 +7,8 @@
 #' @param overwrite if \code{TRUE}, all folders starting with \code{bemovi.} in
 #'   the \code{bemovi_dir} will be deleted
 #'
+#' @importFrom utils read.table write.table
+#'
 #' @return the maximum id used
 #' @export
 #'

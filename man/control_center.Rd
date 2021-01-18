@@ -6,6 +6,9 @@
 \usage{
 control_center(rootdir = ".")
 }
+\arguments{
+\item{rootdir}{Directory in which all the data directories can be found.}
+}
 \value{
 return value from \code{runApp()}
 }

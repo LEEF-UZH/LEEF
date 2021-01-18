@@ -7,7 +7,7 @@
 register_packages(packages)
 }
 \arguments{
-\item{list}{of packages. Each element \bold{must} contain the elements
+\item{packages}{list of packages. Each element \bold{must} contain the elements
 \describe{
   \item{\code{name}}{the name of the package,}
   \item{\code{InstallCommand}}{the command to be executed to install the package, and }

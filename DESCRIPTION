@@ -1,7 +1,7 @@
 Package: LEEF
 Type: Package
 Title: Data Package Containing Only Data and Data Information
-Version: 0.7.1
+Version: 0.7.2
 Authors@R: c(
   person(given = "Rainer M.", family = "Krug", email = "Rainer.Krug@uzh.ch", role = c("aut", "cre"))
   )
@@ -21,9 +21,8 @@ Imports:
     LEEF.measurement.flowcytometer,
     LEEF.measurement.manualcount,
     LEEF.measurement.o2meter,
-    LEEF.measurement.toc,
-	LEEF.archive.default,
-	LEEF.backend.sqlite,
+	  LEEF.archive.default,
+	  LEEF.backend.sqlite,
     testthat,
     yaml,
     drat,

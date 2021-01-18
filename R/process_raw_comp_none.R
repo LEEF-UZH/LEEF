@@ -5,6 +5,9 @@
 #' data, useful for already compressed and large data, e.g. bemovi.
 #' @return invisibly \code{TRUE}
 #'
+#' @param submitter name of the submitter of the data to the pipeline. Will be added to the metadata.
+#' @param timestamp timestamp of the submission of the data to the pipeline.
+#' This should be in the format \code{YYYYMMDD} and will be used to identify the sampling day.
 #' @param ... additional arguments for the different queues
 #'
 #' @importFrom yaml yaml.load_file write_yaml

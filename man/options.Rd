@@ -18,6 +18,8 @@ directory for the extracted data}
 
 \item{archive}{\code{character} \code{vector} of length one containing the
 directory for the archived data}
+
+\item{tools}{directory in which the tools are located}
 }
 \value{
 list of directories. If values have set, the value before the change.

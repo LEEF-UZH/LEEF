@@ -4,6 +4,8 @@
 #' - sanity checks of the raw data
 #' - running of the pipeline
 #' @md
+#'
+#' @param rootdir Directory in which all the data directories can be found.
 #' @return return value from \code{runApp()}
 #' @export
 #'

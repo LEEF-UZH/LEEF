@@ -7,14 +7,18 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup}
+``{r, include = FALSE}
 knitr::opts_chunk$set(
-	collapse = TRUE,
-	comment = "#>",
-	include = FALSE
+  collapse = TRUE,
+  comment = "#>"
 )
+```
+
+```{r setup}
 library(LEEF)
 ```
+
+# Checkliust to use the pipe,ine
 
 - [ ] make sure that all files are uploaded
 ## Edit file `sample_metadata_yml`

@@ -1,5 +1,5 @@
 #' Register the functions to be usedfrom packages in the config file
-#' @param list of packages. Each element \bold{must} contain the elements
+#' @param packages list of packages. Each element \bold{must} contain the elements
 #' \describe{
 #'   \item{\code{name}}{the name of the package,}
 #'   \item{\code{InstallCommand}}{the command to be executed to install the package, and }

@@ -194,28 +194,6 @@ shinyServer(function(input, output) {
     )
   )
 
-  # actions toc  ---------------------------------------------------------------------
-
-  observeEvent(
-    input$new_data_toc,
-    ignoreNULL = TRUE,
-    handlerExpr = withProgress(
-      message = 'Checking and importing files - this might take some time',
-      min = 0,
-      max = 1,
-      value = 0,
-      {
-        output$new_data_toc_result <- renderPrint("Processing...")
-        x <- LEEF.measurement.toc::add_new_data(
-          input = file.path( "~", "LEEF", "000.NewData", "toc"),
-          output = file.path("~", "LEEF", opt_directories()$raw)
-        )
-        output$new_data_toc_result <- renderPrint( cat("Done.", "Please Check input directory for possible error messages!", sep = "\n") )
-        output$files_toci_input <- renderPrint( cat(list.files(file.path("~", "LEEF", "000.NewData", "toc")), sep = "\n") )
-        output$files_toc_output <- renderPrint( cat(list.files(file.path("~", "LEEF", "0.raw.data", "toc")), sep = "\n") )
-      }
-    )
-  )
 
   # Auto update -------------------------------------------------------------
 
@@ -252,10 +230,6 @@ shinyServer(function(input, output) {
     output$files_o2meter_output <- renderPrint( cat(list.files(file.path("~", "LEEF", "0.raw.data", "o2meter")), sep = "\n") )
     output$ok_o2meter_output <- renderPrint( LEEF.measurement.o2meter::raw_data_ok( file.path("~", "LEEF", "0.raw.data") ) )
 
-    ## autoupdate toc  ------------------------------------------------------------------
-    output$files_toc_input <- renderPrint( cat(list.files(file.path("~", "LEEF", "000.NewData", "toc")), sep = "\n") )
-    output$files_toc_output <- renderPrint( cat(list.files(file.path("~", "LEEF", "0.raw.data", "toc")), sep = "\n") )
-    output$ok_toc_output <- renderPrint( LEEF.measurement.toc::raw_data_ok( file.path("~", "LEEF", "0.raw.data") ) )
 
   })
 }

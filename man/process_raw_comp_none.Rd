@@ -7,6 +7,11 @@
 process_raw_comp_none(submitter, timestamp, ...)
 }
 \arguments{
+\item{submitter}{name of the submitter of the data to the pipeline. Will be added to the metadata.}
+
+\item{timestamp}{timestamp of the submission of the data to the pipeline.
+This should be in the format \code{YYYYMMDD} and will be used to identify the sampling day.}
+
 \item{...}{additional arguments for the different queues}
 }
 \value{

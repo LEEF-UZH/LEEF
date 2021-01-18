@@ -11,7 +11,7 @@
 #'   directory for the extracted data
 #' @param archive \code{character} \code{vector} of length one containing the
 #'   directory for the archived data
-#'
+#' @param tools directory in which the tools are located
 #' @return list of directories. If values have set, the value before the change.
 #'
 #' @rdname options
