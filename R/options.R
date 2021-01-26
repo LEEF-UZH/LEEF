@@ -3,6 +3,8 @@
 #' Read or write the directories to be used in the processing. Directories do
 #' not have to exist and will be created. Content will be overwritten without
 #' confirmation! If no parameter is given, the directories will be returned a a list.
+#' @param general.parameter \code{character} \code{vector} of length one containing the
+#'   directory for the general parameter files
 #' @param raw \code{character} \code{vector} of length one containing the
 #'   directory for the raw data
 #' @param pre_processed \code{character} \code{vector} of length one containing
@@ -24,6 +26,7 @@
 #' opt_directories(raw = "./temp")
 #'
 opt_directories <- function(
+  general.parameter,
   raw,
   pre_processed,
   extracted,
@@ -39,6 +42,13 @@ opt_directories <- function(
   dirs <- old_dirs
   read <- TRUE
   ##
+  if (!missing(general.parameter)) {
+    if (length(general.parameter) != 1) {
+      stop("length of the vector has to be one!")
+    }
+   dirs$general.parameter <- general.parameter
+   read <- FALSE
+  }  
   if (!missing(raw)) {
     if (length(raw) != 1) {
       stop("length of the vector has to be one!")

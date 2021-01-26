@@ -35,24 +35,28 @@ init_LEEF <- function(
 
   # Fix missing directories -------------------------------------------------
 
-
+  if ( is.null(opt_directories()$general.parameter) ) {
+    opt_directories( general.parameter = file.path( ".", "00.general.parameter" )  )
+  }
+  dir.create(opt_directories()$general.parameter, recursive = TRUE, showWarnings = FALSE)
+  
   if ( is.null(opt_directories()$raw) ) {
-    opt_directories( raw = getwd() )
+    opt_directories( raw = file.path( ".", "0.raw.data" ) )
   }
   dir.create(opt_directories()$raw, recursive = TRUE, showWarnings = FALSE)
 
   if (is.null(opt_directories()$pre_processed)) {
-    opt_directories( pre_processed = file.path( opt_directories()$raw, "..", "pre_processed" ) )
+    opt_directories( pre_processed = file.path( opt_directories()$raw, "..", "1.pre_processed.data" ) )
   }
   dir.create(opt_directories()$pre_processed, recursive = TRUE, showWarnings = FALSE)
 
   if (is.null(opt_directories()$extracted)) {
-    opt_directories( extracted = file.path( opt_directories()$raw, "..", "extracted" ) )
+    opt_directories( extracted = file.path( opt_directories()$raw, "..", "2.extracted.data" ) )
   }
   dir.create(opt_directories()$extracted, recursive = TRUE, showWarnings = FALSE)
 
   if (is.null(opt_directories()$archive)) {
-    opt_directories( archive = file.path( opt_directories()$raw, "..", "archive" ) )
+    opt_directories( archive = file.path( opt_directories()$raw, "..", "3.archived.data" ) )
   }
   dir.create(opt_directories()$archive, recursive = TRUE, showWarnings = FALSE)
 
@@ -65,7 +69,7 @@ init_LEEF <- function(
   # Check sample_metadata.yml ----------------------------------------------
 
 
-  if (!file.exists(file.path(".", opt_directories()$raw, "../", "00.general.parameter", "sample_metadata.yml"))){
+  if (!file.exists(file.path(".", opt_directories()$general.parameter, "sample_metadata.yml"))){
     stop("sample_metadata is missing")
   }
 

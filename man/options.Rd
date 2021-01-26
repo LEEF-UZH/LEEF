@@ -4,9 +4,19 @@
 \alias{opt_directories}
 \title{Functions to read and write options}
 \usage{
-opt_directories(raw, pre_processed, extracted, archive, tools)
+opt_directories(
+  general.parameter,
+  raw,
+  pre_processed,
+  extracted,
+  archive,
+  tools
+)
 }
 \arguments{
+\item{general.parameter}{\code{character} \code{vector} of length one containing the
+directory for the general parameter files}
+
 \item{raw}{\code{character} \code{vector} of length one containing the
 directory for the raw data}
 
