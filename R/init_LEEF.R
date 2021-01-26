@@ -62,16 +62,11 @@ init_LEEF <- function(
   dir.create(opt_directories()$tools, recursive = TRUE, showWarnings = FALSE)
 
 
-  # Create sample_metadata.yml ----------------------------------------------
+  # Check sample_metadata.yml ----------------------------------------------
 
-  if (!file.exists(file.path(".", opt_directories()$raw, "sample_metadata.yml"))){
-    md <- yaml::read_yaml(system.file("sample_metadata.yml", package = "LEEF"))
-    md$name        = getOption("LEEF")$name
-    md$description = getOption("LEEF")$description
-    yaml::write_yaml(
-      md,
-      file.path(opt_directories()$raw, "sample_metadata.yml")
-    )
+
+  if (!file.exists(file.path(".", opt_directories()$raw, "../", "00.general.parameter", "sample_metadata.yml"))){
+    stop("sample_metadata is missing")
   }
 
   # Load measurement packages -----------------------------------------------

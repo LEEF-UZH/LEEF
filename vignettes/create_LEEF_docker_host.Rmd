@@ -25,13 +25,31 @@ library(LEEF)
 	sudo apt-get update
 	sudo apt-get update
 	sudo apt-get -y upgrade
-	sudo apt-get -y install mc zile
+	sudo apt-get -y install mc zile keyutils keyutils
 
 	# sudo reboot now
 
+## Configured everything for kerberos / the D.UZH.CH domain (as root):
+vi /etc/krb5.conf
+--- relevant new lines (add them if missing) ---
+[libdefaults]
+       default_realm = D.UZH.CH
+
+[realms]
+       D.UZH.CH = {
+               kdc = d.uzh.ch
+               admin_server = d.uzh.ch
+               default_domain = uzh.ch
+       }
+
+[domain_realm]
+       d.uzh.ch = D.UZH.CH
+---
+
+
 ## Install and setup samba client
-### install cifs samba client
-	sudo apt-get -y install cifs-utils
+### install cifs samba client and smbclient
+	sudo apt-get -y install cifs-utils smbclient
 	
 ### Prepare for the mounting of the volume
 	 sudo mkdir /mnt/leef_data
