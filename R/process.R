@@ -32,7 +32,7 @@ process <- function(
 
   # Set sample metadata -----------------------------------------------------
 
-  smdf <- file.path(opt_directories()$raw, "sample_metadata.yml")
+  smdf <- file.path(opt_directories()$raw, "..", "00.general.parameter", "sample_metadata.yml")
 
   smd <- yaml::yaml.load_file(smdf)
 
