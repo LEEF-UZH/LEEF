@@ -22,6 +22,7 @@ library(LEEF)
 # Pipeline Server 
 
 ## basic stuff
+  sudo timedatectl set-timezone Europe/Zurich
 	sudo apt-get update
 	sudo apt-get update
 	sudo apt-get -y upgrade
