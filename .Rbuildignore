@@ -31,3 +31,5 @@
 ^temp$
 ^tools$
 ^codemeta\.json$
+^doc$
+^Meta$

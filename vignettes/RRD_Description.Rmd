@@ -1,0 +1,549 @@
+---
+title: "RRD Description"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{RRD Description}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+
+# Tables in the `LEEF.RRD.sqlite` database
+
+This database contains the main data for reserarch. In other words, under normal circumstances, it is not necessarty to use any other database than this one. 
+
+These are the sql commands to create the tables in the database.
+
+## bemovi_mag_16__mean_density_per_ml
+
+```{sql}
+CREATE TABLE IF NOT EXISTS bemovi_mag_16__mean_density_per_ml (
+  "timestamp" text,
+  date text,
+  species text,
+  composition_id text,
+  bottle text,
+  temperature_treatment text,
+  magnification integer,
+  sample integer,
+  density real
+);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__mean_density_per_ml_timestamp_bottle 
+	ON bemovi_mag_16__mean_density_per_ml ("timestamp", bottle);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__mean_density_per_ml_bottle 
+	ON bemovi_mag_16__mean_density_per_ml (bottle);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__mean_density_per_ml_timetamp 
+	ON bemovi_mag_16__mean_density_per_ml ("timestamp");
+```
+
+
+## bemovi_mag_16__morph_mvt
+
+```{sql}
+CREATE TABLE IF NOT EXISTS bemovi_mag_16__morph_mvt (
+  "timestamp" text,
+  file text,
+  mean_grey real,
+  sd_grey real,
+  mean_area real,
+  sd_area real,
+  mean_perimeter real,
+  sd_perimeter real,
+  mean_major real,
+  sd_major real,
+  mean_minor real,
+  sd_minor real,
+  mean_ar real,
+  sd_ar real,
+  mean_turning real,
+  sd_turning real,
+  duration real,
+  n_frames integer,
+  max_net real,
+  net_disp integer,
+  net_speed real,
+  gross_disp real,
+  gross_speed real,
+  max_step real,
+  min_step real,
+  sd_step real,
+  sd_gross_speed real,
+  max_gross_speed real,
+  min_gross_speed real,
+  id text,
+  date text,
+  bottle text,
+  composition_id text,
+  temperature_treatment text,
+  magnification integer,
+  dilution_factor integer,
+  sample integer,
+  video integer
+);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__morph_mvt_timestamp_bottle 
+	ON bemovi_mag_16__morph_mvt ("timestamp", bottle);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__morph_mvt_bottle 
+	ON bemovi_mag_16__morph_mvt (bottle);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__morph_mvt_timetamp 
+	\ON bemovi_mag_16__morph_mvt ("timestamp");```
+
+## bemovi_mag_25__mean_density_per_ml
+```{sql}
+CREATE TABLE IF NOT EXISTS bemovi_mag_25__mean_density_per_ml (
+  "timestamp" text,
+  date text,
+  species text,
+  composition_id text,
+  bottle text,
+  temperature_treatment text,
+  magnification integer,
+  sample integer,
+  density real
+);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__mean_density_per_ml_timestamp_bottle 
+	ON bemovi_mag_25__mean_density_per_ml ("timestamp", bottle);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__mean_density_per_ml_bottle 
+	ON bemovi_mag_25__mean_density_per_ml (bottle);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__mean_density_per_ml_timetamp 
+	ON bemovi_mag_25__mean_density_per_ml ("timestamp");
+```
+## bemovi_mag_25__mean_density_per_ml_cropped
+```{sql}
+CREATE TABLE IF NOT EXISTS bemovi_mag_25__mean_density_per_ml_cropped (
+  "timestamp" text,
+  date text,
+  species text,
+  composition_id text,
+  bottle text,
+  temperature_treatment text,
+  magnification integer,
+  sample integer,
+  density real
+);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__mean_density_per_ml_cropped_timestamp_bottle 
+	ON bemovi_mag_25__mean_density_per_ml_cropped ("timestamp", bottle);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__mean_density_per_ml_cropped_bottle 
+	ON bemovi_mag_25__mean_density_per_ml_cropped (bottle);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__mean_density_per_ml_cropped_timetamp 
+	ON bemovi_mag_25__mean_density_per_ml_cropped ("timestamp");
+```
+##bemovi_mag_25__morph_mvt
+```{sql}
+CREATE TABLE IF NOT EXISTS bemovi_mag_25__morph_mvt (
+  "timestamp" text,
+  file text,
+  mean_grey real,
+  sd_grey real,
+  mean_area real,
+  sd_area real,
+  mean_perimeter real,
+  sd_perimeter real,
+  mean_major real,
+  sd_major real,
+  mean_minor real,
+  sd_minor real,
+  mean_ar real,
+  sd_ar real,
+  mean_turning real,
+  sd_turning real,
+  duration real,
+  n_frames integer,
+  max_net real,
+  net_disp integer,
+  net_speed real,
+  gross_disp real,
+  gross_speed real,
+  max_step real,
+  min_step real,
+  sd_step real,
+  sd_gross_speed real,
+  max_gross_speed real,
+  min_gross_speed real,
+  id text,
+  date text,
+  bottle text,
+  composition_id text,
+  temperature_treatment text,
+  magnification integer,
+  dilution_factor integer,
+  sample integer,
+  video integer
+);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__morph_mvt_timestamp_bottle 
+	ON bemovi_mag_25__morph_mvt ("timestamp", bottle);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__morph_mvt_bottle 
+	ON bemovi_mag_25__morph_mvt (bottle);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__morph_mvt_timetamp 
+	ON bemovi_mag_25__morph_mvt ("timestamp");
+```
+
+## bemovi_mag_25__morph_mvt_cropped
+```{sql}
+CREATE TABLE IF NOT EXISTS bemovi_mag_25__morph_mvt_cropped (
+  "timestamp" text,
+  file text,
+  mean_grey real,
+  sd_grey real,
+  mean_area real,
+  sd_area real,
+  mean_perimeter real,
+  sd_perimeter real,
+  mean_major real,
+  sd_major real,
+  mean_minor real,
+  sd_minor real,
+  mean_ar real,
+  sd_ar real,
+  mean_turning real,
+  sd_turning real,
+  duration real,
+  n_frames integer,
+  max_net real,
+  net_disp integer,
+  net_speed real,
+  gross_disp real,
+  gross_speed real,
+  max_step real,
+  min_step real,
+  sd_step real,
+  sd_gross_speed real,
+  max_gross_speed real,
+  min_gross_speed real,
+  id text,
+  date text,
+  bottle text,
+  composition_id text,
+  temperature_treatment text,
+  magnification integer,
+  dilution_factor integer,
+  sample integer,
+  video integer
+);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__morph_mvt_cropped_timestamp_bottle 
+	ON bemovi_mag_25__morph_mvt_cropped ("timestamp", bottle);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__morph_mvt_cropped_bottle 
+	ON bemovi_mag_25__morph_mvt_cropped (bottle);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__morph_mvt_cropped_timetamp 
+	ON bemovi_mag_25__morph_mvt_cropped ("timestamp");
+```
+
+
+## flowcam__algae_density
+```{sql}
+CREATE TABLE IF NOT EXISTS flowcam__algae_density (
+  "timestamp" text,
+  species text,
+  bottle text,
+  composition text,
+  temperature text,
+  incubator text,
+  volume_imaged real,
+  dilution_factor integer,
+  richness integer,
+  count integer,
+  density integer
+);
+
+CREATE INDEX IF NOT EXISTS idx_flowcam__algae_density_timestamp_bottle 
+	ON flowcam__algae_density ("timestamp", bottle);
+
+CREATE INDEX IF NOT EXISTS idx_flowcam__algae_density_bottle 
+	ON flowcam__algae_density (bottle);
+
+CREATE INDEX IF NOT EXISTS idx_flowcam__algae_density_timetamp 
+	ON flowcam__algae_density ("timestamp");
+```
+
+## flowcytometer__flowcytometer
+```{sql}
+CREATE TABLE IF NOT EXISTS flowcytometer__flowcytometer (
+  "timestamp" text,
+  sample text,
+  bottle text,
+  volume integer,
+  "total.counts" integer,
+  tot_density_perml real,
+  dilution_factor integer,
+  bacteria_counts integer,
+  bacteria_density_perml real,
+  sample_letter text,
+  sample_number integer,
+  lna_counts integer,
+  mna_counts integer,
+  hna_counts integer,
+  lna_perml real,
+  mna_perml real,
+  hna_perml real,
+  algae_counts integer,
+  algae_perml real
+);
+
+CREATE INDEX IF NOT EXISTS idx_flowcytometer__flowcytometer_timestamp_bottle 
+	ON flowcytometer__flowcytometer ("timestamp", bottle);
+
+CREATE INDEX IF NOT EXISTS idx_flowcytometer__flowcytometer_bottle 
+	ON flowcytometer__flowcytometer (bottle);
+
+CREATE INDEX IF NOT EXISTS idx_flowcytometer__flowcytometer_timetamp 
+	ON flowcytometer__flowcytometer ("timestamp");
+```
+
+
+## o2meter__o2meter
+
+```{sql}
+CREATE TABLE IF NOT EXISTS o2meter__o2meter (
+  "timestamp" text,
+  bottle integer,
+  sensor integer,
+  date text,
+  time text,
+  channel integer,
+  user text,
+  sensorid integer,
+  sensor_name text,
+  delta_t real,
+  time_unit text,
+  value real,
+  o2_unit text,
+  mode text,
+  phase real,
+  phase_unit text,
+  amplitude integer,
+  amplitude_unit text,
+  "temp" real,
+  temp_unit text,
+  pressure real,
+  pressure_unit text,
+  salinity real,
+  salinity_unit text,
+  error integer,
+  cal0 real,
+  cal0_unit text,
+  t0 real,
+  t0_unit text,
+  o2cal2nd real,
+  o2_unit1 text,
+  cal2nd real,
+  cal2nd_unit text,
+  t2nd real,
+  t2nd_unit text,
+  calpressure real,
+  calpressure_unit text,
+  f1 real,
+  dphi1 real,
+  dksv1 real,
+  dphi2 real,
+  dksv2 integer,
+  m real,
+  cal_mode text,
+  signalledcurrent real,
+  user_signal_intensity integer,
+  referenceledcurrent real,
+  reference_amplitude real,
+  device_serial text,
+  fwversion text,
+  swversion text,
+  sensor_type text,
+  batchid text,
+  calibration_date text,
+  sensor_lot integer,
+  presens_calibr integer,
+  battery_voltage real,
+  battery_voltage_unit text
+);
+
+CREATE INDEX IF NOT EXISTS idx_o2meter__o2meter_timestamp_bottle 
+	ON o2meter__o2meter ("timestamp", bottle);
+
+CREATE INDEX IF NOT EXISTS idx_o2meter__o2meter_bottle 
+	ON o2meter__o2meter (bottle);
+
+CREATE INDEX IF NOT EXISTS idx_o2meter__o2meter_timetamp 
+	ON o2meter__o2meter ("timestamp");
+```
+
+
+ 
+
+# Tables in the `LEEF.RRD_flowcam_algae_traits.sqlite` database
+
+This database contains the algae traits including the species classifications.
+
+These are the sql commands to create the tables in the database.
+
+## flowcam__algae_traits
+```{sql}
+CREATE TABLE IF NOT EXISTS flowcam__algae_traits (
+  "timestamp" text,
+  bottle text,
+  Particle_ID integer,
+  Area_ABD real,
+  Area_Filled real,
+  Aspect_Ratio real,
+  Average_Blue real,
+  Average_Green real,
+  Average_Red real,
+  Calibration_Factor real,
+  Calibration_Image integer,
+  Camera integer,
+  Capture_X integer,
+  Capture_Y integer,
+  Ch1_Area integer,
+  Ch1_Peak integer,
+  Ch1_Width integer,
+  Ch2_Area integer,
+  Ch2_Peak integer,
+  Ch2_Width integer,
+  Ch2_Ch1_Ratio integer,
+  Circle_Fit real,
+  Circularity real,
+  Circularity_Hu real,
+  Compactness real,
+  Convex_Perimeter real,
+  Convexity real,
+  Date_flowcam text,
+  Diameter_ABD real,
+  Diameter_ESD real,
+  Edge_Gradient real,
+  Elongation real,
+  Feret_Angle_Max integer,
+  Feret_Angle_Min integer,
+  Fiber_Curl real,
+  Fiber_Straightness real,
+  Filter_Score integer,
+  Geodesic_Aspect_Ratio real,
+  Geodesic_Length real,
+  Geodesic_Thickness real,
+  Image_File text,
+  Image_Height integer,
+  Image_Width integer,
+  Image_X integer,
+  Image_Y integer,
+  Intensity real,
+  Length real,
+  Particles_Per_Chain integer,
+  Perimeter real,
+  Ratio_Blue_Green real,
+  Ratio_Red_Blue real,
+  Ratio_Red_Green real,
+  Roughness real,
+  Scatter_Area integer,
+  Scatter_Peak integer,
+  Scatter_Width integer,
+  Sigma_Intensity real,
+  Source_Image integer,
+  Sum_Intensity integer,
+  Symmetry real,
+  Time text,
+  Timestamp_flowcam text,
+  Transparency real,
+  Volume_ABD real,
+  Volume_ESD real,
+  Width real,
+  volume_imaged real,
+  dilution_factor integer,
+  temperature text,
+  richness integer,
+  composition text,
+  incubator text,
+  species text,
+  species_probability real
+);
+
+CREATE INDEX IF NOT EXISTS idx_flowcam__algae_traits_timestamp_bottle 
+  ON flowcam__algae_traits ("timestamp", bottle);
+
+CREATE INDEX IF NOT EXISTS idx_flowcam__algae_traits_bottle 
+  ON flowcam__algae_traits (bottle);
+
+CREATE INDEX IF NOT EXISTS idx_flowcam__algae_traits_timetamp 
+  ON flowcam__algae_traits ("timestamp");
+```
+
+# Tables in the `LEEF.RRD_bemovi_master.sqlite` and `LEEF.RRD_bemovi_master_cropped.sqlite` database
+
+This database contains the master file from the analysis of the movie files in both magnifications. The database LEEF.RRD_bemovi_master.sqlite` contains the uncropped analysis, the database `LEEF.RRD_bemovi_master_cropped.sqlite` the cropped.
+
+These are the sql commands to create the tables in the database.
+
+## bemovi_mag_16__master, bemovi_mag_25__master and bemovi_mag_25__master_cropped
+
+```{sql}
+CREATE TABLE IF NOT EXISTS bemovi_mag_16__master (
+  "timestamp" text,
+  file text,
+  X real,
+  Y real,
+  frame integer,
+  obs integer,
+  Area real,
+  Mean real,
+  Min integer,
+  Max integer,
+  Perimeter real,
+  Major real,
+  Minor real,
+  Angle real,
+  "Circ." real,
+  AR real,
+  Round real,
+  Solidity real,
+  id text,
+  trajectory integer,
+  step_length real,
+  step_duration real,
+  step_speed real,
+  gross_disp real,
+  net_disp integer,
+  abs_angle real,
+  rel_angle real,
+  date text,
+  bottle text,
+  composition_id text,
+  temperature_treatment text,
+  magnification integer,
+  dilution_factor integer,
+  sample integer,
+  video integer
+);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__master_timestamp_bottle 
+  ON bemovi_mag_16__master ("timestamp", bottle);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__master_bottle 
+  ON bemovi_mag_16__master (bottle);
+
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__master_timetamp 
+  ON bemovi_mag_16__master ("timestamp");
+```
+
+
