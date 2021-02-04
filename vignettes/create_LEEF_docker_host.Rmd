@@ -55,7 +55,11 @@ library(LEEF)
 ### Prepare for the mounting of the volume
 	 sudo mkdir /mnt/leef_data
 	 sudo chown -R ubuntu:ubuntu /mnt/leef_data
-	 mkdir ~ubuntu/LEEF
+
+### Create links in `~ubuntu`
+	- `Inconing` to `/mnt/leef_data/Incoming`
+	- `Done` to `/mnt/leef_data/Done`
+	- `LEEF` to `/mnt/leef_data/LEEF`
 
 ### add leef_data to hosts file
 	
