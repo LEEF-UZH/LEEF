@@ -23,7 +23,7 @@ list_LEEF_packages <- function(
   pkgs <- tools::package_dependencies("LEEF", which = "all", recursive = recursive)
   pkgs <- c(
     "LEEF",
-    grep("LEEF.|.LEEF", result$LEEF, value = TRUE)
+    grep("LEEF.|.LEEF", pkgs$LEEF, value = TRUE)
   )
 
   if (versions) {
