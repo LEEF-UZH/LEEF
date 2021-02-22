@@ -4,10 +4,12 @@
 \alias{list_LEEF_packages}
 \title{List packages on which LEEF depends from the LEEF-UZH repo}
 \usage{
-list_LEEF_packages(recursive = TRUE)
+list_LEEF_packages(recursive = TRUE, versions = FALSE)
 }
 \arguments{
 \item{recursive}{logical: should (reverse) dependencies of (reverse) dependencies (and so on) be included? defaults to \code{TRUE}}
+
+\item{versions}{logical: should versions be returned as well.}
 }
 \value{
 list of all packages which are installed which contain \bold{.LEEF} or \bold{LEEF.} and the package \bold{LEEF} itself

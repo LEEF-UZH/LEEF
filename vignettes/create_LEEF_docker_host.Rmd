@@ -116,12 +116,6 @@ library(LEEF)
 	sudo apt-get -y install make
 	make pull
 	
-	
-
-
-
-
-
 ===========
 
 # Samba Server and syncthing
