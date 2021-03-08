@@ -1,8 +1,8 @@
 ---
-title: "Start Pipeline Checklist"
+title: "1001 Start Pipeline Checklist"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Start Pipeline Checklist}
+  %\VignetteIndexEntry{1001 Start Pipeline Checklist}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

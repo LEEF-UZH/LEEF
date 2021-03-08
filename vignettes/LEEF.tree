@@ -1,0 +1,44 @@
+./LEEF
+├── 0.raw.data
+│   ├── bemovi.mag.16
+│   ├── bemovi.mag.25
+│   ├── flowcam
+│   ├── flowcytometer
+│   ├── manualcount
+│   └── o2meter
+├── 00.general.parameter
+│   ├── compositions.csv
+│   ├── experimental_design.csv
+│   └── sample_metadata.yml
+├── 1.pre-processed.data
+│   ├── bemovi.mag.16
+│   ├── bemovi.mag.25
+│   ├── flowcam
+│   ├── flowcytometer
+│   ├── manualcount
+│   └── o2meter
+├── 2.extracted.data
+│   ├── bemovi.mag.16
+│   ├── bemovi.mag.25
+│   ├── flowcam
+│   ├── flowcytometer
+│   ├── manualcount
+│   └── o2meter
+├── 3.archived.data
+│   ├── extracted
+│   ├── pre_processed
+│   └── raw
+├── 9.backend
+│   ├── LEEF.RRD.sqlite
+│   ├── LEEF.RRD_bemovi_master.sqlite
+│   ├── LEEF.RRD_bemovi_master_cropped.sqlite
+│   ├── LEEF.RRD_flowcam_algae_metadata.sqlite
+│   └── LEEF.RRD_flowcam_algae_traits.sqlite
+├── log.2021-03-03--15-06-32.fast.done.txt
+├── log.2021-03-03--15-06-32.fast.txt
+├── log.2021-03-03--15-14-20.bemovi.mag.16.done.txt
+├── log.2021-03-03--15-14-20.bemovi.mag.16.error.txt
+├── log.2021-03-03--15-14-20.bemovi.mag.16.txt
+├── log.2021-03-03--15-14-20.bemovi.mag.25.done.txt
+├── log.2021-03-03--15-14-20.bemovi.mag.25.error.txt
+└── log.2021-03-03--15-14-20.bemovi.mag.25.txt

@@ -1,0 +1,158 @@
+---
+title: "01 Background LEEF Data"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{01 Background LEEF Data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(LEEF)
+```
+
+# LEEF Data
+## Measurements in the Pipeline
+- **bemovi** see [link](location) for manual
+- **flowcam** see [link](location) for manual
+- **flowcytometer** see [link](location) for manual
+- **manual** count see [link](location) for manual
+- **O~2~ meter** see [link](location) for manual
+
+# Raw Data Folder Structure for the Pipeline
+
+The data submitted to the pipeline consists out of two folder: one `0.raw.data` folder containing the measured data and measurement specific metadata, and the folder `00.general.parameter` containing the metadata and some data used by all measurements. The folder structure has to be as follows:
+
+```
+0.raw.data
+├── bemovi.mag.16
+│   ├── ........_00097.cxd
+│   ├── ...
+│   ├── ........_00192.cxd
+│   ├── bemovi_extract.mag.16.yml
+│   ├── video.description.txt
+│   ├── video_classifiers_18c_16x.rds
+│   └── video_classifiers_increasing_16x_best_available.rds
+├── bemovi.mag.25
+│   ├── ........_00001.cxd
+│   ├── ...
+│   ├── ........_00096.cxd
+│   ├── bemovi_extract.mag.25.cropped.yml
+│   ├── bemovi_extract.mag.25.yml
+│   ├── video.description.txt
+│   ├── video_classifiers_18c_25x.rds
+│   └── video_classifiers_increasing_25x_best_available.rds
+├── flowcam
+│   ├── 11
+│   ├── 12
+│   ├── 13
+│   ├── 14
+│   ├── 15
+│   ├── 16
+│   ├── 17
+│   ├── 21
+│   ├── 22
+│   ├── 23
+│   ├── 24
+│   ├── 25
+│   ├── 26
+│   ├── 27
+│   ├── 34
+│   └── 37
+├── flowcytometer
+│   ├── ........
+│   └── .........ciplus
+├── manualcount
+│   └── .........xlsx
+└── o2meter
+    └── .........csv
+
+```
+
+
+```
+00.general.parameter
+├── compositions.csv
+├── experimental_design.csv
+└── sample_metadata.yml
+```
+
+
+see the   [document](https://teams.microsoft.com/l/file/38CD9349-F25C-4773-B08A-39329D23F221?tenantId=c7e438db-e462-4c22-a90a-c358b16980b3&fileType=docx&objectUrl=https%3A%2F%2Fuzh.sharepoint.com%2Fsites%2FLEEF%2FShared%20Documents%2FGeneral%2F05_protocols%2FData_upload_manual.docx&baseUrl=https%3A%2F%2Fuzh.sharepoint.com%2Fsites%2FLEEF&serviceName=teams&threadId=19:d14a98eb700e4721b35583265c27e8a3@thread.tacv2&groupId=13ba9e9a-1d5d-42b1-9a95-08fd956973cc) on Teams with the detailed steps necessary to assemble the data and the necessary metadata.
+
+These two folders need top be uploaded to the pipeline server and the pipeline needs to be started.
+
+## Uploading and managing the Pipeline
+There are two approaches of uploading the data to the pipeline server and start the pipeline afterwards: using [local bash scripts](c_02_running_pipeline_lpm.html) from a local computer or executing the commands [from the pipeline server](c_03_running_pipeline_manual.html).
+
+The recommended approach is to use the [local bash scripts](c_02_running_pipeline_lpm.html), as this will minimise the likelihood of errors or accidental data loss. Nevertheless, for some actions it might be necessary to work directly on the pipeline server, usually via an ssh session and to execute commands [on the pipeline server](c_03_running_pipeline_manual.html). 
+
+# Folder structure after pipeline
+
+After completing the pipeline, the folder `LEEF` on the pipeline server will look as follws: 
+
+```
+./LEEF
+├── 0.raw.data
+│   ├── bemovi.mag.16
+│   ├── bemovi.mag.25
+│   ├── flowcam
+│   ├── flowcytometer
+│   ├── manualcount
+│   └── o2meter
+├── 00.general.parameter
+│   ├── compositions.csv
+│   ├── experimental_design.csv
+│   └── sample_metadata.yml
+├── 1.pre-processed.data
+│   ├── bemovi.mag.16
+│   ├── bemovi.mag.25
+│   ├── flowcam
+│   ├── flowcytometer
+│   ├── manualcount
+│   └── o2meter
+├── 2.extracted.data
+│   ├── bemovi.mag.16
+│   ├── bemovi.mag.25
+│   ├── flowcam
+│   ├── flowcytometer
+│   ├── manualcount
+│   └── o2meter
+├── 3.archived.data
+│   ├── extracted
+│   ├── pre_processed
+│   └── raw
+├── 9.backend
+│   ├── LEEF.RRD.sqlite
+│   ├── LEEF.RRD_bemovi_master.sqlite
+│   ├── LEEF.RRD_bemovi_master_cropped.sqlite
+│   ├── LEEF.RRD_flowcam_algae_metadata.sqlite
+│   └── LEEF.RRD_flowcam_algae_traits.sqlite
+├── log.2021-03-03--15-06-32.fast.done.txt
+├── log.2021-03-03--15-06-32.fast.txt
+├── log.2021-03-03--15-14-20.bemovi.mag.16.done.txt
+├── log.2021-03-03--15-14-20.bemovi.mag.16.error.txt
+├── log.2021-03-03--15-14-20.bemovi.mag.16.txt
+├── log.2021-03-03--15-14-20.bemovi.mag.25.done.txt
+├── log.2021-03-03--15-14-20.bemovi.mag.25.error.txt
+└── log.2021-03-03--15-14-20.bemovi.mag.25.txt
+
+```
+## 1.pre-processed.data
+## 2.extracted.data
+## 3.archived.data
+## 9.backend
+## log.xxx.txt
+
+
+# <span style="color:red">Pipeline server samba share</span>
+

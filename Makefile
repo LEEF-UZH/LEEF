@@ -45,9 +45,15 @@ Readme.md: $(READMERMD)
 	@Rscript -e "rmarkdown::render('$(READMERMD)', output_format = 'rmarkdown::github_document')"
 	rm -f $(READMEHTML)
 
-clean_readme:
-	rm -f $(READMEMD)
+########### pkgdown ###########
 
+pkgdown:
+	@Rscript -e "pkgdown::build_site()"
+
+clean_pkgdown:
+	@Rscript -e "pkgdown::clean_site()"
+
+####
 ########### vignettes ###########
 
 # vignettes: $(VIGHTML)
