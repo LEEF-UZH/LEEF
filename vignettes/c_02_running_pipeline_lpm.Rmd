@@ -56,18 +56,24 @@ upload -h
 
 We will now go through the commands available and explain what they are doing and how they can be used. Finally, we will show a basic workflow on how to upload data, start the server, download results, and prepare the pipeline server for the next run.
 
-## The commands
+# Prerequisite
 
-# `server`
+Before you can use the bash scripts, you need a password to login the pipeline server. Please contact the person responsible for that.
 
-## Help
+In addition, on windows, you need to be able to run bash scripts. Probably the easiest approach is to use the Linux Bash Shell under Windows 10. Please see [this How-To Geek article](https://www.howtogeek.com/261591/how-to-create-and-run-bash-shell-scripts-on-windows-10/). In this Linux Bash Shell in Windows you can execute the bash scripts provided.
+
+# The commands
+
+## `server`
+
+### Help
 ```{bash}
 export PATH=~/Documents_Local/git/LEEF/local_pipeline_management/bin/:$PATH
 ##
 server -h
 ```
 
-## Description
+### Description
 The command `server` returns the adress of the pipeline server. When the adress of the pipeline server changes, you can open the script in a text editor and simply replace the adress in the last line with the new adress.
 
 ```{bash echo=FALSE}
@@ -77,7 +83,7 @@ cat $(which server )
 ```
 
 
-## Example of typical usage
+### Example of typical usage
 ```{bash}
 export PATH=~/Documents_Local/git/LEEF/local_pipeline_management/bin/:$PATH
 ##
@@ -85,21 +91,21 @@ server
 ```
 
 
-# `upload`
-## Help
+## `upload`
+### Help
 ```{bash}
 export PATH=~/Documents_Local/git/LEEF/local_pipeline_management/bin/:$PATH
 ##
 upload -h
 ```
 
-## Description
+### Description
 
 This command uplaods data to the pipeline server. The most common usage is to uplad the data for the pipeline server. This is done by specifying the directory **in which the `00.general.parameter` and `0.raw.data` directory** resides locally.
 
 The copying could also be done by mounting the `leef_data` as a samba share, but it would be slower.
 
-## Example of typical usage
+### Example of typical usage
 
 ```{bash, eval = FALSE}
 upload ./20210101
@@ -107,86 +113,86 @@ upload ./20210101
 
 would upload the folder `./20210101` into the folder `Incoming` on the pipeline server.
 
-# `prepare`
-## Help
+## `prepare`
+### Help
 ```{bash}
 export PATH=~/Documents_Local/git/LEEF/local_pipeline_management/bin/:$PATH
 ##
 prepare -h
 ```
 
-## Description
+### Description
 
 Copying the data from within the folder `from` in the `LEEF` folder where it can be processed by the pipeline. Before copying the data, folder leftovers from earlier pipeline runs are dewleted by running the `clean` script. 
 
-## Example of typical usage
+### Example of typical usage
 
 ```{bash, eval = FALSE}
 prepare 20210101
 ```
 
-# `start`
-## Help
+## `start`
+### Help
 ```{bash}
 export PATH=~/Documents_Local/git/LEEF/local_pipeline_management/bin/:$PATH
 ##
 start -h
 ```
 
-## Description
+### Description
 
 The pipeline consists of two actual pipelines, namely one for bemovi (called `bemovi`), which runs several hours, and one for the other measurements (called `fast`), which runs for less than an hour. The typical usage is to run both pipelines (first `fast`, and afterwards `bemovi`).
 
-## Example of typical usage
+### Example of typical usage
 
 ```{bash, eval = FALSE}
 start all
 ```
 
-# `status`
-## Help
+## `status`
+### Help
 ```{bash}
 export PATH=~/Documents_Local/git/LEEF/local_pipeline_management/bin/:$PATH
 ##
 status -h
 ```
 
-## Description
+### Description
 
 The status returned, is the status when the pipeline is started using `start`. When started manually from the pipeline server (or via ssh), the `status` will not be reported correctly. 
 
-## Example of typical usage
+### Example of typical usage
 
 ```{bash, eval = FALSE}
 status
 ```
 
-# `download`
-## Help
+## `download`
+### Help
 ```{bash}
 export PATH=~/Documents_Local/git/LEEF/local_pipeline_management/bin/:$PATH
 ##
 download -h
 ```
 
-## Description
+### Description
 
 Download files or folder from the `LEEF` directory on the pipeline server. If you want to download files from other folders, use `..` to move one directory up. For example, `../Incoming` would download the whole `Incoming` directory.
 
-## Example of typical usage
+### Example of typical usage
 ```{bash, eval = FALSE}
 download 9.backend
 ```
 
-# `clean`
-## Help
+## `clean`
+### Help
 ```{bash}
 export PATH=~/Documents_Local/git/LEEF/local_pipeline_management/bin/:$PATH
 ##
 clean -h
 ```
 
-## Description
+### Description
 
 Delete all raw data and results folders from the pipeline. The folders containing the archived data as well as the backend (containing the Reserch Read Data databases) are not deleted!
 
@@ -194,7 +200,7 @@ This script is run automatically the script `prepare` is executed.
 
 The script asks for confirmation before deleting anything!
 
-## Example of typical usage
+### Example of typical usage
 
 ```{bash, eval = FALSE}
 clean

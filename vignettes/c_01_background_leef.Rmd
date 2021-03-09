@@ -148,10 +148,31 @@ After completing the pipeline, the folder `LEEF` on the pipeline server will loo
 
 ```
 ## 1.pre-processed.data
+
+This folder contains the pre-processed data. Pre-processed means, that the raw data (`0.raw.data`) is converted into open formats where this is possible to be done **lossless** and compressed (in case of the bemovi videos). All further processing is done with the pre-processed data. 
+
 ## 2.extracted.data
+
+This folder contains the data which will be used in the further analysis outside the pipeline. It contains the intermediate extracted data as well as the data which will finally be added to the backend (`9.backend`). The final extracted data for the backend is in `csv` format.
+
 ## 3.archived.data
+
+Data is archived as raw data, pre-processed data, and extracted data. In the respective folders, a folder using the timestamp as specified in the `sample.metadata.yml` is created containing the actual data. The raw data as well as the pre-processed data from the bemovi is just copied over, while the others are in form of `.tar.gz` archives. Of all files sha256 hashes are calculated to guarantee the correctness of the data.
+
 ## 9.backend
+
+The backend consists of the following sqlite databases. 
+
+- **LEEF.RRD.sqlite** containes the Research Ready Data (RRD) of all measurements. This one will be used for the further analysis
+
+- **LEEF.RRD_bemovi_master_cropped.sqlite** contains the master file as returned from the bemovi analysis of the cropped data from the 25 magnification images.
+- **LEEF.RRD_bemovi_master.sqlite** contains the master file as returned from the bemovi analysis of the uncropped data from the 16 and 25 magnification images. Will be used after new classification.
+- **LEEF.RRD_flowcam_algae_metadata.sqlite** metadata about the flowcam analysis (<span style="color:red">I think this one is not needed</span>)
+- **LEEF.RRD_flowcam_algae_traits.sqlite** raw data as returned fron the flowcam analysis. Will be used after new classification.
+
 ## log.xxx.txt
+
+Contains the log files for the run of the pipelines.
 
 
 # <span style="color:red">Pipeline server samba share</span>

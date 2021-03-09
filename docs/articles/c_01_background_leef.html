@@ -125,9 +125,10 @@
 <strong>O<sub>2</sub> meter</strong> see <a href="location">link</a> for manual</li>
 </ul>
 </div>
-<div id="folder-structure-for-the-pipeline" class="section level2">
-<h2 class="hasAnchor">
-<a href="#folder-structure-for-the-pipeline" class="anchor"></a>Folder Structure for the Pipeline</h2>
+</div>
+<div id="raw-data-folder-structure-for-the-pipeline" class="section level1">
+<h1 class="hasAnchor">
+<a href="#raw-data-folder-structure-for-the-pipeline" class="anchor"></a>Raw Data Folder Structure for the Pipeline</h1>
 <p>The data submitted to the pipeline consists out of two folder: one <code>0.raw.data</code> folder containing the measured data and measurement specific metadata, and the folder <code>00.general.parameter</code> containing the metadata and some data used by all measurements. The folder structure has to be as follows:</p>
 <pre><code>0.raw.data
 ├── bemovi.mag.16
@@ -178,8 +179,99 @@
 └── sample_metadata.yml</code></pre>
 <p>see the <a href="https://teams.microsoft.com/l/file/38CD9349-F25C-4773-B08A-39329D23F221?tenantId=c7e438db-e462-4c22-a90a-c358b16980b3&amp;fileType=docx&amp;objectUrl=https%3A%2F%2Fuzh.sharepoint.com%2Fsites%2FLEEF%2FShared%20Documents%2FGeneral%2F05_protocols%2FData_upload_manual.docx&amp;baseUrl=https%3A%2F%2Fuzh.sharepoint.com%2Fsites%2FLEEF&amp;serviceName=teams&amp;threadId=19:d14a98eb700e4721b35583265c27e8a3@thread.tacv2&amp;groupId=13ba9e9a-1d5d-42b1-9a95-08fd956973cc">document</a> on Teams with the detailed steps necessary to assemble the data and the necessary metadata.</p>
 <p>These two folders need top be uploaded to the pipeline server and the pipeline needs to be started.</p>
-<p>There are two approaches of uploading the data to the pipeline server and start the pipeline afterwards. The one is by using <a href="c_02_running_pipeline_lpm.html">local bash scripts</a> or <a href="c_02_running_pipeline_manual.html">from the pipeline server</a></p>
+<div id="uploading-and-managing-the-pipeline" class="section level2">
+<h2 class="hasAnchor">
+<a href="#uploading-and-managing-the-pipeline" class="anchor"></a>Uploading and managing the Pipeline</h2>
+<p>There are two approaches of uploading the data to the pipeline server and start the pipeline afterwards: using <a href="c_02_running_pipeline_lpm.html">local bash scripts</a> from a local computer or executing the commands <a href="c_03_running_pipeline_manual.html">from the pipeline server</a>.</p>
+<p>The recommended approach is to use the <a href="c_02_running_pipeline_lpm.html">local bash scripts</a>, as this will minimise the likelihood of errors or accidental data loss. Nevertheless, for some actions it might be necessary to work directly on the pipeline server, usually via an ssh session and to execute commands <a href="c_03_running_pipeline_manual.html">on the pipeline server</a>.</p>
 </div>
+</div>
+<div id="folder-structure-after-pipeline" class="section level1">
+<h1 class="hasAnchor">
+<a href="#folder-structure-after-pipeline" class="anchor"></a>Folder structure after pipeline</h1>
+<p>After completing the pipeline, the folder <code>LEEF</code> on the pipeline server will look as follws:</p>
+<pre><code>./LEEF
+├── 0.raw.data
+│   ├── bemovi.mag.16
+│   ├── bemovi.mag.25
+│   ├── flowcam
+│   ├── flowcytometer
+│   ├── manualcount
+│   └── o2meter
+├── 00.general.parameter
+│   ├── compositions.csv
+│   ├── experimental_design.csv
+│   └── sample_metadata.yml
+├── 1.pre-processed.data
+│   ├── bemovi.mag.16
+│   ├── bemovi.mag.25
+│   ├── flowcam
+│   ├── flowcytometer
+│   ├── manualcount
+│   └── o2meter
+├── 2.extracted.data
+│   ├── bemovi.mag.16
+│   ├── bemovi.mag.25
+│   ├── flowcam
+│   ├── flowcytometer
+│   ├── manualcount
+│   └── o2meter
+├── 3.archived.data
+│   ├── extracted
+│   ├── pre_processed
+│   └── raw
+├── 9.backend
+│   ├── LEEF.RRD.sqlite
+│   ├── LEEF.RRD_bemovi_master.sqlite
+│   ├── LEEF.RRD_bemovi_master_cropped.sqlite
+│   ├── LEEF.RRD_flowcam_algae_metadata.sqlite
+│   └── LEEF.RRD_flowcam_algae_traits.sqlite
+├── log.2021-03-03--15-06-32.fast.done.txt
+├── log.2021-03-03--15-06-32.fast.txt
+├── log.2021-03-03--15-14-20.bemovi.mag.16.done.txt
+├── log.2021-03-03--15-14-20.bemovi.mag.16.error.txt
+├── log.2021-03-03--15-14-20.bemovi.mag.16.txt
+├── log.2021-03-03--15-14-20.bemovi.mag.25.done.txt
+├── log.2021-03-03--15-14-20.bemovi.mag.25.error.txt
+└── log.2021-03-03--15-14-20.bemovi.mag.25.txt
+</code></pre>
+<div id="pre-processed-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#pre-processed-data" class="anchor"></a>1.pre-processed.data</h2>
+<p>This folder contains the pre-processed data. Pre-processed means, that the raw data (<code>0.raw.data</code>) is converted into open formats where this is possible to be done <strong>lossless</strong> and compressed (in case of the bemovi videos). All further processing is done with the pre-processed data.</p>
+</div>
+<div id="extracted-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#extracted-data" class="anchor"></a>2.extracted.data</h2>
+<p>This folder contains the data which will be used in the further analysis outside the pipeline. It contains the intermediate extracted data as well as the data which will finally be added to the backend (<code>9.backend</code>). The final extracted data for the backend is in <code>csv</code> format.</p>
+</div>
+<div id="archived-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#archived-data" class="anchor"></a>3.archived.data</h2>
+<p>Data is archived as raw data, pre-processed data, and extracted data. In the respective folders, a folder using the timestamp as specified in the <code>sample.metadata.yml</code> is created containing the actual data. The raw data as well as the pre-processed data from the bemovi is just copied over, while the others are in form of <code>.tar.gz</code> archives. Of all files sha256 hashes are calculated to guarantee the correctness of the data.</p>
+</div>
+<div id="backend" class="section level2">
+<h2 class="hasAnchor">
+<a href="#backend" class="anchor"></a>9.backend</h2>
+<p>The backend consists of the following sqlite databases.</p>
+<ul>
+<li><p><strong>LEEF.RRD.sqlite</strong> containes the Research Ready Data (RRD) of all measurements. This one will be used for the further analysis</p></li>
+<li><p><strong>LEEF.RRD_bemovi_master_cropped.sqlite</strong> contains the master file as returned from the bemovi analysis of the cropped data from the 25 magnification images.</p></li>
+<li><p><strong>LEEF.RRD_bemovi_master.sqlite</strong> contains the master file as returned from the bemovi analysis of the uncropped data from the 16 and 25 magnification images. Will be used after new classification.</p></li>
+<li><p><strong>LEEF.RRD_flowcam_algae_metadata.sqlite</strong> metadata about the flowcam analysis (<span style="color:red">I think this one is not needed</span>)</p></li>
+<li><p><strong>LEEF.RRD_flowcam_algae_traits.sqlite</strong> raw data as returned fron the flowcam analysis. Will be used after new classification.</p></li>
+</ul>
+</div>
+<div id="log-xxx-txt" class="section level2">
+<h2 class="hasAnchor">
+<a href="#log-xxx-txt" class="anchor"></a>log.xxx.txt</h2>
+<p>Contains the log files for the run of the pipelines.</p>
+</div>
+</div>
+<div id="pipeline-server-samba-share" class="section level1">
+<h1 class="hasAnchor">
+<a href="#pipeline-server-samba-share" class="anchor"></a><span style="color:red">Pipeline server samba share</span>
+</h1>
 </div>
   </div>
 

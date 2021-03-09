@@ -106,11 +106,338 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/LEEF-UZH/LEEF">LEEF</a></span><span class="op">)</span></code></pre></div>
+<div id="background" class="section level1">
+<h1 class="hasAnchor">
+<a href="#background" class="anchor"></a>Background</h1>
+<p>The repository <a href="https://github.com/LEEF-UZH/local_pipeline_management">local_pipeline_management</a> in the <a href="https://github.com/LEEF-UZH">LEEF-UZH organisation</a> on github contains the bash functions to manage the pipeline remotely. These commands do run in the Linux terminal as well as in the Mac terminals. <span style="color:red">check with windows!!!</span></p>
+<p>To use these commands, you can either <a href="https://github.com/LEEF-UZH/local_pipeline_management/archive/main.zip">download</a> the repository and unzip it somewhere, or clone the repository using git. This is slightly more complicated, but makes it easier to update the local commands from the github repo.</p>
+<p>To clone the commands do the following:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone git@github.com:LEEF-UZH/local_pipeline_management.git</span></code></pre></div>
+<p>which will create a directory called <code>local_pipeline_management</code>. When downloading the zip file, you have to extract it, which will create a directory called <code>local_pipeline_management-main</code>. The content of these two directories are identical for the further discussion here.</p>
+<p>Inside this directory is a directory called <code>bin</code> which contains the scripts to manage the pipeline remotely. The commands are:</p>
+<ul>
+<li><code>server</code></li>
+<li><code>upload</code></li>
+<li><code>prepare</code></li>
+<li><code>start</code></li>
+<li><code>status</code></li>
+<li><code>download</code></li>
+<li><code>clean</code></li>
+</ul>
+<p>To execute these commands, you have to be either in the directory where the commands are located, or the directory has to be in the path. If they are not in the path, you have to prepend <code>./</code> to the command to work, e.g. <code>./upload -h</code> instead of <code>upload -h</code> when they are in the path. For thiis tutorial, I will put them in the path.</p>
+<p>All commands contain a basic usage help, which can be called by using the <code>-h</code> or <code>--help</code> argument as in e.g. <code>./upload -h</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH=</span>~/Documents_Local/git/LEEF/local_pipeline_management/bin/:<span class="va">$PATH</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">##</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">upload</span> <span class="at">-h</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Usage: upload [options] source_directory target_directory</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        upload [options] source_file target_directory</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        </span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Upload data from 'source' to the target_directory on the pipeline server in the 'Incoming' </span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; directory.</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Depending on if a directory or a file is specifiedas source or target, the behaviour </span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; differs slightly:</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source_directory target_directory: Copies the source_directory into the target_directory</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source_file target_directory     : Copies the source_file into the target_directory</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source_file target_file          : Copies the source_file over the target_file</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The transfer is done by using 'rsync'.</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Options:</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   -h, --help            Print short help message and exit</span></span></code></pre></div>
+<p>We will now go through the commands available and explain what they are doing and how they can be used. Finally, we will show a basic workflow on how to upload data, start the server, download results, and prepare the pipeline server for the next run.</p>
+</div>
+<div id="prerequisite" class="section level1">
+<h1 class="hasAnchor">
+<a href="#prerequisite" class="anchor"></a>Prerequisite</h1>
+<p>Before you can use the bash scripts, you need a password to login the pipeline server. Please contact the person responsible for that.</p>
+<p>In addition, on windows, you need to be able to run bash scripts. Probably the easiest approach is to use the Linux Bash Shell under Windows 10. Please see <a href="https://www.howtogeek.com/261591/how-to-create-and-run-bash-shell-scripts-on-windows-10/">this How-To Geek article</a>. In this Linux Bash Shell in Windows you can execute the bash scripts provided.</p>
+</div>
+<div id="the-commands" class="section level1">
+<h1 class="hasAnchor">
+<a href="#the-commands" class="anchor"></a>The commands</h1>
+<div id="server" class="section level2">
+<h2 class="hasAnchor">
+<a href="#server" class="anchor"></a><code>server</code>
+</h2>
+<div id="help" class="section level3">
+<h3 class="hasAnchor">
+<a href="#help" class="anchor"></a>Help</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH=</span>~/Documents_Local/git/LEEF/local_pipeline_management/bin/:<span class="va">$PATH</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">##</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">server</span> <span class="at">-h</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Usage: server [options]</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        </span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Returns the pipeline server IP. All scripts ude this function to obtain te server IP, </span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; wherefore only here a new server IP needs to be specified</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Options:</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   -h, --help            Print short help message and exit</span></span></code></pre></div>
+</div>
+<div id="description" class="section level3">
+<h3 class="hasAnchor">
+<a href="#description" class="anchor"></a>Description</h3>
+<p>The command <code>server</code> returns the adress of the pipeline server. When the adress of the pipeline server changes, you can open the script in a text editor and simply replace the adress in the last line with the new adress.</p>
+<pre><code>#&gt; #!/bin/bash
+#&gt; 
+#&gt; usage="
+#&gt; Usage: `basename $0` [options]
+#&gt;        
+#&gt; Returns the pipeline server IP. All scripts ude this function to obtain te server IP, 
+#&gt; wherefore only here a new server IP needs to be specified
+#&gt; 
+#&gt; Options:
+#&gt;   -h, --help            Print short help message and exit
+#&gt; "
+#&gt; 
+#&gt; if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+#&gt;   echo "${usage}"
+#&gt;   exit 0
+#&gt; fi
+#&gt; 
+#&gt; ############
+#&gt; ############
+#&gt; 
+#&gt; echo 172.23.57.181</code></pre>
+</div>
+<div id="example-of-typical-usage" class="section level3">
+<h3 class="hasAnchor">
+<a href="#example-of-typical-usage" class="anchor"></a>Example of typical usage</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH=</span>~/Documents_Local/git/LEEF/local_pipeline_management/bin/:<span class="va">$PATH</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">##</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">server</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 172.23.57.181</span></span></code></pre></div>
+</div>
+</div>
+<div id="upload" class="section level2">
+<h2 class="hasAnchor">
+<a href="#upload" class="anchor"></a><code>upload</code>
+</h2>
+<div id="help-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#help-1" class="anchor"></a>Help</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH=</span>~/Documents_Local/git/LEEF/local_pipeline_management/bin/:<span class="va">$PATH</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">##</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">upload</span> <span class="at">-h</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Usage: upload [options] source_directory target_directory</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        upload [options] source_file target_directory</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        </span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Upload data from 'source' to the target_directory on the pipeline server in the 'Incoming' </span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; directory.</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Depending on if a directory or a file is specifiedas source or target, the behaviour </span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; differs slightly:</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source_directory target_directory: Copies the source_directory into the target_directory</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source_file target_directory     : Copies the source_file into the target_directory</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source_file target_file          : Copies the source_file over the target_file</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The transfer is done by using 'rsync'.</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Options:</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   -h, --help            Print short help message and exit</span></span></code></pre></div>
+</div>
+<div id="description-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#description-1" class="anchor"></a>Description</h3>
+<p>This command uplaods data to the pipeline server. The most common usage is to uplad the data for the pipeline server. This is done by specifying the directory <strong>in which the <code>00.general.parameter</code> and <code>0.raw.data</code> directory</strong> resides locally.</p>
+<p>The copying could also be done by mounting the <code>leef_data</code> as a samba share, but it would be slower.</p>
+</div>
+<div id="example-of-typical-usage-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#example-of-typical-usage-1" class="anchor"></a>Example of typical usage</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">upload</span> ./20210101</span></code></pre></div>
+<p>would upload the folder <code>./20210101</code> into the folder <code>Incoming</code> on the pipeline server.</p>
+</div>
+</div>
+<div id="prepare" class="section level2">
+<h2 class="hasAnchor">
+<a href="#prepare" class="anchor"></a><code>prepare</code>
+</h2>
+<div id="help-2" class="section level3">
+<h3 class="hasAnchor">
+<a href="#help-2" class="anchor"></a>Help</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH=</span>~/Documents_Local/git/LEEF/local_pipeline_management/bin/:<span class="va">$PATH</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">##</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">prepare</span> <span class="at">-h</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Usage: prepare [options] from</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Prepare the pipeline by populating the LEEF folder</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; with the data in the folder 'Income/from'.</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The command 'clean' will be run the *clean* command first and deleted the following folders in the LEEF folder:</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  - 00.general.data</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  - 0.raw.data</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  - 1.pre-processed.data</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  - 2.extracted.data</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  </span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Options:</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   -h, --help            Print short help message and exit</span></span></code></pre></div>
+</div>
+<div id="description-2" class="section level3">
+<h3 class="hasAnchor">
+<a href="#description-2" class="anchor"></a>Description</h3>
+<p>Copying the data from within the folder <code>from</code> in the <code>LEEF</code> folder where it can be processed by the pipeline. Before copying the data, folder leftovers from earlier pipeline runs are dewleted by running the <code>clean</code> script.</p>
+</div>
+<div id="example-of-typical-usage-2" class="section level3">
+<h3 class="hasAnchor">
+<a href="#example-of-typical-usage-2" class="anchor"></a>Example of typical usage</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">prepare</span> 20210101</span></code></pre></div>
+</div>
+</div>
+<div id="start" class="section level2">
+<h2 class="hasAnchor">
+<a href="#start" class="anchor"></a><code>start</code>
+</h2>
+<div id="help-3" class="section level3">
+<h3 class="hasAnchor">
+<a href="#help-3" class="anchor"></a>Help</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH=</span>~/Documents_Local/git/LEEF/local_pipeline_management/bin/:<span class="va">$PATH</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">##</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">start</span> <span class="at">-h</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Usage: start [options] pipeline</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Start the pipeline on the pipeline server.</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; It needs one parameter, specifying the pipeline to start.</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Options:</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   -h, --help            Print short help message and exit</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Allowed values for 'pipeline' are:</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    fast  : start the pipeline for flowcam, flowcytometer,</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            o2meter and manual count.</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    bemovi: start the pipeline for bemovi</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    all   : start all pipelines, equivalent to first running 'fast''</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            and than 'bemovi'.</span></span></code></pre></div>
+</div>
+<div id="description-3" class="section level3">
+<h3 class="hasAnchor">
+<a href="#description-3" class="anchor"></a>Description</h3>
+<p>The pipeline consists of two actual pipelines, namely one for bemovi (called <code>bemovi</code>), which runs several hours, and one for the other measurements (called <code>fast</code>), which runs for less than an hour. The typical usage is to run both pipelines (first <code>fast</code>, and afterwards <code>bemovi</code>).</p>
+</div>
+<div id="example-of-typical-usage-3" class="section level3">
+<h3 class="hasAnchor">
+<a href="#example-of-typical-usage-3" class="anchor"></a>Example of typical usage</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">start</span> all</span></code></pre></div>
+</div>
+</div>
+<div id="status" class="section level2">
+<h2 class="hasAnchor">
+<a href="#status" class="anchor"></a><code>status</code>
+</h2>
+<div id="help-4" class="section level3">
+<h3 class="hasAnchor">
+<a href="#help-4" class="anchor"></a>Help</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH=</span>~/Documents_Local/git/LEEF/local_pipeline_management/bin/:<span class="va">$PATH</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">##</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">status</span> <span class="at">-h</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Usage: status [options]</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Displays status information about the pipeline.</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The script checks, if a tmux session named 'pipeline_running'</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; is active.</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Options:</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   -h, --help            Print short help message and exit</span></span></code></pre></div>
+</div>
+<div id="description-4" class="section level3">
+<h3 class="hasAnchor">
+<a href="#description-4" class="anchor"></a>Description</h3>
+<p>The status returned, is the status when the pipeline is started using <code>start</code>. When started manually from the pipeline server (or via ssh), the <code>status</code> will not be reported correctly.</p>
+</div>
+<div id="example-of-typical-usage-4" class="section level3">
+<h3 class="hasAnchor">
+<a href="#example-of-typical-usage-4" class="anchor"></a>Example of typical usage</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">status</span></span></code></pre></div>
+</div>
+</div>
+<div id="download" class="section level2">
+<h2 class="hasAnchor">
+<a href="#download" class="anchor"></a><code>download</code>
+</h2>
+<div id="help-5" class="section level3">
+<h3 class="hasAnchor">
+<a href="#help-5" class="anchor"></a>Help</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH=</span>~/Documents_Local/git/LEEF/local_pipeline_management/bin/:<span class="va">$PATH</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">##</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ex">download</span> <span class="at">-h</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Usage: download [options] source target_directory</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        </span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Download the 'source' directory or file from within the 'LEEF' directory on the </span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; pipeline server target_directory.</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  </span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The target_directory will be created if it does not exist.</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The transfer is done by using 'rsync'.</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Options:</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   -h, --help            Print short help message and exit</span></span></code></pre></div>
+</div>
+<div id="description-5" class="section level3">
+<h3 class="hasAnchor">
+<a href="#description-5" class="anchor"></a>Description</h3>
+<p>Download files or folder from the <code>LEEF</code> directory on the pipeline server. If you want to download files from other folders, use <code>..</code> to move one directory up. For example, <code>../Incoming</code> would download the whole <code>Incoming</code> directory.</p>
+</div>
+<div id="example-of-typical-usage-5" class="section level3">
+<h3 class="hasAnchor">
+<a href="#example-of-typical-usage-5" class="anchor"></a>Example of typical usage</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">download</span> 9.backend</span></code></pre></div>
+</div>
+</div>
+<div id="clean" class="section level2">
+<h2 class="hasAnchor">
+<a href="#clean" class="anchor"></a><code>clean</code>
+</h2>
+<div id="help-6" class="section level3">
+<h3 class="hasAnchor">
+<a href="#help-6" class="anchor"></a>Help</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH=</span>~/Documents_Local/git/LEEF/local_pipeline_management/bin/:<span class="va">$PATH</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">##</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="ex">clean</span> <span class="at">-h</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Usage: clean [options]</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Clean the pipeline to prepare it for new input data.</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; This will *delete* the following folders in the LEEF folder:</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  - 00.general.data</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  - 0.raw.data</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  - 1.pre-processed.data</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  - 2.extracted.data</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  </span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Options:</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   -h, --help            Print short help message and exit</span></span></code></pre></div>
+</div>
+<div id="description-6" class="section level3">
+<h3 class="hasAnchor">
+<a href="#description-6" class="anchor"></a>Description</h3>
+<p>Delete all raw data and results folders from the pipeline. The folders containing the archived data as well as the backend (containing the Reserch Read Data databases) are not deleted!</p>
+<p>This script is run automatically the script <code>prepare</code> is executed.</p>
+<p>The script asks for confirmation before deleting anything!</p>
+</div>
+<div id="example-of-typical-usage-6" class="section level3">
+<h3 class="hasAnchor">
+<a href="#example-of-typical-usage-6" class="anchor"></a>Example of typical usage</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">clean</span></span></code></pre></div>
+</div>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 

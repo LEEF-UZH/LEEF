@@ -10,7 +10,8 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = FALSE
 )
 ```
 
@@ -21,223 +22,279 @@ library(LEEF)
 
 # Pipeline Server 
 
+Before starting, make sure that you have enough space for the LEEF data upload and processing. This can be done either by having a large enough system drive or have a second drive mounted. For this document, we will assume that the space for the LEEF data is at `/mnt/leef_data`.
+
 ## basic stuff
-  sudo timedatectl set-timezone Europe/Zurich
-	sudo apt-get update
-	sudo apt-get update
-	sudo apt-get -y upgrade
-	sudo apt-get -y install mc zile keyutils keyutils
 
-	# sudo reboot now
+```{bash}
+sudo timedatectl set-timezone Europe/Zurich
+sudo apt-get update
+sudo apt-get update
+sudo apt-get -y upgrade
+sudo apt-get -y install mc zile keyutils keyutils
+sudo apt-get -y install make
 
-## Configured everything for kerberos / the D.UZH.CH domain (as root):
-/etc/krb5.conf
-	--- relevant new lines (add them if missing) ---
-		[libdefaults]
-       default_realm = D.UZH.CH
-
-		[realms]
-       D.UZH.CH = {
-               kdc = d.uzh.ch
-               admin_server = d.uzh.ch
-               default_domain = uzh.ch
-       }
-
-	[domain_realm]
-       d.uzh.ch = D.UZH.CH
-	---
+sudo reboot now
+```
 
 
 ## Install and setup samba client
+
 ### install cifs samba client and smbclient
-	sudo apt-get -y install cifs-utils smbclient
-	
+
+```{bash}
+sudo apt-get -y install cifs-utils smbclient
+```
+
 ### Prepare for the mounting of the volume
-	 sudo mkdir /mnt/leef_data
-	 sudo chown -R ubuntu:ubuntu /mnt/leef_data
+
+```{bash}
+ sudo mkdir /mnt/leef_data
+ sudo chown -R ubuntu:ubuntu /mnt/leef_data
+ sudo touch /mnt/leef_data/NOT_MOUNTED
+ ###
+ # depends on local setup!
+ sudo mount /dev/vdb /mnt/leef_data/
+ ###
+ sudo chown -R ubuntu:ubuntu /mnt/leef_data
+ # sudo umount /mnt/leef_data/
+```
+
 
 ### Create links in `~ubuntu`
-	- `Inconing` to `/mnt/leef_data/Incoming`
-	- `Done` to `/mnt/leef_data/Done`
-	- `LEEF` to `/mnt/leef_data/LEEF`
-
-### add leef_data to hosts file
-	
-	sudo zile /etc/hosts
-	# 172.23.43.172 leef_data
-
-### add credentials file `/usr/local/etc/whisper.credential` for leef_data
-	sudo zile /usr/local/etc/whisper.credential
-	
-	# username=leef
-	# password="leef is long"
-	
-### add mounting to fstab
-
-	sudo cp /etc/fstab /etc/fstab.old
-	sudo zile /etc/fstab
-	
-	# ADD THE SAMBA SHARE
-	# THIS DOES NOT WORK# leef_data/leef_data /mnt/leef_data cifs 	-o user,credentials=/usr/local/etc/whisper.credentials,uid=1000,umask=000,noauto,x-systemd.automount,x-systemd.idle-timeout=300 0 0
-	# //leef_data/leef_data   /mnt/leef_data cifs     rw,credentials=/usr/local/etc/whisper.credential,uid=ubuntu,gid=ubuntu,file_mode=0770,dir_mode=0770,x-systemd.mount-timeout=300 0 0
-	# /mnt/leef_data/LEEF /home/ubuntu/LEEF        none    bind
-	sudo mount -a
-	
+- `Incoming` to `/mnt/leef_data/Incoming`
+- `Done` to `/mnt/leef_data/Done`
+- `LEEF` to `/mnt/leef_data/LEEF`
 
 ## [install docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-10) and setup of user
 
 ### install docker
-	sudo apt-get -y install apt-transport-https ca-certificates curl gnupg2 software-properties-common	
-	
-	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-	
-	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-	
-	sudo apt update
-	
-	# apt-cache policy docker-ce 
-	
-	sudo apt -y install docker-ce
+
+```{bash}
+sudo apt-get -y install apt-transport-https ca-certificates curl gnupg2 software-properties-common
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+sudo apt update
+
+# apt-cache policy docker-ce 
+
+sudo apt -y install docker-ce
+```
 
 ### Check if running
-	sudo systemctl status docker
-	
+
+```{bash}
+sudo systemctl status docker
+```
+
 ### Add user `ubuntu` to docker group
 
-	sudo usermod -aG docker ${USER}
-	
-	# logout and in again to active=ate the new membership
+```{bash}
+sudo usermod -aG docker ${USER}
+```
 
-## Pull LEEF-UZH/docker repo
-	
-	cd
-	git clone https://github.com/LEEF-UZH/docker.git
-	cd docker
-	sudo apt-get -y install make
-	make pull
-	
-===========
+Now logout and in again to activate the new memberships.
 
-# Samba Server and syncthing
 
-## Prepare for the mounting of the volume
-	 sudo mkdir /mnt/leef_data
-	 sudo touch /mnt/leef_data/NOT_MOUNTED
-	 sudo mount /dev/vdb /mnt/leef_data/
-	 sudo chown -R ubuntu:ubuntu /mnt/leef_data
-	 # sudo umount /mnt/leef_data/
+# Samba Server
 
 ## add mounting to fstab
-	sudo cp /etc/fstab /etc/fstab.old
-	sudo lsblk -o NAME,FSTYPE,UUID,SIZE,LABEL
-	sudo zile /etc/fstab
-	
-	# ADD
-	# UUID=a10379cf-40c6-490a-9233-1dee0552b953 /mnt/leef_data ext4 	noauto,x-systemd.automount,x-systemd.idle-timeout=300 0 0
-	
-	# sudo mount -a
-	
+
+```{bash}
+sudo cp /etc/fstab /etc/fstab.old
+sudo lsblk -o NAME,FSTYPE,UUID,SIZE,LABEL
+sudo zile /etc/fstab
+```
+
+Add the following line, but adapt the UUIB to the actual one
+
+```{bash}
+# UUID=a10379cf-40c6-490a-9233-1dee0552b953 /mnt/leef_data ext4 noauto,x-systemd.automount,x-systemd.idle-timeout=300 0 0
+```
+
+
+```{bash}
+sudo mount -a
+```
+
 ## install and configure samba
-	sudo apt-get -y install samba
-	
+
+```{bash}
+sudo apt-get -y install samba
+```
+
 ## configure samba
-	sudo cp -pf /etc/samba/smb.conf /etc/samba/smb.conf.bak
 
-	sudo addgroup smbgrp
-	sudo useradd leef -G smbgrp
-	sudo smbpasswd -a leef
-	sudo chmod -R 0770 /mnt/leef_data/LEEF /mnt/leef_data/Diverse /mnt/leef_data/sample\ one\ day
-	sudo chown -R ubuntu:smbgrp /mnt/leef_data/LEEF /mnt/leef_data/Diverse /mnt/leef_data/sample\ one\ day
+```{bash}
+sudo cp -pf /etc/samba/smb.conf /etc/samba/smb.conf.bak
+sudo addgroup smbgrp
+sudo useradd leef -G smbgrp
+sudo smbpasswd -a leef
+sudo chmod -R 0770 /mnt/leef_data/LEEF /mnt/leef_data/Diverse /mnt/leef_data/sample\ one\ day
+sudo chown -R ubuntu:smbgrp /mnt/leef_data/LEEF /mnt/leef_data/Diverse /mnt/leef_data/sample\ one\ day
 
-	sudo zile /etc/samba/smb.conf
-	
+sudo zile /etc/samba/smb.conf
+```
+
 The file should be as followed:
 
-	#======================= Global Settings =======================
 
-		[global]
-   		workgroup = WORKGROUP
-   		dns proxy = no
+```{bash}
+#======================= Global Settings =======================
 
-		#### Networking ####
+[global]
+   workgroup = WORKGROUP
+   dns proxy = no
 
-		#### Debugging/Accounting ####
+#### Networking ####
 
-   		log file = /var/log/samba/log.%m
+#### Debugging/Accounting ####
 
-   		syslog = 0
+   log file = /var/log/samba/log.%m
 
-   		panic action = /usr/share/samba/panic-action %d
+   syslog = 0
+
+   panic action = /usr/share/samba/panic-action %d
 
 
-		####### Authentication #######
+####### Authentication #######
 
-   		passdb backend = tdbsam
+   passdb backend = tdbsam
 
-   		obey pam restrictions = yes
+   obey pam restrictions = yes
 
-   		unix password sync = yes
+   unix password sync = yes
 
-   		passwd program = /usr/bin/passwd %u
-   		passwd chat = *Enter\snew\s*\spassword:* %n\n *Retype\snew\s*\spassword:* %n\n *password\supdated\ssuccessfully* .
+   passwd program = /usr/bin/passwd %u
+   passwd chat = *Enter\snew\s*\spassword:* %n\n *Retype\snew\s*\spassword:* %n\n *password\supdated\ssuccessfully* .
 
-   		pam password change = yes
+   pam password change = yes
 
-   		map to guest = bad user
+   map to guest = bad user
 
     ########## Domains ###########
 
 
     ############ Misc ############
 
-   		usershare allow guests = yes
+   usershare allow guests = yes
 
     #======================= Share Definitions =======================
 
 
     [leef_data]
-    	comment = LEEF Data
-       	path = /mnt/leef_data
-       	browsable = yes
-       	writable = yes
-  		 	read only = no
- 		  	guest ok = no
+    comment = LEEF Data
+       path = /mnt/leef_data
+       browsable = yes
+       writable = yes
+   read only = no
+   guest ok = no
+```
 
 Now restart samba
-   	
-	sudo service smbd restart
-	
-	
+   
+```{bash}
+sudo service smbd restart
+```
+
+# Pull LEEF-UZH/docker repo and the leef docker image.
+
+```{bash}
+cd
+git clone https://github.com/LEEF-UZH/docker.git
+cd docker
+make pull
+```
+
+===========
+
+
+# Old stuff which is not needed anymore
+
+
 ## Install syncthing and configure for leef_data volume
+This is not needed at the moment, although it was a nice idea. Still here to remember how it was done.
 
+echo "deb https://apt.syncthing.net/ syncthing stable" | sudo tee /etc/apt/sources.list.d/syncthing.list
+curl -s https://syncthing.net/release-key.txt | sudo apt-key add -
+printf "Package: *\nPin: origin apt.syncthing.net\nPin-Priority: 990\n" | sudo tee /etc/apt/preferences.d/syncthing
+sudo apt-get update
+sudo apt-get install syncthing
 
-	echo "deb https://apt.syncthing.net/ syncthing stable" | sudo tee /etc/apt/sources.list.d/syncthing.list
-	curl -s https://syncthing.net/release-key.txt | sudo apt-key add -
-	printf "Package: *\nPin: origin apt.syncthing.net\nPin-Priority: 990\n" | sudo tee /etc/apt/preferences.d/syncthing
-	sudo apt-get update
-	sudo apt-get install syncthing	
-	
 ### Edit `~/.config/syncthing/config.xml`
 Change 
 
+```{bash}
     <gui enabled="true" tls="false" debugging="false">
         <address>127.0.0.1:8384</address>
+```
 
 to
 
+```{bash}
     <gui enabled="true" tls="false" debugging="false">
         <address>0.0.0.0:8384</address>
-        
+```        
+
 to enable global access
-### Start syncthing	
-	sudo systemctl enable syncthing@ubuntu.service
-	sudo systemctl start syncthing@ubuntu.service
+### Start syncthing
+
+```{bash}
+sudo systemctl enable syncthing@ubuntu.service
+sudo systemctl start syncthing@ubuntu.service
+```
 
 ## Install cifs to be able to mount smb shares
-Not needed at the moment.
+This is not needed at the moment, as all transfers are done remotely using rsync.
 
-	sudo apt-get install cifs-utils
-	sudo mkdir /mnt/LEEF_IEU
 
-	
-	
+
+### add mounting to fstab
+
+some tries which did not work
+
+### Add The SAMBA Share
+
+```{bash}
+sudo cp /etc/fstab /etc/fstab.old
+sudo zile /etc/fstab
+
+```
+
+Add the following lines
+```{bash}
+# THIS DOES NOT WORK# leef_§data/leef_data /mnt/leef_data cifs -o user,credentials=/usr/local/etc/whisper.credentials,uid=1000,umask=000,noauto,x-systemd.automount,x-systemd.idle-timeout=300 0 0
+# //leef_data/leef_data   /mnt/leef_data cifs     rw,credentials=/usr/local/etc/whisper.credential,uid=ubuntu,gid=ubuntu,file_mode=0770,dir_mode=0770,x-systemd.mount-timeout=300 0 0
+# /mnt/leef_data/LEEF /home/ubuntu/LEEF        none    bind
+```
+
+finally
+```{bash}
+sudo mount -a
+```
+
+## Configure everything for kerberos / the D.UZH.CH domain (as root):
+
+```{bash}
+sudo zile /etc/krb5.conf
+```
+
+relevant new lines (add them if missing):
+
+```{bash}
+[libdefaults]
+       default_realm = D.UZH.CH
+
+[realms]
+       D.UZH.CH = {
+               kdc = d.uzh.ch
+               admin_server = d.uzh.ch
+               default_domain = uzh.ch
+       }
+
+[domain_realm]
+       d.uzh.ch = D.UZH.CH
+```
