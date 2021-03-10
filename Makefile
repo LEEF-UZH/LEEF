@@ -47,7 +47,7 @@ Readme.md: $(READMERMD)
 
 ########### pkgdown ###########
 
-pkgdown:
+pkgdown: readme
 	@Rscript -e "pkgdown::build_site()"
 
 clean_pkgdown:
@@ -160,4 +160,4 @@ list: list_variables list_targets
 
 #############
 
-.PHONY: list update clean clean_check clean_readme
+.PHONY: list update clean clean_check clean_readme docs
