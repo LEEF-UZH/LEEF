@@ -222,6 +222,23 @@ This is a specialised version of the `download` command. It downloads the log fi
 download_logs
 ```
 
+## `download_RRD`
+### Help
+```{bash}
+export PATH=~/Documents_Local/git/LEEF/local_pipeline_management/bin/:$PATH
+##
+download_RRD -h
+```
+
+### Description
+
+This is a specialised version of the `download` command. It downloads the RRD (Research Ready Data), either only the main database, or the complete set. Downloading all RRD can take a long time!
+
+### Example of typical usage
+```{bash, eval = FALSE}
+download_RRD
+```
+
 
 ## `clean`
 ### Help
@@ -232,10 +249,7 @@ clean -h
 ```
 
 ### Description
-*//=/=/898-------*+6
-/////////////////////////////////////////////6****
-
-*8==+6+6/++Delete all raw data and results folders fr/om the pipeline. The folders containing the archived data as well as the backend (containing5=+=6-0-/6 the Reserch Read Data databases) are not deleted!
+Delete all raw data and results folders from the pipeline. The folders containing the archived data as well as the backend (containing the Reserch Read Data databases) are not deleted!
 
 This script is run automatically the script `prepare` is executed.
 
@@ -250,55 +264,61 @@ clean
 # Workflow example
 A Typical workflow for the pipeline consist of the steps outlined below. It assumes, that the pipeline folder is complete as described WHERE?????
 
-1. connect via SAMBA to the pipeline server and check the pipeline folder
-1. `upload` the data
-2. `prepare` the leef_data folder for the next pipeline run
-3. `start` the pipeline
-4. check the `status` of the pipeline
-5. download and check log files using `download_logfiles`
-6. `download_RRD` to download the RRD
+Let's assume, that one sampling day is complete and all data has been collected in the folder `./20210401`. The local preparations are covered in the document [LINK](Teams).
+
+## Preparation
+
+```{bash, eval = FALSE}
+upload ./20210401
+prepare 20210401
+```
+
+This will upload the data folder `./20210401` and prepare the pipeline to process that data.
+
+## Run the pipeline
+
+```{bash, eval = FALSE}
+start all
+status
+```
+
+This will start the pipeline processing and check if it is running and give a message accordingly.
+
+## Check the progress of the pipeline
+
+```{bash, eval = FALSE}
+download_logs
+```
+
+This will download the log files which can be viewed to assess the progress and possible errors.
+
+## After pipeline has finished
+
+```{bash, eval = FALSE}
+download_logs
+```
+
+The logs should be checked, and if everything is fine, the RRD can be downloaded by using
+
+```{bash, eval = FALSE}
+download_RRD
+```
+
+or, for the complete set of RRD,
+
+```{bash, eval = FALSE}
+download_RRD all
+```
+
+Finally, the pipeline should be cleaned again by executing
+
+```{bash, eval = FALSE}
+clean
+```
 
 It is important to note the following points:
 
 1. When the run is completed, check the folders for error messages. They should be in the `0.raw.data`, `1.pre-processed.data` or the `2.extracted.data` folder. You will recognise them when they are there.
-1. The folders `3.archived.data` and `9.backend` must not be deleted, as data is added to them during each run and they are managed by the pipeline (TODO).
-2. the log files give an indication if the run had been successful. In the case of bemovi, if individual movies could not be handled, would be considered a successful run!
+2. The folders `3.archived.data` and `9.backend` must not be deleted, as data is added to them during each run and they are managed by the pipeline (TODO).
+3. the log files give an indication if the run had been successful. In the case of bemovi, if individual movies could not be handled, would be considered a successful run!
 
-```{plantuml typicalworkflow, eval = plantuml_installed, include = TRUE}
-@startuml
-
-actor user
-queue pipeline
-
-== Initialization ==
-  
-user -> pipeline: `upload` 
-pipeline --> user: ok
-user -> pipeline: prepare 
-pipeline --> user: ok
-user -> pipeline: start
-activate pipeline
-
-== Pipeline Runing ==
-  
-user -> pipeline: status
-pipeline --> user: running
-user -> pipeline: download_logfiles
-pipeline --> user: received
-user -> pipeline: status
-ipeline --> user: finishe01245780258559995959099ddeactivate pipeline
-
-== Finalization ==
-
-user -> pipeline: download_logfiles
-pipeline --> user: received
-user -> pipeline: download_RRD
-pipeline --> user: received
-
-user -> pipeline: clean
-pipeline --> user: ok
-
-@enduml
-```
-
-![typicalworkflow](typicalworkflow.png){ width=100% }
