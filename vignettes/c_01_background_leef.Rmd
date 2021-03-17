@@ -20,6 +20,14 @@ knitr::opts_chunk$set(
 library(LEEF)
 ```
 
+# General info
+
+The pipeline is located in the S3IT Science Cloud and is accessible from the UZH network.
+
+To access it from outside the UZH network, it is necessary to use the **UZH VPN**!
+
+This applies to **all** activities on the server, i.e. uploading, downloading, managing and mounting the samba share! 
+
 # LEEF Data
 ## Measurements in the Pipeline
 - **bemovi** see [link](location) for manual
@@ -175,5 +183,21 @@ The backend consists of the following sqlite databases.
 Contains the log files for the run of the pipelines.
 
 
-# <span style="color:red">Pipeline server samba share</span>
+# Pipeline server samba share
+
+The LEEF folder of the pipeline server is accessible via a samba share, although this is rather slow and is not the preferred way of uploading / downloading data. Nevertheless, it is useful to mount the pipeline server to see the progress of the pipeline and investigate errors further.
+
+The share shows the LEEF folder. For a description see the [Background LEEF Data](location) article.
+
+The credentials are available in a private internal document.
+
+## Mount samba share on a Mac
+- open Finder
+- press ⌘K to open 'Connect to Server ...'
+- enter `smb://USERNAME@IP` and when prompter for a password, enter it and tick the box 'Remember password' (or similar wording
+the next time, you will not have to enter the password
+
+## Mount samba share on Windows
+
+- no idea - somebody with a windows computer has to provide that info
 

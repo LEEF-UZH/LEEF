@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LEEF</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
       </span>
     </div>
 
@@ -63,9 +63,6 @@
       <a href="../articles/c_03_running_pipeline_manual.html">03 Manual Pipeline Management</a>
     </li>
     <li>
-      <a href="../articles/d_100_Leef_Planning.html">Leef Planning</a>
-    </li>
-    <li>
       <a href="../articles/d_101_RRD_Description.html">101 RRD Description</a>
     </li>
     <li>
@@ -73,6 +70,9 @@
     </li>
     <li>
       <a href="../articles/e_1001_start_pipeline_checklist.html">1001 Start Pipeline Checklist</a>
+    </li>
+    <li>
+      <a href="../articles/x_9999_Leef_Planning.html">9999 Leef Planning</a>
     </li>
   </ul>
 </li>
@@ -273,8 +273,26 @@
 </div>
 <div id="pipeline-server-samba-share" class="section level1">
 <h1 class="hasAnchor">
-<a href="#pipeline-server-samba-share" class="anchor"></a><span style="color:red">Pipeline server samba share</span>
-</h1>
+<a href="#pipeline-server-samba-share" class="anchor"></a>Pipeline server samba share</h1>
+<p>The LEEF folder of the pipeline server is accessible via a samba share, although this is rather slow and is not the preferred way of uploading / downloading data. Nevertheless, it is useful to mount the pipeline server to see the progress of the pipeline and investigate errors further.</p>
+<p>The share shows the LEEF folder. For a description see the <a href="location">Background LEEF Data</a> article.</p>
+<p>The credentials are available in a private internal document.</p>
+<div id="mount-samba-share-on-a-mac" class="section level2">
+<h2 class="hasAnchor">
+<a href="#mount-samba-share-on-a-mac" class="anchor"></a>Mount samba share on a Mac</h2>
+<ul>
+<li>open Finder</li>
+<li>press ⌘K to open ‘Connect to Server …’</li>
+<li>enter <code>smb://USERNAME@IP</code> and when prompter for a password, enter it and tick the box ‘Remember password’ (or similar wording the next time, you will not have to enter the password</li>
+</ul>
+</div>
+<div id="mount-samba-share-on-windows" class="section level2">
+<h2 class="hasAnchor">
+<a href="#mount-samba-share-on-windows" class="anchor"></a>Mount samba share on Windows</h2>
+<ul>
+<li>no idea - somebody with a windows computer has to provide that info</li>
+</ul>
+</div>
 </div>
   </div>
 

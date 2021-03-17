@@ -7,13 +7,20 @@ vignette: >
   %\VignetteIndexEntry{02 Local Pipeline Management}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  ##
+  plantuml.path = "./"
 )
+plantuml_installed <- require(plantuml)
+if (plantuml_installed) {
+  plantuml::plantuml_knit_engine_register()
+}
 ```
 
 ```{r setup}
@@ -123,7 +130,7 @@ prepare -h
 
 ### Description
 
-Copying the data from within the folder `from` in the `LEEF` folder where it can be processed by the pipeline. Before copying the data, folder leftovers from earlier pipeline runs are dewleted by running the `clean` script. 
+Copying the data from within the folder `from` in the `LEEF` folder where it can be processed by the pipeline. Before copying the data, folder leftovers from earlier pipeline runs are deleted by running the `clean` script. 
 
 ### Example of typical usage
 
@@ -141,7 +148,21 @@ start -h
 
 ### Description
 
-The pipeline consists of two actual pipelines, namely one for bemovi (called `bemovi`), which runs several hours, and one for the other measurements (called `fast`), which runs for less than an hour. The typical usage is to run both pipelines (first `fast`, and afterwards `bemovi`).
+The pipeline consists of three actual pipelines, 
+
+- `bemovi.mag.16` - bemovi magnification 16
+- `bemovi.mag.25` - bemovi magnification 25
+- `fast` - remaining measurements
+
+The typical usage is to run both pipelines (first `fast`, and afterwards `bemovi`) by providing the argument `all`.
+
+During the pipeline runs, logfiles are created in the pipeline folder. These have the extension 
+
+- `.txt` - the general log file which should be looked at to mag=ke sure thhat there are no errors. Thes should be logged in the
+- `error.txt` file. 
+- `done.txt` This file contains the timing info and is created at the end of the pipeline. 
+
+and are created for each pipeline run named as above.
 
 ### Example of typical usage
 
@@ -184,6 +205,24 @@ Download files or folder from the `LEEF` directory on the pipeline server. If yo
 download 9.backend
 ```
 
+## `download_logs`
+### Help
+```{bash}
+export PATH=~/Documents_Local/git/LEEF/local_pipeline_management/bin/:$PATH
+##
+download_logs -h
+```
+
+### Description
+
+This is a specialised version of the `download` command. It downloads the log files into the directory `./pipeline_logs`
+
+### Example of typical usage
+```{bash, eval = FALSE}
+download_logs
+```
+
+
 ## `clean`
 ### Help
 ```{bash}
@@ -193,8 +232,10 @@ clean -h
 ```
 
 ### Description
+*//=/=/898-------*+6
+/////////////////////////////////////////////6****
 
-Delete all raw data and results folders from the pipeline. The folders containing the archived data as well as the backend (containing the Reserch Read Data databases) are not deleted!
+*8==+6+6/++Delete all raw data and results folders fr/om the pipeline. The folders containing the archived data as well as the backend (containing5=+=6-0-/6 the Reserch Read Data databases) are not deleted!
 
 This script is run automatically the script `prepare` is executed.
 
@@ -206,5 +247,58 @@ The script asks for confirmation before deleting anything!
 clean
 ```
 
+# Workflow example
+A Typical workflow for the pipeline consist of the steps outlined below. It assumes, that the pipeline folder is complete as described WHERE?????
 
+1. connect via SAMBA to the pipeline server and check the pipeline folder
+1. `upload` the data
+2. `prepare` the leef_data folder for the next pipeline run
+3. `start` the pipeline
+4. check the `status` of the pipeline
+5. download and check log files using `download_logfiles`
+6. `download_RRD` to download the RRD
 
+It is important to note the following points:
+
+1. When the run is completed, check the folders for error messages. They should be in the `0.raw.data`, `1.pre-processed.data` or the `2.extracted.data` folder. You will recognise them when they are there.
+1. The folders `3.archived.data` and `9.backend` must not be deleted, as data is added to them during each run and they are managed by the pipeline (TODO).
+2. the log files give an indication if the run had been successful. In the case of bemovi, if individual movies could not be handled, would be considered a successful run!
+
+```{plantuml typicalworkflow, eval = plantuml_installed, include = TRUE}
+@startuml
+
+actor user
+queue pipeline
+
+== Initialization ==
+  
+user -> pipeline: `upload` 
+pipeline --> user: ok
+user -> pipeline: prepare 
+pipeline --> user: ok
+user -> pipeline: start
+activate pipeline
+
+== Pipeline Runing ==
+  
+user -> pipeline: status
+pipeline --> user: running
+user -> pipeline: download_logfiles
+pipeline --> user: received
+user -> pipeline: status
+ipeline --> user: finishe01245780258559995959099ddeactivate pipeline
+
+== Finalization ==
+
+user -> pipeline: download_logfiles
+pipeline --> user: received
+user -> pipeline: download_RRD
+pipeline --> user: received
+
+user -> pipeline: clean
+pipeline --> user: ok
+
+@enduml
+```
+
+![typicalworkflow](typicalworkflow.png){ width=100% }

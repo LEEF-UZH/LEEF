@@ -1,7 +1,7 @@
 Package: LEEF
 Type: Package
 Title: Data Package Containing Only Data and Data Information
-Version: 0.9.0
+Version: 0.9.1
 Authors@R: c(
   person(given = "Rainer M.", family = "Krug", email = "Rainer.Krug@uzh.ch", role = c("aut", "cre"))
   )
