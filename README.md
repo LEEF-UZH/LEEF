@@ -1,9 +1,6 @@
 LEEF CA planning
 ================
 
--   [LEEF Data](#leef-data)
-    -   [Measurements in the Pipeline](#measurements-in-the-pipeline)
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ``` r
@@ -14,9 +11,9 @@ library(LEEF)
 
 ## Measurements in the Pipeline
 
-The actual measurement protocols are located oin the Teams server of
-pour group. If you have access to it, the following links will point you
-tho the documents.
+The actual measurement protocols are located on the Teams server of pour
+group. If you have access to it, the following links will point you tho
+the documents.
 
 -   **sampling** see
     <a href="https://teams.microsoft.com/l/file/7E868619-064E-4C6B-BC89-935C190130D4?tenantId=c7e438db-e462-4c22-a90a-c358b16980b3&fileType=docx&objectUrl=https%3A%2F%2Fuzh.sharepoint.com%2Fsites%2FLEEF%2FShared%20Documents%2FGeneral%2F05_protocols%2FSampling_manual.docx&baseUrl=https%3A%2F%2Fuzh.sharepoint.com%2Fsites%2FLEEF&serviceName=teams&threadId=19:d14a98eb700e4721b35583265c27e8a3@thread.tacv2&groupId=13ba9e9a-1d5d-42b1-9a95-08fd956973cc" target="_blank">link</a>
