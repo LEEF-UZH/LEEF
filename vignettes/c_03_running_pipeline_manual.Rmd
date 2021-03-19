@@ -18,4 +18,35 @@ knitr::opts_chunk$set(
 library(LEEF)
 ```
 
-# 
+# Background
+
+
+
+
+
+The pipeline is run in a docker container. It consists out of two images:
+
+- **leef.base**: contains all the dependencies necessary to install and run the leef pipeline. Only non-leef packages are included in this image. There is no need to re-build this. 
+- **leef**: this image is build on-top oif the **leef.base** image and contains in addition the `LEEF` package as well as it's dependencies which are in the [LEEF-UZH repo on github](https://github.com/LEEF-UZH/drat).  
+	This image needs to be rebuild whenever new versions of the LEEF packages are available. Nevertheless, this should not be done carefully, as results may not be consistent with results from earlier images.
+
+## Prerequisites
+
+# Start the Pipeline
+
+# The makefile
+
+All of the functionality is wrapped in a `makefile`. A `makefile` is a kind of configuration file for the `make` command and defines different targets, which define what the `make` command is doing.
+
+Our `makefile` defines many targets (you can see them all by executing `make list_targets`) but only a few are relevant for the actual managing of the pipeline.
+ 
+I will only discuss the targets relevant for the normal running of the pipeline.
+
+## Start the pipeline
+
+There are three targets to start the pipeline:
+- **pipeline.bemovi**: start the pipeline to process the bemovi measurements
+- **pipeline.fast**: start the pipeline to all measurements but bemovi
+- **pipeline.all**: first, run the `fast` pipeline, followed by the `bemovi` pipeline
+
+

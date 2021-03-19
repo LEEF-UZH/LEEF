@@ -1,10 +1,10 @@
 ---
-title: "02 Local Pipeline Management"
+title: "02 Pipeline Management"
 output: 
   rmarkdown::html_vignette:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{02 Local Pipeline Management}
+  %\VignetteIndexEntry{02 Pipeline Management}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   
@@ -63,11 +63,7 @@ upload -h
 
 We will now go through the commands available and explain what they are doing and how they can be used. Finally, we will show a basic workflow on how to upload data, start the server, download results, and prepare the pipeline server for the next run.
 
-# Prerequisite
 
-Before you can use the bash scripts, you need a password to login the pipeline server. Please contact the person responsible for that.
-
-In addition, on windows, you need to be able to run bash scripts. Probably the easiest approach is to use the Linux Bash Shell under Windows 10. Please see [this How-To Geek article](https://www.howtogeek.com/261591/how-to-create-and-run-bash-shell-scripts-on-windows-10/). In this Linux Bash Shell in Windows you can execute the bash scripts provided.
 
 # The commands
 

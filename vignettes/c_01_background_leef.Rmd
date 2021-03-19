@@ -19,14 +19,38 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(LEEF)
 ```
+# Initial Remarks and Prerequisite
 
-# General info
-
-The pipeline is located in the S3IT Science Cloud and is accessible from the UZH network.
+The pipeline server is located in the S3IT Science Cloud and is accessible from within the UZH network.
 
 To access it from outside the UZH network, it is necessary to use the **UZH VPN**!
 
-This applies to **all** activities on the server, i.e. uploading, downloading, managing and mounting the samba share! 
+This applies to **all** activities on the server, e.g. uploading, downloading, managing and mounting the samba share! 
+
+## Manage Pipeline Server Instance
+To manage the pipeline server instance itself, you have to connect to Dashboard of the S3IT Science cloud at [https://cloud.s3it.uzh.ch/auth/login/?next=/](https://cloud.s3it.uzh.ch/auth/login/?next=/). Normally, no interaction with the dashboard is necessary. See the [Admin Guide](LINK) for details.
+
+## bash Shell
+
+Before you can use the bash scripts for management of the pipeline, you need a terminal running a bash shell. These are included in Mac and Linux, but need to be installed on Windows. Probably the easiest approach is to use the Windows Subsystem for Linux. This can relatively easily be installed as described [here](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/). Please see [this How-To Geek article](https://www.howtogeek.com/261591/how-to-create-and-run-bash-shell-scripts-on-windows-10/) for details on how to run bash script after the WSL is installed. In this Linux Bash Shell in Windows you can execute the bash scripts provided.
+
+Other options for Windows include <span style="color:red">To be added after input from Uriah</span>.
+
+## ssh Client
+To be able to remotely log in the pipeline server, an ssh client is needed. In Mac, Linux and the WSL are these builtin. Another widely used ssh shell under Windows is provided by [putty](https://www.putty.org). 
+
+## ssh keys
+For any interaction with the pipeline server (except of mounting the SAMBA share), you have to authenticate. The pipeline server is setup to only accept passwordless logins, which authenticates by using a so called ssh certificate, which is unique to your computer. This is safer than password authentication and much easier to use once setup. 
+
+Before you generate a new one, you should check if you already have one (not impossible) by executing
+
+```{bash, eval = FALSE}
+cat ~/.ssh/id_rsa.pub
+```
+
+from the bash shell. If it tells you `No such file or directory`, you have to generate one as described in the [S3IT training handout](https://docs.s3it.uzh.ch/cloud/training/training_handout/#create-a-key-on-linuxmacwindows10) for Mac, Windows or Linux.
+
+After you have an ssh key for your computer, you have to contact me to have it added to the instance so that you can interact with the pipeline server either via the local pipeline management scripts or logging in using ssh (username `ubuntu`) and executing commands directly in the pipeline server.
 
 # LEEF Data
 ## Measurements in the Pipeline

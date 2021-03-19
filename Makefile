@@ -76,12 +76,10 @@ clean_pkgdown:
 
 ########### web ###########
 
-# web: html vignettes readme
-# 	cp -f $(VIGHTML) $(OUTDIR)/
-# 	mkdir -p $(DATADIR)
-#	cp -f $(EXAMPLEXML) $(DATADIR)/
+web: pkgdown
 
-# clean_web: clean_html clean_vignettes clean_readme
+clean_web: clean_pkgdown
+
 # 	rm -f VIGHTMLOUT
 # 	rm -rf $(DATADIR)
 
@@ -160,4 +158,4 @@ list: list_variables list_targets
 
 #############
 
-.PHONY: list update clean clean_check clean_readme docs
+.PHONY: list update clean clean_check clean_readme docs web pkgdown, clean_pkgdown clean_web

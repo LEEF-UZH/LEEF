@@ -1,0 +1,40 @@
+---
+title: "04 Pipeline Server Admin Guide"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{04 Pipeline Server Admin Guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(LEEF)
+```
+# Initial Remarks and Prerequisite
+
+The pipeline server is located in the S3IT Science Cloud and is accessible from within the UZH network.
+
+To access it from outside the UZH network, it is necessary to use the **UZH VPN**, while the dashboard is accessible without the UZH VPN.
+
+## Manage Pipeline Server Instance
+To manage the pipeline server instance itself, you have to connect to Dashboard of the S3IT Science cloud at [https://cloud.s3it.uzh.ch/auth/login/?next=/](https://cloud.s3it.uzh.ch/auth/login/?next=/). Normally, no interaction with the dashboard is necessary. 
+
+## Adding additional ssh key to the pipeline server
+To add an additional ssh key to the instance, so that ssh access by other users is possible, you have to append the **public** ssh key to the `~/.ssh/authorized_keys` on the pipeline server. After this, the other user will be able to login. See also the [S3IT Training Handout](https://docs.s3it.uzh.ch/cloud/training/training_handout/).
+
+**NB**: You can only set one key in the Dashboard per instance. If y9ou want to add more, you have to add them as described in this section!
+
+
+
+
+
+
