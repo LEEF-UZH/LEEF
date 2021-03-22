@@ -14,11 +14,9 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+# library(LEEF)
 ```
 
-```{r setup}
-library(LEEF)
-```
 # Initial Remarks and Prerequisite
 
 The pipeline server is located in the S3IT Science Cloud and is accessible from within the UZH network.

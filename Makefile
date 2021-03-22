@@ -53,6 +53,10 @@ pkgdown: readme
 clean_pkgdown:
 	@Rscript -e "pkgdown::clean_site()"
 
+preview_pkgdown:
+	@Rscript -e "pkgdown::preview_site( preview = TRUE )"
+
+
 ####
 ########### vignettes ###########
 

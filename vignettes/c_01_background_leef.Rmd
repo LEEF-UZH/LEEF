@@ -9,15 +9,13 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-```
-
-```{r setup}
-library(LEEF)
+# library(LEEF)
 ```
 # Initial Remarks and Prerequisite
 
@@ -40,7 +38,7 @@ Other options for Windows include <span style="color:red">To be added after inpu
 To be able to remotely log in the pipeline server, an ssh client is needed. In Mac, Linux and the WSL are these builtin. Another widely used ssh shell under Windows is provided by [putty](https://www.putty.org). 
 
 ## ssh keys
-For any interaction with the pipeline server (except of mounting the SAMBA share), you have to authenticate. The pipeline server is setup to only accept passwordless logins, which authenticates by using a so called ssh certificate, which is unique to your computer. This is safer than password authentication and much easier to use once setup. 
+For any interaction with the pipeline server you have to authenticate. The pipeline server is setup to only accept passwordless logins (except of mounting the SAMBA share), which authenticates by using a so called ssh certificate, which is unique to your computer. This is safer than password authentication and much easier to use once setup. 
 
 Before you generate a new one, you should check if you already have one (not impossible) by executing
 
@@ -50,7 +48,7 @@ cat ~/.ssh/id_rsa.pub
 
 from the bash shell. If it tells you `No such file or directory`, you have to generate one as described in the [S3IT training handout](https://docs.s3it.uzh.ch/cloud/training/training_handout/#create-a-key-on-linuxmacwindows10) for Mac, Windows or Linux.
 
-After you have an ssh key for your computer, you have to contact me to have it added to the instance so that you can interact with the pipeline server either via the local pipeline management scripts or logging in using ssh (username `ubuntu`) and executing commands directly in the pipeline server.
+After you have an ssh key for your computer, you have to contactsomebody who already has access to the pipeline server to have it added to the instance so that you can interact with the pipeline server either via the local pipeline management scripts (which are using ssh) or logging in using ssh directly (username `ubuntu`) and executing commands  on the pipeline server.
 
 # LEEF Data
 ## Measurements in the Pipeline

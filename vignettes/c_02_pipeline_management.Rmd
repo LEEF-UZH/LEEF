@@ -10,7 +10,7 @@ vignette: >
   
 ---
 
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -21,11 +21,9 @@ plantuml_installed <- require(plantuml)
 if (plantuml_installed) {
   plantuml::plantuml_knit_engine_register()
 }
+# library(LEEF)
 ```
 
-```{r setup}
-library(LEEF)
-```
 
 # Background
 
