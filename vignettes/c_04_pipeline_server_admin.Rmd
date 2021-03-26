@@ -17,6 +17,8 @@ knitr::opts_chunk$set(
 # library(LEEF)
 ```
 
+# <span style="color:red">This document is incomplete and under development</span>
+
 # Initial Remarks and Prerequisite
 
 The pipeline server is located in the S3IT Science Cloud and is accessible from within the UZH network.

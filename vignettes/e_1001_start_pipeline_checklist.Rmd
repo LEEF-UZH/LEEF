@@ -15,6 +15,8 @@ knitr::opts_chunk$set(
 # library(LEEF)
 ```
 
+# <span style="color:red">This document need to be considered as it is possibly redundant - but it might be useful to have this info here as well.</span>
+
 
 # Checkliust to use the pipe,ine
 

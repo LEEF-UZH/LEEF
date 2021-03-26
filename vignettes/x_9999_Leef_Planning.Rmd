@@ -26,16 +26,8 @@ if (plantuml_installed) {
 library(LEEF)
 ```
 
-# **Important**
-
-**<span style="color:red">
-The whole document needs to be re-worked and does not reflect the current design!
-It is based on the initial planning and has not been updated.
-
-It does not reflect the actual package and day=tabase!!!!
-
-TODO: Update this document!
-</span>**
+# **<span style="color:red">The whole document needs to be re-worked and does not reflect the current design! It is based on the initial planning and has not been updated.
+It does not reflect the actual package and database!!!!</span>**
 
 # Ideas
 - The workflow should be separated from the functionality, i.e. R package containing functionality, scripts (or other packages) which contain the workflow load the functionality package and condtrol the analysis.
