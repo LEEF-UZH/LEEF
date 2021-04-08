@@ -7,17 +7,24 @@
 list_LEEF_packages(recursive = TRUE, versions = FALSE)
 }
 \arguments{
-\item{recursive}{logical: should (reverse) dependencies of (reverse) dependencies (and so on) be included? defaults to \code{TRUE}}
+\item{recursive}{logical: should (reverse) dependencies of (reverse)
+dependencies (and so on) be included? defaults to \code{TRUE}}
 
 \item{versions}{logical: should versions be returned as well.}
 }
 \value{
-list of all packages which are installed which contain \bold{.LEEF} or \bold{LEEF.} and the package \bold{LEEF} itself
+list of all packages which are installed which contain \bold{.LEEF}
+  or \bold{LEEF.} and the package \bold{LEEF} itself
 }
 \description{
 This function is a wrapper around \code{tools::package_dependencies("LEEF",
 which = "all", recursive = TRUE)} which returns only the packages which
 contain \bold{.LEEF} or \bold{LEEF.} and the package \bold{LEEF} itself.
+}
+\details{
+This function is a convenience function and only returns useful results when
+all packages which are dependencies of the \code{LEEF} package are prefixed
+with \code{LEEF.} or postficxed with \code{.LEEF}.
 }
 \examples{
 \dontrun{

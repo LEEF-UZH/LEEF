@@ -1,4 +1,4 @@
-#' Process all ques in the correct order
+#' Process all queues in the correct order
 #'
 #' This function is an example and can be used as a template for processing the
 #' queues in a script. It uses the archiver "none" for the raw and pre-processed

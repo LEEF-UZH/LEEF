@@ -2,7 +2,7 @@
 % Please edit documentation in R/init_LEEF.R
 \name{init_LEEF}
 \alias{init_LEEF}
-\title{Create folder structure for data import and processing}
+\title{Create folder structure and prepares the pipeline based on the config file}
 \usage{
 init_LEEF(
   config_file = system.file("default_config.yml", package = "LEEF"),
@@ -18,7 +18,25 @@ init_LEEF(
 invisible \code{TRUE}
 }
 \description{
-Create folder structure for data import and processing
+The following steps are done in this function
+}
+\details{
+\enumerate{
+\item the config file as specified in the argument \code{config_file} is read
+\item the folders as specified in the config file are, if they do not exist yet, created. If they are not specified, the following default values are used:
+\itemize{
+\item \strong{general.parameter}: \verb{00.general.parameter} - the directory containing general configuratuion files which are used for multiple measurements
+\item \strong{raw}: \verb{0.raw.data} - the raw data
+\item \strong{pre_processed}: \verb{1.pre_processed.data} - the pre-processed Archive Ready Data
+\item \strong{extracted}: \verb{2.extracted.data} = the extracted Research Ready Data
+\item \strong{archive}: \verb{3.archived.data} - the archived data from any of the previous steps or raw data
+\item \strong{backend}: \verb{9.backend} - the backend which contains the Research Ready Data from all pipeline runs before
+\item \strong{tools}: \code{tools} - tools needed for running the different processes in the pipeline
+}
+\item verifies if a file named \code{sample_metadata.yml} exists which contains the metadata of the raw data
+\item registers all \code{measurement}, \code{archive} and \code{backend} packages
+\item verifies,if all tools are installed and installs them when needed. \strong{THis step is specific to the bemovi measurement!!!}
+}
 }
 \examples{
 \dontrun{

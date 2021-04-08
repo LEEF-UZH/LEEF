@@ -3,7 +3,7 @@
 #' @details \bold{add_additor}: Adding a named function to the queue of additors. If the named function
 #' already exists will it be replaced.
 #'
-#' @return invisiby the function queue. A \code{list} which is processed
+#' @return invisibly the function queue. A \code{list} which is processed
 #'
 #' @rdname add
 #'

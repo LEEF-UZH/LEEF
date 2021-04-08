@@ -1,16 +1,22 @@
 #' @title Add or replace a function in a queue
 #'
-#' @description Functions starting with \code{add_...} do add a function to a queue which is
-#' processed by the coresponding \code{run_...} command.
+#' @description Functions starting with \code{add_...} do add a function to a
+#'   queue which is processed by the coresponding \code{run_...} command.
 #'
-#' @details \bold{add_additor}: Adding a named function to the queue of additors. If the named function
-#' already exists will it be replaced.
+#'   The functions do reqquire exactly two arguments with the first named
+#'   \code{input} and the second one named \code{output}. They should return
+#'   either \code{TRUE} when run successful, or \code{FALSE} when failed.
+#'   Although, the checking is not yet implemented.
 #'
-#' @param fun function which is run when calling \code{run_...()} The functions must not require any arguments!
+#' @details \bold{add}: The function which is doing the adding - normally the
+#'   specific \code{add_*} functions are used
+#'
+#' @param fun function which is run when calling \code{run_...()} The functions
+#'   must not require any arguments!
 #' @param funname name of the function
 #' @param queue name of queue in \code{getOption("LEEF")}
 #'
-#' @return invisiby the function queue.
+#' @return invisibly the function queue.
 #'
 #' @rdname add
 #'
@@ -40,5 +46,5 @@ add <- function(
   LEEF_options$queues[[queue]][[funname]] <- fun
   options(LEEF = LEEF_options)
   ##
-  invisible(  )
+  invisible( LEEF_options$queues[[queue]] )
 }

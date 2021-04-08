@@ -20,38 +20,54 @@ add_extractor(fun)
 add_pre_processor(fun)
 }
 \arguments{
-\item{fun}{function which is run when calling \code{run_...()} The functions must not require any arguments!}
+\item{fun}{function which is run when calling \code{run_...()} The functions
+must not require any arguments!}
 
 \item{funname}{name of the function}
 
 \item{queue}{name of queue in \code{getOption("LEEF")}}
 }
 \value{
-invisiby the function queue.
+invisibly the function queue.
 
-invisiby the function queue. A \code{list} which is processed
+invisibly the function queue. A \code{list} which is processed
 
-invisiby the function queue. A \code{list} which is processed
+invisibly the function queue. A \code{list} which is processed
 }
 \description{
-Functions starting with \code{add_...} do add a function to a queue which is
-processed by the coresponding \code{run_...} command.
+Functions starting with \code{add_...} do add a function to a
+  queue which is processed by the coresponding \code{run_...} command.
+
+  The functions do reqquire exactly two arguments with the first named
+  \code{input} and the second one named \code{output}. They should return
+  either \code{TRUE} when run successful, or \code{FALSE} when failed.
+  Although, the checking is not yet implemented.
 }
 \details{
-\bold{add_additor}: Adding a named function to the queue of additors. If the named function
-already exists will it be replaced.
+\bold{add}: The function which is doing the adding - normally the
+  specific \code{add_*} functions are used
 
 \bold{add_additor}: Adding a named function to the queue of additors. If the named function
 already exists will it be replaced.
 
-\bold{add_archiver}: Adding a named function to the queue of additors. If the named function
-already exists will it be replaced.
+\bold{add_archiver}: Adding a named function to the queue of
+  archivers. If the named function already exists will it be replaced.
 
-\bold{add_extractor}: Adding a named function to the queue of extractors. If the named function
-already exists will it be replaced.
+  These functions do archive the results of the current processing step.
 
-\bold{add_pre_processor}: Adding a named function to the queue of pre-processors. If the named function
-already exists will it be replaced.
+\bold{add_extractor}: Adding a named function to the queue of
+  extractors. If the named function already exists will it be replaced.
+
+  These functions should extract data from the pre-processed data. The
+  extracted data should be usable for the actual analysis to address the
+  actual research question.
+
+\bold{add_pre_processor}: Adding a named function to the queue of
+  pre-processors. If the named function already exists will it be replaced.
+
+  This function should pre-process the raw data. The pre-processed data
+  should be archive ready, i.e. contain the same information as the raw data,
+  be in an open format, and be compressed if possible.
 }
 \examples{
 \dontrun{

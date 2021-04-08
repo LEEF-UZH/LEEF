@@ -1,7 +1,11 @@
 #' @title Add or replace a function in a queue
 #'
-#' @details \bold{add_extractor}: Adding a named function to the queue of extractors. If the named function
-#' already exists will it be replaced.
+#' @details \bold{add_extractor}: Adding a named function to the queue of
+#'   extractors. If the named function already exists will it be replaced.
+#'
+#'   These functions should extract data from the pre-processed data. The
+#'   extracted data should be usable for the actual analysis to address the
+#'   actual research question.
 #'
 #' @rdname add
 #'

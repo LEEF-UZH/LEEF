@@ -1,9 +1,26 @@
-#' Create folder structure for data import and processing
+#' Create folder structure and prepares the pipeline based on the config file
+#'
+#' The following steps are done in this function
+#'
+#' 1. the config file as specified in the argument `config_file` is read
+#' 2. the folders as specified in the config file are, if they do not exist yet, created. If they are not specified, the following default values are used:
+#'    - **general.parameter**: `00.general.parameter` - the directory containing general configuratuion files which are used for multiple measurements
+#'    - **raw**: `0.raw.data` - the raw data
+#'    - **pre_processed**: `1.pre_processed.data` - the pre-processed Archive Ready Data
+#'    - **extracted**: `2.extracted.data` = the extracted Research Ready Data
+#'    - **archive**: `3.archived.data` - the archived data from any of the previous steps or raw data
+#'    - **backend**: `9.backend` - the backend which contains the Research Ready Data from all pipeline runs before
+#'    - **tools**: `tools` - tools needed for running the different processes in the pipeline
+#' 3. verifies if a file named `sample_metadata.yml` exists which contains the metadata of the raw data
+#' 4. registers all `measurement`, `archive` and `backend` packages
+#' 5. verifies,if all tools are installed and installs them when needed. **THis step is specific to the bemovi measurement!!!**
 #'
 #' @param config_file config file to use. If none is specified, \code{cofig.yml} in the current working directory will be used.
 #' @param id id which will be appended to the name in the config file, using a '.'
 #'
 #' @return invisible \code{TRUE}
+#'
+#' @md
 #'
 #' @importFrom yaml yaml.load_file write_yaml
 #'
@@ -39,7 +56,7 @@ init_LEEF <- function(
     opt_directories( general.parameter = file.path( ".", "00.general.parameter" )  )
   }
   dir.create(opt_directories()$general.parameter, recursive = TRUE, showWarnings = FALSE)
-  
+
   if ( is.null(opt_directories()$raw) ) {
     opt_directories( raw = file.path( ".", "0.raw.data" ) )
   }
@@ -59,6 +76,11 @@ init_LEEF <- function(
     opt_directories( archive = file.path( opt_directories()$raw, "..", "3.archived.data" ) )
   }
   dir.create(opt_directories()$archive, recursive = TRUE, showWarnings = FALSE)
+
+  if (is.null(opt_directories()$backend)) {
+    opt_directories( backend = file.path( opt_directories()$raw, "..", "9.backend" ) )
+  }
+  dir.create(opt_directories()$backend, recursive = TRUE, showWarnings = FALSE)
 
   if (is.null(opt_directories()$tools)) {
     opt_directories( archive = file.path( opt_directories()$raw, "..", "tools" ) )

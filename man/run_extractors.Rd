@@ -12,7 +12,7 @@ returns the results of the queue as a vector of length of the queue.
   returned \code{TRUE})
 }
 \description{
-Run all the additors registered with \code{add_extractor()}.
+Run all the extractors registered with \code{add_extractor()}.
 }
 \examples{
 \dontrun{

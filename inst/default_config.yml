@@ -18,7 +18,6 @@ maintainer: Rainer M. Krug <Rainer@uzh.ch>
 
 
 directories:
-  general.parameter: "00.general.parameter"
   raw: "0.raw.data"
   pre_processed: "1.pre-processed.data"
   extracted: "2.extracted.data"
