@@ -2,7 +2,7 @@
 % Please edit documentation in R/process_raw_comp_none.R
 \name{process_raw_comp_none}
 \alias{process_raw_comp_none}
-\title{Process all ques in the correct order}
+\title{Process all queues in the correct order}
 \usage{
 process_raw_comp_none(submitter, timestamp, ...)
 }
