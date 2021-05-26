@@ -1,0 +1,33 @@
+---
+title: "05 Block Storage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{04 Block Storage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(LEEF)
+```
+
+# Install OpenStack Swift tool
+## Manage Block Storage Container
+[Swift client](https://docs.s3it.uzh.ch/how-to_articles/how_to_use_swift_object_store/#openstack-swift-tool)
+
+## Access via GUI
+[Cyberduck](https://docs.s3it.uzh.ch/how-to_articles/how_to_use_swift_object_store/#cyberduck)
+
+## Mount Block Storage Container from Terminal
+[rclone](https://docs.s3it.uzh.ch/how-to_articles/how_to_use_swift_object_store/#rclone)
+
+## Mount Block Storage Container using a GUI
+[Mountain Duck](https://mountainduck.io)
+Setup as in mount via terminal.

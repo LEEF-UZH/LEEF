@@ -1,13 +1,13 @@
 ---
 title: "02 Pipeline Management"
-output: 
+output:
   rmarkdown::html_vignette:
     toc: true
 vignette: >
   %\VignetteIndexEntry{02 Pipeline Management}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-  
+
 ---
 
 ```{r setup, include = FALSE}
@@ -34,7 +34,7 @@ To use these commands, you can either [download](https://github.com/LEEF-UZH/loc
 To clone the commands do the following:
 
 ```bash
-git clone git@github.com:LEEF-UZH/local_pipeline_management.git
+git clone https://github.com/LEEF-UZH/local_pipeline_management.git
 ```
 
 which will create a directory called `local_pipeline_management`. When downloading the zip file, you have to extract it, which will create a directory called `local_pipeline_management-main`. The content of these two directories are identical for the further discussion here.
@@ -49,9 +49,9 @@ Inside this directory is a directory called `bin` which contains the scripts to 
 - `download`
 - `clean`
 
-To execute these commands, you have to be either in the directory where the commands are located, or the directory has to be in the path. If they are not in the path, you have to prepend `./` to the command to work, e.g. `./upload -h` instead of `upload -h` when they are in the path. For thiis tutorial, I will put them in the path.
+To execute these commands, you have to be either in the directory where the commands are located, or the directory has to be in the path. If they are not in the path, you have to prepend `./` to the command to work, e.g. `./upload -h` instead of `upload -h` when they are in the path. For this tutorial, I will put them in the path.
 
-All commands contain a basic usage help, which can be called by using the `-h` or `--help` argument as in e.g. `./upload -h`. 
+All commands contain a basic usage help, which can be called by using the `-h` or `--help` argument as in e.g. `./upload -h`.
 
 ```{bash}
 export PATH=~/Documents_Local/git/LEEF/local_pipeline_management/bin/:$PATH
@@ -124,7 +124,7 @@ prepare -h
 
 ### Description
 
-Copying the data from within the folder `from` in the `LEEF` folder where it can be processed by the pipeline. Before copying the data, folder leftovers from earlier pipeline runs are deleted by running the `clean` script. 
+Copying the data from within the folder `from` in the `LEEF` folder where it can be processed by the pipeline. Before copying the data, folder leftovers from earlier pipeline runs are deleted by running the `clean` script.
 
 ### Example of typical usage
 
@@ -142,7 +142,7 @@ start -h
 
 ### Description
 
-The pipeline consists of three actual pipelines, 
+The pipeline consists of three actual pipelines,
 
 - `bemovi.mag.16` - bemovi magnification 16
 - `bemovi.mag.25` - bemovi magnification 25
@@ -150,11 +150,11 @@ The pipeline consists of three actual pipelines,
 
 The typical usage is to run both pipelines (first `fast`, and afterwards `bemovi`) by providing the argument `all`.
 
-During the pipeline runs, logfiles are created in the pipeline folder. These have the extension 
+During the pipeline runs, logfiles are created in the pipeline folder. These have the extension
 
 - `.txt` - the general log file which should be looked at to mag=ke sure thhat there are no errors. Thes should be logged in the
-- `error.txt` file. 
-- `done.txt` This file contains the timing info and is created at the end of the pipeline. 
+- `error.txt` file.
+- `done.txt` This file contains the timing info and is created at the end of the pipeline.
 
 and are created for each pipeline run named as above.
 
@@ -174,7 +174,7 @@ status -h
 
 ### Description
 
-The status returned, is the status when the pipeline is started using `start`. When started manually from the pipeline server (or via ssh), the `status` will not be reported correctly. 
+The status returned, is the status when the pipeline is started using `start`. When started manually from the pipeline server (or via ssh), the `status` will not be reported correctly.
 
 ### Example of typical usage
 
@@ -256,7 +256,7 @@ clean
 ```
 
 # Workflow example
-A Typical workflow for the pipeline consist of the steps outlined below. It assumes, that the pipeline folder is complete as described WHERE?????
+A Typical workflow for the pipeline consist of the steps outlined below. It assumes, that the pipeline folder is complete as described in the section **Raw Data Folder Structure for the Pipeline** in the document **01 Background LEEF Data**.
 
 Let's assume, that one sampling day is complete and all data has been collected in the folder `./20210401`. The local preparations are covered in the document [LINK](Teams).
 
