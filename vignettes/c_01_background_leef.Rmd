@@ -1,6 +1,6 @@
 ---
 title: "01 Background LEEF Data"
-output: 
+output:
   rmarkdown::html_vignette:
     toc: true
 vignette: >
@@ -23,7 +23,7 @@ The pipeline server is located in the S3IT Science Cloud and is accessible from 
 
 To access it from outside the UZH network, it is necessary to use the **UZH VPN**!
 
-This applies to **all** activities on the server, e.g. uploading, downloading, managing and mounting the samba share! 
+This applies to **all** activities on the server, e.g. uploading, downloading, managing and mounting the samba share!
 
 ## Manage Pipeline Server Instance
 To manage the pipeline server instance itself, you have to connect to Dashboard of the S3IT Science cloud at [https://cloud.s3it.uzh.ch/auth/login/?next=/](https://cloud.s3it.uzh.ch/auth/login/?next=/). Normally, no interaction with the dashboard is necessary. See the [Admin Guide](LINK) for details.
@@ -35,10 +35,10 @@ Before you can use the bash scripts for management of the pipeline, you need a t
 Other options for Windows include <span style="color:red">To be added after input from Uriah</span>.
 
 ## ssh Client
-To be able to remotely log in the pipeline server, an ssh client is needed. In Mac, Linux and the WSL are these builtin. Another widely used ssh shell under Windows is provided by [putty](https://www.putty.org). 
+To be able to remotely log in the pipeline server, an ssh client is needed. In Mac, Linux and the WSL are these builtin. Another widely used ssh shell under Windows is provided by [putty](https://www.putty.org).
 
 ## ssh keys
-For any interaction with the pipeline server you have to authenticate. The pipeline server is setup to only accept passwordless logins (except of mounting the SAMBA share), which authenticates by using a so called ssh certificate, which is unique to your computer. This is safer than password authentication and much easier to use once setup. 
+For any interaction with the pipeline server you have to authenticate. The pipeline server is setup to only accept passwordless logins (except of mounting the SAMBA share), which authenticates by using a so called ssh certificate, which is unique to your computer. This is safer than password authentication and much easier to use once setup.
 
 Before you generate a new one, you should check if you already have one (not impossible) by executing
 
@@ -69,18 +69,18 @@ The data submitted to the pipeline consists out of two folder: one `0.raw.data` 
 │   ├── ...
 │   ├── ........_00192.cxd
 │   ├── bemovi_extract.mag.16.yml
-│   ├── video.description.txt
-│   ├── video_classifiers_18c_16x.rds
-│   └── video_classifiers_increasing_16x_best_available.rds
+│   ├── svm_video.description.txt
+│   ├── svm_video_classifiers_18c_16x.rds
+│   └── svm_video_classifiers_increasing_16x_best_available.rds
 ├── bemovi.mag.25
 │   ├── ........_00001.cxd
 │   ├── ...
 │   ├── ........_00096.cxd
 │   ├── bemovi_extract.mag.25.cropped.yml
 │   ├── bemovi_extract.mag.25.yml
-│   ├── video.description.txt
-│   ├── video_classifiers_18c_25x.rds
-│   └── video_classifiers_increasing_25x_best_available.rds
+│   ├── svm_video.description.txt
+│   ├── svm_video_classifiers_18c_25x.rds
+│   └── svm_video_classifiers_increasing_25x_best_available.rds
 ├── flowcam
 │   ├── 11
 │   ├── 12
@@ -97,10 +97,16 @@ The data submitted to the pipeline consists out of two folder: one `0.raw.data` 
 │   ├── 26
 │   ├── 27
 │   ├── 34
-│   └── 37
+│   ├── 37
+│   ├──flowcam_dilution.csv
+│   ├──flowcam.yml
+│   ├──svm_flowcam_classifiers_18c.rds
+│   └──svm_flowcam_classifiers_increasing_best_available.rds
 ├── flowcytometer
 │   ├── ........
-│   └── .........ciplus
+│   ├── .........ciplus
+│   ├──gates_coordinates.csv
+│   └──metadata_flowcytometer.csv
 ├── manualcount
 │   └── .........xlsx
 └── o2meter
@@ -124,11 +130,11 @@ These two folders need top be uploaded to the pipeline server and the pipeline n
 ## Uploading and managing the Pipeline
 There are two approaches of uploading the data to the pipeline server and start the pipeline afterwards: using [local bash scripts](c_02_running_pipeline_lpm.html) from a local computer or executing the commands [from the pipeline server](c_03_running_pipeline_manual.html).
 
-The recommended approach is to use the [local bash scripts](c_02_running_pipeline_lpm.html), as this will minimise the likelihood of errors or accidental data loss. Nevertheless, for some actions it might be necessary to work directly on the pipeline server, usually via an ssh session and to execute commands [on the pipeline server](c_03_running_pipeline_manual.html). 
+The recommended approach is to use the [local bash scripts](c_02_running_pipeline_lpm.html), as this will minimise the likelihood of errors or accidental data loss. Nevertheless, for some actions it might be necessary to work directly on the pipeline server, usually via an ssh session and to execute commands [on the pipeline server](c_03_running_pipeline_manual.html).
 
 # Folder structure after pipeline
 
-After completing the pipeline, the folder `LEEF` on the pipeline server will look as follws: 
+After completing the pipeline, the folder `LEEF` on the pipeline server will look as follws:
 
 ```
 ./LEEF
@@ -179,7 +185,7 @@ After completing the pipeline, the folder `LEEF` on the pipeline server will loo
 ```
 ## 1.pre-processed.data
 
-This folder contains the pre-processed data. Pre-processed means, that the raw data (`0.raw.data`) is converted into open formats where this is possible to be done **lossless** and compressed (in case of the bemovi videos). All further processing is done with the pre-processed data. 
+This folder contains the pre-processed data. Pre-processed means, that the raw data (`0.raw.data`) is converted into open formats where this is possible to be done **lossless** and compressed (in case of the bemovi videos). All further processing is done with the pre-processed data.
 
 ## 2.extracted.data
 
@@ -191,18 +197,11 @@ Data is archived as raw data, pre-processed data, and extracted data. In the res
 
 ## 9.backend
 
-The backend consists of the following sqlite databases. 
-
-- **LEEF.RRD.sqlite** containes the Research Ready Data (RRD) of all measurements. This one will be used for the further analysis
-
-- **LEEF.RRD_bemovi_master_cropped.sqlite** contains the master file as returned from the bemovi analysis of the cropped data from the 25 magnification images.
-- **LEEF.RRD_bemovi_master.sqlite** contains the master file as returned from the bemovi analysis of the uncropped data from the 16 and 25 magnification images. Will be used after new classification.
-- **LEEF.RRD_flowcam_algae_metadata.sqlite** metadata about the flowcam analysis (<span style="color:red">I think this one is not needed</span>)
-- **LEEF.RRD_flowcam_algae_traits.sqlite** raw data as returned fron the flowcam analysis. Will be used after new classification.
+The backend consists of the sqlite database **LEEF.RRD.sqlite** which containes the Research Ready Data (RRD) of all measurements. This one will be used for the further analysis.
 
 ## log.xxx.txt
 
-Contains the log files for the run of the pipelines.
+Contains the log files for the run of the pipelines. In addition, in each numbered directory, there is also a single log file.
 
 
 # Pipeline server samba share

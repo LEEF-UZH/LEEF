@@ -1,6 +1,6 @@
 ---
 title: "101 RRD Description"
-output: 
+output:
   rmarkdown::html_vignette:
     toc: true
 vignette: >
@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 
 # Tables in the `LEEF.RRD.sqlite` database
 
-This database contains the main data for reserarch. In other words, under normal circumstances, it is not necessarty to use any other database than this one. 
+This database contains the main data for reserarch. In other words, under normal circumstances, it is not necessarty to use any other database than this one.
 
 These are the sql commands to create the tables in the database.
 
@@ -40,13 +40,13 @@ CREATE TABLE IF NOT EXISTS bemovi_mag_16__mean_density_per_ml (
   density real
 );
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__mean_density_per_ml_timestamp_bottle 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__mean_density_per_ml_timestamp_bottle
 	ON bemovi_mag_16__mean_density_per_ml ("timestamp", bottle);
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__mean_density_per_ml_bottle 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__mean_density_per_ml_bottle
 	ON bemovi_mag_16__mean_density_per_ml (bottle);
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__mean_density_per_ml_timetamp 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__mean_density_per_ml_timetamp
 	ON bemovi_mag_16__mean_density_per_ml ("timestamp");
 ```
 
@@ -95,13 +95,13 @@ CREATE TABLE IF NOT EXISTS bemovi_mag_16__morph_mvt (
   video integer
 );
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__morph_mvt_timestamp_bottle 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__morph_mvt_timestamp_bottle
 	ON bemovi_mag_16__morph_mvt ("timestamp", bottle);
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__morph_mvt_bottle 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__morph_mvt_bottle
 	ON bemovi_mag_16__morph_mvt (bottle);
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__morph_mvt_timetamp 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__morph_mvt_timetamp
 	\ON bemovi_mag_16__morph_mvt ("timestamp");```
 
 ## bemovi_mag_25__mean_density_per_ml
@@ -118,13 +118,13 @@ CREATE TABLE IF NOT EXISTS bemovi_mag_25__mean_density_per_ml (
   density real
 );
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__mean_density_per_ml_timestamp_bottle 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__mean_density_per_ml_timestamp_bottle
 	ON bemovi_mag_25__mean_density_per_ml ("timestamp", bottle);
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__mean_density_per_ml_bottle 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__mean_density_per_ml_bottle
 	ON bemovi_mag_25__mean_density_per_ml (bottle);
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__mean_density_per_ml_timetamp 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__mean_density_per_ml_timetamp
 	ON bemovi_mag_25__mean_density_per_ml ("timestamp");
 ```
 ## bemovi_mag_25__mean_density_per_ml_cropped
@@ -141,13 +141,13 @@ CREATE TABLE IF NOT EXISTS bemovi_mag_25__mean_density_per_ml_cropped (
   density real
 );
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__mean_density_per_ml_cropped_timestamp_bottle 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__mean_density_per_ml_cropped_timestamp_bottle
 	ON bemovi_mag_25__mean_density_per_ml_cropped ("timestamp", bottle);
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__mean_density_per_ml_cropped_bottle 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__mean_density_per_ml_cropped_bottle
 	ON bemovi_mag_25__mean_density_per_ml_cropped (bottle);
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__mean_density_per_ml_cropped_timetamp 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__mean_density_per_ml_cropped_timetamp
 	ON bemovi_mag_25__mean_density_per_ml_cropped ("timestamp");
 ```
 ##bemovi_mag_25__morph_mvt
@@ -193,13 +193,13 @@ CREATE TABLE IF NOT EXISTS bemovi_mag_25__morph_mvt (
   video integer
 );
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__morph_mvt_timestamp_bottle 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__morph_mvt_timestamp_bottle
 	ON bemovi_mag_25__morph_mvt ("timestamp", bottle);
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__morph_mvt_bottle 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__morph_mvt_bottle
 	ON bemovi_mag_25__morph_mvt (bottle);
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__morph_mvt_timetamp 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__morph_mvt_timetamp
 	ON bemovi_mag_25__morph_mvt ("timestamp");
 ```
 
@@ -246,13 +246,13 @@ CREATE TABLE IF NOT EXISTS bemovi_mag_25__morph_mvt_cropped (
   video integer
 );
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__morph_mvt_cropped_timestamp_bottle 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__morph_mvt_cropped_timestamp_bottle
 	ON bemovi_mag_25__morph_mvt_cropped ("timestamp", bottle);
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__morph_mvt_cropped_bottle 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__morph_mvt_cropped_bottle
 	ON bemovi_mag_25__morph_mvt_cropped (bottle);
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__morph_mvt_cropped_timetamp 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_25__morph_mvt_cropped_timetamp
 	ON bemovi_mag_25__morph_mvt_cropped ("timestamp");
 ```
 
@@ -273,19 +273,19 @@ CREATE TABLE IF NOT EXISTS flowcam__algae_density (
   density integer
 );
 
-CREATE INDEX IF NOT EXISTS idx_flowcam__algae_density_timestamp_bottle 
+CREATE INDEX IF NOT EXISTS idx_flowcam__algae_density_timestamp_bottle
 	ON flowcam__algae_density ("timestamp", bottle);
 
-CREATE INDEX IF NOT EXISTS idx_flowcam__algae_density_bottle 
+CREATE INDEX IF NOT EXISTS idx_flowcam__algae_density_bottle
 	ON flowcam__algae_density (bottle);
 
-CREATE INDEX IF NOT EXISTS idx_flowcam__algae_density_timetamp 
+CREATE INDEX IF NOT EXISTS idx_flowcam__algae_density_timetamp
 	ON flowcam__algae_density ("timestamp");
 ```
 
-## flowcytometer__flowcytometer
+## flowcytometer__flowcytometer_density
 ```{sql}
-CREATE TABLE IF NOT EXISTS flowcytometer__flowcytometer (
+CREATE TABLE IF NOT EXISTS flowcytometer__flowcytometer_density (
   "timestamp" text,
   sample text,
   bottle text,
@@ -307,14 +307,14 @@ CREATE TABLE IF NOT EXISTS flowcytometer__flowcytometer (
   algae_perml real
 );
 
-CREATE INDEX IF NOT EXISTS idx_flowcytometer__flowcytometer_timestamp_bottle 
-	ON flowcytometer__flowcytometer ("timestamp", bottle);
+CREATE INDEX IF NOT EXISTS idx_flowcytometer__flowcytometer_density_timestamp_bottle
+	ON flowcytometer__flowcytometer_density ("timestamp", bottle);
 
-CREATE INDEX IF NOT EXISTS idx_flowcytometer__flowcytometer_bottle 
-	ON flowcytometer__flowcytometer (bottle);
+CREATE INDEX IF NOT EXISTS idx_flowcytometer__flowcytometer_density_bottle
+	ON flowcytometer__flowcytometer_density (bottle);
 
-CREATE INDEX IF NOT EXISTS idx_flowcytometer__flowcytometer_timetamp 
-	ON flowcytometer__flowcytometer ("timestamp");
+CREATE INDEX IF NOT EXISTS idx_flowcytometer__flowcytometer_density_timetamp
+	ON flowcytometer__flowcytometer_density ("timestamp");
 ```
 
 
@@ -382,18 +382,18 @@ CREATE TABLE IF NOT EXISTS o2meter__o2meter (
   battery_voltage_unit text
 );
 
-CREATE INDEX IF NOT EXISTS idx_o2meter__o2meter_timestamp_bottle 
+CREATE INDEX IF NOT EXISTS idx_o2meter__o2meter_timestamp_bottle
 	ON o2meter__o2meter ("timestamp", bottle);
 
-CREATE INDEX IF NOT EXISTS idx_o2meter__o2meter_bottle 
+CREATE INDEX IF NOT EXISTS idx_o2meter__o2meter_bottle
 	ON o2meter__o2meter (bottle);
 
-CREATE INDEX IF NOT EXISTS idx_o2meter__o2meter_timetamp 
+CREATE INDEX IF NOT EXISTS idx_o2meter__o2meter_timetamp
 	ON o2meter__o2meter ("timestamp");
 ```
 
 
- 
+
 
 # Tables in the `LEEF.RRD_flowcam_algae_traits.sqlite` database
 
@@ -480,13 +480,13 @@ CREATE TABLE IF NOT EXISTS flowcam__algae_traits (
   species_probability real
 );
 
-CREATE INDEX IF NOT EXISTS idx_flowcam__algae_traits_timestamp_bottle 
+CREATE INDEX IF NOT EXISTS idx_flowcam__algae_traits_timestamp_bottle
   ON flowcam__algae_traits ("timestamp", bottle);
 
-CREATE INDEX IF NOT EXISTS idx_flowcam__algae_traits_bottle 
+CREATE INDEX IF NOT EXISTS idx_flowcam__algae_traits_bottle
   ON flowcam__algae_traits (bottle);
 
-CREATE INDEX IF NOT EXISTS idx_flowcam__algae_traits_timetamp 
+CREATE INDEX IF NOT EXISTS idx_flowcam__algae_traits_timetamp
   ON flowcam__algae_traits ("timestamp");
 ```
 
@@ -537,13 +537,13 @@ CREATE TABLE IF NOT EXISTS bemovi_mag_16__master (
   video integer
 );
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__master_timestamp_bottle 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__master_timestamp_bottle
   ON bemovi_mag_16__master ("timestamp", bottle);
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__master_bottle 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__master_bottle
   ON bemovi_mag_16__master (bottle);
 
-CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__master_timetamp 
+CREATE INDEX IF NOT EXISTS idx_bemovi_mag_16__master_timetamp
   ON bemovi_mag_16__master ("timestamp");
 ```
 

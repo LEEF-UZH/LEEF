@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 # <span style="color:red">This document is in a draft version and needs to be tidied up</span>
 
-# Pipeline Server 
+# Pipeline Server
 
 Before starting, make sure that you have enough space for the LEEF data upload and processing. This can be done either by having a large enough system drive or have a second drive mounted. For this document, we will assume that the space for the LEEF data is at `/mnt/leef_data`.
 
@@ -29,8 +29,8 @@ sudo timedatectl set-timezone Europe/Zurich
 sudo apt-get update
 sudo apt-get update
 sudo apt-get -y upgrade
-sudo apt-get -y install mc zile keyutils keyutils
-sudo apt-get -y install make
+sudo apt-get -y install mc zile keyutils
+sudo apt-get -y install make mailutils
 
 sudo reboot now
 ```
@@ -77,7 +77,7 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 
 sudo apt update
 
-# apt-cache policy docker-ce 
+# apt-cache policy docker-ce
 
 sudo apt -y install docker-ce
 ```
@@ -193,7 +193,7 @@ The file should be as followed:
 ```
 
 Now restart samba
-   
+
 ```{bash}
 sudo service smbd restart
 ```
@@ -252,7 +252,7 @@ sudo apt-get update
 sudo apt-get install syncthing
 
 ### Edit `~/.config/syncthing/config.xml`
-Change 
+Change
 
 ```{bash}
     <gui enabled="true" tls="false" debugging="false">
@@ -264,7 +264,7 @@ to
 ```{bash}
     <gui enabled="true" tls="false" debugging="false">
         <address>0.0.0.0:8384</address>
-```        
+```
 
 to enable global access
 ### Start syncthing
