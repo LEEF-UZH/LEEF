@@ -14,7 +14,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.1.0 (2021-05-18)",
+  "runtimePlatform": "R version 4.1.1 (2021-08-10)",
   "author": [
     {
       "@type": "Person",
@@ -204,7 +204,7 @@
   ],
   "codeRepository": "https://github.com/LEEF-UZH/LEEF",
   "readme": "https://github.com/LEEF-UZH/LEEF/blob/master/README.md",
-  "fileSize": "0KB",
+  "fileSize": "NAKB",
   "keywords": [
     "leef",
     "r",

@@ -1,0 +1,323 @@
+---
+title: "02 Pipeline Management"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{02 Pipeline Management}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE,
+  ##
+  plantuml.path = "./"
+)
+plantuml_installed <- require(plantuml)
+if (plantuml_installed) {
+  plantuml::plantuml_knit_engine_register()
+}
+# library(LEEF)
+```
+
+
+# Background
+
+The repository [local_pipeline_management](https://github.com/LEEF-UZH/local_pipeline_management) in the [LEEF-UZH organisation](https://github.com/LEEF-UZH) on github contains the bash functions to manage the pipeline remotely. These commands do run in the Linux terminal as well as in the Mac terminals. <span style="color:red">check with windows!!!</span>
+
+To use these commands, you can either [download](https://github.com/LEEF-UZH/local_pipeline_management/archive/main.zip) the repository and unzip it somewhere, or clone the repository using git. This is slightly more complicated, but makes it easier to update the local commands from the github repo.
+
+To clone the commands do the following:
+
+```bash
+git clone https://github.com/LEEF-UZH/local_pipeline_management.git
+```
+
+which will create a directory called `local_pipeline_management`. When downloading the zip file, you have to extract it, which will create a directory called `local_pipeline_management-main`. The content of these two directories are identical for the further discussion here.
+
+Inside this directory is a directory called `bin` which contains the scripts to manage the pipeline remotely. The commands are:
+
+- `server`
+- `check_connection`
+- `upload`
+- `prepare`
+- `start`
+- `status`
+- `wait_till_done`
+- `download`
+- `download_logs`
+- `download_RRD`
+- `report_diag`
+- `report_interactive`
+- `archive`
+- `clean`
+
+- `do_all`
+
+To execute these commands, you have to be either in the directory where the commands are located, or the directory has to be in the path. If they are not in the path, you have to prepend `./` to the command to work, e.g. `./upload -h` instead of `upload -h` when they are in the path. For this tutorial, I will put them in the path.
+
+All commands contain a basic usage help, which can be called by using the `-h` or `--help` argument as in e.g. `./upload -h`.
+
+```{bash}
+export PATH=~/Documents_Local/git/LEEF/local_pipeline_management/bin/:$PATH
+##
+upload -h
+```
+
+We will now go through the commands available and explain what they are doing and how they can be used. Finally, we will show a basic workflow on how to upload data, start the server, download results, and prepare the pipeline server for the next run.
+
+# The commands
+
+## `server`
+The command `server` returns the adress of the pipeline server. When the adress of the pipeline server changes, you can open the script in a text editor and simply replace the adress in the last line with the new adress.
+
+A typical usage would be
+```{bash}
+export PATH=~/Documents_Local/git/LEEF/local_pipeline_management/bin/:$PATH
+##
+server
+```
+
+## `check_connection`
+Checks the reachability of the server and verifies the credentials, i.e. if you can execute the commands successfully.
+
+A typical usage would be
+```{bash}
+export PATH=~/Documents_Local/git/LEEF/local_pipeline_management/bin/:$PATH
+##
+check_connection
+```
+
+## `upload`
+This command uplaods data to the pipeline server. The most common usage is to uplad the data for the pipeline server. This is done by specifying the directory **in which the `00.general.parameter` and `0.raw.data` directory** resides locally.
+
+The copying could also be done by mounting the `leef_data` as a samba share, but it would be slower.
+
+A typical usage would be to upload the folder `./20210101` into the folder `Incoming` on the pipeline server.
+```{bash, eval = FALSE}
+upload ./20210101
+```
+
+
+## `prepare`
+Copying the data from within the folder `from` in the `LEEF` folder where it can be processed by the pipeline. Before copying the data, folder leftovers from earlier pipeline runs are deleted by running the `clean` script.
+
+A typical usage would be
+```{bash, eval = FALSE}
+prepare 20210101
+```
+
+## `start`
+The pipeline consists of three actual pipelines,
+
+- `bemovi.mag.16` - bemovi magnification 16
+- `bemovi.mag.25` - bemovi magnification 25
+- `fast` - remaining measurements
+
+The typical usage is to run both pipelines (first `fast`, and afterwards `bemovi`) by providing the argument `all`.
+
+During the pipeline runs, logfiles are created in the pipeline folder. These have the extension
+
+- `.txt` - the general log file which should be looked at to mag=ke sure thhat there are no errors. Thes should be logged in the
+- `error.txt` file.
+- `done.txt` This file contains the timing info and is created at the end of the pipeline.
+
+and are created for each pipeline run named as above.
+
+```{bash}
+export PATH=~/Documents_Local/git/LEEF/local_pipeline_management/bin/:$PATH
+##
+start -h
+```
+
+A typical usage would be
+```{bash, eval = FALSE}
+start all
+```
+
+## `status`
+The status returned, is the status when the pipeline is started using `start`. When started manually from the pipeline server (or via ssh), the `status` will not be reported correctly.
+
+A typical usage would be
+```{bash, eval = FALSE}
+status
+```
+
+## `wait_till_done`
+Waits and displays a spinning symbol (spinning every five minutes) until the pipeline is finished.
+
+<span style="color:red">Interruption of this command will **not** interrupt the pipeline!</span>
+
+A typical usage would be
+```{bash, eval = FALSE}
+wait_till_done
+```
+
+## `download`
+Download files or folder from the `LEEF` directory on the pipeline server. If you want to download files from other folders, use `..` to move one directory up. For example, `../Incoming` would download the whole `Incoming` directory.
+
+A typical usage would be
+```{bash, eval = FALSE}
+download 9.backend
+```
+
+## `download_logs`
+This is a specialised version of the `download` command. It downloads the log files into the directory `./pipeline_logs`
+
+A typical usage would be
+```{bash, eval = FALSE}
+download_logs
+```
+
+## `download_RRD`
+This is a specialised version of the `download` command. It downloads the RRD (Research Ready Data), either only the main database, or the complete set. Downloading all RRD can take a long time!
+
+A typical usage would be
+```{bash, eval = FALSE}
+download_RRD
+```
+
+## `report_diag`
+Creates a diagnostic report of the RRD database and opens it. The second parameter specifies the format of the report. Supported are at the moment `html`, `pdf` and `word`.
+
+A typical usage would be
+```{bash, eval = FALSE}
+report_diag ~/Desktop/9/backend/RRD.sqlite html
+```
+
+## `report_interactive`
+Creates an interactive report of the RRD database and opens it in the web browser. 
+
+A typical usage would be
+```{bash, eval = FALSE}
+report_interactive ~/Desktop/9/backend/RRD.sqlite
+```
+
+## `archive`
+Move all content in the folder 'LEEF/3.archived.data' to the container 'LEEF.archived.data'
+and copy the content of the folder 'LEEF/9.backend' to the container 'LEEF.backend' 
+on the S3 Swift Object Storage. The transfer uses the 'swift' command.
+
+A typical usage would be
+```{bash, eval = FALSE}
+archive
+```
+
+## `clean`
+Delete all raw data and results folders from the pipeline. The folders containing the archived data as well as the backend (containing the Reserch Read Data databases) are not deleted!
+
+This script is run automatically the script `prepare` is executed.
+
+The script asks for confirmation before deleting anything!
+
+A typical usage would be
+```{bash, eval = FALSE}
+clean
+```
+
+## `do_all`
+This is a convenience function which executes the following commands in order:
+
+1. upload
+2. clean
+3. prepare
+4. start all
+5. wait_till_done
+6. download_logs
+7. download_rrd
+8. report_diag_
+
+A typical usage would be
+```{bash, eval = FALSE}
+do_all ./20210101
+```
+which runs the pipeline using the data in `./20210101` and downloads the logs and RRD and opens the diagnostic report.
+
+# Workflow example
+A Typical workflow for the pipeline consist of the steps outlined below. It assumes, that the pipeline folder is complete as described in the section **Raw Data Folder Structure for the Pipeline** in the document **01 Background LEEF Data**.
+
+Let's assume, that one sampling day is complete and all data has been collected in the folder `./20210401`. The local preparations are covered in the document [LINK](Teams).
+
+## Preparation
+
+```{bash, eval = FALSE}
+upload ./20210401
+prepare 20210401
+```
+
+This will upload the data folder `./20210401` and prepare the pipeline to process that data.
+
+## Run the pipeline
+
+```{bash, eval = FALSE}
+start all
+status
+```
+
+This will start the pipeline processing and check if it is running and give a message accordingly.
+
+
+
+## Check the progress of the pipeline
+
+```{bash, eval = FALSE}
+wait_till_done
+```
+will than wait until the pipeline is finished and display a spinning symbol.
+
+## After pipeline has finished
+
+```{bash, eval = FALSE}
+download_logs
+```
+
+This will download the log files which can be viewed to assess the progress and possible errors.
+
+The logs should be checked, and if everything is fine, the RRD can be downloaded by using
+
+```{bash, eval = FALSE}
+download_RRD
+```
+
+or, for the complete set of RRD,
+
+```{bash, eval = FALSE}
+download_RRD all
+```
+
+## Create reports to do the final verification the RRD
+
+```{bash, eval = FALSE}
+report_diag ./LEEF.RRD.sqlite
+```
+
+will create and open an html report of the RRD database which can be evaluated if the pipeline measurements and the pipeline provided consistent results and can be used for further analysis.
+
+## Archiving the correct data
+
+Only if the previous evaluation is succesfull, the pipeline data should be archived, i.e. moved to a different storage by using
+
+```{bash, eval = FALSE}
+archive
+```
+
+## cleaning the pipeline
+
+Finally, the pipeline should be cleaned again by executing
+
+```{bash, eval = FALSE}
+clean
+```
+
+## Important points
+
+It is important to note the following points:
+
+1. When the run is completed, check the folders for error messages. They should be in the `0.raw.data`, `1.pre-processed.data` or the `2.extracted.data` folder. You will recognise them when they are there.
+2. The folders `3.archived.data` and `9.backend` must not be deleted, as data is added to them during each run and they are managed by the pipeline (TODO).
+3. the log files give an indication if the run had been successful. In the case of bemovi, if individual movies could not be handled, would be considered a successful run!
+
