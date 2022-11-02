@@ -3,8 +3,8 @@
 # General info regarding the processing
 
 
-name: LEEF
-description: LEEF Data from an long term experiment.
+name: LEEF-2
+description: LEEF-2 Data from an long term experiment.
              Some more detaled info has to follow.
 maintainer: Rainer M. Krug <Rainer@uzh.ch>
 
@@ -39,6 +39,10 @@ measurement_packages:
     name: LEEF.measurement.bemovi
     InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.bemovi')
     RegisterCommand: LEEF.measurement.bemovi::tools_path(tools_path = '.'); LEEF.measurement.bemovi::register()
+  LEEF.measurement.conductivity:
+    name: LEEF.measurement.conductivity
+    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.conductivity')
+    RegisterCommand: LEEF.measurement.conductivity::register()
   LEEF.measurement.flocam:
     name: LEEF.measurement.flowcam
     InstallCommand: drat::addRepo('LEEF-UZH'); install.packages(('LEEF.measurement.flowcam')

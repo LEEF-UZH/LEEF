@@ -1,7 +1,7 @@
 Package: LEEF
 Type: Package
 Title: Data Package Containing Only Data and Data Information
-Version: 0.9.1
+Version: 0.9.2
 Authors@R: c(
   person(given = "Rainer M.", family = "Krug", email = "Rainer.Krug@uzh.ch", role = c("aut", "cre")),
   person("SNF Project 310030_188431", role = "fnd")
@@ -36,5 +36,5 @@ Suggests:
     rmarkdown,
     shiny,
     shinyFiles
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1
 VignetteBuilder: knitr

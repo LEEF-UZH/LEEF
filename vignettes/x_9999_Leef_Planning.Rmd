@@ -14,15 +14,16 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   echo = FALSE,
-  eval = TRUE,
+  eval = FALSE,
   fig.retina = 4,
   ##
   plantuml.path = "./"
 )
-plantuml_installed <- require(plantuml)
-if (plantuml_installed) {
-  plantuml::plantuml_knit_engine_register()
-}
+# plantuml_installed <- require(plantuml)
+# if (plantuml_installed) {
+#   plantuml::plantuml_knit_engine_register()
+# }
+plantuml_installed <- FALSE
 library(LEEF)
 ```
 
@@ -402,7 +403,7 @@ Format has to be human readable, YAML and one can use the package `config` https
 
 Possible fields (with default valuse) could be (if one is using R instead of webhooks for DOI and TTS):
 
-```{R, echo = TRUE, eval = FALSE}
+```{R, echo = TRUE, eval = plantuml_installed, include = FALSE}
 default:
   doi: FALSE
   tts: TRUE
@@ -983,12 +984,12 @@ install.packages("later")
 ## Prerequisites
 As the package is only on github, you need `devtools` to install it easily as a prerequisite
 
-```{r installation_prerequisites, eval = FALSE, echo = TRUE}
+```{r installation_prerequisites, echo = TRUE}
 install.packages("devtools")
 ```
 
 ## Installation of the package
-```{r install, eval = FALSE, echo = TRUE}
+```{r install, echo = TRUE}
 devtools::install_github("rkrug/LEEF")
 ```
 
@@ -1005,7 +1006,7 @@ readLines( system.file("default_config.yml", package = "LEEF") )
 
 The fastest way to start a new data storage infrastructure is to create an empty directory and to copy the config file into this directory. Afterwards, change the working directory to that directoryt and initialise the folder structure and the package:
 
-```{r init_db, eval = FALSE, echo = TRUE}
+```{r init_db, echo = TRUE}
 # library("LEEF")
 devtools::load_all(here::here())
 nd <- "Data_directory"
@@ -1020,7 +1021,7 @@ initialize_db()
 
 After that, the data to be imported can be placed into the ToBeImported folder and imported by calling
 
-```{r import, eval = FALSE, echo = TRUE}
+```{r import, echo = TRUE}
 import_new_data()
 ```
 
@@ -1056,7 +1057,7 @@ endif
 ### `config.yml`
 In the `config.yml` file are all configuration options of the infrastructure. The example one looks as follow:
 
-```{r config_yml, eval = FALSE, echo = TRUE}
+```{r config_yml, echo = TRUE}
 default:
   maintainer:
     name: Max Mustermann

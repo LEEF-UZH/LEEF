@@ -1,20 +1,19 @@
 {
-  "@context": [
-    "https://doi.org/10.5063/schema/codemeta-2.0",
-    "http://schema.org"
-  ],
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "LEEF",
   "description": "Setup package for the LEEF pipeline which loads / installs all necessary packages and functions to run the pipeline.",
   "name": "LEEF: Data Package Containing Only Data and Data Information",
+  "codeRepository": "https://github.com/LEEF-UZH/LEEF",
+  "issueTracker": "https://github.com/LEEF-UZH/LEEF/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.1.1 (2021-08-10)",
+  "runtimePlatform": "R version 4.2.1 (2022-06-23)",
   "author": [
     {
       "@type": "Person",
@@ -23,8 +22,6 @@
       "email": "Rainer.Krug@uzh.ch"
     }
   ],
-  "contributor": {},
-  "copyrightHolder": {},
   "funder": [
     {
       "@type": "Organization",
@@ -101,49 +98,49 @@
       "sameAs": "https://CRAN.R-project.org/package=shinyFiles"
     }
   ],
-  "softwareRequirements": [
-    {
+  "softwareRequirements": {
+    "1": {
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
       "version": ">= 3.5.0"
     },
-    {
+    "2": {
       "@type": "SoftwareApplication",
       "identifier": "LEEF.measurement.bemovi",
       "name": "LEEF.measurement.bemovi"
     },
-    {
+    "3": {
       "@type": "SoftwareApplication",
       "identifier": "LEEF.measurement.flowcam",
       "name": "LEEF.measurement.flowcam"
     },
-    {
+    "4": {
       "@type": "SoftwareApplication",
       "identifier": "LEEF.measurement.flowcytometer",
       "name": "LEEF.measurement.flowcytometer"
     },
-    {
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "LEEF.measurement.manualcount",
       "name": "LEEF.measurement.manualcount"
     },
-    {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "LEEF.measurement.o2meter",
       "name": "LEEF.measurement.o2meter"
     },
-    {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "LEEF.archive.default",
       "name": "LEEF.archive.default"
     },
-    {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "LEEF.backend.sqlite",
       "name": "LEEF.backend.sqlite"
     },
-    {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "testthat",
       "name": "testthat",
@@ -155,7 +152,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=testthat"
     },
-    {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "yaml",
       "name": "yaml",
@@ -167,7 +164,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=yaml"
     },
-    {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "drat",
       "name": "drat",
@@ -179,12 +176,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=drat"
     },
-    {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "utils",
       "name": "utils"
     },
-    {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "R.utils",
       "name": "R.utils",
@@ -196,20 +193,14 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=R.utils"
     },
-    {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "tools",
       "name": "tools"
-    }
-  ],
-  "codeRepository": "https://github.com/LEEF-UZH/LEEF",
+    },
+    "SystemRequirements": null
+  },
+  "fileSize": "3336.454KB",
   "readme": "https://github.com/LEEF-UZH/LEEF/blob/master/README.md",
-  "fileSize": "3730.823KB",
-  "keywords": [
-    "leef",
-    "r",
-    "data-analysis",
-    "data-processing"
-  ],
-  "issueTracker": "https://github.com/LEEF-UZH/LEEF/issues"
+  "keywords": ["leef", "r", "data-analysis", "data-processing"]
 }
