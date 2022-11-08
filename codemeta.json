@@ -1,19 +1,19 @@
 {
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
-  "identifier": "LEEF",
+  "identifier": "LEEF.2",
   "description": "Setup package for the LEEF pipeline which loads / installs all necessary packages and functions to run the pipeline.",
-  "name": "LEEF: Data Package Containing Only Data and Data Information",
+  "name": "LEEF.2: Data Package Containing Only Data and Data Information",
   "codeRepository": "https://github.com/LEEF-UZH/LEEF",
   "issueTracker": "https://github.com/LEEF-UZH/LEEF/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.9.2",
+  "version": "0.9.5",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.2.1 (2022-06-23)",
+  "runtimePlatform": "R version 4.2.2 (2022-10-31)",
   "author": [
     {
       "@type": "Person",
@@ -107,18 +107,18 @@
     },
     "2": {
       "@type": "SoftwareApplication",
-      "identifier": "LEEF.measurement.bemovi",
-      "name": "LEEF.measurement.bemovi"
+      "identifier": "LEEF.2.measurement.bemovi",
+      "name": "LEEF.2.measurement.bemovi"
     },
     "3": {
       "@type": "SoftwareApplication",
-      "identifier": "LEEF.measurement.flowcam",
-      "name": "LEEF.measurement.flowcam"
+      "identifier": "LEEF.2.measurement.flowcam",
+      "name": "LEEF.2.measurement.flowcam"
     },
     "4": {
       "@type": "SoftwareApplication",
-      "identifier": "LEEF.measurement.flowcytometer",
-      "name": "LEEF.measurement.flowcytometer"
+      "identifier": "LEEF.2.measurement.flowcytometer",
+      "name": "LEEF.2.measurement.flowcytometer"
     },
     "5": {
       "@type": "SoftwareApplication",
@@ -137,8 +137,8 @@
     },
     "8": {
       "@type": "SoftwareApplication",
-      "identifier": "LEEF.backend.sqlite",
-      "name": "LEEF.backend.sqlite"
+      "identifier": "LEEF.2.backend.sqlite",
+      "name": "LEEF.2.backend.sqlite"
     },
     "9": {
       "@type": "SoftwareApplication",
@@ -200,7 +200,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "3336.454KB",
-  "readme": "https://github.com/LEEF-UZH/LEEF/blob/master/README.md",
+  "fileSize": "1596.474KB",
+  "readme": "https://github.com/LEEF-UZH/LEEF/blob/LEEF-2/README.md",
   "keywords": ["leef", "r", "data-analysis", "data-processing"]
 }
