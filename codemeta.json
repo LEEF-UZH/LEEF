@@ -7,7 +7,7 @@
   "codeRepository": "https://github.com/LEEF-UZH/LEEF",
   "issueTracker": "https://github.com/LEEF-UZH/LEEF/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
