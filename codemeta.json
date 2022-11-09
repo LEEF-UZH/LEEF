@@ -107,40 +107,45 @@
     },
     "2": {
       "@type": "SoftwareApplication",
+      "identifier": "LEEF.2.measurement.conductivity",
+      "name": "LEEF.2.measurement.conductivity"
+    },
+    "3": {
+      "@type": "SoftwareApplication",
       "identifier": "LEEF.2.measurement.bemovi",
       "name": "LEEF.2.measurement.bemovi"
     },
-    "3": {
+    "4": {
       "@type": "SoftwareApplication",
       "identifier": "LEEF.2.measurement.flowcam",
       "name": "LEEF.2.measurement.flowcam"
     },
-    "4": {
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "LEEF.2.measurement.flowcytometer",
       "name": "LEEF.2.measurement.flowcytometer"
     },
-    "5": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "LEEF.2.measurement.manualcount",
       "name": "LEEF.2.measurement.manualcount"
     },
-    "6": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "LEEF.2.measurement.o2meter",
       "name": "LEEF.2.measurement.o2meter"
     },
-    "7": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "LEEF.2.archive.default",
       "name": "LEEF.2.archive.default"
     },
-    "8": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "LEEF.2.backend.sqlite",
       "name": "LEEF.2.backend.sqlite"
     },
-    "9": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "testthat",
       "name": "testthat",
@@ -152,7 +157,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=testthat"
     },
-    "10": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "yaml",
       "name": "yaml",
@@ -164,7 +169,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=yaml"
     },
-    "11": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "drat",
       "name": "drat",
@@ -176,12 +181,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=drat"
     },
-    "12": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "utils",
       "name": "utils"
     },
-    "13": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "R.utils",
       "name": "R.utils",
@@ -193,14 +198,14 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=R.utils"
     },
-    "14": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "tools",
       "name": "tools"
     },
     "SystemRequirements": null
   },
-  "fileSize": "3281.568KB",
+  "fileSize": "3281.623KB",
   "readme": "https://github.com/LEEF-UZH/LEEF/blob/LEEF-2/README.md",
   "keywords": ["leef", "r", "data-analysis", "data-processing"]
 }
