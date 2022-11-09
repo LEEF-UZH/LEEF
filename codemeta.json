@@ -13,7 +13,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.2.2 (2022-10-31)",
+  "runtimePlatform": "R version 4.2.1 (2022-06-23)",
   "author": [
     {
       "@type": "Person",
@@ -122,18 +122,18 @@
     },
     "5": {
       "@type": "SoftwareApplication",
-      "identifier": "LEEF.measurement.manualcount",
-      "name": "LEEF.measurement.manualcount"
+      "identifier": "LEEF.2.measurement.manualcount",
+      "name": "LEEF.2.measurement.manualcount"
     },
     "6": {
       "@type": "SoftwareApplication",
-      "identifier": "LEEF.measurement.o2meter",
-      "name": "LEEF.measurement.o2meter"
+      "identifier": "LEEF.2.measurement.o2meter",
+      "name": "LEEF.2.measurement.o2meter"
     },
     "7": {
       "@type": "SoftwareApplication",
-      "identifier": "LEEF.archive.default",
-      "name": "LEEF.archive.default"
+      "identifier": "LEEF.2.archive.default",
+      "name": "LEEF.2.archive.default"
     },
     "8": {
       "@type": "SoftwareApplication",
@@ -200,7 +200,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1596.474KB",
+  "fileSize": "3281.564KB",
   "readme": "https://github.com/LEEF-UZH/LEEF/blob/LEEF-2/README.md",
   "keywords": ["leef", "r", "data-analysis", "data-processing"]
 }

@@ -35,30 +35,30 @@ directories:
 
 
 measurement_packages:
-  LEEF.measurement.bemovi:
-    name: LEEF.measurement.bemovi
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.bemovi')
-    RegisterCommand: LEEF.measurement.bemovi::tools_path(tools_path = '.'); LEEF.measurement.bemovi::register()
-  LEEF.measurement.conductivity:
-    name: LEEF.measurement.conductivity
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.conductivity')
-    RegisterCommand: LEEF.measurement.conductivity::register()
-  LEEF.measurement.flocam:
-    name: LEEF.measurement.flowcam
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages(('LEEF.measurement.flowcam')
-    RegisterCommand: LEEF.measurement.flowcam::register()
-  LEEF.measurement.flowcytometer:
-    name: LEEF.measurement.flowcytometer
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.flowcytometer')
-    RegisterCommand: LEEF.measurement.flowcytometer::register()
-  LEEF.measurement.manualcount:
-    name: LEEF.measurement.manualcount
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.manualcount')
-    RegisterCommand: LEEF.measurement.manualcount::register()
-  LEEF.measurement.o2meter:
-    name: LEEF.measurement.o2meter
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.measurement.o2meter')
-    RegisterCommand: LEEF.measurement.o2meter::register()
+  LEEF.2.measurement.bemovi:
+    name: LEEF.2.measurement.bemovi
+    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.2.measurement.bemovi')
+    RegisterCommand: LEEF.2.measurement.bemovi::tools_path(tools_path = '.'); LEEF.2.measurement.bemovi::register()
+  LEEF.2.measurement.conductivity:
+    name: LEEF.2.measurement.conductivity
+    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.2.measurement.conductivity')
+    RegisterCommand: LEEF.2.measurement.conductivity::register()
+  LEEF.2.measurement.flocam:
+    name: LEEF.2.measurement.flowcam
+    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages(('LEEF.2.measurement.flowcam')
+    RegisterCommand: LEEF.2.measurement.flowcam::register()
+  LEEF.2.measurement.flowcytometer:
+    name: LEEF.2.measurement.flowcytometer
+    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.2.measurement.flowcytometer')
+    RegisterCommand: LEEF.2.measurement.flowcytometer::register()
+  LEEF.2.measurement.manualcount:
+    name: LEEF.2.measurement.manualcount
+    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.2.measurement.manualcount')
+    RegisterCommand: LEEF.2.measurement.manualcount::register()
+  LEEF.2.measurement.o2meter:
+    name: LEEF.2.measurement.o2meter
+    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.2.measurement.o2meter')
+    RegisterCommand: LEEF.2.measurement.o2meter::register()
 
 
 
@@ -72,10 +72,10 @@ measurement_packages:
 
 
 archive_packages:
-  LEEF.archive.default:
-    name: LEEF.archive.default
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.archive.default')
-    RegisterCommand: LEEF.archive.default::register(compression = "none")
+  LEEF.2.archive.default:
+    name: LEEF.2.archive.default
+    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.2.archive.default')
+    RegisterCommand: LEEF.2.archive.default::register(compression = "none")
 
 # --------------------------------------------------------------------
 # backend packages ()
@@ -90,14 +90,14 @@ archive_packages:
 
 
 backend_packages:
-  LEEF.backend.csv:
-    name: LEEF.backend.csv
-    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.backend.csv')
-    RegisterCommand: LEEF.backend.csv::register()
-  # LEEF.backend.sqlite:
-  #   name: LEEF.backend.sqlite
-  #   InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.backend.sqlite')
-  #   RegisterCommand: LEEF.backend.sqlite::register()
+  LEEF.2.backend.csv:
+    name: LEEF.2.backend.csv
+    InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.2.backend.csv')
+    RegisterCommand: LEEF.2.backend.csv::register()
+  # LEEF.2.backend.sqlite:
+  #   name: LEEF.2.backend.sqlite
+  #   InstallCommand: drat::addRepo('LEEF-UZH'); install.packages('LEEF.2.backend.sqlite')
+  #   RegisterCommand: LEEF.2.backend.sqlite::register()
   #   dbpath:
   #   dbname: 'LEEFData.sqlite'
 
