@@ -57,7 +57,7 @@ shinyServer(function(input, output) {
       value = 0,
       {
         output$new_data_bemovi_result <- renderPrint("Processing...")
-        x <- LEEF.measurement.bemovi::add_new_data(
+        x <- LEEF.2.measurement.bemovi::add_new_data(
           input = file.path( "~", "LEEF", "000.NewData", "bemovi"),
           output = file.path("~", "LEEF", opt_directories()$raw)
         )
@@ -78,19 +78,19 @@ shinyServer(function(input, output) {
       value = 0,
       {
         output$nextract_points_bemovi_result <- renderPrint("Processing...")
-        if ( !isTRUE(LEEF.measurement.bemovi::raw_data_ok( file.path("~", "LEEF", "0.raw.data"))) ) {
+        if ( !isTRUE(LEEF.2.measurement.bemovi::raw_data_ok( file.path("~", "LEEF", "0.raw.data"))) ) {
           output$nextract_points_bemovi_result <- renderPrint("Raw Data can not be processed yet!")
         } else {
-          LEEF.measurement.bemovi::pre_processor_bemovi(
+          LEEF.2.measurement.bemovi::pre_processor_bemovi(
             input = file.path("~", "LEEF", "0.raw.data"),
             output = file.path("~", "LEEF", "1.pre-processed.data")
           )
-          LEEF.measurement.bemovi::extractor_bemovi_particle(
+          LEEF.2.measurement.bemovi::extractor_bemovi_particle(
             input = file.path("~", "LEEF", "1.pre-processed.data"),
             output = file.path("~", "LEEF", "2.extracted.data")
           )
         }
-        # x <- LEEF.measurement.bemovi::add_new_data(
+        # x <- LEEF.2.measurement.bemovi::add_new_data(
         #   input = file.path( "~", "LEEF", "000.NewData", "bemovi"),
         #   output = file.path("~", "LEEF", opt_directories()$raw)
         # )
@@ -208,7 +208,7 @@ shinyServer(function(input, output) {
 
     output$files_bemovi_input <- renderPrint( cat(list.files(file.path("~", "LEEF", "000.NewData", "bemovi")), sep = "\n") )
     output$files_bemovi_output <- renderPrint( cat(list.files(file.path("~", "LEEF", "0.raw.data", "bemovi")), sep = "\n") )
-    output$ok_bemovi_output <- renderPrint( LEEF.measurement.bemovi::raw_data_ok( file.path("~", "LEEF", "0.raw.data") ) )
+    output$ok_bemovi_output <- renderPrint( LEEF.2.measurement.bemovi::raw_data_ok( file.path("~", "LEEF", "0.raw.data") ) )
 
     ## autoupdate Flowcam  ------------------------------------------------------------------
     output$files_flowcam_input <- renderPrint( cat(list.files(file.path("~", "LEEF", "000.NewData", "flowcam")), sep = "\n") )

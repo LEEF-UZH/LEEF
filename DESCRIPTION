@@ -17,6 +17,7 @@ Additional_repositories: https://leef-uzh.github.io/drat/
 Depends:
   R (>= 3.5.0),
 Imports:
+    LEEF.2.measurement.conductivity,
     LEEF.2.measurement.bemovi,
     LEEF.2.measurement.flowcam,
     LEEF.2.measurement.flowcytometer,

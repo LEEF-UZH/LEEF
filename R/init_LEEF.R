@@ -114,14 +114,14 @@ init_LEEF <- function(
 
   # setup tools --------------------------------------------------------------
 
-  LEEF.measurement.bemovi::tools_path(opt_directories()$tools)
+  LEEF.2.measurement.bemovi::tools_path(opt_directories()$tools)
 
-  if (!isTRUE( suppressWarnings(LEEF.measurement.bemovi::check_tools_path(download = FALSE)) )) {
+  if (!isTRUE( suppressWarnings(LEEF.2.measurement.bemovi::check_tools_path(download = FALSE)) )) {
     message("d###################################################")
     message("tools directory incomplete.")
     message("downloading missing tools for bemovi...")
     message("d###################################################")
-    LEEF.measurement.bemovi::check_tools_path(download = TRUE)
+    LEEF.2.measurement.bemovi::check_tools_path(download = TRUE)
     message("done!")
     message("d###################################################")
   }
