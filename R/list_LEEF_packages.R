@@ -28,7 +28,7 @@ list_LEEF_packages <- function(
   drat::addRepo("LEEF-UZH")
   pkgs <- tools::package_dependencies("LEEF.2", which = "all", recursive = recursive)
   pkgs <- c(
-    "LEEF",
+    "LEEF.2",
     grep("LEEF.|.LEEF", pkgs$LEEF, value = TRUE)
   )
 
