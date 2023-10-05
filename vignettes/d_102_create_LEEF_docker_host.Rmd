@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 # Pipeline Server
 
-Before starting, make sure that you have enough space for the LEEF data upload and processing. This can be done either by having a large enough system drive or have a second drive mounted. For this document, we will assume that the space for the LEEF data is at `/mnt/leef_data`.
+Before starting, make sure that you have enough space for the LEEF data upload and processing. This can be done either by having a large enough system drive or have a second drive mounted. For this document, we will assume that the space for the LEEF data is at `/mnt/leef_data`, i.e. in a separate volume. The process of mouting the second volume is described not described below (see https://docs.s3it.uzh.ch/cloud/user_guide/4_create_and_manage_volumes/ for details). It is important, thet the volume is  mounted to /mnt/leef_data
 
 ## basic stuff
 
@@ -107,7 +107,7 @@ sudo lsblk -o NAME,FSTYPE,UUID,SIZE,LABEL
 sudo zile /etc/fstab
 ```
 
-Add the following line, but adapt the UUIB to the actual one
+Add the following line, but adapt the **UUID** to the actual one
 
 ```{bash}
 # UUID=a10379cf-40c6-490a-9233-1dee0552b953 /mnt/leef_data ext4 noauto,x-systemd.automount,x-systemd.idle-timeout=300 0 0

@@ -32,7 +32,6 @@ To manage the pipeline server instance itself, you have to connect to Dashboard 
 
 Before you can use the bash scripts for management of the pipeline, you need a terminal running a bash shell. These are included in Mac and Linux, but need to be installed on Windows. Probably the easiest approach is to use the Windows Subsystem for Linux. This can relatively easily be installed as described [here](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/). Please see [this How-To Geek article](https://www.howtogeek.com/261591/how-to-create-and-run-bash-shell-scripts-on-windows-10/) for details on how to run bash script after the WSL is installed. In this Linux Bash Shell in Windows you can execute the bash scripts provided.
 
-Other options for Windows include <span style="color:red">To be added after input from Uriah</span>.
 
 ## ssh Client
 To be able to remotely log in the pipeline server, an ssh client is needed. In Mac, Linux and the WSL are these builtin. Another widely used ssh shell under Windows is provided by [putty](https://www.putty.org).
@@ -48,7 +47,7 @@ cat ~/.ssh/id_rsa.pub
 
 from the bash shell. If it tells you `No such file or directory`, you have to generate one as described in the [S3IT training handout](https://docs.s3it.uzh.ch/cloud/training/training_handout/#create-a-key-on-linuxmacwindows10) for Mac, Windows or Linux.
 
-After you have an ssh key for your computer, you have to contactsomebody who already has access to the pipeline server to have it added to the instance so that you can interact with the pipeline server either via the local pipeline management scripts (which are using ssh) or logging in using ssh directly (username `ubuntu`) and executing commands  on the pipeline server.
+After you have an ssh key for your computer, you have to contact somebody who already has access to the pipeline server to have it added to the instance so that you can interact with the pipeline server either via the local pipeline management scripts (which are using ssh) or logging in using ssh directly (username `ubuntu`) and executing commands  on the pipeline server. These need to be added to the file `/home/ubuntu/.ssh/authorized_keys` on the pipeline server.
 
 # LEEF Data
 ## Measurements in the Pipeline
@@ -215,7 +214,7 @@ The credentials are available in a private internal document.
 ## Mount samba share on a Mac
 - open Finder
 - press ⌘K to open 'Connect to Server ...'
-- enter `smb://USERNAME@IP` and when prompter for a password, enter it and tick the box 'Remember password' (or similar wording
+- enter `smb://USERNAME@IP` and when prompter for a password, enter it and tick the box 'Remember password' (or similar wording)
 the next time, you will not have to enter the password
 
 ## Mount samba share on Windows

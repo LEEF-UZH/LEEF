@@ -13,7 +13,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.2.1 (2022-06-23)",
+  "runtimePlatform": "R version 4.3.1 (2023-06-16)",
   "author": [
     {
       "@type": "Person",
@@ -205,7 +205,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "3281.623KB",
+  "fileSize": "1594.53KB",
   "readme": "https://github.com/LEEF-UZH/LEEF/blob/LEEF-2/README.md",
   "keywords": ["leef", "r", "data-analysis", "data-processing"]
 }
