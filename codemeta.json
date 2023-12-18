@@ -7,13 +7,13 @@
   "codeRepository": "https://github.com/LEEF-UZH/LEEF",
   "issueTracker": "https://github.com/LEEF-UZH/LEEF/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.9.8",
+  "version": "1.0.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.3.1 (2023-06-16)",
+  "runtimePlatform": "R version 4.3.2 (2023-10-31)",
   "author": [
     {
       "@type": "Person",
@@ -205,7 +205,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1594.53KB",
+  "fileSize": "1607.123KB",
   "readme": "https://github.com/LEEF-UZH/LEEF/blob/LEEF-2/README.md",
   "keywords": ["leef", "r", "data-analysis", "data-processing"]
 }
